@@ -1,0 +1,10 @@
+RewriteEngine On
+
+DirectoryIndex home.php
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteRule ^single/([^/]+)/?$ single.php?product=$1 [L,QSA]
+RewriteRule ^blog/([^/]+)/?$ blog.php?title=$1 [L,QSA]
+
+RewriteRule ^eshop home.php [L,QSA]

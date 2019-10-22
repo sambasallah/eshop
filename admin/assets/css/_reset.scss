@@ -1,0 +1,36 @@
+* {
+	box-sizing: border-box;
+}
+
+html,body {
+	margin: 0px;
+	padding: 0px;
+}
+
+body a {
+	padding: 0px;
+	text-decoration: none;
+}
+
+body a:hover {
+	-webkit-transition: 0.3s all;
+	-moz-transition: 0.3s all;
+	transition: 0.3s all;
+	text-decoration: none;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	margin: 0px;
+	padding: 0px;
+}
+
+p {
+	padding: 0px;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+}
+
+/** reset code **/

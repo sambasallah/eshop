@@ -1,0 +1,25 @@
+{
+    "authors" : [
+        {
+            "name" : "Samba Sallah",
+            "role" : "Lead Developer",
+            "email" : "sambasallah10@gmail.com",
+            "homepage" : "http://www.php7dev.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "eshop\\": ""
+        }
+    },
+    "require-dev": {
+            "php": "^7.2",
+            "phpunit/phpunit": "^8"
+    },
+    "support" : 
+        {
+            "email" : "sambasallah10@gmail.com"
+        }
+    
+    
+}
