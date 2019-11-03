@@ -1234,6 +1234,18 @@ hr.latest_separator {
   .success .success_info {
     width: 60%;
   }
+
+  .cart_details ul li h6 {
+    font-size: 9px;
+  }
+
+  .cart_details a {
+    padding: 5px 15px;
+  }
+
+  .cart_details .fab.fa-cc-visa, .fab.fa-cc-mastercard, .fab.fa-cc-paypal {
+    font-size: 12px;
+  }
 }
 @media screen and (min-width: 1024px) and (max-width: 1366px) {
   .newsletter input[type=text] {

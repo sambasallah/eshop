@@ -10,7 +10,7 @@
 				Our Blog
 			<?php elseif( basename($_SERVER['SCRIPT_NAME']) == "blog-single.php")  : ?>
 				Rise of online store in Africa
-			<?php elseif( basename($_SERVER['SCRIPT_NAME']) == "single.php")  : ?>
+			<?php elseif( basename($_SERVER['SCRIPT_NAME']) == "product.php")  : ?>
 				Chemise
 			<?php elseif( basename($_SERVER['SCRIPT_NAME']) == "contact.php")  : ?>
 				Contact Us
