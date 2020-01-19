@@ -1039,6 +1039,10 @@ hr.latest_separator {
   .success .success_info {
     width: 90%;
   }
+
+  .products .card img {
+    height: auto;
+  }
 }
 @media screen and (min-width: 375px) and (max-width: 667px) {
   .newsletter input[type=text] {
@@ -1054,6 +1058,10 @@ hr.latest_separator {
 
   .success .success_info {
     width: 90%;
+  }
+
+  .products .card img {
+    height: auto;
   }
 }
 @media screen and (min-width: 411px) and (max-width: 731px) {
@@ -1071,6 +1079,10 @@ hr.latest_separator {
   .success .success_info {
     width: 90%;
   }
+
+  .products .card img {
+    height: auto;
+  }
 }
 @media screen and (min-width: 412px) and (max-width: 732px) {
   .newsletter input[type=text] {
@@ -1086,6 +1098,10 @@ hr.latest_separator {
 
   .success .success_info {
     width: 90%;
+  }
+
+  .products .card img {
+    height: auto !important;
   }
 }
 @media screen and (min-width: 569px) and (max-width: 731px) {
@@ -1137,6 +1153,10 @@ hr.latest_separator {
     font-size: 24px;
     margin-bottom: 20px;
   }
+
+  .products .card img {
+    height: auto;
+  }
 }
 @media screen and (min-width: 600px) and (max-width: 960px) {
   .newsletter input[type=text] {
@@ -1152,6 +1172,10 @@ hr.latest_separator {
 
   .success .success_info {
     width: 60%;
+  }
+
+  .products .card img {
+    height: auto;
   }
 }
 @media screen and (min-width: 732px) and (max-width: 767px) {
@@ -1191,6 +1215,11 @@ hr.latest_separator {
 
   .success .success_info {
     width: 60%;
+  }
+
+  .products .card .card-body {
+    padding: 0;
+    font-size: 8px;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1024px) {
@@ -1245,6 +1274,11 @@ hr.latest_separator {
 
   .cart_details .fab.fa-cc-visa, .fab.fa-cc-mastercard, .fab.fa-cc-paypal {
     font-size: 12px;
+  }
+
+  .products .card .card-body {
+    padding: 2px;
+    font-size: 8px;
   }
 }
 @media screen and (min-width: 1024px) and (max-width: 1366px) {

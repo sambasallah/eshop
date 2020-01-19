@@ -1101,6 +1101,10 @@ hr.latest_separator {
 	.success .success_info {
 		width: 90%;
 	}
+
+	.products .card img {
+		height: auto;
+	}
 }
 
 @media screen and (min-width: 375px) and (max-width: 667px) {
@@ -1117,6 +1121,10 @@ hr.latest_separator {
 
 	.success .success_info {
 		width: 90%;
+	}
+
+	.products .card img {
+		height: auto;
 	}
 }
 
@@ -1136,6 +1144,10 @@ hr.latest_separator {
 	.success .success_info {
 		width: 90%;
 	}
+
+	.products .card img {
+		height: auto;
+	}
 }
 
 
@@ -1153,6 +1165,10 @@ hr.latest_separator {
 
 	.success .success_info {
 		width: 90%;
+	}
+
+	.products .card img {
+		height: auto !important;
 	}
 }
 
@@ -1205,6 +1221,10 @@ hr.latest_separator {
 		font-size: 24px; 
 		margin-bottom: 20px;
 	}
+
+	.products .card img {
+		height: auto;
+	}
 }
 
 @media screen and (min-width: 600px) and (max-width: 960px) {
@@ -1221,6 +1241,10 @@ hr.latest_separator {
 
 	.success .success_info {
 		width: 60%;
+	}
+
+	.products .card img {
+		height: auto;
 	}
 }
 
@@ -1263,6 +1287,10 @@ hr.latest_separator {
 		width: 60%;
 	}
 
+	.products .card .card-body{
+		padding: 0;
+		font-size: 8px;
+	}
 
 }
 
@@ -1320,6 +1348,11 @@ hr.latest_separator {
 
 	.cart_details .fab.fa-cc-visa, .fab.fa-cc-mastercard, .fab.fa-cc-paypal {
 		font-size: 12px;
+	}
+
+	.products .card .card-body{
+		padding: 2px;
+		font-size: 8px;
 	}
 
 }
