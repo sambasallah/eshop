@@ -15,3 +15,5 @@ eShop is a modern ecommerce website
   - HTML
   - CSS/SASS
   - JAVASCRIPT (jQuery)
+### Backend API
+  - Lumen
