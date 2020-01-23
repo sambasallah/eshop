@@ -1,0 +1,23 @@
+{
+  "name": "eshop",
+  "version": "1.0.0",
+  "description": "e-commerce website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sambasallah/eshop.git"
+  },
+  "author": "Samba Sallah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sambasallah/eshop/issues"
+  },
+  "homepage": "https://github.com/sambasallah/eshop#readme",
+  "dependencies": {
+    "react-icons": "^3.8.0",
+    "react-router-dom": "^5.1.2"
+  }
+}
