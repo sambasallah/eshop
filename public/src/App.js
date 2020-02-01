@@ -13,6 +13,7 @@ import Error from './pages/Error';
 
 /** Components */
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
     <Route exact path="/checkout" component={Checkout}></Route>
     <Route component={Error}></Route>
    </Switch>
+   <Footer></Footer>
   </>;
 }
 
