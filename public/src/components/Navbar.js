@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <div className="main_nav">
+        <div className="main-nav">
             <nav className="navbar navbar-expand-md navbar-bg-color fixed-top justify-content-left">
                 <div className="container">
 
@@ -34,7 +34,7 @@ const Navbar = () => {
                     </li> 
                     <li className="nav-item">
                         <Link to="/cart" className="nav-link">
-                            <i className="fa fa-cart-arrow-down" title="Cart"></i>
+                            <i className="fa fa-shopping-cart" title="Cart"></i>
                             <span className='badge badge-warning' id='lblCartCount'> 5 </span>
                         </Link>
                     </li>
