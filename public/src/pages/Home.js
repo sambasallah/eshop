@@ -4,6 +4,7 @@ const Home = () => {
     return (
      <div>
 		 <div className="home">
+			 <div className="home-inner">
 		 <div className="carousel-container">
          <div id="myCarousel" className="carousel slide" data-ride="carousel">
 		 <ol className="carousel-indicators">
@@ -13,7 +14,7 @@ const Home = () => {
   		</ol>
 		  <div className="carousel-inner text-center">
 		    <div className="carousel-item active">
-		      <img className="d-block w-100 img-responsive" src={require('../media/images/banner1.jpg') } alt="First slide" />
+		      <img className="d-block w-100 img-responsive" src={require('../media/images/banner1.jpg') } alt={"First Slide"} />
 		      <div className="text-content responsive">
                 <h1>Summer Discount Offer!</h1>
                 <a href="shop" className="shop-btn">SHOP NOW</a>
@@ -162,8 +163,73 @@ const Home = () => {
 			 </div>
 		 </div>
 	 </div>
+
+	 <div className="recommended-categories">
+		<div className="recommended">
+			<div className="row">
+				<div className="col-md-3">
+					<div className="item">
+						<img src={require('../media/images/printer.jpg')} alt="printers" style={{width : '100%', height : '100%'}} />
+						<div className="description">
+							<h2>Printers</h2>
+							<p>
+								For all your printing needs...
+							</p>
+							<p className="shopBtn">Shop Now <i className="fa fa-angle-right"></i></p>
+						</div>
+					</div>
+				</div>
+				<div className="col-md-3">
+				<div className="item">
+						<img src={require('../media/images/headphones.jpg')} alt="headphones" style={{width : '100%', height : '100%'}} />
+						<div className="description">
+							<h2>Headphones & Speakers</h2>
+							<p>
+								Quality Sound on the go...
+							</p>
+							<p className="shopBtn">Shop Now <i className="fa fa-angle-right"></i></p>
+						</div>
+					</div>
+				</div>
+				<div className="col-md-3">
+				<div className="item">
+						<img src={require('../media/images/watch.jpg')} alt="watch" style={{width : '100%', height : '100%'}} />
+						<div className="description">
+							<h2>Watches</h2>
+							<p>
+								Upgrade your style
+							</p>
+							<p className="shopBtn">Shop Now <i className="fa fa-angle-right"></i></p>
+						</div>
+					</div>
+				</div>
+				<div className="col-md-3">
+				<div className="item">
+						<img src={require('../media/images/beauty.jpg')} alt="beauty" style={{width : '100%', height : '100%'}} />
+						<div className="description">
+							<h2>Printers</h2>
+							<p>
+								For the perfect look...
+							</p>
+							<p className="shopBtn">Shop Now <i className="fa fa-angle-right"></i></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	 </div>
-	
+		
+	 <div className="about">
+		 <h2>eBaaba Gambia's No. 1 Online Shopping Platform</h2>
+		 <p>
+		 Konga.com is Nigeria’s number one online Shopping destination.We pride ourselves in having everything you could possibly need for life and living at the best prices than anywhere else. Our access to Original Equipment Manufacturers and premium sellers gives us a wide range of products at very low prices. Some of our popular categories include electronics, mobile phones, computers, fashion, beauty products, home and kitchen, Building and construction materials and a whole lot more from premium brands. Some of our other categories include Food and drinks, automotive and industrial, books, musical equipment, babies and kids items, sports and fitness, to mention a few. To make your shopping experience swift and memorable, there are also added services like gift vouchers, consumer promotion activities across different categories and bulk purchases with hassle-free delivery. Enjoy free shipping rates for certain products and with the bulk purchase option, you can enjoy low shipping rates, discounted prices and flexible payment. When you shop on our platform, you can pay with your debit card or via KongaPay, which is a convenient and secured payment solution. Get the best of lifestyle services online. Don't miss out on the biggest sales online which takes place on special dates yearly.
+		 </p>
+	 </div>
+
+	 <div className="end"></div>
+
+	 </div>
+	 </div>
      </div>   
     )
 }

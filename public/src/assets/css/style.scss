@@ -33,6 +33,12 @@
 /** Home BG **/
 .home {
 	background-color: $bg-color;
+	width: 100%;
+}
+
+.home .home-inner {
+	width: 97%;
+	margin: auto;
 }
 
 /** Navbar **/
@@ -40,8 +46,16 @@
 	background-color: $primary_color;
 }
 
+.main-nav {
+	height: 55px;
+}
+
+.container {
+	min-width: 100% !important;
+}
+
 .navbar {
-	box-shadow: -1px 2px 4px rgba(0,0,0,0.5);
+	box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.5);
 }
 
 .navbar .nav-item {
@@ -70,10 +84,6 @@
 	color: $tertiary_white;
 }
 
-.main-nav {
-	height: 55px;
-}
-
 .badge {
   border-radius: 9px;
 }
@@ -93,7 +103,7 @@
 
 #myCarousel {
 	width: 97%;
-	margin:auto;
+	margin: 10px auto;
 	border: 0.8px solid #d3d3d3;
 	border-radius: 5px;
 }
@@ -150,8 +160,7 @@
 
 /** Latest Deals **/
 .latest-deals {
-	width: 97%;
-	margin: 20px auto;
+	margin: 20px;
 	background-color: #fff;
 	border-radius: 5px;
 }
@@ -222,6 +231,57 @@
 	border-radius: 5px 5px 0px 0px;
 }
 
+/** Recommend Categories **/
+.recommended-categories {
+	margin-bottom: -40px;
+}
+
+.item .description {
+	 background-color: #fff;
+	 padding: 15px;
+	 position: relative;
+	 top: -40px;
+	 border-radius: 0px 0px 5px 5px;
+	 box-sizing: border-box;
+ }
+
+ .item .description h2 {
+	 font-size: 1.2em;
+	 color: #5a5f66;
+	 margin-bottom: 20px;
+ }
+
+ .shopBtn {
+	 text-transform: uppercase;
+	 color: $primary-text-color;
+	 font-weight: bold;
+	 font-size: 12px;
+	 cursor: pointer;
+ }
+
+ .shopBtn i.fa.fa-angle-right {
+	 padding-left: 8px;
+ }
+
+ /** About **/
+ .about {
+	 width: 97%;
+	 margin:auto;
+	 background-color: #fff;
+	 border-radius: 5px;
+	 box-sizing: border-box;
+ }
+
+ .about h2 {
+	 font-size: 1.8em;
+	 padding-bottom: 8px;
+ }
+
+ /** Home End **/
+
+ .home .end {
+	 height: 20px;
+ }
 
 /** featured products **/
 .featured_products {
