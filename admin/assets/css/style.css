@@ -14,7 +14,8 @@
   width: 95%;
   margin: 0px auto;
   padding: 20px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   background-color: #fff;
 }
 
@@ -29,7 +30,8 @@
 }
 
 * {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 html, body {
@@ -44,7 +46,6 @@ body a {
 
 body a:hover {
   -webkit-transition: 0.3s all;
-  -moz-transition: 0.3s all;
   transition: 0.3s all;
   text-decoration: none;
 }
@@ -70,7 +71,8 @@ ul {
 }
 
 .navbar {
-  box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
+          box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
 }
 
 .navbar .nav-item {
@@ -164,18 +166,22 @@ ul {
   font-size: 20px;
   border-radius: 5px;
   margin-top: 10px;
-  box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.25);
+          box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.25);
 }
 
 #dashboard .live_visitors {
+  background-image: -webkit-gradient(linear, right top, left top, from(#ed017f), to(grey));
   background-image: linear-gradient(to left, #ed017f, grey);
 }
 
 #dashboard .orders {
+  background-image: -webkit-gradient(linear, right top, left top, from(#33b27b), to(grey));
   background-image: linear-gradient(to left, #33b27b, grey);
 }
 
 #dashboard .total_sales {
+  background-image: -webkit-gradient(linear, right top, left top, from(#000), to(grey));
   background-image: linear-gradient(to left, #000, grey);
 }
 
@@ -223,5 +229,4 @@ ul {
 .product_content h5 {
   text-align: right;
 }
-
 /*# sourceMappingURL=style.css.map */

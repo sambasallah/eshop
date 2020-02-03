@@ -55,7 +55,7 @@ const Home = () => {
 					<div className="deal-info">
 						<div className="row">
 							<div className="col-md-3">
-								<img src={require('../media/images/coat.jpg')} style={{ width : '100%', height : '100%'}}/>
+								<img src={require('../media/images/coat.jpg')} style={{ width : '100%'}}/>
 							</div>
 							<div className="col-md-9">
 								<p>Winter Coat</p>
@@ -71,7 +71,7 @@ const Home = () => {
 				<div className="deal-info">
 						<div className="row">
 							<div className="col-md-3">
-								<img src={require('../media/images/chemise1.jpg')} style={{ width : '100%', height : '100%'}}/>
+								<img src={require('../media/images/chemise1.jpg')} style={{ width : '100%'}}/>
 							</div>
 							<div className="col-md-9">
 								<p>Chemise</p>
@@ -87,7 +87,7 @@ const Home = () => {
 				<div className="deal-info">
 						<div className="row">
 							<div className="col-md-3">
-								<img src={require('../media/images/derby-shoe.jpg')} style={{ width : '100%', height : '100%'}}/>
+								<img src={require('../media/images/derby-shoe.jpg')} style={{ width : '100%'}}/>
 							</div>
 							<div className="col-md-9">
 								<p>Leather Derby Shoe</p>
@@ -105,7 +105,7 @@ const Home = () => {
 				<div className="deal-info">
 						<div className="row">
 							<div className="col-md-3">
-								<img src={require('../media/images/female-top.jpg')} style={{ width : '100%', height : '100%'}}/>
+								<img src={require('../media/images/female-top.jpg')} style={{ width : '100%'}}/>
 							</div>
 							<div className="col-md-9">
 								<p>Female Top</p>
@@ -121,7 +121,7 @@ const Home = () => {
 				<div className="deal-info">
 						<div className="row">
 							<div className="col-md-3">
-								<img src={require('../media/images/shirt3.jpg')} style={{ width : '100%', height : '100%'}}/>
+								<img src={require('../media/images/shirt3.jpg')} style={{ width : '100%'}}/>
 							</div>
 							<div className="col-md-9">
 								<p>Men Shirt</p>
@@ -137,7 +137,7 @@ const Home = () => {
 			   <div className="deal-info">
 						<div className="row">
 							<div className="col-md-3">
-								<img src={require('../media/images/chemise3.jpg')} style={{ width : '100%', height : '100%'}}/>
+								<img src={require('../media/images/chemise3.jpg')} style={{ width : '100%'}}/>
 							</div>
 							<div className="col-md-9">
 								<p>Chemise</p>
@@ -152,14 +152,38 @@ const Home = () => {
 		 </div>
 	 </div>
 		
-	 <div className="popular-categories">
-		 <h2>Popular Categories</h2>
-		 <div className="categories">
+	 <div className="popular-products">
+		 <h2>Popular Products</h2>
+		 <div className="products">
 			 <div className="row">
-				 <div className="col-md-3">1</div>
-				 <div className="col-md-3">2</div>
-				 <div className="col-md-3">3</div>
-				 <div className="col-md-3">4</div>
+				 <div className="col-md-3">
+					 <img src={require('../media/images/chemise1.jpg')} style={{width : '70%', height : '80%'}} />
+					 <div className="product-description">
+						<h4>Chemise</h4>
+						<h5>GMD 600 <span className="original-price"><del>800</del></span></h5>
+					 </div>
+				 </div>
+				 <div className="col-md-3">
+				 	<img src={require('../media/images/b5.jpg')} style={{width : '70%', height : '80%'}} />
+					 <div className="product-description">
+						<h4>Bag</h4>
+						<h5>GMD 500 <span className="original-price"><del>700</del></span></h5>
+					 </div>
+				 </div>
+				 <div className="col-md-3">
+				 	<img src={require('../media/images/m7.jpg')} style={{width : '70%', height : '80%' }} />
+					 <div className="product-description">
+						<h4>Watch</h4>
+						<h5>GMD 800 <span className="original-price"><del>1100</del></span></h5>
+					 </div>
+				 </div>
+				 <div className="col-md-3">
+				 	<img src={require('../media/images/cat-shirt.jpg')} style={{width : '70%', height : '80%'}} />
+					 <div className="product-description">
+						<h4>Shirt</h4>
+						<h5>GMD 600 <span className="original-price"><del>800</del></span></h5>
+					 </div>
+				 </div>
 			 </div>
 		 </div>
 	 </div>
@@ -219,7 +243,7 @@ const Home = () => {
 		</div>
 	 </div>
 		
-	 <div className="about">
+	 <div className="about-eBaaba">
 		 <h2>eBaaba Gambia's No. 1 Online Shopping Platform</h2>
 		 <p>
 		 Konga.com is Nigeria’s number one online Shopping destination.We pride ourselves in having everything you could possibly need for life and living at the best prices than anywhere else. Our access to Original Equipment Manufacturers and premium sellers gives us a wide range of products at very low prices. Some of our popular categories include electronics, mobile phones, computers, fashion, beauty products, home and kitchen, Building and construction materials and a whole lot more from premium brands. Some of our other categories include Food and drinks, automotive and industrial, books, musical equipment, babies and kids items, sports and fitness, to mention a few. To make your shopping experience swift and memorable, there are also added services like gift vouchers, consumer promotion activities across different categories and bulk purchases with hassle-free delivery. Enjoy free shipping rates for certain products and with the bulk purchase option, you can enjoy low shipping rates, discounted prices and flexible payment. When you shop on our platform, you can pay with your debit card or via KongaPay, which is a convenient and secured payment solution. Get the best of lifestyle services online. Don't miss out on the biggest sales online which takes place on special dates yearly.

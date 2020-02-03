@@ -10,6 +10,10 @@ import Product from './pages/ProductSingle';
 import Contact from './pages/Contact';
 import Checkout from './pages/Checkout';
 import Error from './pages/Error';
+import Cart from './pages/Cart';
+import Success from './pages/Success';
+import Auth from './pages/Auth';
+import Account from './pages/Account';
 
 /** Components */
 import Navbar from './components/Navbar';
@@ -26,6 +30,10 @@ const App = () => {
     <Route exact path="/product/:slug" component={Product}></Route>
     <Route exact path="/contact" component={Contact}></Route>
     <Route exact path="/checkout" component={Checkout}></Route>
+    <Route exact path="/cart" component={Cart}></Route>
+    <Route exact path="/completed" component={Success}></Route>
+    <Route exact path="/auth" component={Auth}></Route>
+    <Route exact path="/account" component={Account}></Route>
     <Route component={Error}></Route>
    </Switch>
    <Footer></Footer>
