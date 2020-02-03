@@ -14,8 +14,8 @@ eShop is a modern ecommerce website
 ### Frontend
   - HTML
   - CSS/SASS
-  - ReactJS
-  - Javascript
-  - jQuery
+  - ReactJS/Redux
+
 ### Backend API
-  - Lumen
+  - PHP (Lumen)
+  - Golang
