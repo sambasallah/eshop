@@ -1,9 +1,0 @@
-RewriteEngine On
-
-DirectoryIndex dashboard.php
-RewriteCond %{REQUEST_FILENAME} !-f
-
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
-RewriteRule ^single/([^/]+)/?$ single.php?product=$1 [L,QSA]
-
-RewriteRule ^eshop/admin dashboard.php [L,QSA]
