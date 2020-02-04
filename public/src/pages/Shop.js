@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 
 const Shop = () => {
     return (
@@ -24,35 +25,35 @@ const Shop = () => {
                             <div id="price" className="collapse show">
                                     <form>
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="customSwitch1" name="example1" />
+                                            <input type="radio" class="custom-control-input" id="customSwitch1" name="radio-btn" />
                                             <label class="custom-control-label" for="customSwitch1">Under GMD2,000</label>
                                         </div>
                                         
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="customSwitch2" name="example1" />
+                                            <input type="radio" class="custom-control-input" id="customSwitch2" name="radio-btn" />
                                             <label class="custom-control-label" for="customSwitch2">GMD2,000 - GMD5,000</label>
                                         </div>
                                     
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="customSwitch3" name="example1" />
+                                            <input type="radio" class="custom-control-input" id="customSwitch3" name="radio-btn" />
                                             <label class="custom-control-label" for="customSwitch3">GMD5,000 - GMD10,000</label>
                                         </div>
                                     
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="customSwitch4" name="example1" />
+                                            <input type="radio" class="custom-control-input" id="customSwitch4" name="radio-btn" />
                                             <label class="custom-control-label" for="customSwitch4">GMD10,000 - GMD20,000</label>
                                         </div>
                                       
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="customSwitch5" name="example5" />
+                                            <input type="radio" class="custom-control-input" id="customSwitch5" name="radio-btn" />
                                             <label class="custom-control-label" for="customSwitch5">GMD20,000 - GMD40,000</label>
                                         </div>
                                        
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="customSwitch6" name="example6" />
+                                            <input type="radio" class="custom-control-input" id="customSwitch6" name="radio-btn" />
                                             <label class="custom-control-label" for="customSwitch6">Above GMD40,000</label>
                                         </div>
-                                        </form>
+                                    </form>
                                 </div>
                                 <hr></hr>
                             <ul>
@@ -71,13 +72,196 @@ const Shop = () => {
                             </div>
                         </div>
                         <div className="col-md-9">
-                            <div className="row">
-                                <div className="col-md-3">1</div>
-                                <div className="col-md-3">2</div>
-                                <div className="col-md-3">3</div>
-                                <div className="col-md-3">4</div>
+                        <div className="row shop-items">
+                                <div className="col-md-3">
+                                    <div className="product">
+                                        <div className="product-img">
+                                             <img src={require('../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
+                                        </div>
+                                        <div className="product-description">
+                                            <h3 className="title">Hand Bag</h3>
+                                            <hr className="below-title"></hr>
+                                            <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                            <hr className="below-price"></hr>
+                                            <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="product">
+                                           <div className="product-img">
+                                           <img src={require('../media/images/b6.jpg')} style={{ width : "100%", height : "100%"}} />
+                                           </div>
+                                            <div className="product-description">
+                                                <h3 className="title">Hand Bag</h3>
+                                                <hr className="below-title"></hr>
+                                                <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                                <hr className="below-price"></hr>
+                                                <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div className="col-md-3">
+                                <div className="product">
+                                        <div className="product-img">
+                                           <img src={require('../media/images/chemise2.jpg')} style={{ width : "100%", height : "100%"}} />
+                                        </div>
+                                        <div className="product-description">
+                                            <h3 className="title">Hand Bag</h3>
+                                            <hr className="below-title"></hr>
+                                            <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                            <hr className="below-price"></hr>
+                                            <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                <div className="product">
+                                        <div className="product-img">
+                                        <img src={require('../media/images/derby-shoe.jpg')} style={{ width : "100%", height : "100%"}} />
+                                        </div>
+                                        <div className="product-description">
+                                            <h3 className="title">Hand Bag</h3>
+                                            <hr className="below-title"></hr>
+                                            <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                            <hr className="below-price"></hr>
+                                            <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+                            <div className="row shop-items">
+                                <div className="col-md-3">
+                                    <div className="product">
+                                        <div className="product-img">
+                                             <img src={require('../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
+                                        </div>
+                                        <div className="product-description">
+                                            <h3 className="title">Hand Bag</h3>
+                                            <hr className="below-title"></hr>
+                                            <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                            <hr className="below-price"></hr>
+                                            <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="product">
+                                           <div className="product-img">
+                                           <img src={require('../media/images/b6.jpg')} style={{ width : "100%", height : "100%"}} />
+                                           </div>
+                                            <div className="product-description">
+                                                <h3 className="title">Hand Bag</h3>
+                                                <hr className="below-title"></hr>
+                                                <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                                <hr className="below-price"></hr>
+                                                <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div className="col-md-3">
+                                <div className="product">
+                                        <div className="product-img">
+                                           <img src={require('../media/images/chemise2.jpg')} style={{ width : "100%", height : "100%"}} />
+                                        </div>
+                                        <div className="product-description">
+                                            <h3 className="title">Hand Bag</h3>
+                                            <hr className="below-title"></hr>
+                                            <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                            <hr className="below-price"></hr>
+                                            <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                <div className="product">
+                                        <div className="product-img">
+                                        <img src={require('../media/images/derby-shoe.jpg')} style={{ width : "100%", height : "100%"}} />
+                                        </div>
+                                        <div className="product-description">
+                                            <h3 className="title">Hand Bag</h3>
+                                            <hr className="below-title"></hr>
+                                            <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                            <hr className="below-price"></hr>
+                                            <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="row shop-items">
+                                <div className="col-md-3">
+                                    <div className="product">
+                                        <div className="product-img">
+                                             <img src={require('../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
+                                        </div>
+                                        <div className="product-description">
+                                            <h3 className="title">Hand Bag</h3>
+                                            <hr className="below-title"></hr>
+                                            <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                            <hr className="below-price"></hr>
+                                            <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="product">
+                                           <div className="product-img">
+                                           <img src={require('../media/images/b6.jpg')} style={{ width : "100%", height : "100%"}} />
+                                           </div>
+                                            <div className="product-description">
+                                                <h3 className="title">Hand Bag</h3>
+                                                <hr className="below-title"></hr>
+                                                <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                                <hr className="below-price"></hr>
+                                                <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div className="col-md-3">
+                                <div className="product">
+                                        <div className="product-img">
+                                           <img src={require('../media/images/chemise2.jpg')} style={{ width : "100%", height : "100%"}} />
+                                        </div>
+                                        <div className="product-description">
+                                            <h3 className="title">Hand Bag</h3>
+                                            <hr className="below-title"></hr>
+                                            <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                            <hr className="below-price"></hr>
+                                            <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                <div className="product">
+                                        <div className="product-img">
+                                        <img src={require('../media/images/derby-shoe.jpg')} style={{ width : "100%", height : "100%"}} />
+                                        </div>
+                                        <div className="product-description">
+                                            <h3 className="title">Hand Bag</h3>
+                                            <hr className="below-title"></hr>
+                                            <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                            <hr className="below-price"></hr>
+                                            <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="pagination">
+                                <ul>
+                                    <li><span>Previous</span></li>
+                                    <li><span>1</span></li>
+                                    <li><span>2</span></li>
+                                    <li><span>3</span></li>
+                                    <li>...</li>
+                                    <li><span>10</span></li>
+                                    <li><span>Next</span></li>
+                                </ul>
+                            </div>
+
                         </div>
+                       
                     </div>
                 </div>
             </div>
