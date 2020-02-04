@@ -7,7 +7,7 @@ const Navbar = () => {
             <nav className="navbar navbar-expand-md navbar-bg-color fixed-top justify-content-left">
                 <div className="container">
 
-                <Link className="navbar-brand" href="./">eBaaba</Link>
+                <Link className="navbar-brand" to="./">eBaaba</Link>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span>

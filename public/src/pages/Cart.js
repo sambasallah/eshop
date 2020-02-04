@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Cart = () => {
     return (
         <div>
+            <Helmet>
+			 <title>Cart | eBaaba No. 1 Online Shopping Website in Gambia</title>
+		 </Helmet>
             <div className="breadcrumb">
                 <div className="breadcrumb-container">
                     <h2>Shopping Cart</h2>

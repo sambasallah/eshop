@@ -1,19 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Checkout = () => {
     return (
         <div>
+            <Helmet>
+			 <title>Checkout | eBaaba No. 1 Online Shopping Website in Gambia</title>
+		 </Helmet>
             <div className="breadcrumb">
                 <div className="breadcrumb-container">
                     <h2>Checkout</h2>
                 </div>
             </div>
             <div className="checkout">
-    <div className="checkout_container">
+    <div className="checkout-container">
         <div className="row">
             <div className="col-md-8">
-                <div className="personal_information">
+                <div className="personal-information">
                     <form action="" method="post">
                     <h2>Personal Information</h2>
                     <input type="text" name="name" placeholder="Full Name" />
@@ -267,7 +271,7 @@ const Checkout = () => {
                 </div>
             </div>
             <div className="col-md-4">
-            <div className="checkout_details">
+            <div className="checkout-details">
                     <ul>
                         <li><h6>Order Summary</h6></li>
                         <li><h6>1 Item</h6></li>

@@ -1,8 +1,12 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const About = () => {
     return (
         <div>
+			<Helmet>
+			 <title>About Us | eBaaba No. 1 Online Shopping Website in Gambia</title>
+		 </Helmet>
             <div className="breadcrumb">
                 <div className="breadcrumb-container">
                     <h2>About Us</h2>

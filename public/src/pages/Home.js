@@ -1,8 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
     return (
      <div>
+		 <Helmet>
+			 <title>Home | eBaaba No. 1 Online Shopping Website in Gambia</title>
+		 </Helmet>
 		 <div className="home">
 			 <div className="home-inner">
 		 <div className="carousel-container">
@@ -47,7 +52,7 @@ const Home = () => {
 	</div>
 	 
 	 <div className="latest-deals">
-		 <h2>Latest Deals</h2>
+		 <h2>Latest Deals <Link to="/shop" className="see-all">See All Items</Link></h2>
 		 <div className="deals">
 		 <div className="row">
 			<div className="col-md-4">

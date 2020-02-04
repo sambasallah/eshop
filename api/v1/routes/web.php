@@ -11,11 +11,6 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return json_encode([['Welcome' => 'eShop is an ecommerce website']], JSON_PRETTY_PRINT);
-});
+$router->get('/', 'ProductController@greet');
 
 
-$router->get('/version', function () use ($router) {
-    return json_encode(['API' => "V1"],JSON_PRETTY_PRINT);
-});

@@ -1,8 +1,12 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const Auth = () => {
     return (
         <div>
+            <Helmet>
+			 <title>Login / Register | eBaaba No. 1 Online Shopping Website in Gambia</title>
+		 </Helmet>
             <div className="breadcrumb">
                 <div className="breadcrumb-container">
                     <h2>Login / Register</h2>
