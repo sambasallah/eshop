@@ -116,12 +116,12 @@ ul {
 
 /** Carousel **/
 .carousel-container {
-  padding-top: 10px;
+  padding-top: 20px;
+  width: 97%;
+  margin: auto;
 }
 
 #myCarousel {
-  width: 97%;
-  margin: auto;
   border: 0.8px solid #d3d3d3;
   border-radius: 5px;
 }
@@ -175,6 +175,41 @@ ul {
   height: 15px;
   margin: 10px;
   background-color: #ed017f;
+}
+
+.info-box {
+  width: 100%;
+  height: 190px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.info-box i.fa.fa-gear {
+  font-size: 40px;
+}
+
+.info-box .col-md-6 h2 {
+  text-align: center;
+  padding-top: 30%;
+  color: #33b27b;
+}
+
+.info-box:first-child {
+  margin-bottom: 10px;
+}
+
+.info-box .btn-shop {
+  position: relative;
+  padding: 10px 30px;
+  background-color: #ed017f;
+  color: #fff;
+  border: 1px solid #ed017f;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  box-shadow: -1px 3px 4px rgba(0, 0, 0, 0.5);
+  transition: 0.3s ease-in-out;
+  top: 43%;
+  left: 25%;
 }
 
 /** Latest Deals **/
@@ -292,6 +327,8 @@ ul {
 .item {
   width: 100%;
   margin-bottom: 20px;
+  border: 1px solid #f5f5f5;
+  border-radius: 5px;
 }
 
 .item .description {
@@ -760,7 +797,7 @@ ul {
 }
 
 .product .product-description .price {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: bold;
   color: #000;
   padding: 8px 0px;

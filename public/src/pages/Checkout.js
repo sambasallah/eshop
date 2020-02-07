@@ -7,7 +7,7 @@ const Checkout = () => {
         <div>
             <Helmet>
 			 <title>Checkout | eBaaba No. 1 Online Shopping Website in Gambia</title>
-		 </Helmet>
+		    </Helmet>
             <div className="breadcrumb">
                 <div className="breadcrumb-container">
                     <h2>Checkout</h2>

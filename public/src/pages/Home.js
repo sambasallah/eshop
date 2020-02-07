@@ -11,7 +11,9 @@ const Home = () => {
 		 <div className="home">
 			 <div className="home-inner">
 		 <div className="carousel-container">
-         <div id="myCarousel" className="carousel slide" data-ride="carousel">
+			 <div className="row">
+				 <div className="col-md-9">
+				 <div id="myCarousel" className="carousel slide" data-ride="carousel">
 		 <ol className="carousel-indicators">
 		    <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
 		    <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -48,8 +50,44 @@ const Home = () => {
 		    <span className="carousel-control-next-icon" aria-hidden="true"></span>
 		    <span className="sr-only">Next</span>
 		  </a>
-	</div>
-	</div>
+				</div>
+				 </div>
+
+				 <div className="col-md-3">
+				 	<div className="row">
+						 <div className="col-md-12">
+							 <div className="info-box">
+								 <div className="row">
+									 <div className="col-md-6">
+										 <h2><i className="fa fa-shopping-cart"></i></h2>
+									 </div>
+									 <div className="col-md-6">
+									 	<h2><i className="fa fa-money"></i></h2>
+									 </div>
+								 </div>
+
+								 <div className="row">
+									 <div className="col-md-6">
+									 	<h2><i className="fa fa-shopping-basket"></i></h2>
+									 </div>
+									 <div className="col-md-6">
+									 	<h2><i className="fa fa-shopping-bag"></i></h2>
+									 </div>
+								 </div>
+							 </div>
+
+							 <div className="info-box">
+								<Link to="/shop" className="btn-shop">Shop Now</Link>
+							 </div>
+						 </div>
+					 </div>
+					 <div className="row">
+						
+					 </div>
+				 </div>
+
+			 </div>
+	     </div>
 	 
 	 <div className="latest-deals">
 		 <h2>Latest Deals <Link to="/shop" className="see-all">See All Items</Link></h2>
@@ -183,10 +221,15 @@ const Home = () => {
 					 </div>
 				 </div>
 				 <div className="col-md-3">
-				 	<img src={require('../media/images/cat-shirt.jpg')} style={{width : '70%', height : '80%'}} />
-					 <div className="product-description">
-						<h4>Shirt</h4>
-						<h5>GMD 600 <span className="original-price"><del>800</del></span></h5>
+				 	<div className="row">
+						 <div className="col-md-12">
+						 <img src={require('../media/images/cat-shirt.jpg')} style={{width : '70%', height : '80%'}} />
+							<div className="product-description">
+								<h4>Shirt</h4>
+								<h5>GMD 600 <span className="original-price"><del>800</del></span></h5>
+							</div>
+						 </div>
+						 
 					 </div>
 				 </div>
 			 </div>

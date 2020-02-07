@@ -11,6 +11,7 @@
 |
 */
 
-$router->get('/', 'ProductController@greet');
+$router->get('/users', 'UserController@allUsers');
+$router->get('/users/{id}', 'UserController@singleUser');
 
 
