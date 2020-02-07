@@ -65,7 +65,7 @@ ul {
 }
 
 .main-nav {
-  height: 55px;
+  height: 50px;
 }
 
 .container {
@@ -190,7 +190,7 @@ ul {
 
 .info-box .col-md-6 h2 {
   text-align: center;
-  padding-top: 30%;
+  padding-top: 27%;
   color: #33b27b;
 }
 
@@ -210,6 +210,7 @@ ul {
   transition: 0.3s ease-in-out;
   top: 43%;
   left: 25%;
+  border-radius: 5px;
 }
 
 /** Latest Deals **/

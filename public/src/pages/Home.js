@@ -57,23 +57,7 @@ const Home = () => {
 				 	<div className="row">
 						 <div className="col-md-12">
 							 <div className="info-box">
-								 <div className="row">
-									 <div className="col-md-6">
-										 <h2><i className="fa fa-shopping-cart"></i></h2>
-									 </div>
-									 <div className="col-md-6">
-									 	<h2><i className="fa fa-money"></i></h2>
-									 </div>
-								 </div>
-
-								 <div className="row">
-									 <div className="col-md-6">
-									 	<h2><i className="fa fa-shopping-basket"></i></h2>
-									 </div>
-									 <div className="col-md-6">
-									 	<h2><i className="fa fa-shopping-bag"></i></h2>
-									 </div>
-								 </div>
+									<img src={require('../media/images/derby-shoe.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
 							 </div>
 
 							 <div className="info-box">
@@ -195,7 +179,7 @@ const Home = () => {
 		 </div>
 	 </div>
 		
-	 <div className="popular-products">
+	 {/* <div className="popular-products">
 		 <h2>Popular Products</h2>
 		 <div className="products">
 			 <div className="row">
@@ -234,7 +218,7 @@ const Home = () => {
 				 </div>
 			 </div>
 		 </div>
-	 </div>
+	 </div> */}
 
 	 <div className="recommended-categories">
 		<div className="recommended">
