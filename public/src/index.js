@@ -1,13 +1,31 @@
-import 'jquery/dist/jquery';
 import 'bootstrap/dist/js/bootstrap.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
+import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import './index.css';
+import 'slick-carousel';
+import 'slick-carousel/slick/slick';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+// Product Slider
+$(document).ready(() => {
+    // Product Slider
+    $('.product-slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'linear'
+    });
+      
+});
+      
 
 ReactDOM.render(
 <Router> 

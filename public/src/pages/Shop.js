@@ -81,7 +81,7 @@ const Shop = () => {
                                         <div className="product-description">
                                             <h3 className="title">Hand Bag</h3>
                                             <hr className="below-title"></hr>
-                                            <span className="price"><span className="currency-symbol">GMD</span> 1,200</span>
+                                            <span className="price"><span className="currency-symbol">GMD</span> 1,200</span> <sup className="orignal-price"><del>1500</del></sup>
                                             <hr className="below-price"></hr>
                                             <Link to="/cart" className="add-to-cart">Add to Cart</Link>
                                         </div>

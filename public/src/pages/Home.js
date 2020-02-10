@@ -61,7 +61,7 @@ const Home = () => {
 							 </div>
 
 							 <div className="info-box">
-								<Link to="/shop" className="btn-shop">Shop Now</Link>
+							 <img src={require('../media/images/chemise1.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
 							 </div>
 						 </div>
 					 </div>
@@ -179,112 +179,7 @@ const Home = () => {
 		 </div>
 	 </div>
 
-	 <div className="latest-deals">
-		 <h2>Latest Deals <Link to="/shop" className="see-all">See All Items</Link></h2>
-		 <div className="deals">
-		 <div className="row">
-			<div className="col-md-4">
-				<div className="deal">
-					<div className="deal-info">
-						<div className="row">
-							<div className="col-md-3">
-								<img src={require('../media/images/coat.jpg')} style={{ width : '100%'}}/>
-							</div>
-							<div className="col-md-9">
-								<p>Winter Coat</p>
-								<h6>GMD4,000 <span className="sale-price">GMD5,000</span></h6>
-								<span className="amount-saved">You saved GMD500</span>
-							</div>	
-						</div>	
-					</div>	
-				</div> 
-			</div>
-			<div className="col-md-4">
-				<div className="deal">
-				<div className="deal-info">
-						<div className="row">
-							<div className="col-md-3">
-								<img src={require('../media/images/chemise1.jpg')} style={{ width : '100%'}}/>
-							</div>
-							<div className="col-md-9">
-								<p>Chemise</p>
-								<h6>GMD800 <span className="sale-price">GMD1,000</span></h6>
-								<span className="amount-saved">You saved GMD200</span>
-							</div>	
-						</div>	
-					</div>	
-				</div> 
-			</div>
-			<div className="col-md-4">
-				<div className="deal">
-				<div className="deal-info">
-						<div className="row">
-							<div className="col-md-3">
-								<img src={require('../media/images/derby-shoe.jpg')} style={{ width : '100%'}}/>
-							</div>
-							<div className="col-md-9">
-								<p>Leather Derby Shoe</p>
-								<h6>GMD2,400 <span className="sale-price">GMD3,000</span></h6>
-								<span className="amount-saved">You saved GMD600</span>
-							</div>	
-						</div>	
-					</div>		
-				</div> 
-			</div>
-		 </div>
-		 <div className="row">
-			<div className="col-md-4">
-				<div className="deal">
-				<div className="deal-info">
-						<div className="row">
-							<div className="col-md-3">
-								<img src={require('../media/images/female-top.jpg')} style={{ width : '100%'}}/>
-							</div>
-							<div className="col-md-9">
-								<p>Female Top</p>
-								<h6>GMD600 <span className="sale-price">GMD900</span></h6>
-								<span className="amount-saved">You saved GMD200</span>
-							</div>	
-						</div>	
-					</div>		
-				</div> 
-			</div>
-			<div className="col-md-4">
-				<div className="deal">
-				<div className="deal-info">
-						<div className="row">
-							<div className="col-md-3">
-								<img src={require('../media/images/shirt3.jpg')} style={{ width : '100%'}}/>
-							</div>
-							<div className="col-md-9">
-								<p>Men Shirt</p>
-								<h6>GMD700 <span className="sale-price">GMD900</span></h6>
-								<span className="amount-saved">You saved GMD200</span>
-							</div>	
-						</div>	
-					</div>	
-				</div> 
-			</div>
-			<div className="col-md-4">
-			   <div className="deal">
-			   <div className="deal-info">
-						<div className="row">
-							<div className="col-md-3">
-								<img src={require('../media/images/chemise3.jpg')} style={{ width : '100%'}}/>
-							</div>
-							<div className="col-md-9">
-								<p>Chemise</p>
-								<h6>GMD800 <span className="sale-price">GMD1100</span></h6>
-								<span className="amount-saved">You saved GMD300</span>
-							</div>	
-						</div>	
-					</div>	   
-				</div>  
-			</div>
-		 </div>
-		 </div>
-	 </div>
-		
+	 
 	 {/* <div className="popular-products">
 		 <h2>Popular Products</h2>
 		 <div className="products">
