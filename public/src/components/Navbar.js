@@ -7,7 +7,7 @@ const Navbar = () => {
             <nav className="navbar navbar-expand-md navbar-bg-color fixed-top justify-content-left">
                 <div className="container">
 
-                <Link className="navbar-brand" to="/home">eBaaba</Link>
+                <Link className="navbar-brand" to="/">eBaaba</Link>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span>
@@ -18,10 +18,10 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
                     <ul className="navbar-nav">
                     <li className="nav-item">
-                        <Link className="nav-link" to="/home">home</Link>
+                        <Link className="nav-link" to="/">home</Link>
                     </li>
                     <li className="nav-item">
-                        <a class="nav-link" href="shop">shop</a>
+                        <Link class="nav-link" to="shop">shop</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/about">about</Link>

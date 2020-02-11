@@ -530,6 +530,25 @@
 .product-details ul a i.fa.fa-twitter {
 	color: #00acee;
 }
+
+.single-product-description {
+	@extend .page-container-setup;
+	margin-top: 20px;
+}
+
+.single-product-description h3 {
+	border-bottom: 1px solid #f5f5f5;
+	padding: 10px 0px;
+}
+
+.single-product-description h5 {
+	margin-top: 10px;
+}
+
+.single-product-description p {
+	padding-top: 10px;
+}
+
 /** About Page **/
 .about {
 	@extend .page-setup;

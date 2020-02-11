@@ -44,12 +44,37 @@ const ProductSingle = () => {
                                         <li><a href=""><i className="fa fa-twitter"></i></a></li>
                                     </ul>
                                 </h3>
+                                <h3>
+                                    <ul>
+                                        <li><i className="fa fa-truck"></i></li>
+                                        <li>Fast & Reliable Delivery</li>
+                                    </ul>
+                                </h3>
                             </div>
                        </div>
                    </div>
                 </div>
-            </div>
 
+                <div className="single-product-description">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <h3>Description</h3>
+                            <h5>
+                                <ul>
+                                    <li>Quality 100% Cotton</li>
+                                    <li>Best Quality</li>
+                                    <li>Long Lasting</li>
+                                </ul>
+                            </h5>
+                            <h3>Return Policy</h3>
+                            <p><i className="fa fa-repeat"></i> 7 Days Return Guarantee</p>
+                            <h3>Delivery</h3>
+                            <p><i className="fa fa-truck"></i> 2 - 9 Hours</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     )
 }

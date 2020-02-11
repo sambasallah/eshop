@@ -24,7 +24,7 @@ const App = () => {
   return <>
     <Navbar></Navbar>
    <Switch>
-     <Route exact path="/home" component={Home}></Route>
+    <Route exact path="/" component={Home}></Route>
     <Route exact path="/shop/" component={Shop}></Route>
     <Route exact path="/about/" component={About}></Route>
     <Route exact path="/contact/" component={Contact}></Route>
@@ -35,7 +35,6 @@ const App = () => {
     <Route exact path="/account/" component={Account}></Route>
     <Route exact path="/product/:slug" component={Product}></Route>
     <Route component={Error}></Route>
-    
    </Switch>
    <Footer></Footer>
   </>;
