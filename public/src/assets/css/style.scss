@@ -398,42 +398,132 @@
 
 
 
-/** footer section **/
-.footer_section {
-		color: $tertiary_white;
-		background-color: $tertiary_black;
+/** Footer **/
+.contact-info {
+	width: 100%;
+	background-color: #1c1d1f;
 }
 
-.footer_section .footer_container {
-	width: 90%;
-	margin: 0px auto;
+.contact-info-inner {
+	width: 95%;
+	margin: auto;
+	padding: 10px 0px 0px 0px;
 }
 
-.footer_section .footer_padding {
+.contact-info-inner ul {
+	list-style-type: none;
+	color: #b5b5b5;
+}
+
+.contact-info-inner i.fa.fa-envelope, i.fa.fa-phone {
+	font-size: 20px;
+	padding: 15px;
+	background-color: #fff !important;
+	color: #000 !important;
+	border-radius: 50%;
+}
+
+.contact-info-inner h4,p {
+	color: #b5b5b5;
+}
+
+.contact-info-inner ul li {
+	display: inline-block;
+	transition: 0.3s ease-in-out;
+}
+
+.contact-info-inner ul li:first-child {
+	padding-right: 15px;
+}
+
+.contact-info-inner ul li:hover {
+	color: #fff;
+}
+
+.contact-info-inner form input[type=text] {
+	height: 40px;
+	border: none;
+	width: 200px;
+	padding: 0px 8px;
+	font-family: sans-serif;
+	border-radius: 5px 0px 0px 5px;
+}
+
+.contact-info-inner form input[type=submit] {
+	padding: 9px;
+	background-color: $primary-color;
+	color: #fff;
+	border: none;
+	border-radius: 0px 5px 5px 0px;
+}
+
+.footer {
+	width: 100%;
+	background-color: #000;
+}
+
+.footer-inner {
+	width: 95%;
+	margin: auto;
+	color: #b5b5b5;
+}
+
+.footer-inner h4 {
+	font-size: 18px;
+	font-weight: 600;
+	margin: 15px 0px;
+}
+
+.footer-inner ul {
+	list-style: none;
+}
+
+.footer-inner ul li {
+	padding-bottom: 5px;
+	font-weight: lighter;
+}
+
+.footer-inner i.fa.fa-facebook, i.fa.fa-twitter, i.fa.fa-instagram {
+	font-size: 20px;
+	padding: 0px 10px 0px 0px;
+	transition: 0.3s ease-in-out;
+}
+
+.footer-inner i.fa.fa-facebook:hover {
+	color: #3b5998;
+	cursor: pointer;
+}
+
+.footer-inner i.fa.fa-instagram:hover {
+	color: #c08d64;
+	cursor: pointer;
+}
+
+.footer-inner i.fa.fa-twitter:hover {
+	color: #0084b4;
+	cursor: pointer;
+}
+
+.copyright-area {
+	width: 100%;
+	background-color: #000;
+}
+
+.copyright-inner {
+	width: 95%;
+	margin: auto;
+	text-align: center;
+	color: #b5b5b5;
+}
+
+.copyright-inner footer {
+	font-weight: lighter;
 	padding: 10px 0px;
 }
 
-.footer_section .footer_padding ul {
-	list-style: none;
-	padding: 5px 5px;
-}
-
-.footer_section ul li a {
-	color: $tertiary_white;
-}
-
-.footer_section footer {
-	text-align: center;
-	padding-bottom: 5px;
-}
-
-.footer_section .fa.fa-envelope, .fa.fa-phone {
-	color: $primary_color;
-	padding-right: 5px;
-}
 
 
-/** breadcrumb **/
+/** Breadcrumb **/
 
 .breadcrumb {
 	background-color: $tertiary_white;
