@@ -21,21 +21,21 @@ const Home = () => {
   		</ol>
 		  <div className="carousel-inner text-center">
 		    <div className="carousel-item active">
-		      <img className="d-block w-100 img-responsive" src={require('../media/images/banner1.jpg') } alt={"First Slide"} />
+		      <img className="d-block w-100 img-responsive" src={require('../../media/images/banner1.jpg') } alt={"First Slide"} />
 		      <div className="text-content responsive">
                 <h1>Summer Discount Offer!</h1>
                 <a href="shop" className="shop-btn">SHOP NOW</a>
             </div>
 		    </div>
 		    <div className="carousel-item">
-		      <img className="d-block w-100" src={require("../media/images/banner2.jpg")} alt="Second slide" />
+		      <img className="d-block w-100" src={require("../../media/images/banner2.jpg")} alt="Second slide" />
 		       <div className="text-content">
                 <h1>Classic Summer Wears</h1>
                 <a href="shop" className="shop-btn">SHOP NOW</a>
             </div>
 		    </div>
 		    <div className="carousel-item">
-		      <img className="d-block w-100" src={require("../media/images/banner3.jpg")} alt="Third slide" />
+		      <img className="d-block w-100" src={require("../../media/images/banner3.jpg")} alt="Third slide" />
 		       <div className="text-content">
                 <h1>Classic Women Wears</h1>
                 <a href="shop" className="shop-btn">SHOP NOW</a>
@@ -57,11 +57,11 @@ const Home = () => {
 				 	<div className="row">
 						 <div className="col-md-12">
 							 <div className="info-box">
-									<img src={require('../media/images/derby-shoe.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
+									<img src={require('../../media/images/derby-shoe.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
 							 </div>
 
 							 <div className="info-box">
-							 <img src={require('../media/images/chemise1.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
+							 <img src={require('../../media/images/chemise1.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
 							 </div>
 						 </div>
 					 </div>
@@ -82,7 +82,7 @@ const Home = () => {
 					<div className="deal-info">
 						<div className="row">
 							<div className="col-md-3">
-								<img src={require('../media/images/coat.jpg')} style={{ width : '100%'}}/>
+								<img src={require('../../media/images/coat.jpg')} style={{ width : '100%'}}/>
 							</div>
 							<div className="col-md-9">
 								<p>Winter Coat</p>
@@ -98,7 +98,7 @@ const Home = () => {
 				<div className="deal-info">
 						<div className="row">
 							<div className="col-md-3">
-								<img src={require('../media/images/chemise1.jpg')} style={{ width : '100%'}}/>
+								<img src={require('../../media/images/chemise1.jpg')} style={{ width : '100%'}}/>
 							</div>
 							<div className="col-md-9">
 								<p>Chemise</p>
@@ -114,7 +114,7 @@ const Home = () => {
 				<div className="deal-info">
 						<div className="row">
 							<div className="col-md-3">
-								<img src={require('../media/images/derby-shoe.jpg')} style={{ width : '100%'}}/>
+								<img src={require('../../media/images/derby-shoe.jpg')} style={{ width : '100%'}}/>
 							</div>
 							<div className="col-md-9">
 								<p>Leather Derby Shoe</p>
@@ -132,7 +132,7 @@ const Home = () => {
 				<div className="deal-info">
 						<div className="row">
 							<div className="col-md-3">
-								<img src={require('../media/images/female-top.jpg')} style={{ width : '100%'}}/>
+								<img src={require('../../media/images/female-top.jpg')} style={{ width : '100%'}}/>
 							</div>
 							<div className="col-md-9">
 								<p>Female Top</p>
@@ -148,7 +148,7 @@ const Home = () => {
 				<div className="deal-info">
 						<div className="row">
 							<div className="col-md-3">
-								<img src={require('../media/images/shirt3.jpg')} style={{ width : '100%'}}/>
+								<img src={require('../../media/images/shirt3.jpg')} style={{ width : '100%'}}/>
 							</div>
 							<div className="col-md-9">
 								<p>Men Shirt</p>
@@ -164,7 +164,7 @@ const Home = () => {
 			   <div className="deal-info">
 						<div className="row">
 							<div className="col-md-3">
-								<img src={require('../media/images/chemise3.jpg')} style={{ width : '100%'}}/>
+								<img src={require('../../media/images/chemise3.jpg')} style={{ width : '100%'}}/>
 							</div>
 							<div className="col-md-9">
 								<p>Chemise</p>
@@ -226,7 +226,7 @@ const Home = () => {
 			<div className="row">
 				<div className="col-md-3">
 					<div className="item">
-						<img src={require('../media/images/printer.jpg')} alt="printers" style={{width : '100%', height : '100%'}} />
+						<img src={require('../../media/images/printer.jpg')} alt="printers" style={{width : '100%', height : '100%'}} />
 						<div className="description">
 							<h2>Printers</h2>
 							<p>
@@ -238,7 +238,7 @@ const Home = () => {
 				</div>
 				<div className="col-md-3">
 				<div className="item">
-						<img src={require('../media/images/headphones.jpg')} alt="headphones" style={{width : '100%', height : '100%'}} />
+						<img src={require('../../media/images/headphones.jpg')} alt="headphones" style={{width : '100%', height : '100%'}} />
 						<div className="description">
 							<h2>Headphones & Speakers</h2>
 							<p>
@@ -250,7 +250,7 @@ const Home = () => {
 				</div>
 				<div className="col-md-3">
 				<div className="item">
-						<img src={require('../media/images/watch.jpg')} alt="watch" style={{width : '100%', height : '100%'}} />
+						<img src={require('../../media/images/watch.jpg')} alt="watch" style={{width : '100%', height : '100%'}} />
 						<div className="description">
 							<h2>Watches</h2>
 							<p>
@@ -262,7 +262,7 @@ const Home = () => {
 				</div>
 				<div className="col-md-3">
 				<div className="item">
-						<img src={require('../media/images/beauty.jpg')} alt="beauty" style={{width : '100%', height : '100%'}} />
+						<img src={require('../../media/images/beauty.jpg')} alt="beauty" style={{width : '100%', height : '100%'}} />
 						<div className="description">
 							<h2>Printers</h2>
 							<p>

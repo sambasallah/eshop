@@ -76,7 +76,7 @@ const Shop = () => {
                                 <div className="col-md-3">
                                     <div className="product">
                                         <div className="product-img">
-                                             <img src={require('../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
+                                             <img src={require('../../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
                                         </div>
                                         <div className="product-description">
                                             <h3 className="title">Hand Bag</h3>
@@ -90,7 +90,7 @@ const Shop = () => {
                                 <div className="col-md-3">
                                     <div className="product">
                                            <div className="product-img">
-                                           <img src={require('../media/images/b6.jpg')} style={{ width : "100%", height : "100%"}} />
+                                           <img src={require('../../media/images/b6.jpg')} style={{ width : "100%", height : "100%"}} />
                                            </div>
                                             <div className="product-description">
                                                 <h3 className="title">Hand Bag</h3>
@@ -104,7 +104,7 @@ const Shop = () => {
                                 <div className="col-md-3">
                                 <div className="product">
                                         <div className="product-img">
-                                           <img src={require('../media/images/chemise2.jpg')} style={{ width : "100%", height : "100%"}} />
+                                           <img src={require('../../media/images/chemise2.jpg')} style={{ width : "100%", height : "100%"}} />
                                         </div>
                                         <div className="product-description">
                                             <h3 className="title">Hand Bag</h3>
@@ -118,7 +118,7 @@ const Shop = () => {
                                 <div className="col-md-3">
                                 <div className="product">
                                         <div className="product-img">
-                                        <img src={require('../media/images/derby-shoe.jpg')} style={{ width : "100%", height : "100%"}} />
+                                        <img src={require('../../media/images/derby-shoe.jpg')} style={{ width : "100%", height : "100%"}} />
                                         </div>
                                         <div className="product-description">
                                             <h3 className="title">Hand Bag</h3>
@@ -135,7 +135,7 @@ const Shop = () => {
                                 <div className="col-md-3">
                                     <div className="product">
                                         <div className="product-img">
-                                             <img src={require('../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
+                                             <img src={require('../../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
                                         </div>
                                         <div className="product-description">
                                             <h3 className="title">Hand Bag</h3>
@@ -149,7 +149,7 @@ const Shop = () => {
                                 <div className="col-md-3">
                                     <div className="product">
                                            <div className="product-img">
-                                           <img src={require('../media/images/b6.jpg')} style={{ width : "100%", height : "100%"}} />
+                                           <img src={require('../../media/images/b6.jpg')} style={{ width : "100%", height : "100%"}} />
                                            </div>
                                             <div className="product-description">
                                                 <h3 className="title">Hand Bag</h3>
@@ -163,7 +163,7 @@ const Shop = () => {
                                 <div className="col-md-3">
                                 <div className="product">
                                         <div className="product-img">
-                                           <img src={require('../media/images/chemise2.jpg')} style={{ width : "100%", height : "100%"}} />
+                                           <img src={require('../../media/images/chemise2.jpg')} style={{ width : "100%", height : "100%"}} />
                                         </div>
                                         <div className="product-description">
                                             <h3 className="title">Hand Bag</h3>
@@ -177,7 +177,7 @@ const Shop = () => {
                                 <div className="col-md-3">
                                 <div className="product">
                                         <div className="product-img">
-                                        <img src={require('../media/images/derby-shoe.jpg')} style={{ width : "100%", height : "100%"}} />
+                                        <img src={require('../../media/images/derby-shoe.jpg')} style={{ width : "100%", height : "100%"}} />
                                         </div>
                                         <div className="product-description">
                                             <h3 className="title">Hand Bag</h3>
@@ -194,7 +194,7 @@ const Shop = () => {
                                 <div className="col-md-3">
                                     <div className="product">
                                         <div className="product-img">
-                                             <img src={require('../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
+                                             <img src={require('../../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
                                         </div>
                                         <div className="product-description">
                                             <h3 className="title">Hand Bag</h3>
@@ -208,7 +208,7 @@ const Shop = () => {
                                 <div className="col-md-3">
                                     <div className="product">
                                            <div className="product-img">
-                                           <img src={require('../media/images/b6.jpg')} style={{ width : "100%", height : "100%"}} />
+                                           <img src={require('../../media/images/b6.jpg')} style={{ width : "100%", height : "100%"}} />
                                            </div>
                                             <div className="product-description">
                                                 <h3 className="title">Hand Bag</h3>
@@ -222,7 +222,7 @@ const Shop = () => {
                                 <div className="col-md-3">
                                 <div className="product">
                                         <div className="product-img">
-                                           <img src={require('../media/images/chemise2.jpg')} style={{ width : "100%", height : "100%"}} />
+                                           <img src={require('../../media/images/chemise2.jpg')} style={{ width : "100%", height : "100%"}} />
                                         </div>
                                         <div className="product-description">
                                             <h3 className="title">Hand Bag</h3>
@@ -236,7 +236,7 @@ const Shop = () => {
                                 <div className="col-md-3">
                                 <div className="product">
                                         <div className="product-img">
-                                        <img src={require('../media/images/derby-shoe.jpg')} style={{ width : "100%", height : "100%"}} />
+                                        <img src={require('../../media/images/derby-shoe.jpg')} style={{ width : "100%", height : "100%"}} />
                                         </div>
                                         <div className="product-description">
                                             <h3 className="title">Hand Bag</h3>

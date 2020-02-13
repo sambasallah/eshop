@@ -3,21 +3,21 @@ import {Route, Switch} from 'react-router-dom';
 import './App.css';
 
 /** Pages */
-import Home from './pages/Home';
-import Shop from './pages/Shop';
-import About from './pages/About';
-import Product from './pages/ProductSingle';
-import Contact from './pages/Contact';
-import Checkout from './pages/Checkout';
-import Error from './pages/Error';
-import Cart from './pages/Cart';
-import Success from './pages/Success';
-import Auth from './pages/Auth';
-import Account from './pages/Account';
+import Home from './components/pages/Home';
+import Shop from './components/pages/Shop';
+import About from './components/pages/About';
+import Product from './components/pages/ProductSingle';
+import Contact from './components/pages/Contact';
+import Checkout from './components/pages/Checkout';
+import Error from './components/pages/Error';
+import Cart from './components/pages/Cart';
+import Success from './components/pages/Success';
+import Auth from './components/pages/Auth';
+import Account from './components/pages/Account';
 
 /** Components */
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import Navbar from './components/inc/Navbar';
+import Footer from './components/inc/Footer';
 
 
 const App = () => {

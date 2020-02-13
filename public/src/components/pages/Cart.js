@@ -31,7 +31,7 @@ const Cart = () => {
                         <tr>
                             <td>
                                 
-                                <h6><img src={require('../media/images/b6.jpg')} alt="" style={{ width: "40px", height:"40px"}} /> <span>Bag</span></h6>
+                                <h6><img src={require('../../media/images/b6.jpg')} alt="" style={{ width: "40px", height:"40px"}} /> <span>Bag</span></h6>
                             </td>
                             <td>
                         <h6 className="qty-cart"><b>2</b></h6>
@@ -47,7 +47,7 @@ const Cart = () => {
                         <tr>
                             <td>
                                 
-                                <h6><img src={require('../media/images/b6.jpg')} alt="" style={{width:"40px", height:"40px"}} /> <span>Bag</span></h6>
+                                <h6><img src={require('../../media/images/b6.jpg')} alt="" style={{width:"40px", height:"40px"}} /> <span>Bag</span></h6>
                             </td>
                             <td>
                             <h6 className="qty-cart"><b>2</b></h6>

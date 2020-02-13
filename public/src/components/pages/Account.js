@@ -18,7 +18,7 @@ const Account = () => {
                 <div className="row">
                     <div className="col-md-4">
                         <div className="account-info">
-                            <img src={require("../media/images/b5.jpg")} alt="profile" className="profile-pic" />
+                            <img src={require("../../media/images/b5.jpg")} alt="profile" className="profile-pic" />
                             <ul className="nav flex-column">
                                 <li><a href="#dashboard" data-toggle="tab" className="nav-link active"><i className="fa fa-tachometer"></i> Dashboard</a></li>
                                 <li><a href="#account-info" data-toggle="tab" className="nav-link"><i className="fa fa-user"></i> Account Information</a></li>
@@ -60,7 +60,7 @@ const Account = () => {
                                     <tbody>
                                     <tr>
                                         <td>
-                                            <h6><img src={require("../media/images/b6.jpg")} alt="" style={{width:"40px", height:"40px"}} /> <span>Bag</span></h6>
+                                            <h6><img src={require("../../media/images/b6.jpg")} alt="" style={{width:"40px", height:"40px"}} /> <span>Bag</span></h6>
                                         </td>
                                         <td>
                                             <b>2</b>

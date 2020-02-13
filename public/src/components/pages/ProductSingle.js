@@ -23,13 +23,13 @@ const ProductSingle = () => {
                        <div className="col-md-4">
                        <div className="product-slider">
                             <div className="img-container">
-                                <img src={require('../media/images/chemise0.jpg')} style={{ width: '100%', height : '100%'}} />
+                                <img src={require('../../media/images/chemise0.jpg')} style={{ width: '100%', height : '100%'}} />
                             </div>
                             <div className="img-container">
-                                <img src={require('../media/images/chemise2.jpg')} style={{ width: '100%', height : '100%'}} />
+                                <img src={require('../../media/images/chemise2.jpg')} style={{ width: '100%', height : '100%'}} />
                             </div>
                             <div className="img-container">
-                                <img src={require('../media/images/chemise3.jpg')} style={{ width: '100%', height : '100%'}} />
+                                <img src={require('../../media/images/chemise3.jpg')} style={{ width: '100%', height : '100%'}} />
                             </div>
                         </div>
                        </div>
