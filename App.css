@@ -178,8 +178,6 @@ ul {
 }
 
 .info-box {
-  position: relative;
-  display: inline-block;
   width: 100%;
   height: 190px;
   background-color: #fff;
@@ -201,7 +199,7 @@ ul {
 }
 
 .info-box .btn-shop {
-  position: absolute;
+  position: relative;
   padding: 10px 30px;
   background-color: #ed017f;
   color: #fff;
@@ -210,25 +208,24 @@ ul {
   font-family: sans-serif;
   box-shadow: -1px 3px 4px rgba(0, 0, 0, 0.5);
   transition: 0.3s ease-in-out;
-  top: 40%;
+  top: 43%;
   left: 25%;
   border-radius: 5px;
-  display: none;
-  z-index: 99;
 }
 
-.info-box:hover:after {
+.hover-overlay {
+  position: relative;
+  display: none;
+}
+
+.hover-overlay:hover:after {
   content: "";
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 0, 0, 0.5);
   position: absolute;
   top: 0;
   left: 0;
-}
-
-.info-box:hover .btn-shop {
-  display: block;
 }
 
 /** Latest Deals **/
@@ -651,12 +648,10 @@ ul {
 
 .product-details ul a i.fa.fa-facebook {
   color: #3b5998;
-  padding: 0 !important;
 }
 
 .product-details ul a i.fa.fa-twitter {
   color: #00acee;
-  padding: 0 !important;
 }
 
 .single-product-description {

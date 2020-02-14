@@ -46,7 +46,7 @@ const Footer = () => {
 				 <div className="footer-inner">
 					 <div className="row">
 						 <div className="col-md-2">
-                             <h4>About eBaaba</h4>
+                             <h4>ABOUT eBaaba</h4>
 							 <ul>
 								 <li>Contact Us</li>
 								 <li>About Us</li>
@@ -57,7 +57,7 @@ const Footer = () => {
 							 </ul>
 						 </div>
 						 <div className="col-md-2">
-							 <h4>Payment</h4>
+							 <h4>PAYMENT</h4>
 							 <ul>
 								 <li>Visa</li>
 								 <li>MasterCard</li>
@@ -66,7 +66,7 @@ const Footer = () => {
 							 </ul>
 						 </div>
 						 <div className="col-md-2">
-							 <h4>Buyer Safety</h4>
+							 <h4>BUYER SAFETY</h4>
 							 <ul>
 								 <li>Buyer Safety Center</li>
 								 <li>FAQs</li>
@@ -77,7 +77,7 @@ const Footer = () => {
 							 </ul>
 						 </div>
 						 <div className="col-md-2">
-						 	<h4>More Info</h4>
+						 	<h4>MORE INFO</h4>
 							 <ul>
 								 <li>Site Map</li>
 								 <li>Track Order</li>

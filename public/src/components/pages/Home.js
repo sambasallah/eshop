@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { ReactDOMServer } from 'react-dom/server';
 
 const Home = () => {
     return (
@@ -55,13 +56,14 @@ const Home = () => {
 
 				 <div className="col-md-3">
 				 	<div className="row">
-						 <div className="col-md-12">
+						 <div className="col-md-12 right-carousel">
 							 <div className="info-box">
-									<img src={require('../../media/images/derby-shoe.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
+								     <Link to="/product/chemise" className="btn-shop">Shop Now</Link>
+									 <img src={require('../../media/images/derby-shoe.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
 							 </div>
-
 							 <div className="info-box">
-							 <img src={require('../../media/images/chemise1.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
+								   <Link to="/product/chemise" className="btn-shop">Shop Now</Link>
+							       <img src={require('../../media/images/chemise1.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
 							 </div>
 						 </div>
 					 </div>
