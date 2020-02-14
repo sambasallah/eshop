@@ -58,11 +58,11 @@ const Home = () => {
 				 	<div className="row">
 						 <div className="col-md-12 right-carousel">
 							 <div className="info-box">
-								     <Link to="/product/chemise" className="btn-shop">Shop Now</Link>
+								     <a href="./product/chemise" className="btn-shop">Shop Now</a>
 									 <img src={require('../../media/images/derby-shoe.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
 							 </div>
 							 <div className="info-box">
-								   <Link to="/product/chemise" className="btn-shop">Shop Now</Link>
+								   <a Link href="./product/chemise" className="btn-shop">Shop Now</a>
 							       <img src={require('../../media/images/chemise1.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
 							 </div>
 						 </div>
