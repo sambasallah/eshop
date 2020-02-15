@@ -11,7 +11,11 @@
 |
 */
 
+// Users route
 $router->get('/users', 'UserController@allUsers');
 $router->get('/users/{id}', 'UserController@singleUser');
 
+// Products route
+$router->get('/products','ProductsController@allProducts');
+$router->get('/products/{id}','ProductsController@singleProduct');
 
