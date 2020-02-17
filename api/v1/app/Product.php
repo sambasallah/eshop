@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+class Product {
 
-class ProductsController extends Controller {
-    
-    
-    public function allProducts() {
+    public static function getAllProducts(){
+
         $products = DB::table("products")
         ->join('product_categories','product_categories.product_id','=','products.id')
         ->join('categories','categories.id','=','product_categories.category_id')
-        ->get();
+        ->paginate(15);
 
         $data['products'] = array();
 
@@ -32,8 +30,8 @@ class ProductsController extends Controller {
         return response()->json($data);
     }
 
-    public function singleProduct(Request $request,$id) {
-        
+    public static function getSingleProduct($id) {
+          
         $product = DB::table('products')
         ->select('name','description','regular_price','discount_price','quantity','category_name')
         ->join('product_categories','product_categories.product_id','=','products.id')
@@ -44,4 +42,5 @@ class ProductsController extends Controller {
         
         return response()->json($product);
     }
+
 }

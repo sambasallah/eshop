@@ -169,17 +169,16 @@
 
 .info-box .btn-shop {
 	position: absolute;
-	padding: 10px 30px;
+	padding: 5px 15px;
 	background-color: $primary_color;
 	color: $tertiary_white;
 	border: 1px solid $primary_color;
 	text-transform: uppercase;
 	font-family: sans-serif;
-	box-shadow: -1px 3px 4px rgba(0,0,0,0.5);
+	box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.5);
 	transition: 0.3s ease-in-out;
 	top: 40%;
-	left: 25%;
-	border-radius: 5px;
+	left: 30%;
 	display: none;
 	z-index: 99;
 }
@@ -467,7 +466,7 @@
 }
 
 .contact-info-inner form input[type=submit] {
-	padding: 9px;
+	padding: 8.3px;
 	background-color: $primary-color;
 	color: #fff;
 	border: none;
@@ -524,6 +523,7 @@
 .copyright-area {
 	width: 100%;
 	background-color: #000;
+	box-shadow: 0px 2px 3px 1px $primary-color;
 }
 
 .copyright-inner {
@@ -535,6 +535,7 @@
 
 .copyright-inner footer {
 	font-weight: lighter;
+	font-size: 14px;
 	padding: 10px 0px;
 }
 
