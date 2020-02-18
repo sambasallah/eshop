@@ -41,7 +41,7 @@ const Cart = () => {
                                 <sub>D12,000 x 1 Item</sub>
                             </td>
                             <td>
-                                <h6 className="delete"><a href="#"><i className="fa fa-trash"></i></a></h6>
+                                <h6 className="delete"><a href=""><i className="fa fa-trash"></i></a></h6>
                             </td>
                         </tr>
                         <tr>

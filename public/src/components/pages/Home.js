@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { ReactDOMServer } from 'react-dom/server';
 
 const Home = () => {
     return (

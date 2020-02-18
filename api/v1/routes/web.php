@@ -19,5 +19,6 @@ $router->delete('/users/{id}', 'UserController@deleteUser');
 
 // Products route
 $router->get('/products','ProductController@allProducts');
+
 $router->get('/products/{id}','ProductController@singleProduct');
 

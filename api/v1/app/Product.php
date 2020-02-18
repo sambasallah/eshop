@@ -27,7 +27,7 @@ class Product {
             array_push($data['products'],$product);
         }
 
-        return response()->json($data);
+        return response()->json($data,200,['Access-Control-Allow-Origin' => 'http://localhost:3000']);
     }
 
     public static function getSingleProduct($id) {

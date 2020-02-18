@@ -43,7 +43,7 @@ const Account = () => {
                                     <input type="password" name="password" placeholder="Password" />
                                     <input type="password" name="password-repeat" placeholder="Repeat Password" />
                                     <input type="file" name="profile-picture" /> 
-                                    <a href="" type="submit">Update Profile</a>
+                                    <a href="/cart" type="submit">Update Profile</a>
                                 </form>
                             </div>
                             <div className="tab-pane container" id="orders">
