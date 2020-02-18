@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -14,6 +13,9 @@
 // Users route
 $router->get('/users', 'UserController@allUsers');
 $router->get('/users/{id}', 'UserController@singleUser');
+$router->post('/users','UserController@registerUser');
+$router->patch('/users/{id}','UserController@updateUser');
+$router->delete('/users/{id}', 'UserController@deleteUser');
 
 // Products route
 $router->get('/products','ProductController@allProducts');
