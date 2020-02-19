@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('regular_price');
             $table->string('discount_price');
             $table->string('quantity');
+            $table->string('slug')->unique();
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

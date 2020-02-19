@@ -10,6 +10,8 @@
 |
 */
 
+$router->group(['prefix' => 'api/v1'], function() use($router) {
+  
 // Users route
 $router->get('/users', 'UserController@allUsers');
 $router->get('/users/{id}', 'UserController@singleUser');
@@ -19,6 +21,7 @@ $router->delete('/users/{id}', 'UserController@deleteUser');
 
 // Products route
 $router->get('/products','ProductController@allProducts');
-
 $router->get('/products/{id}','ProductController@singleProduct');
 
+
+});

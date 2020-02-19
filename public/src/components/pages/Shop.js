@@ -3,6 +3,18 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 const Product = ({ product, index }) => {
+    
+const limitedTitle = (str) => {
+    let newTitle = '';
+    if(str.length < 18) {
+        return str;
+    } 
+    for(let i = 0; i < 18; i++) {
+        newTitle += str.charAt(i);
+    }
+    return newTitle.trim() + "..";
+}
+
     return (
         <div className="col-md-3">
         <div className="product">
@@ -10,7 +22,7 @@ const Product = ({ product, index }) => {
                  <img src={require('../../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
             </div>
             <div className="product-description">
-                <h3 className="title">{ product.name }</h3>
+                <h3 className="title">{ limitedTitle(product.name) }</h3>
                 <hr className="below-title"></hr>
                 <span className="price"><span className="currency-symbol">GMD</span> { product.regular_price } </span> <sup className="orignal-price"><del> { product.discount_price } </del></sup>
                 <hr className="below-price"></hr>
@@ -21,19 +33,12 @@ const Product = ({ product, index }) => {
     );
 }
 
-
-const Products = () => {
-    
-  
-}
-
-
 const Shop = () => {
 
     const [products, setProducts] = useState([]);
 
     const getProducts = async () => {
-        const url = "http://localhost:8000/products";
+        const url = "http://localhost:8000/api/v1/products";
     
          await fetch(url)
          .then((resp) => resp.json() )
@@ -48,10 +53,6 @@ const Shop = () => {
     useEffect(() => {
         getProducts();
     }, []);
-
-   
-
-   
 
     return (
         <div>
@@ -122,17 +123,10 @@ const Shop = () => {
                             </div>
                         </div>
                         <div className="col-md-9">
-                        <div className="row shop-items">
-                           { products.map((product, index) => ( <Product key={index} index={index} product={product} /> )) }
-                        </div>   
-                        <div className="row shop-items">
-                               
-                            
-                        </div>
+                           <div className="row shop-items">
+                                { products.map((product, index) => ( <Product key={index} index={index} product={product} /> )) }
+                           </div>
 
-                        <div className="row shop-items">
-                               
-                        </div>
                             <div className="pagination">
                                 <ul>
                                     <li><span>Previous</span></li>
