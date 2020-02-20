@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\DB;
 
 class User {
 
+    /**
+     * @return json
+     */
     public static function getAllUsers()  {
         $users = DB::table("users")->paginate(15);
         $data['users'] = array();
@@ -38,6 +41,11 @@ class User {
         return response()->json(array("User Created" => false));
     }
 
+    /**
+     * @param array $data
+     * @param int $id
+     * @return json
+     */
     public static function updateUser(array $data, int $id) {
         \extract($data);
         $updated = DB::update("update users set username = ?, email = ?, password = ? where id = ?",[$username, $email, $password, $id]);
@@ -49,6 +57,10 @@ class User {
         return response()->json(array("User Updated" => false));
     }
 
+    /**
+     * @param int $id
+     * @return json
+     */
     public static function deleteUser($id) {
         $deleted = DB::delete("delete from users where id = ?",[$id]);
 

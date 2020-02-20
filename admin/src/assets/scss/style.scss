@@ -1,2 +1,49 @@
 @import 'reset';
 @import 'variables';
+
+
+.page-setup {
+	width: 100%;
+	background-color: $bg-color;
+	padding: 20px;
+}
+
+.page-container-setup {
+	width: 95%;
+	margin: 0px auto;
+	padding: 20px;
+	box-sizing: border-box;
+	background-color: $tertiary_white;
+}
+
+/** Navbar **/
+.navbar-bg-color {
+	background-color: $primary-color;
+}
+
+.main-nav {
+	height: 50px;
+}
+
+.container {
+	min-width: 98% !important;
+}
+
+.navbar {
+	box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.5);
+}
+
+.navbar .nav-item {
+	padding-right: 20px;
+}
+
+.navbar a.nav-link {
+	color: $tertiary_white;
+	font-size: 14px;
+	padding-right: 20px;
+	text-transform: uppercase;
+}
+
+.navbar .navbar-brand {
+	color: $tertiary_white;
+}

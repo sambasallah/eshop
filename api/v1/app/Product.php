@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\DB;
 
 class Product {
 
+    /**
+     * @return json
+     */
     public static function getAllProducts(){
 
         $products = DB::table("products")
@@ -27,9 +30,16 @@ class Product {
             array_push($data['products'],$product);
         }
 
-        return response()->json($data,200,['Access-Control-Allow-Origin' => 'http://localhost:3000']);
+        return response()->json($data,200,
+        ['Content-Type' => 'application/json',
+         'Access-Control-Allow-Origin' => '*']
+        );
     }
 
+    /**
+     * @param int $id
+     * @return json
+     */
     public static function getSingleProduct($id) {
           
         $product = DB::table('products')
@@ -38,8 +48,7 @@ class Product {
         ->join('categories','categories.id','=','product_categories.category_id')
         ->where('products.id',$id)
         ->get();
-        
-        
+    
         return response()->json($product);
     }
 
