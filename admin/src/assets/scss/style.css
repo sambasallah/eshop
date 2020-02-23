@@ -1,5 +1,6 @@
 * {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 html, body {
@@ -14,7 +15,6 @@ body a {
 
 body a:hover {
   -webkit-transition: 0.3s all;
-  -moz-transition: 0.3s all;
   transition: 0.3s all;
   text-decoration: none;
 }
@@ -44,7 +44,8 @@ ul {
   width: 95%;
   margin: 0px auto;
   padding: 20px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   background-color: #fff;
 }
 
@@ -62,7 +63,8 @@ ul {
 }
 
 .navbar {
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
 }
 
 .navbar .nav-item {
@@ -110,37 +112,37 @@ ul {
 
 /** Dashboard **/
 .dashboard .custom-card {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   width: 100%;
   height: 100px;
   padding: 10px;
   color: #ffffff;
-  margin-bottom: 15px;
 }
 
 .dashboard .custom-card.first {
   background: #2193b0 !important;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);
   /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#6dd5ed), to(#2193b0));
   background: linear-gradient(to right, #6dd5ed, #2193b0);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .dashboard .custom-card.second {
-  background: #11998e;
+  background: #CAC531;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #38ef7d, #11998e);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #38ef7d, #11998e);
+  background: -webkit-gradient(linear, left top, right top, from(#F3F9A7), to(#CAC531));
+  background: linear-gradient(to right, #F3F9A7, #CAC531);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .dashboard .custom-card.third {
   background: #f953c6;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #b91d73, #f953c6);
   /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#b91d73), to(#f953c6));
   background: linear-gradient(to right, #b91d73, #f953c6);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
@@ -162,32 +164,4 @@ ul {
 .custom-card-inner .decimal-point {
   font-size: 14px;
 }
-
-.dashboard-inner .admin-profile {
-  text-align: center;
-}
-
-.dashboard-inner .admin-profile h6 {
-  font-size: 18px;
-  font-weight: lighter;
-}
-
-.dashboard-inner .left {
-  background-color: #f5f5f5;
-  margin-bottom: 15px;
-}
-
-.dashboard-inner .left ul {
-  list-style: none;
-}
-
-.dashboard-inner .left ul li i.fa.fa-tachometer, i.fa.fa-gift, i.fa.fa-shopping-basket, i.fa.fa-cog {
-  width: 15%;
-}
-
-.dashboard-inner .left ul li {
-  font-size: 20px;
-  padding-bottom: 15px;
-}
-
 /*# sourceMappingURL=style.css.map */

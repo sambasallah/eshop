@@ -18,13 +18,15 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
                     <ul className="navbar-nav">
                     <li className="nav-item">
-                        <a className="nav-link" href="/">home</a>
+                        <a className="nav-link" href="#">
+                            <i className="fa fa-bell"></i>
+                            <span className='badge badge-warning' id='notification'> 5 </span>
+                        </a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/about">about</a>
-                    </li>
-                    <li className="nav-item">
-                        <a href="#"><i className="fa fa-bell"></i></a>
+                        <a className="nav-link" href="/about">
+                            <i className="fa fa-cog"></i>
+                        </a>
                     </li>
                     </ul>
                 </div> 

@@ -24,6 +24,10 @@ class User {
         return response()->json($data);
     }
 
+    /**
+     * @param int $id
+     * @return json
+     */
     public static function getSingleUser(int $id) {
         $user = DB::table('users')->where('id', $id)->get();
         

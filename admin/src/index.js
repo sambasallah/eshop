@@ -4,9 +4,10 @@ import App from './App';
 import './assets/css/style.css';
 import * as serviceWorker from './serviceWorker';
 
-import $ from 'jquery/dist/jquery';
+import 'jquery/dist/jquery';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
