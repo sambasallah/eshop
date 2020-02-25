@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import DashboardChart from '../charts/DashboardChart';
 
 const Dashboard = () => {
     return (
@@ -27,7 +28,7 @@ const Dashboard = () => {
                                     <li><i className="fa fa-tachometer"></i> Dashboard</li>
                                     <li><i className="fa fa-gift"></i> Orders</li>
                                     <li><i className="fa fa-shopping-basket"></i> Store</li>
-                                    <li><i className="fa fa-tachometer"></i> Analytics</li>
+                                    <li><i className="fa fa-line-chart"></i> Analytics</li>
                                     <li><i className="fa fa-cog"></i> Setting</li>
                                 </ul>
                             </div>
@@ -38,13 +39,13 @@ const Dashboard = () => {
                                     <div className="custom-card first">
                                         <div className="custom-card-inner">
                                         <div className="row">
-                                                <div className="col-md-10">
+                                                <div className="col-md-8">
                                                     <h2>Sales</h2>
                                                     <h3>D8,500.<span className="decimal-point">00</span></h3>
                                                     <h6>D4000 This Week.</h6>
                                                 </div>
-                                                <div className="col-md-2">
-                                                    <i className="fa fa-money"></i>
+                                                <div className="col-md-4">
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -60,7 +61,7 @@ const Dashboard = () => {
                                                     <h6>300 New Orders</h6>
                                                 </div>
                                                 <div className="col-md-2">
-                                                    <i className="fa fa-gift"></i>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -73,15 +74,19 @@ const Dashboard = () => {
                                                 <div className="col-md-10">
                                                     <h2>Profit</h2>
                                                     <h3>D8,500.<span className="decimal-point">00</span></h3>
-                                                    <h6>+3000 this week</h6>
+                                                    <h6>+3000 This Week</h6>
                                                 </div>
                                                 <div className="col-md-2">
-                                                    <i className="fa fa-money"></i>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div className="chart-container">
+                                <DashboardChart />
                             </div>
                         </div>
                     </div>

@@ -73,7 +73,7 @@ const Shop = () => {
                                 <li className="filter-title">Price</li>
                                 <li><a type="button" data-toggle="collapse" data-target="#price"><i className="fa fa-plus"></i></a></li>
                             </ul>
-                            <div id="price" className="collapse show">
+                            <div id="price" className="collapse">
                                     <form>
                                         <div className="custom-control custom-radio">
                                             <input type="radio" className="custom-control-input" id="customSwitch1" name="radio-btn" />

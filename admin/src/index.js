@@ -1,13 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './assets/css/style.css';
-import * as serviceWorker from './serviceWorker';
+// Lib
 
-import 'jquery/dist/jquery';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
+// import $ from 'jquery';
+// import 'chart.js/dist/Chart.bundle';
+
+// Assets
+import './assets/css/style.css';
+// import './assets/js/main';
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
