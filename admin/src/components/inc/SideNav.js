@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const SideNav = () => {
     return (
@@ -13,11 +14,11 @@ const SideNav = () => {
         </div>
         <h5>General</h5>
             <ul>
-                <li><i className="fa fa-tachometer"></i> Dashboard</li>
-                <li><i className="fa fa-gift"></i> Orders</li>
-                <li><i className="fa fa-shopping-basket"></i> Store</li>
-                <li><i className="fa fa-line-chart"></i> Analytics</li>
-                <li><i className="fa fa-cog"></i> Setting</li>
+                <li><i className="fa fa-tachometer"></i> <Link to="/" className="link">Dashboard</Link></li>
+                <li><i className="fa fa-gift"></i> <Link to="/orders" className="link">Orders</Link></li>
+                <li><i className="fa fa-shopping-basket"></i> <Link to="/store" className="link">Store</Link></li>
+                <li><i className="fa fa-line-chart"></i> <Link to="/analytics" className="link">Analytics</Link></li>
+                <li><i className="fa fa-cog"></i> <Link to="/settings" className="link">Settings</Link></li>
             </ul>
         </div>
     )

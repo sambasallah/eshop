@@ -162,6 +162,10 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 	cursor: pointer;
 }
 
+.dashboard-inner .left ul li .link {
+	color: #000;
+}
+
 .dashboard-inner .left ul li:hover {
 	background-color: $secondary-color;
 	border-radius: 5px;
@@ -203,6 +207,11 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 	font-size: 20px;
 	padding: 10px 5px;
 	cursor: pointer;
+	color: #000;
+}
+
+.orders-inner .left ul li .link {
+	color: #000;
 }
 
 .orders-inner .left ul li:hover {
@@ -252,6 +261,10 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 	cursor: pointer;
 }
 
+.store-inner .left ul li .link {
+	color: #000;
+}
+
 .store-inner .left ul li:hover {
 	background-color: $secondary-color;
 	border-radius: 5px;
@@ -291,7 +304,7 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 }
 
 .settings-inner .left ul {
-	list-style: none;
+	list-style: none;;
 }
 
 .settings-inner .left ul li i.fa.fa-tachometer, i.fa.fa-gift, i.fa.fa-shopping-basket, i.fa.fa-cog, i.fa.fa-line-chart {
@@ -302,6 +315,10 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 	font-size: 20px;
 	padding: 10px 5px;
 	cursor: pointer;
+}
+
+.settings-inner .left ul li .link {
+	color: #000;
 }
 
 .settings-inner .left ul li:hover {
@@ -349,10 +366,15 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 	width: 15%;
 }
 
-.single-order-inner .left ul li {
+.single-order-inner .left ul li{
 	font-size: 20px;
 	padding: 10px 5px;
 	cursor: pointer;
+	color: #000;
+}
+
+.single-order-inner .left ul li .link {
+	color: #000;
 }
 
 .single-order-inner .left ul li:hover {

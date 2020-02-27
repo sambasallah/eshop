@@ -192,6 +192,10 @@ ul {
   cursor: pointer;
 }
 
+.dashboard-inner .left ul li .link {
+  color: #000;
+}
+
 .dashboard-inner .left ul li:hover {
   background-color: #33b27b;
   border-radius: 5px;
@@ -224,6 +228,11 @@ ul {
   font-size: 20px;
   padding: 10px 5px;
   cursor: pointer;
+  color: #000;
+}
+
+.orders-inner .left ul li .link {
+  color: #000;
 }
 
 .orders-inner .left ul li:hover {
@@ -262,6 +271,10 @@ ul {
   font-size: 20px;
   padding: 10px 5px;
   cursor: pointer;
+}
+
+.store-inner .left ul li .link {
+  color: #000;
 }
 
 .store-inner .left ul li:hover {
@@ -306,6 +319,10 @@ ul {
   cursor: pointer;
 }
 
+.settings-inner .left ul li .link {
+  color: #000;
+}
+
 .settings-inner .left ul li:hover {
   background-color: #33b27b;
   border-radius: 5px;
@@ -346,6 +363,11 @@ ul {
   font-size: 20px;
   padding: 10px 5px;
   cursor: pointer;
+  color: #000;
+}
+
+.single-order-inner .left ul li .link {
+  color: #000;
 }
 
 .single-order-inner .left ul li:hover {

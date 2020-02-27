@@ -4,6 +4,11 @@ import SideNav from '../inc/SideNav'
 const Settings = () => {
     return (
         <div>
+            <div className="breadcrumb">
+                <div className="breadcrumb-inner">
+                   <h2>Settings</h2>
+                </div>
+            </div>
             <div className="settings">
                 <div className="settings-inner">
                     <div className="row">

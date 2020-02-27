@@ -4,6 +4,11 @@ import SideNav from '../inc/SideNav';
 const Store = () => {
     return (
         <div>
+            <div className="breadcrumb">
+                <div className="breadcrumb-inner">
+                   <h2>Store</h2>
+                </div>
+            </div>
            <div className="store">
                <div className="store-inner">
                    <div className="row">
