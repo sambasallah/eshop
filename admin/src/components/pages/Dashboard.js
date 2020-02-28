@@ -1,10 +1,14 @@
 import React from 'react';
 import DashboardChart from '../charts/DashboardChart';
 import SideNav from '../inc/SideNav';
+import { Helmet } from 'react-helmet';
 
 const Dashboard = () => {
     return (
-        <div className="">
+        <div>
+            <Helmet>
+                <title>eBaaba Dashboard</title>
+            </Helmet>
             <div className="breadcrumb">
                 <div className="breadcrumb-inner">
                    <h2>Dashboard</h2>

@@ -1,9 +1,13 @@
 import React from 'react'
 import SideNav from '../inc/SideNav'
+import { Helmet } from 'react-helmet';
 
 const Settings = () => {
     return (
         <div>
+            <Helmet>
+                <title>Settings | eBaaba Dashboard</title>
+            </Helmet>
             <div className="breadcrumb">
                 <div className="breadcrumb-inner">
                    <h2>Settings</h2>
@@ -31,7 +35,7 @@ const Settings = () => {
                                     <input type="text" placeholder="Your Password" className="form-control" />
                                 </div>
                                 <div className="form-group">
-                                    <input type="file" className="form-control" />
+                                    <input type="file" />
                                 </div>
                                 <div className="row">
                                     <div className="col-md-3">

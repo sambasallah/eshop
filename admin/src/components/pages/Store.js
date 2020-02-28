@@ -1,12 +1,16 @@
 import React from 'react'
 import SideNav from '../inc/SideNav';
+import { Helmet } from 'react-helmet';
 
 const Store = () => {
     return (
         <div>
+             <Helmet>
+                <title>Store | eBaaba Dashboard</title>
+            </Helmet>
             <div className="breadcrumb">
                 <div className="breadcrumb-inner">
-                   <h2>Store</h2>
+                   <h2>Store | eBaaba Dashboard</h2>
                 </div>
             </div>
            <div className="store">
