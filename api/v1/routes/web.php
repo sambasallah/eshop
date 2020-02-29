@@ -12,16 +12,21 @@
 
 $router->group(['prefix' => 'api/v1'], function() use($router) {
   
-// Users route
+// Users Route
 $router->get('/users', 'UserController@allUsers');
 $router->get('/users/{id}', 'UserController@singleUser');
 $router->post('/users','UserController@registerUser');
-$router->patch('/users/{id}','UserController@updateUser');
+$router->put('/users/{id}','UserController@updateUser');
 $router->delete('/users/{id}', 'UserController@deleteUser');
 
-// Products route
+// Products Route
 $router->get('/products','ProductController@allProducts');
 $router->get('/products/{id}','ProductController@singleProduct');
 
+// Admin Route
+$router->get('/admin', 'AdminController@allAdmin');
+$router->get('/admin/{id}', 'AdminController@admin');
+$router->post('/admin','AdminController@registerAdmin');
+$router->put('/admin/{id}','AdminController@updateAdmin');
 
 });

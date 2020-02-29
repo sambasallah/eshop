@@ -10,7 +10,7 @@ const Store = () => {
             </Helmet>
             <div className="breadcrumb">
                 <div className="breadcrumb-inner">
-                   <h2>Store | eBaaba Dashboard</h2>
+                   <h2>Store</h2>
                 </div>
             </div>
            <div className="store">
@@ -20,7 +20,16 @@ const Store = () => {
                          <SideNav />
                        </div>
                        <div className="col-md-8">
-                           <h2>Products</h2>
+                            <div className="row">
+                                <div className="col-md-8"><h2>Products</h2></div>
+                                <div className="col-md-4">
+                                    <form>
+                                        <div className="form-group">
+                                            <input type="text" placeholder="Search" className="form-control" />
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <div className="row">
                                 <div className="col-md-3">
                                     <div className="card">
@@ -106,6 +115,20 @@ const Store = () => {
                                     </div>
                                 </div>
                             </div>
+
+                            <nav aria-label="Products Navigation">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
                        </div>
                    </div>
                </div>

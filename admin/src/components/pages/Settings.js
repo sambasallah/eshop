@@ -46,7 +46,7 @@ const Settings = () => {
                                     </div>
                                     </div>
                                 </div>
-                                <input type="submit" value="Update Profile" className="btn btn-primary" />
+                                <input type="submit" value="Update Profile" className="btn btn-success" />
                             </form>
                         </div>
                     </div>
