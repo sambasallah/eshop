@@ -19,13 +19,17 @@ import Account from './components/pages/Account';
 import Navbar from './components/inc/Navbar';
 import Footer from './components/inc/Footer';
 
+/** Context Provider */
+import { ProductProvider } from './context/ProductProvider';
+
 
 const App = () => {
-  return <>
+  return (
+    <ProductProvider>
+    <>
     <Navbar></Navbar>
    <Switch>
     <Route exact path="/" component={Home}></Route>
-    <Route exact path="/shop/" component={Shop}></Route>
     <Route exact path="/about/" component={About}></Route>
     <Route exact path="/contact/" component={Contact}></Route>
     <Route exact path="/checkout/" component={Checkout}></Route>
@@ -33,11 +37,14 @@ const App = () => {
     <Route exact path="/completed/" component={Success}></Route>
     <Route exact path="/auth/" component={Auth}></Route>
     <Route exact path="/account/" component={Account}></Route>
+    <Route exact path="/shop/" component={Shop}></Route>
     <Route exact path="/product/:slug" component={Product}></Route>
     <Route component={Error}></Route>
    </Switch>
    <Footer></Footer>
-  </>;
+  </>
+  </ProductProvider>
+  );
 }
 
 export default App;

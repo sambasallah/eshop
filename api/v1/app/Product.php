@@ -20,6 +20,7 @@ class Product {
 
         foreach($products as $product) {
             $product = array(
+                "id" => $product->id,
                 "name" => $product->name,
                 "description" => $product->description,
                 "regular_price" => $product->regular_price,

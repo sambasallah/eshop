@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
+import { ProductContext } from '../../context/ProductProvider';
 
-const ProductSingle = () => {
+const ProductSingle = (props) => {
 
+    const [product] = useState(
+        {
+            "product_name": "Iphone Charger",
+            "product_price" : "D4,000",
+            "product_qty" : "4",
+            "slug" : "iphone-charger"
+        }
+    );
 
     return (
         <div>
             <Helmet>
-                <title>Chemise | eBaaba Gambia</title>
+                <title> Chemise | eBaaba Gambia</title>
             </Helmet>
 
             <div className="breadcrumb">
                <div className="breadcrumb-container">
-                   <h2>Chemise</h2>
+                    <h2>{ product.product_name }</h2>
                </div>
             </div>
 
@@ -35,8 +44,8 @@ const ProductSingle = () => {
                        </div>
                        <div className="col-md-8">
                             <div className="product-details">
-                                <h2>Chemise</h2>
-                                <h3>D600 <sup><del>D700</del> <span>You saved D100</span></sup></h3>
+                                <h2> { product.product_name } </h2>
+                                <h3>{ product.product_price } <sup><del>D4700</del> <span>You saved D700</span></sup></h3>
                                 <h3><Link to="/cart" className="add-to-cart">Buy Now</Link></h3>
                                 <h3>
                                     <ul>

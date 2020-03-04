@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
+import { limitTitle }  from '../helpers/Helpers';
+import { ProductContext } from '../../context/ProductProvider';
+
 
 const Product = ({ product, index }) => {
-    
-const limitedTitle = (str) => {
-    let newTitle = '';
-    if(str.length < 18) {
-        return str;
-    } 
-    for(let i = 0; i < 18; i++) {
-        newTitle += str.charAt(i);
-    }
-    return newTitle.trim() + "..";
-}
 
     return (
         <div className="col-md-3">
@@ -21,13 +13,17 @@ const limitedTitle = (str) => {
             <div className="product-img">
                  <img src={require('../../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
             </div>
-            <div className="product-description">
-                <h3 className="title">{ limitedTitle(product.name) }</h3>
-                <hr className="below-title"></hr>
-                <span className="price"><span className="currency-symbol">GMD</span> { product.regular_price } </span> <sup className="orignal-price"><del> { product.discount_price } </del></sup>
-                <hr className="below-price"></hr>
-                <Link to="/cart" className="add-to-cart">Add to Cart</Link>
-            </div>
+            <a href={'product/'+product.slug} >
+                <div className="product-description">
+                    <h3 className="title">{ limitTitle(product.product_name) }</h3>
+                    <hr className="below-title"></hr>
+                    <span className="price"><span className="currency-symbol">GMD</span> { product.product_price } </span> <sup className="orignal-price"><del> { product.discount_price } </del></sup>
+                    <hr className="below-price"></hr>
+                    <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                </div>
+               
+            </a>
+           
         </div>
     </div>
     );
@@ -35,30 +31,32 @@ const limitedTitle = (str) => {
 
 const Shop = () => {
 
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
 
-    const getProducts = async () => {
-        const url = "http://localhost:8000/api/v1/products";
+    // const getProducts = async () => {
+    //     const url = "http://localhost:8000/api/v1/products";
     
-         await fetch(url)
-         .then((resp) => resp.json() )
-         .then((data) => {
-             setProducts(data.products);
-         })
-         .catch((error) => {
-             console.log("An error");            
-         })       
-       }
+    //      await fetch(url)
+    //      .then((resp) => resp.json() )
+    //      .then((data) => {
+    //          setProducts(data.products);
+    //      })
+    //      .catch((error) => {
+    //          console.log("An error");            
+    //      })       
+    //    }
 
-    useEffect(() => {
-        getProducts();
-    }, []);
+    // useEffect(() => {
+    //     getProducts();
+    // }, []);
+
+    const products = useContext(ProductContext);
 
     return (
         <div>
             <Helmet>
-			 <title>Shop | eBaaba No. 1 Online Shopping Website in Gambia</title>
-		 </Helmet>
+			     <title>Shop | eBaaba No. 1 Online Shopping Website in Gambia</title>
+		    </Helmet>
             <div className="breadcrumb">
                 <div className="breadcrumb-container">
                     <h2>Shop</h2>

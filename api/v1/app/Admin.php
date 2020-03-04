@@ -34,14 +34,7 @@ class Admin {
     public static function getSingleAdmin(int $id) {
         $admin = DB::table('admin')->where('id','=',$id)->get();
         
-        $data = array(
-            "full_name" => $admin->full_name,
-            "email" => $admin->email,
-            "username" => $admin->username,
-            "password" => $admin->password
-        );
-
-        return response()->json($data);
+        return response()->json($admin);
     }
 
     /**
