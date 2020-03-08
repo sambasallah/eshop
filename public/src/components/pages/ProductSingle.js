@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
+import Slider  from 'react-slick';
 import { ProductContext } from '../../context/ProductProvider';
 
 const ProductSingle = (props) => {
 
-    const [product] = useState(
-        {
-            "product_name": "Iphone Charger",
-            "product_price" : "D4,000",
-            "product_qty" : "4",
-            "slug" : "iphone-charger"
-        }
-    );
+    const product = useContext(ProductContext);
+
+    const settings = {dots: true,
+        infinite: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'linear'};
+
+    // const { product_name, product_price } = product.single;
 
     return (
         <div>
@@ -22,7 +24,7 @@ const ProductSingle = (props) => {
 
             <div className="breadcrumb">
                <div className="breadcrumb-container">
-                    <h2>{ product.product_name }</h2>
+                    <h2>{ product.single.product_name }</h2>
                </div>
             </div>
 
@@ -31,7 +33,8 @@ const ProductSingle = (props) => {
                    <div className="row">
                        <div className="col-md-4">
                        <div className="product-slider">
-                            <div className="img-container">
+                           <Slider {...settings}>
+                           <div className="img-container">
                                 <img src={require('../../media/images/chemise0.jpg')} style={{ width: '100%', height : '100%'}} />
                             </div>
                             <div className="img-container">
@@ -40,12 +43,14 @@ const ProductSingle = (props) => {
                             <div className="img-container">
                                 <img src={require('../../media/images/chemise3.jpg')} style={{ width: '100%', height : '100%'}} />
                             </div>
+                           </Slider>
+                            
                         </div>
                        </div>
                        <div className="col-md-8">
                             <div className="product-details">
-                                <h2> { product.product_name } </h2>
-                                <h3>{ product.product_price } <sup><del>D4700</del> <span>You saved D700</span></sup></h3>
+                                <h2> { product.single.product_name } </h2>
+                                <h3>{ product.single.product_price } <sup><del>D4700</del> <span>You saved D700</span></sup></h3>
                                 <h3><Link to="/cart" className="add-to-cart">Buy Now</Link></h3>
                                 <h3>
                                     <ul>
@@ -84,7 +89,8 @@ const ProductSingle = (props) => {
                 </div>
 
             </div>
-        </div>
+         
+        </div> 
     )
 }
 

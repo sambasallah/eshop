@@ -57,11 +57,11 @@ const Home = () => {
 				 	<div className="row">
 						 <div className="col-md-12 right-carousel">
 							 <div className="info-box">
-								     <a href="./product/chemise" className="btn-shop">Shop Now</a>
+								     <Link to="./product/chemise" className="btn-shop">Shop Now</Link>
 									 <img src={require('../../media/images/derby-shoe.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
 							 </div>
 							 <div className="info-box">
-								   <a Link href="./product/chemise" className="btn-shop">Shop Now</a>
+								   <Link to="./product/chemise" className="btn-shop">Shop Now</Link>
 							       <img src={require('../../media/images/chemise1.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
 							 </div>
 						 </div>
@@ -75,7 +75,7 @@ const Home = () => {
 	     </div>
 	 
 	 <div className="latest-deals">
-		 <h2>Latest Deals <Link to="/shop" className="see-all">See All Items</Link></h2>
+		 <h2>Recommended for you <Link to="/shop" className="see-all">See All Items</Link></h2>
 		 <div className="deals">
 		 <div className="row">
 			<div className="col-md-4">

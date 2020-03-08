@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import { limitTitle }  from '../helpers/Helpers';
 import { ProductContext } from '../../context/ProductProvider';
 
-
-const Product = ({ product, index }) => {
+const Product = ({ product, index, products }) => {
 
     return (
         <div className="col-md-3">
@@ -13,42 +12,24 @@ const Product = ({ product, index }) => {
             <div className="product-img">
                  <img src={require('../../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
             </div>
-            <a href={'product/'+product.slug} >
-                <div className="product-description">
-                    <h3 className="title">{ limitTitle(product.product_name) }</h3>
-                    <hr className="below-title"></hr>
-                    <span className="price"><span className="currency-symbol">GMD</span> { product.product_price } </span> <sup className="orignal-price"><del> { product.discount_price } </del></sup>
-                    <hr className="below-price"></hr>
-                    <Link to="/cart" className="add-to-cart">Add to Cart</Link>
-                </div>
-               
-            </a>
-           
+            <div onClick={ () => products.handleProduct(product.id) } >
+                <Link to={ '/product/' + product.slug }>
+                    <div className="product-description">
+                        <h3 className="title">{ limitTitle(product.product_name) }</h3>
+                        <hr className="below-title"></hr>
+                        <span className="price"><span className="currency-symbol">GMD</span> { product.product_price } </span> <sup className="orignal-price"><del> { product.discount_price } </del></sup>
+                        <hr className="below-price"></hr>
+                        <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                    </div>
+                </Link>
+            </div>
         </div>
     </div>
     );
 }
 
+
 const Shop = () => {
-
-    // const [products, setProducts] = useState([]);
-
-    // const getProducts = async () => {
-    //     const url = "http://localhost:8000/api/v1/products";
-    
-    //      await fetch(url)
-    //      .then((resp) => resp.json() )
-    //      .then((data) => {
-    //          setProducts(data.products);
-    //      })
-    //      .catch((error) => {
-    //          console.log("An error");            
-    //      })       
-    //    }
-
-    // useEffect(() => {
-    //     getProducts();
-    // }, []);
 
     const products = useContext(ProductContext);
 
@@ -122,7 +103,7 @@ const Shop = () => {
                         </div>
                         <div className="col-md-9">
                            <div className="row shop-items">
-                                { products.map((product, index) => ( <Product key={index} index={index} product={product} /> )) }
+                                { products.products.map((product, index) => ( <Product key={index} index={index} product={product} products={products} /> )) }
                            </div>
 
                             <div className="pagination">

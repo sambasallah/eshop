@@ -25,11 +25,14 @@ import { ProductProvider } from './context/ProductProvider';
 
 const App = () => {
   return (
-    <ProductProvider>
+    
     <>
+    
     <Navbar></Navbar>
+    <ProductProvider>
    <Switch>
     <Route exact path="/" component={Home}></Route>
+    <Route exact path="/shop/" component={Shop}></Route>
     <Route exact path="/about/" component={About}></Route>
     <Route exact path="/contact/" component={Contact}></Route>
     <Route exact path="/checkout/" component={Checkout}></Route>
@@ -37,13 +40,14 @@ const App = () => {
     <Route exact path="/completed/" component={Success}></Route>
     <Route exact path="/auth/" component={Auth}></Route>
     <Route exact path="/account/" component={Account}></Route>
-    <Route exact path="/shop/" component={Shop}></Route>
     <Route exact path="/product/:slug" component={Product}></Route>
     <Route component={Error}></Route>
    </Switch>
+   </ProductProvider>
    <Footer></Footer>
+   
   </>
-  </ProductProvider>
+  
   );
 }
 
