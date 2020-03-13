@@ -19,7 +19,7 @@ const ProductSingle = (props) => {
     return (
         <div>
             <Helmet>
-                <title> Chemise | eBaaba Gambia</title>
+                <title> eBaaba Gambia </title>
             </Helmet>
 
             <div className="breadcrumb">

@@ -8,6 +8,7 @@ import Navbar from './components/inc/Navbar';
 import Store from './components/pages/Store';
 import Settings from './components/pages/Settings';
 import SingleOrder from './components/pages/SingleOrder';
+import AddProduct from './components/pages/AddProduct';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route exact path="/store" component={Store}></Route>
           <Route exact path="/settings" component={Settings}></Route>
           <Route exact path="/order" component={SingleOrder}></Route>
+          <Route exact path="/add-product" component={AddProduct}></Route>
         </Switch>
     </div>
   );

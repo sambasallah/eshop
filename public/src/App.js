@@ -40,7 +40,7 @@ const App = () => {
     <Route exact path="/completed/" component={Success}></Route>
     <Route exact path="/auth/" component={Auth}></Route>
     <Route exact path="/account/" component={Account}></Route>
-    <Route exact path="/product/:slug" component={Product}></Route>
+    <Route exact path="/:slug" component={Product}></Route>
     <Route component={Error}></Route>
    </Switch>
    </ProductProvider>

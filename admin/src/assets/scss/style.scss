@@ -434,3 +434,49 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 	padding: 10px 0px;
 	font-weight: 500;
 }
+
+/** Add Product **/
+.add-product {
+	@extend .page-setup;
+}
+
+.add-product .add-product-inner {
+	@extend .page-inner-setup;
+}
+
+
+.add-product-inner .left {
+	// background-color: #f5f5f5;
+	margin-bottom: 15px;
+	padding: 15px 10px;
+}
+
+.add-product-inner .left ul {
+	list-style: none;
+}
+
+.add-product-inner .left ul li i.fa.fa-tachometer, i.fa.fa-gift, i.fa.fa-shopping-basket, i.fa.fa-cog, i.fa.fa-line-chart {
+	width: 15%;
+}
+
+.add-product-inner .left ul li{
+	font-size: 20px;
+	padding: 10px 5px;
+	cursor: pointer;
+	color: #000;
+}
+
+.add-product-inner .left ul li .link {
+	color: #000;
+}
+
+.add-product-inner .left ul li:hover {
+	background-color: $secondary-color;
+	border-radius: 5px; 
+}
+
+.add-product-inner .right h2 {
+	padding-bottom: 8px;
+	margin-bottom: 8px;
+	border-bottom: 1px solid #f5f5f5;
+}

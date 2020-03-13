@@ -13,7 +13,7 @@ const Product = ({ product, index, products }) => {
                  <img src={require('../../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
             </div>
             <div onClick={ () => products.handleProduct(product.id) } >
-                <Link to={ '/product/' + product.slug }>
+                <Link to={ product.slug }>
                     <div className="product-description">
                         <h3 className="title">{ limitTitle(product.product_name) }</h3>
                         <hr className="below-title"></hr>
