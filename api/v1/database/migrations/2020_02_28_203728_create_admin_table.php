@@ -20,6 +20,7 @@ class CreateAdminTable extends Migration
             $table->string('email');
             $table->string('username');
             $table->string('password');
+            $table->string('img');
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

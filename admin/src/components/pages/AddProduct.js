@@ -37,14 +37,15 @@ const thumbsContainer = {
 
 const AddProduct = () => {
 
-    const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([]);
   const {getRootProps, getInputProps} = useDropzone({
     accept: 'image/*',
     onDrop: acceptedFiles => {
       setFiles(acceptedFiles.map(file => Object.assign(file, {
         preview: URL.createObjectURL(file)
       })));
-    }
+    },
+    multiple : true
   });
   
   const removeImage = (img) => {
@@ -63,6 +64,10 @@ const AddProduct = () => {
      <a onClick={() =>  removeImage(file.name) }><i className="fa fa-trash"></i></a>
     </div>
   ));
+
+  const uploadProduct = () => {
+     
+  }
 
   useEffect(() => () => {
     // Make sure to revoke the data uris to avoid memory leaks
@@ -91,7 +96,7 @@ const AddProduct = () => {
                         </div>
                         <div className="col-md-8 right">
                             <h2>Product Information</h2>
-                            <form>
+                            <form onSubmit={ () => uploadProduct() }>
                                 <div className="form-group">
                                     <label>Product Name</label>
                                     <input type="text" className="form-control" />
@@ -124,6 +129,7 @@ const AddProduct = () => {
                                         </aside>
                                     </section>
                                 </div>
+                                <input type="submit" value="Save" className="btn btn-success" />
                             </form>
                         </div>
                     </div>
