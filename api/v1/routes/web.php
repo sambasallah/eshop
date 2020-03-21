@@ -24,9 +24,9 @@ $router->get('/products','ProductController@allProducts');
 $router->get('/products/{id}','ProductController@singleProduct');
 
 // Admin Route
-$router->get('/admin', 'AdminController@allAdmin');
+$router->get('/admins', 'AdminController@allAdmin');
 $router->get('/admin/{id}', 'AdminController@admin');
 $router->post('/admin','AdminController@registerAdmin');
-$router->put('/admin/{id}','AdminController@updateAdmin');
+$router->put('/admin/{id}', ['middleware' => 'cors', 'uses' => 'AdminController@updateAdmin']);
 
 });
