@@ -1,52 +1,105 @@
-import React, { useState, useEffect } from 'react'
-import SideNav from '../inc/SideNav'
+import React, { useState, useEffect } from 'react';
+import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
-
-const Alert = (msg) => {
-    return(
-        <div>
-            Alert
-        </div>
-    );
-}
+import { Error, Success } from '../alerts/Alerts';
+import { fetchPhotos, openUploadWidget } from "../utils/CloudinaryService";
+import { Image, Video, Transformation, CloudinaryContext } from 'cloudinary-react';
 
 const Settings = () => {
 
-    const [settings, setSettings] = useState([{
+    const originalState = {
         id : '',
         full_name : '',
         username : '',
         password : '',
-        email : ''
-     }]);
+        email : '',
+        success : '',
+        failed : '',
+        img : '',
+        loading: true
+     };
+
+    const [settings, setSettings] = useState([originalState]);
+    const [images, setImages] = useState([]);
+
+
+    const beginUpload = tag => {
+        const uploadOptions = {
+          cloudName: "ebaaba",
+          tags: [tag],
+          uploadPreset: "profile"
+        };
+      
+        openUploadWidget(uploadOptions, (error, photos) => {
+          if (!error) {
+            console.log(photos);
+            if(photos.event === 'success'){
+              setImages(Object.assign([],images,photos.info.public_id));
+              setSettings(Object.assign({},settings, { img : 'https://res.cloudinary.com/ebaaba/image/upload/v1585059334/profile-pictures/screenshot_nm8ffz'
+            }));
+              console.log(images);
+            }
+          } else {
+            console.log(error);
+          }
+        })
+      }
    
     const getProfileInformation = async () => {
-         let url = 'http://localhost:8000/api/v1/admin/1';
-         let response = await fetch(url, {method : 'GET'});
-         let data = await response.json();
-         setSettings(
-                {
-                    id : data[0].id,
-                    full_name : data[0].full_name, 
-                    email : data[0].email,
-                    username : data[0].username,
-                    password : data[0].password 
-                });
+        let url = 'http://localhost:8000/api/v1/admin/1';
+        let data = await fetch(url)
+         .then((response) => {
+             return response.json();
+         })
+         .catch((error) => {
+             if(error) {
+                 setSettings(originalState);
+             }
+         })
+         
+        if(data) {
+        setSettings(Object.assign({},settings, 
+            {
+                id : data[0].id,
+                full_name : data[0].full_name, 
+                email : data[0].email,
+                username : data[0].username,
+                password : data[0].password,
+                success : '',
+                failed : '',
+                img : '',
+                loading : false 
+            }));
+        }
+        
         
     }
-
 
     const saveForm = async (event) => {
         event.preventDefault();
         let url = 'http://localhost:8000/api/v1/admin/1';
         let response = await fetch(url, {method : 'PUT', cache : 'no-cache', cors : 'no-cors', headers : {'Content-Type' : 'application/json'}, body : JSON.stringify(settings) });
-        let data = response.json();
+        let data = await response.json();
 
-        console.log(data);
+         if(data.Updated === true) {
+            setSettings(Object.assign({},settings, { success : 'Settings Saved' }));
+         } else {
+            setSettings(Object.assign({},settings, { failed : 'Error! Saving Settings' }));
+         }
+
+         return false;
     }
 
     const handleNameChange = (event) => {
        setSettings(Object.assign({},settings, { full_name : event.target.value }));
+    }
+
+    const handleUsernameChange = (event) => {
+        setSettings(Object.assign({},settings, { username : event.target.value }));
+    }
+
+    const handlePasswordChange = (event) => {
+        setSettings(Object.assign({},settings, { password : event.target.value }));
     }
 
     const handleEmailChange = (event) => {
@@ -76,34 +129,53 @@ const Settings = () => {
                             <SideNav />
                         </div>
                         <div className="col-md-8 right">
-                            <h2>Profile Settings</h2>
-                            <form onSubmit= { saveForm }>
-                                <div className="form-group">
-                                    <input type="text" placeholder="Your Name" id="name" value={ settings.full_name } onChange={ handleNameChange }  className="form-control" />
-                                </div>
-                                <div className="form-group">
-                                    <input type="text" placeholder="Your Email" id="email" value={ settings.email } onChange={ handleEmailChange }  className="form-control" />
-                                </div>
-                                <div className="form-group">
-                                    <input type="text" placeholder="Your Username" id="username" value={ settings.username }   className="form-control" />
-                                </div>
-                                <div className="form-group">
-                                    <input type="password" placeholder="Your Password" id="password" value={ settings.password }   className="form-control" />
-                                </div>
-                                <div className="form-group">
-                                    <input type="file" />
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-3">
-                                    <div className="card">
-                                        <div className="card-body">
-                                            <img src={require('../../media/b5.jpg')} alt="Profile" style={{width: '100%' }} />
+                            { settings.loading ? (
+                                    <>
+                                    <div className='loading-screen' style={{ position : 'relative', marginTop : '30%', marginLeft : '50%', transform : 'translate(-50%,-50%)'}}>
+                                       <h2>Loading... <i className="fa fa-spinner fa-spin"></i></h2>
+                                    </div>
+                                    </>
+                                ) : (
+                                    <>
+                                    <h2>Profile Settings</h2>
+                                    <form onSubmit= { saveForm } style={{ marginBottom : '10px' }}>
+                                        <div className="form-group">
+                                            <input type="text" placeholder="Your Name" id="name" value={ settings.full_name } onChange={ handleNameChange }  className="form-control" />
                                         </div>
-                                    </div>
-                                    </div>
-                                </div>
-                                <input type="submit" value="Update Profile" className="btn btn-success" />
-                            </form>
+                                        <div className="form-group">
+                                            <input type="text" placeholder="Your Email" id="email" value={ settings.email } onChange={ handleEmailChange }  className="form-control" />
+                                        </div>
+                                        <div className="form-group">
+                                            <input type="text" placeholder="Your Username" id="username" value={ settings.username } onChange={ handleUsernameChange }  className="form-control" />
+                                        </div>
+                                        <div className="form-group">
+                                            <input type="password" placeholder="Your Password" id="password" value={ settings.password } onChange={ handlePasswordChange }  className="form-control" />
+                                        </div>
+                                        <div className="row">
+                                                  <div className="col-md-3">
+                                                          <div className="card">
+                                                          <div className="card-body">
+                                                              <img src={require('../../media/b5.jpg')}  width="100%"  />
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                        <section className="container">
+                                          <CloudinaryContext cloudName="ebaaba">
+                                                <section>
+                                                    {images.map(i => <img src={i} alt="" />)}
+                                                </section>
+                                         </CloudinaryContext>
+                                         <button onClick={() => beginUpload()}>Upload Image</button>
+                                    
+                                      </section>
+                                        <input type="submit" value="Update Profile" className="btn btn-success" />
+                                        
+                                    </form>
+                                     { settings.success ? ( <Success /> ) : (<></>)}
+                                     { settings.failed ? ( <Error /> ) : ( <></> )}
+                                  </>
+                                  )  }
                         </div>
                     </div>
                 </div>

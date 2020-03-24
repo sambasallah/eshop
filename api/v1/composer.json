@@ -7,7 +7,8 @@
     "require": {
         "php": "^7.2",
         "fruitcake/laravel-cors": "^1.0",
-        "laravel/lumen-framework": "^6.0"
+        "laravel/lumen-framework": "^6.0",
+        "cloudinary/cloudinary_php": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",
