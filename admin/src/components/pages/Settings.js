@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
 import { Error, Success } from '../alerts/Alerts';
-import { fetchPhotos, openUploadWidget } from "../utils/CloudinaryService";
-import { Image, Video, Transformation, CloudinaryContext } from 'cloudinary-react';
+import { openUploadWidget } from "../utils/CloudinaryService";
+import { CloudinaryContext } from 'cloudinary-react';
 
 const Settings = () => {
 
@@ -19,9 +19,8 @@ const Settings = () => {
         loading: true
      };
 
-    const [settings, setSettings] = useState([originalState]);
-    const [images, setImages] = useState([]);
-   
+    const [settings, setSettings] = useState([originalState]);  
+
     const getProfileInformation = async () => {
         let url = 'http://localhost:8000/api/v1/admin/1';
         let data = await fetch(url)
@@ -52,6 +51,7 @@ const Settings = () => {
         
     }
 
+    // Handle Saving Form
     const saveForm = async (event) => {
         event.preventDefault();
         let url = 'http://localhost:8000/api/v1/admin/1';
@@ -154,9 +154,9 @@ const Settings = () => {
                                                   <div className="col-md-3">
                                                           <div className="card">
                                                           <div className="card-body">
-                                                          <CloudinaryContext cloudName="ebaaba">
+                                                            <CloudinaryContext cloudName="ebaaba">
                                                               <img src={ 'https://res.cloudinary.com/ebaaba/image/upload/v1585136586/' + settings.image }  width="100%"  />
-                                                              </CloudinaryContext>
+                                                            </CloudinaryContext>
                                                           </div>
                                                       </div>
                                                   </div>

@@ -13,4 +13,4 @@ eShop is a modern ecommerce website
 ### CDN (Images & Videos)
   - [Cloudinary](https://cloudinary.com)
 ### Live Website
-[Website](https://ebaaba.xyz)
+  - [Website](https://ebaaba.xyz)
