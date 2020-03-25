@@ -12,5 +12,5 @@ eShop is a modern ecommerce website
   - PHP (Laravel/Lumen)
 ### CDN (Images & Videos)
   - [Cloudinary](https://cloudinary.com)
-### Live Website
+### Live Website (Under Development)
   - [Website](https://ebaaba.xyz)
