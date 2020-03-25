@@ -10,6 +10,7 @@ eShop is a modern ecommerce website
 
 ### Backend API
   - PHP (Laravel/Lumen)
-  - Golang
+### CDN (Images & Videos)
+  - [Cloudinary](https://cloudinary.com)
 ### Live Website
 [Website](https://ebaaba.xyz)

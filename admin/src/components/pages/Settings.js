@@ -15,35 +15,12 @@ const Settings = () => {
         email : '',
         success : '',
         failed : '',
-        img : '',
+        image : '',
         loading: true
      };
 
     const [settings, setSettings] = useState([originalState]);
     const [images, setImages] = useState([]);
-
-
-    const beginUpload = tag => {
-        const uploadOptions = {
-          cloudName: "ebaaba",
-          tags: [tag],
-          uploadPreset: "profile"
-        };
-      
-        openUploadWidget(uploadOptions, (error, photos) => {
-          if (!error) {
-            console.log(photos);
-            if(photos.event === 'success'){
-              setImages(Object.assign([],images,photos.info.public_id));
-              setSettings(Object.assign({},settings, { img : 'https://res.cloudinary.com/ebaaba/image/upload/v1585059334/profile-pictures/screenshot_nm8ffz'
-            }));
-              console.log(images);
-            }
-          } else {
-            console.log(error);
-          }
-        })
-      }
    
     const getProfileInformation = async () => {
         let url = 'http://localhost:8000/api/v1/admin/1';
@@ -67,7 +44,7 @@ const Settings = () => {
                 password : data[0].password,
                 success : '',
                 failed : '',
-                img : '',
+                image : data[0].img,
                 loading : false 
             }));
         }
@@ -109,6 +86,28 @@ const Settings = () => {
     useEffect(() => {
         getProfileInformation();
     },[]); 
+
+
+    const beginUpload = (tag) => {
+        const uploadOptions = {
+          cloudName: "ebaaba",
+          tags: [tag],
+          uploadPreset: "profile"
+        };
+      
+        openUploadWidget(uploadOptions, (error, photos) => {
+          if (!error) {
+            console.log(photos);
+            if(photos.event === 'success'){
+              let path = photos.info.public_id;
+              setSettings(Object.assign(settings,{ image : path }));
+              console.log(settings);
+            }
+          } else {
+            console.log(error);
+          }
+        });
+      }
 
   
     return (
@@ -155,20 +154,14 @@ const Settings = () => {
                                                   <div className="col-md-3">
                                                           <div className="card">
                                                           <div className="card-body">
-                                                              <img src={require('../../media/b5.jpg')}  width="100%"  />
+                                                          <CloudinaryContext cloudName="ebaaba">
+                                                              <img src={ 'https://res.cloudinary.com/ebaaba/image/upload/v1585136586/' + settings.image }  width="100%"  />
+                                                              </CloudinaryContext>
                                                           </div>
                                                       </div>
                                                   </div>
                                               </div>
-                                        <section className="container">
-                                          <CloudinaryContext cloudName="ebaaba">
-                                                <section>
-                                                    {images.map(i => <img src={i} alt="" />)}
-                                                </section>
-                                         </CloudinaryContext>
-                                         <button onClick={() => beginUpload()}>Upload Image</button>
-                                    
-                                      </section>
+                                        <button style={{ marginRight : '10px'}} onClick={() => beginUpload()} className="btn btn-warning">Upload Image</button>
                                         <input type="submit" value="Update Profile" className="btn btn-success" />
                                         
                                     </form>
