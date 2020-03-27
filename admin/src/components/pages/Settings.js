@@ -16,7 +16,8 @@ const Settings = () => {
         success : '',
         failed : '',
         image : '',
-        loading: true
+        loading: true,
+        formSubmited: false
      };
 
     const [settings, setSettings] = useState([originalState]);  
@@ -44,7 +45,8 @@ const Settings = () => {
                 success : '',
                 failed : '',
                 image : data[0].img,
-                loading : false 
+                loading : false,
+                formSubmited: false 
             }));
         }
         
@@ -59,7 +61,7 @@ const Settings = () => {
         let data = await response.json();
 
          if(data.Updated === true) {
-            setSettings(Object.assign({},settings, { success : 'Settings Saved' }));
+            setSettings(Object.assign({},settings, { success : 'Settings Saved', formSubmited: true }));
          } else {
             setSettings(Object.assign({},settings, { failed : 'Error! Saving Settings' }));
          }
@@ -161,11 +163,11 @@ const Settings = () => {
                                                       </div>
                                                   </div>
                                               </div>
-                                        <button style={{ marginRight : '10px'}} onClick={() => beginUpload()} className="btn btn-warning">Upload Image</button>
+                                      
                                         <input type="submit" value="Update Profile" className="btn btn-success" />
-                                        
                                     </form>
-                                     { settings.success ? ( <Success /> ) : (<></>)}
+                                    <button style={{ marginRight : '10px', marginBottom: '10px'}} onClick={() => beginUpload()} className="btn btn-warning">Upload Image <i className="fa fa-upload"></i></button>
+                                    { settings.success ? ( <Success /> ) : ( <></>)}
                                      { settings.failed ? ( <Error /> ) : ( <></> )}
                                   </>
                                   )  }

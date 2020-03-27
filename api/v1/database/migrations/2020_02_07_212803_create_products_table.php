@@ -16,13 +16,12 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('product_status_id');
             $table->string('name');
             $table->text('description');
             $table->string('regular_price');
-            $table->string('discount_price');
+            $table->string('sale_price');
             $table->string('quantity');
-            $table->string('slug')->unique();
+            $table->string('slug')->nullable();
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

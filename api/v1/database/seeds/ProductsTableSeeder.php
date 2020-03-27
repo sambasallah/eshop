@@ -14,7 +14,6 @@ class ProductsTableSeeder extends Seeder
     {
         $products = array(
             array(
-                'product_status_id' => 1,
                 'name' => 'Samsung Galaxy A20s',
                 'description' => '
                     Ram : 2GB
@@ -22,11 +21,10 @@ class ProductsTableSeeder extends Seeder
                     Network : GSM/HSPA/LTE
                 ',
                 'regular_price' => '8500',
-                'discount_price' => '',
+                'sale_price' => '',
                 'quantity' => '100'
             ),
             array(
-                'product_status_id' => 2,
                 'name' => 'Fridge',
                 'description' => '
                     Long Lasting
@@ -34,7 +32,7 @@ class ProductsTableSeeder extends Seeder
                     Deep Freezer
                 ',
                 'regular_price' => '18500',
-                'discount_price' => '',
+                'sale_price' => '',
                 'quantity' => '5'
             )
             );

@@ -13,10 +13,9 @@ class ProductController extends Controller {
       ->join('product_categories','product_categories.product_id','=','products.id')
       ->join('categories','categories.id','=','product_categories.category_id')->get();
 
-      return response()->json($products,200,
-      ['Content-Type' => 'application/json',
-       'Access-Control-Allow-Origin' => 'localhost:3001']
-      );
+      return response()->json($products, 200, 
+      ['Access-Control-Allow-Origin' => 'http://localhost:3000',
+      'Content-Type' => 'application/json']);
     }
 
     public function singleProduct(Request $request,$id) {
@@ -28,5 +27,10 @@ class ProductController extends Controller {
       ->get();
   
       return response()->json($product);
+    }
+
+    public function updateProduct(Request $request, int $id) {
+      $data = $request->input();
+      $updated = DB::update('update products set name = ?')
     }
 }

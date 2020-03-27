@@ -1,6 +1,7 @@
 import React from 'react'
 import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 
 const Store = () => {
     return (
@@ -21,9 +22,12 @@ const Store = () => {
                        </div>
                        <div className="col-md-8">
                             <div className="row">
-                                <div className="col-md-8"><h2>Products</h2></div>
+                                <div className="col-md-8">
+                                    <h2>Products -  <Link style={{ padding: '8px 20px', fontSize: '17px', backgroundColor : '#33b27b', color: '#fff', borderRadius: '5px'}} to='/add-product'>Add Product</Link></h2>
+                                   
+                                </div>
                                 <div className="col-md-4">
-                                    <form>
+                                    <form> 
                                         <div className="form-group">
                                             <input type="text" placeholder="Search" className="form-control" />
                                         </div>

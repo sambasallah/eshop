@@ -1,78 +1,49 @@
 import React, {useEffect, useState} from 'react';
 import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
-import {useDropzone} from 'react-dropzone';
-
-
-const thumbsContainer = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 16
-  };
-  
-  const thumb = {
-    display: 'inline-flex',
-    borderRadius: 2,
-    border: '1px solid #eaeaea',
-    marginBottom: 8,
-    marginRight: 8,
-    width: 100,
-    height: 100,
-    padding: 4,
-    boxSizing: 'border-box'
-  };
-  
-  const thumbInner = {
-    display: 'flex',
-    minWidth: 0,
-    overflow: 'hidden'
-  };
-  
-  const img = {
-    display: 'block',
-    width: 'auto',
-    height: '100%'
-  };
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { openUploadWidget } from "../utils/CloudinaryService";
+import { CloudinaryContext } from 'cloudinary-react';
 
 const AddProduct = () => {
 
-  const [files, setFiles] = useState([]);
-  const {getRootProps, getInputProps} = useDropzone({
-    accept: 'image/*',
-    onDrop: acceptedFiles => {
-      setFiles(acceptedFiles.map(file => Object.assign(file, {
-        preview: URL.createObjectURL(file)
-      })));
+  const initialState = {
+    productInfo: {
+      productName: '',
+      regularPrice: '',
+      salePrice: '',
+      description: '',
     },
-    multiple : true
-  });
-  
-  const removeImage = (img) => {
-      const newState = files.filter(image => img !== image.name );
-      setFiles(newState);
-  } 
+    images: []
+  };
 
-  const thumbs = files.map(file => (
-    <div style={thumb} key={file.name}>
-      <div style={thumbInner}>
-        <img
-          src={file.preview}
-          style={img}
-        />
-      </div>
-     <a onClick={() =>  removeImage(file.name) }><i className="fa fa-trash"></i></a>
-    </div>
-  ));
-
-  const uploadProduct = () => {
-     
-  }
+  const [product, setProduct] = useState([initialState]);
 
   useEffect(() => () => {
-    // Make sure to revoke the data uris to avoid memory leaks
-    files.forEach(file => URL.revokeObjectURL(file.preview));
-  }, [files]);
+   
+  }, []);
+
+  const beginUpload = (tag) => {
+    const uploadOptions = {
+      cloudName: "ebaaba",
+      tags: [tag],
+      uploadPreset: "profile"
+    };
+  
+    openUploadWidget(uploadOptions, (error, photos) => {
+      if (!error) {
+        console.log(photos);
+        if(photos.event === 'success'){
+          let path = photos.info.public_id;
+        //   setSettings(Object.assign(settings,{ image : path }));
+        //   console.log(settings);
+        }
+      } else {
+        console.log(error);
+      }
+    });
+  }
 
     return (
         <div>
@@ -96,41 +67,60 @@ const AddProduct = () => {
                         </div>
                         <div className="col-md-8 right">
                             <h2>Product Information</h2>
-                            <form onSubmit={ () => uploadProduct() }>
+                            <form>
                                 <div className="form-group">
                                     <label>Product Name</label>
-                                    <input type="text" className="form-control" />
+                                    <input type="text" placeholder="Product Name" className="form-control" />
                                 </div>
                                 <div className="form-group">
                                    <div className="row">
                                        <div className="col-md-6">
-                                           <label>Regular Price</label>
-                                           <input type="text" className="form-control"></input>
+                                           <label>Regular Price (D)</label>
+                                           <input type="text" placeholder="Regular Price" className="form-control"></input>
                                        </div>
                                        <div className="col-md-6">
-                                            <label>Discount Price</label>
-                                            <input type="text" className="form-control"></input>
+                                            <label>Sale Price (D)</label>
+                                            <input type="text" placeholder="Sale Price" className="form-control"></input>
                                        </div>
                                    </div>
                                 </div>
                                 <div className="form-group">
                                     <label>Product Description</label>
-                                    <textarea className="form-control" rows="5"></textarea>
+                                    {/* <textarea placeholder="Product Description" className="form-control" rows="5"></textarea> */}
+                                    <CKEditor editor={ ClassicEditor }/>    
+                                </div>
+                                <div className="form-group">
+                                    <select className="form-control">
+                                        <label>Category</label>
+                                        <option>Uncategorised</option>
+                                        <option>Electronics</option>
+                                        <option>Groceries</option>
+                                        <option>Fashion</option>
+                                    </select>
                                 </div>
                                 <div className="form-group">
                                     <label>Images</label>
-                                    <section className="container">
-                                        <div {...getRootProps({className: 'dropzone'})}>
-                                            <input {...getInputProps()} />
-                                            <p>Drag 'n' drop some files here, or click to select files</p>
-                                        </div>
-                                        <aside style={thumbsContainer}>
-                                            {thumbs}
-                                        </aside>
-                                    </section>
+                                    <div className="row">
+                                      <div className="col-md-3">
+                                        <img src={require('../../media/b5.jpg')} width='100%'/>
+                                      </div>
+                                      <div className="col-md-3">
+                                        <img src={require('../../media/b5.jpg')} width='100%'/>
+                                      </div>
+                                      <div className="col-md-3">
+                                        <img src={require('../../media/b5.jpg')} width='100%'/>
+                                      </div>
+                                      <div className="col-md-3">
+                                      <CloudinaryContext cloudName="ebaaba">
+                                                             
+                                       </CloudinaryContext>
+                                      </div>
+                                    </div>
                                 </div>
-                                <input type="submit" value="Save" className="btn btn-success" />
+                              
+                                <input type="submit" value="Publish" className="btn btn-success" />
                             </form>
+                            <button className="btn btn-warning" onClick={ () => beginUpload() } style={{ margin: '10px 0px'}}>Upload Images <i className="fa fa-upload"></i></button>
                         </div>
                     </div>
                 </div>

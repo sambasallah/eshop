@@ -10,7 +10,7 @@
 |
 */
 
-$router->group(['prefix' => 'api/v1'], function() use($router) {
+$router->group(['prefix' => 'api/v1', 'middleware' => 'cors'], function() use($router) {
   
 // Users Route
 $router->get('/users', 'UserController@allUsers');
@@ -27,6 +27,6 @@ $router->get('/products/{id}','ProductController@singleProduct');
 $router->get('/admins', 'AdminController@allAdmin');
 $router->get('/admin/{id}', 'AdminController@admin');
 $router->post('/admin','AdminController@registerAdmin');
-$router->put('/admin/{id}', ['middleware' => 'cors', 'uses' => 'AdminController@updateAdmin']);
+$router->put('/admin/{id}', 'AdminController@updateAdmin');
 
 });
