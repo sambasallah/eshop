@@ -168,7 +168,7 @@ const Settings = () => {
                                     </form>
                                     <button style={{ marginRight : '10px', marginBottom: '10px'}} onClick={() => beginUpload()} className="btn btn-warning">Upload Image <i className="fa fa-upload"></i></button>
                                     { settings.success ? ( <Success /> ) : ( <></>)}
-                                     { settings.failed ? ( <Error /> ) : ( <></> )}
+                                    { settings.failed ? ( <Error /> ) : ( <></> )}
                                   </>
                                   )  }
                         </div>

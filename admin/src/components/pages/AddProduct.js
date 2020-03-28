@@ -9,20 +9,41 @@ import { CloudinaryContext } from 'cloudinary-react';
 const AddProduct = () => {
 
   const initialState = {
-    productInfo: {
       productName: '',
       regularPrice: '',
       salePrice: '',
+      category: '',
       description: '',
-    },
-    images: []
+      images: []
   };
 
   const [product, setProduct] = useState([initialState]);
 
-  useEffect(() => () => {
-   
-  }, []);
+  const saveForm = (event) => {
+    event.preventDefault();
+    console.log(product);
+  }
+
+  const handleChange = (event) => {
+
+    if(event.target.id === 'productName') {
+        setProduct(Object.assign({},product, { productName : event.target.value }));
+    } else if(event.target.id === 'regularPrice') {
+        setProduct(Object.assign({},product, { regularPrice : event.target.value }));
+    } else if(event.target.id === 'salePrice') {
+        setProduct(Object.assign({},product, { salePrice : event.target.value }));
+    } else if(event.target.id === 'categories') {
+        setProduct(Object.assign({}, product, { category : event.target.value }))
+    } else {
+        //
+    }
+
+  }
+  
+  const handleDescription = (event, editor) => {
+        const data = editor.getData();
+        setProduct(Object.assign({}, product, { description : data }));
+  }
 
   const beginUpload = (tag) => {
     const uploadOptions = {
@@ -34,10 +55,13 @@ const AddProduct = () => {
     openUploadWidget(uploadOptions, (error, photos) => {
       if (!error) {
         console.log(photos);
-        if(photos.event === 'success'){
-          let path = photos.info.public_id;
-        //   setSettings(Object.assign(settings,{ image : path }));
-        //   console.log(settings);
+        if(photos.event === 'queues-end'){
+          let files = photos.info.files;
+          let data = [];
+          for(let i = 0; i < files.length; i++) {
+            data[i] = photos.info.files[i].uploadInfo.public_id;
+          }
+          setProduct(Object.assign(product, { images : data }))
         }
       } else {
         console.log(error);
@@ -67,57 +91,65 @@ const AddProduct = () => {
                         </div>
                         <div className="col-md-8 right">
                             <h2>Product Information</h2>
-                            <form>
+                            <form onSubmit={ saveForm }>
                                 <div className="form-group">
                                     <label>Product Name</label>
-                                    <input type="text" placeholder="Product Name" className="form-control" />
+                                    <input type="text" placeholder="Product Name" onChange={ handleChange } id="productName" className="form-control" />
                                 </div>
                                 <div className="form-group">
                                    <div className="row">
                                        <div className="col-md-6">
                                            <label>Regular Price (D)</label>
-                                           <input type="text" placeholder="Regular Price" className="form-control"></input>
+                                           <input type="text" placeholder="Regular Price" onChange={ handleChange } id="regularPrice"  className="form-control"></input>
                                        </div>
                                        <div className="col-md-6">
                                             <label>Sale Price (D)</label>
-                                            <input type="text" placeholder="Sale Price" className="form-control"></input>
+                                            <input type="text" placeholder="Sale Price" onChange={ handleChange } id="salePrice"  className="form-control"></input>
                                        </div>
                                    </div>
                                 </div>
                                 <div className="form-group">
                                     <label>Product Description</label>
                                     {/* <textarea placeholder="Product Description" className="form-control" rows="5"></textarea> */}
-                                    <CKEditor editor={ ClassicEditor }/>    
+                                    <CKEditor editor={ ClassicEditor } 
+                                    onChange={ handleDescription } />    
                                 </div>
-                                <div className="form-group">
-                                    <select className="form-control">
-                                        <label>Category</label>
-                                        <option>Uncategorised</option>
-                                        <option>Electronics</option>
-                                        <option>Groceries</option>
-                                        <option>Fashion</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label>Images</label>
-                                    <div className="row">
-                                      <div className="col-md-3">
-                                        <img src={require('../../media/b5.jpg')} width='100%'/>
-                                      </div>
-                                      <div className="col-md-3">
-                                        <img src={require('../../media/b5.jpg')} width='100%'/>
-                                      </div>
-                                      <div className="col-md-3">
-                                        <img src={require('../../media/b5.jpg')} width='100%'/>
-                                      </div>
-                                      <div className="col-md-3">
-                                      <CloudinaryContext cloudName="ebaaba">
-                                                             
-                                       </CloudinaryContext>
-                                      </div>
+                                
+                                <div className="row">
+                                    <div className="col-md-4">
+                                    <div className="form-group">
+                                        <select className="form-control"  id="categories" onChange={ handleChange }>
+                                            <label>Category</label>
+                                            <option>Uncategorised</option>
+                                            <option>Electronics</option>
+                                            <option>Groceries</option>
+                                            <option>Fashion</option>
+                                        </select>
+                                     </div>
+                                
+                                    </div>
+
+                                    <div className="col-md-8">
+                                    <div className="form-group">
+                                        <label>Images</label>
+                                        <div className="row">
+                                        <div className="col-md-3">
+                                            <img src={require('../../media/b5.jpg')} width='100%'/>
+                                        </div>
+                                        <div className="col-md-3">
+                                            <img src={require('../../media/b5.jpg')} width='100%'/>
+                                        </div>
+                                        <div className="col-md-3">
+                                            <img src={require('../../media/b5.jpg')} width='100%'/>
+                                        </div>
+                                        <div className="col-md-3">
+                                            <img src={require('../../media/b5.jpg')} width='100%'/>
+                                        </div>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
-                              
+
                                 <input type="submit" value="Publish" className="btn btn-success" />
                             </form>
                             <button className="btn btn-warning" onClick={ () => beginUpload() } style={{ margin: '10px 0px'}}>Upload Images <i className="fa fa-upload"></i></button>

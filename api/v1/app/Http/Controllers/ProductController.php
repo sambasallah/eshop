@@ -29,8 +29,8 @@ class ProductController extends Controller {
       return response()->json($product);
     }
 
-    public function updateProduct(Request $request, int $id) {
-      $data = $request->input();
-      $updated = DB::update('update products set name = ?')
-    }
+    // public function updateProduct(Request $request, int $id) {
+    //   $data = $request->input();
+    //   $updated = DB::update('update products set name = ?')
+    // }
 }
