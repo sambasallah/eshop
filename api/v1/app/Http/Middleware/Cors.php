@@ -7,9 +7,9 @@ class Cors
 
 public function handle($request, Closure $next)
 {
-    $allowedDomains = array("http://localhost:3000");
+    $allowedDomains = array("*");
     $origin = $request->server('HTTP_ORIGIN');
-    if(in_array($origin, $allowedDomains)){
+    if(true){
         //Intercepts OPTIONS requests
         if($request->isMethod('OPTIONS')) {
             $response = response('', 200);
@@ -22,6 +22,8 @@ public function handle($request, Closure $next)
         $response->header('Access-Control-Allow-Methods', 'OPTIONS, HEAD, GET, POST, PUT, PATCH, DELETE');
         $response->header('Access-Control-Allow-Headers', $request->header('Access-Control-Request-Headers'));
     }
+
+    // in_array($origin, $allowedDomains)
 
     // Sends it
     return $response;

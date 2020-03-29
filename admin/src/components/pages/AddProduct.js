@@ -5,27 +5,65 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { openUploadWidget } from "../utils/CloudinaryService";
 import { CloudinaryContext } from 'cloudinary-react';
+import { slug } from '../utils/UtilityFunctions';
+
+const ProductImages = (prop) => {
+    let images = prop.images;
+    let count = 0;
+    return(
+        <>
+         { images.map((value, index) => {
+             return (
+                 <div className="row">
+                     { value.map((value, index) => {
+                         return (
+                            <div className="col-md-3">
+                                <img src={ value } width='100%' />
+                            </div>
+                         )
+                     })}
+                 </div>
+               
+             )
+         })}
+        </>
+    )        
+}
+
+
 
 const AddProduct = () => {
 
-  const initialState = {
-      productName: '',
-      regularPrice: '',
-      salePrice: '',
-      category: '',
-      description: '',
-      images: []
-  };
+  const [product, setProduct] = useState([]);
+  const [category, setCategory] = useState([]);
 
-  const [product, setProduct] = useState([initialState]);
-
-  const saveForm = (event) => {
+  const saveForm = async (event) => {
     event.preventDefault();
+    let slugName = slug(product.productName);
+    setProduct(Object.assign(product, { slug: slugName }));
+    // let url = 'http://localhost:8000/api/v1/product';
+    // let response = await fetch(url, {method : 'POST', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
+    // let data = await response.json();
+    // console.log(data);
     console.log(product);
+    
   }
 
-  const handleChange = (event) => {
+  const getCategories = async () => {
+      let response = await fetch('http://localhost:8000/api/v1/categories');
+      let data = await response.json();
+      let arr = [];
+      for(let i = 0; i < data.length; i++) {
+         arr[i] = data[i];
+      }
+      setCategory(Object.assign([],category, arr));
+  }
 
+  useEffect(() => {
+    getCategories();
+  },[]);
+
+  const handleChange = (event) => {
     if(event.target.id === 'productName') {
         setProduct(Object.assign({},product, { productName : event.target.value }));
     } else if(event.target.id === 'regularPrice') {
@@ -33,7 +71,7 @@ const AddProduct = () => {
     } else if(event.target.id === 'salePrice') {
         setProduct(Object.assign({},product, { salePrice : event.target.value }));
     } else if(event.target.id === 'categories') {
-        setProduct(Object.assign({}, product, { category : event.target.value }))
+        setProduct(Object.assign({},product, { category : event.target.value }))
     } else {
         //
     }
@@ -59,15 +97,26 @@ const AddProduct = () => {
           let files = photos.info.files;
           let data = [];
           for(let i = 0; i < files.length; i++) {
-            data[i] = photos.info.files[i].uploadInfo.public_id;
+            data[i] = photos.info.files[i].uploadInfo.secure_url;
           }
-          setProduct(Object.assign(product, { images : data }))
+          setProduct(Object.assign({},product, { images : data }))
         }
       } else {
         console.log(error);
       }
     });
   }
+
+  const chunk = (size, xs) => 
+    xs.reduce(
+      (segments, _, index) =>
+        index % size === 0 
+          ? [...segments, xs.slice(index, index + size)] 
+          : segments, 
+      []
+    );
+
+
 
     return (
         <div>
@@ -94,17 +143,17 @@ const AddProduct = () => {
                             <form onSubmit={ saveForm }>
                                 <div className="form-group">
                                     <label>Product Name</label>
-                                    <input type="text" placeholder="Product Name" onChange={ handleChange } id="productName" className="form-control" />
+                                    <input type="text" placeholder="Product Name" onChange={ handleChange } id="productName" className="form-control" required/>
                                 </div>
                                 <div className="form-group">
                                    <div className="row">
                                        <div className="col-md-6">
                                            <label>Regular Price (D)</label>
-                                           <input type="text" placeholder="Regular Price" onChange={ handleChange } id="regularPrice"  className="form-control"></input>
+                                           <input type="text" placeholder="Regular Price" onChange={ handleChange } id="regularPrice"  className="form-control" required/>
                                        </div>
                                        <div className="col-md-6">
                                             <label>Sale Price (D)</label>
-                                            <input type="text" placeholder="Sale Price" onChange={ handleChange } id="salePrice"  className="form-control"></input>
+                                            <input type="text" placeholder="Sale Price" onChange={ handleChange } id="salePrice"  className="form-control" required/>
                                        </div>
                                    </div>
                                 </div>
@@ -119,11 +168,10 @@ const AddProduct = () => {
                                     <div className="col-md-4">
                                     <div className="form-group">
                                         <select className="form-control"  id="categories" onChange={ handleChange }>
-                                            <label>Category</label>
-                                            <option>Uncategorised</option>
-                                            <option>Electronics</option>
-                                            <option>Groceries</option>
-                                            <option>Fashion</option>
+                                            <option value="0">Category</option>
+                                            { category.map(
+                                                (value, index) => 
+                                                { return <option value={value.id}> {value.category_name} </option> }) }
                                         </select>
                                      </div>
                                 
@@ -133,18 +181,11 @@ const AddProduct = () => {
                                     <div className="form-group">
                                         <label>Images</label>
                                         <div className="row">
-                                        <div className="col-md-3">
-                                            <img src={require('../../media/b5.jpg')} width='100%'/>
-                                        </div>
-                                        <div className="col-md-3">
-                                            <img src={require('../../media/b5.jpg')} width='100%'/>
-                                        </div>
-                                        <div className="col-md-3">
-                                            <img src={require('../../media/b5.jpg')} width='100%'/>
-                                        </div>
-                                        <div className="col-md-3">
-                                            <img src={require('../../media/b5.jpg')} width='100%'/>
-                                        </div>
+                                            <ProductImages images={ product.images ? chunk(4, product.images) : [
+                                                ['https://res.cloudinary.com/ebaaba/image/upload/v1585491738/profile-pictures/3_qzcyjq.png',
+                                                'https://res.cloudinary.com/ebaaba/image/upload/v1585491738/profile-pictures/3_qzcyjq.png'],
+                                                ['https://res.cloudinary.com/ebaaba/image/upload/v1585491738/profile-pictures/2_msrxro.png',
+                                                'https://res.cloudinary.com/ebaaba/image/upload/v1585491738/profile-pictures/2_msrxro.png']] } />
                                         </div>
                                     </div>
                                     </div>

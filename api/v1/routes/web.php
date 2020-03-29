@@ -22,6 +22,8 @@ $router->delete('/users/{id}', 'UserController@deleteUser');
 // Products Route
 $router->get('/products','ProductController@allProducts');
 $router->get('/products/{id}','ProductController@singleProduct');
+$router->post('/product', 'ProductController@createProduct');
+$router->get('/categories', 'ProductController@getCategories');
 
 // Admin Route
 $router->get('/admins', 'AdminController@allAdmin');
