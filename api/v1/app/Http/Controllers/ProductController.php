@@ -41,7 +41,8 @@ class ProductController extends Controller {
 
       if(!empty($id)) {
         $imagesSaved = $this->saveProductImages($images, $id);
-        if($imagesSaved) {
+        $categorySaved = $this->saveProductCategory($categoryID, $id);
+        if($imagesSaved && $categorySaved) {
           return response()->json(['Product Created' => true, 'Status Code' => 201]);
         } else {
           return response()->json(['Product Created' => true, 'Status Code' => 201, 'Error' => 'Cannot save images']);
@@ -71,8 +72,14 @@ class ProductController extends Controller {
       return false;
     }
 
-    private function saveProductCategory(string $productCategory): bool {
+    private function saveProductCategory(int $category_id, int $product_id): bool {
+      $saveCategory = DB::table('product_categories')->insert(['category_id' => $category_id, 'product_id' => $product_id]);
 
+      if($saveCategory) {
+        return true;
+      }
+
+      return false;
     }
 
     public function getCategories() {

@@ -41,10 +41,10 @@ const AddProduct = () => {
     event.preventDefault();
     let slugName = slug(product.productName);
     setProduct(Object.assign(product, { slug: slugName }));
-    // let url = 'http://localhost:8000/api/v1/product';
-    // let response = await fetch(url, {method : 'POST', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
-    // let data = await response.json();
-    // console.log(data);
+    let url = 'http://localhost:8000/api/v1/product';
+    let response = await fetch(url, {method : 'POST', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
+    let data = await response.json();
+    console.log(data);
     console.log(product);
     
   }
@@ -64,18 +64,7 @@ const AddProduct = () => {
   },[]);
 
   const handleChange = (event) => {
-    if(event.target.id === 'productName') {
-        setProduct(Object.assign({},product, { productName : event.target.value }));
-    } else if(event.target.id === 'regularPrice') {
-        setProduct(Object.assign({},product, { regularPrice : event.target.value }));
-    } else if(event.target.id === 'salePrice') {
-        setProduct(Object.assign({},product, { salePrice : event.target.value }));
-    } else if(event.target.id === 'categories') {
-        setProduct(Object.assign({},product, { category : event.target.value }))
-    } else {
-        //
-    }
-
+    setProduct(Object.assign({}, product, { [event.target.id] : event.target.value }))
   }
   
   const handleDescription = (event, editor) => {
@@ -165,27 +154,26 @@ const AddProduct = () => {
                                 </div>
                                 
                                 <div className="row">
-                                    <div className="col-md-4">
+                                    <div className="col-md-3">
                                     <div className="form-group">
-                                        <select className="form-control"  id="categories" onChange={ handleChange }>
+                                        <select className="form-control"  id="categoryID" onChange={ handleChange }>
                                             <option value="0">Category</option>
                                             { category.map(
                                                 (value, index) => 
                                                 { return <option value={value.id}> {value.category_name} </option> }) }
                                         </select>
-                                     </div>
-                                
+                                     </div>         
                                     </div>
 
-                                    <div className="col-md-8">
+                                    <div className="col-md-2">
+                                        <input type="number" name="quantity" className="form-control" id="quantity" placeholder="Qty" onChange={ handleChange } />
+                                    </div>  
+
+                                    <div className="col-md-7">
                                     <div className="form-group">
                                         <label>Images</label>
                                         <div className="row">
-                                            <ProductImages images={ product.images ? chunk(4, product.images) : [
-                                                ['https://res.cloudinary.com/ebaaba/image/upload/v1585491738/profile-pictures/3_qzcyjq.png',
-                                                'https://res.cloudinary.com/ebaaba/image/upload/v1585491738/profile-pictures/3_qzcyjq.png'],
-                                                ['https://res.cloudinary.com/ebaaba/image/upload/v1585491738/profile-pictures/2_msrxro.png',
-                                                'https://res.cloudinary.com/ebaaba/image/upload/v1585491738/profile-pictures/2_msrxro.png']] } />
+                                            <ProductImages images={ product.images ? chunk(4, product.images) : [[]] } />
                                         </div>
                                     </div>
                                     </div>
