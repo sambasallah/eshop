@@ -5,20 +5,39 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { openUploadWidget } from "../utils/CloudinaryService";
 import { CloudinaryContext } from 'cloudinary-react';
-import { slug } from '../utils/UtilityFunctions';
+import { slug, chunk } from '../utils/UtilityFunctions';
+import { Error, Updated, Created } from '../alerts/ProductsAlerts';
 
-const ProductImages = (prop) => {
+
+
+
+const AddProduct = () => {
+
+  const [product, setProduct] = useState([{formSubmitted: false}]);
+  const [category, setCategory] = useState([]);
+
+  const ProductImages = (prop) => {
+   
     let images = prop.images;
-    let count = 0;
+
+    const deleteImage = (image) => {
+       let allPictures =  [].concat.apply([], images)
+       let updatedArray = allPictures.filter( img => img !== image);
+       setProduct(Object.assign({}, product, { images : updatedArray }));
+        
+    }
+
+  
     return(
         <>
-         { images.map((value, index) => {
+         { images.map((value, mainIndex) => {
              return (
                  <div className="row">
                      { value.map((value, index) => {
                          return (
                             <div className="col-md-3">
                                 <img src={ value } width='100%' />
+                                <button style={{color: 'red', marginTop: '3px', borderRadius: 'none'}} onClick={ () => deleteImage(value) }><i className="fa fa-trash"></i></button>
                             </div>
                          )
                      })}
@@ -30,34 +49,43 @@ const ProductImages = (prop) => {
     )        
 }
 
-
-
-const AddProduct = () => {
-
-  const [product, setProduct] = useState([]);
-  const [category, setCategory] = useState([]);
-
+  // Handle saving and updating form
   const saveForm = async (event) => {
     event.preventDefault();
     let slugName = slug(product.productName);
     setProduct(Object.assign(product, { slug: slugName }));
-    let url = 'http://localhost:8000/api/v1/product';
-    let response = await fetch(url, {method : 'POST', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
-    let data = await response.json();
-    console.log(data);
-    console.log(product);
-    
+
+    if(product.id === undefined) {
+        let url = 'http://localhost:8000/api/v1/product';
+        let response = await fetch(url, {method : 'POST', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
+        let data = await response.json();
+        if(data) {
+            setProduct(Object.assign({}, product, { id: data.ID, created: 'Product Created'}));
+        }else {
+            setProduct(Object.assign({}, product, { id: data.ID, notCreated: 'Product Not Created', formSubmitted: true }));
+        }
+    } else {
+        let url = 'http://localhost:8000/api/v1/product/' + product.id;
+        let response = await fetch(url, {method : 'PUT', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
+        let data = await response.json();
+        if(data) {
+            setProduct(Object.assign({}, product, { updated: 'Product Updated' }));
+        } else {
+            setProduct(Object.assign({}, product, { notUpdated: false, failed: 'Product Not Updated', formSubmitted: true }));
+        }
+    }
+
   }
 
   const getCategories = async () => {
-      let response = await fetch('http://localhost:8000/api/v1/categories');
-      let data = await response.json();
-      let arr = [];
-      for(let i = 0; i < data.length; i++) {
-         arr[i] = data[i];
-      }
-      setCategory(Object.assign([],category, arr));
-  }
+    let response = await fetch('http://localhost:8000/api/v1/categories');
+    let data = await response.json();
+    let arr = [];
+    for(let i = 0; i < data.length; i++) {
+       arr[i] = data[i];
+    }
+    setCategory(Object.assign([],category, arr));
+}
 
   useEffect(() => {
     getCategories();
@@ -76,34 +104,37 @@ const AddProduct = () => {
     const uploadOptions = {
       cloudName: "ebaaba",
       tags: [tag],
-      uploadPreset: "profile"
+      uploadPreset: "products"
     };
   
     openUploadWidget(uploadOptions, (error, photos) => {
       if (!error) {
         console.log(photos);
-        if(photos.event === 'queues-end'){
+        if(photos.event === 'queues-end' && product.images){
           let files = photos.info.files;
           let data = [];
           for(let i = 0; i < files.length; i++) {
             data[i] = photos.info.files[i].uploadInfo.secure_url;
           }
-          setProduct(Object.assign({},product, { images : data }))
+          for(let i = 0; i < data.length; i++) {
+            product.images.push(data[i]);
+          }
+          let updatedImages = product.images; 
+          setProduct(Object.assign({}, product, { images: updatedImages }));
+
+        } else if(photos.event === 'queues-end') {
+            let files = photos.info.files;
+          let data = [];
+          for(let i = 0; i < files.length; i++) {
+            data[i] = photos.info.files[i].uploadInfo.secure_url;
+          }
+         setProduct(Object.assign({},product, { images : data }))
         }
       } else {
         console.log(error);
       }
     });
   }
-
-  const chunk = (size, xs) => 
-    xs.reduce(
-      (segments, _, index) =>
-        index % size === 0 
-          ? [...segments, xs.slice(index, index + size)] 
-          : segments, 
-      []
-    );
 
 
 
@@ -181,6 +212,8 @@ const AddProduct = () => {
 
                                 <input type="submit" value="Publish" className="btn btn-success" />
                             </form>
+                            { product.created ? ( <Created /> ) : (<></>)}
+                            { product.updated ? ( <Updated /> ) : (<></>)}
                             <button className="btn btn-warning" onClick={ () => beginUpload() } style={{ margin: '10px 0px'}}>Upload Images <i className="fa fa-upload"></i></button>
                         </div>
                     </div>

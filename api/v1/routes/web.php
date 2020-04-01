@@ -23,6 +23,7 @@ $router->delete('/users/{id}', 'UserController@deleteUser');
 $router->get('/products','ProductController@allProducts');
 $router->get('/products/{id}','ProductController@singleProduct');
 $router->post('/product', 'ProductController@createProduct');
+$router->put('/product/{id}', 'ProductController@updateProduct');
 $router->get('/categories', 'ProductController@getCategories');
 
 // Admin Route

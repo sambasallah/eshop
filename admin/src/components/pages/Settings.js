@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
-import { Error, Success } from '../alerts/Alerts';
+import { Error, Success } from '../alerts/SettingsAlerts';
 import { openUploadWidget } from "../utils/CloudinaryService";
 import { CloudinaryContext } from 'cloudinary-react';
 
@@ -69,20 +69,8 @@ const Settings = () => {
          return false;
     }
 
-    const handleNameChange = (event) => {
-       setSettings(Object.assign({},settings, { full_name : event.target.value }));
-    }
-
-    const handleUsernameChange = (event) => {
-        setSettings(Object.assign({},settings, { username : event.target.value }));
-    }
-
-    const handlePasswordChange = (event) => {
-        setSettings(Object.assign({},settings, { password : event.target.value }));
-    }
-
-    const handleEmailChange = (event) => {
-        setSettings(Object.assign({},settings, { email : event.target.value }));
+    const handleFieldChange = (event) => {
+        setSettings(Object.assign({}, settings, { [event.target.id]: event.target.value }));
     }
 
     useEffect(() => {
@@ -141,16 +129,16 @@ const Settings = () => {
                                     <h2>Profile Settings</h2>
                                     <form onSubmit= { saveForm } style={{ marginBottom : '10px' }}>
                                         <div className="form-group">
-                                            <input type="text" placeholder="Your Name" id="name" value={ settings.full_name } onChange={ handleNameChange }  className="form-control" />
+                                            <input type="text" placeholder="Your Name" id="full_name" value={ settings.full_name } onChange={ handleFieldChange }  className="form-control" />
                                         </div>
                                         <div className="form-group">
-                                            <input type="text" placeholder="Your Email" id="email" value={ settings.email } onChange={ handleEmailChange }  className="form-control" />
+                                            <input type="text" placeholder="Your Email" id="email" value={ settings.email } onChange={ handleFieldChange }  className="form-control" />
                                         </div>
                                         <div className="form-group">
-                                            <input type="text" placeholder="Your Username" id="username" value={ settings.username } onChange={ handleUsernameChange }  className="form-control" />
+                                            <input type="text" placeholder="Your Username" id="username" value={ settings.username } onChange={ handleFieldChange }  className="form-control" />
                                         </div>
                                         <div className="form-group">
-                                            <input type="password" placeholder="Your Password" id="password" value={ settings.password } onChange={ handlePasswordChange }  className="form-control" />
+                                            <input type="password" placeholder="Your Password" id="password" value={ settings.password } onChange={ handleFieldChange }  className="form-control" />
                                         </div>
                                         <div className="row">
                                                   <div className="col-md-3">

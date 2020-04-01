@@ -35,7 +35,7 @@ class ProductController extends Controller {
       'description' => $description, 
       'regular_price' => $regularPrice,
       'sale_price' => $salePrice,
-      'quantity' => '10',
+      'quantity' => $quantity,
       'slug' => $slug
       ]);
 
@@ -43,7 +43,7 @@ class ProductController extends Controller {
         $imagesSaved = $this->saveProductImages($images, $id);
         $categorySaved = $this->saveProductCategory($categoryID, $id);
         if($imagesSaved && $categorySaved) {
-          return response()->json(['Product Created' => true, 'Status Code' => 201]);
+          return response()->json(['Product Created' => true, 'Status Code' => 201, 'ID' => $id]);
         } else {
           return response()->json(['Product Created' => true, 'Status Code' => 201, 'Error' => 'Cannot save images']);
         }
@@ -53,11 +53,48 @@ class ProductController extends Controller {
       
     }
 
+    public function updateProduct(Request $request, int $id) {
+      $data = $request->input();
+
+      extract($data);
+
+      $updated = DB::table('products')
+      ->where('id', $id)
+      ->update([
+      'name' => $productName, 
+      'description' => $description, 
+      'regular_price' => $regularPrice,
+      'sale_price' => $salePrice,
+      'quantity' => $quantity,
+      'slug' => $slug
+      ]);
+
+      if($updated || $updated === 0) {
+        $imagesUpdated = $this->updateProductImages($images, $id);
+        $categoryUpdated = $this->updateProductCategory($categoryID, $id);
+        if($imagesUpdated && $categoryUpdated) {
+          return response()->json(['Product Updated' => true, 'Status Code' => 201, 'Images & Category' => 'Updated']);
+        } else if($imagesUpdated) {
+          return response()->json(['Product Updated' => true, 'Status Code' => 201, 'Images' => 'Updated']);
+        } else if($categoryUpdated) {
+          return response()->json(['Product Updated' => true, 'Status Code' => 201, 'Category' => 'Updated']);
+        }
+        else {
+          return response()->json(['Product Updated' => true, 'Status Code' => 201, 'Error' => 'Cannot save images and category']);
+        }
+      }
+
+      return response()->json(['Error' => 'Post data Error', 'Updated' => $updated]);     
+      
+    }
+
     private function saveProductImages(array $images, int $product_id): bool {
       $length = count($images);
       $count = 0;
       for($i = 0; $i < $length; $i++) {
-        $saveImage = DB::table('product_images')->insert(['product_id' => $product_id, 'path' => $images[$i]]);
+        $saveImage = DB::table('product_images')
+        ->insert(['product_id' => $product_id, 
+        'path' => $images[$i]]);
         if($saveImage) {
           $count++;
           continue;
@@ -72,8 +109,46 @@ class ProductController extends Controller {
       return false;
     }
 
+    private function updateProductImages(array $images, int $product_id): bool {
+      $length = count($images);
+      $count = 0;
+      for($i = 0; $i < $length; $i++) {
+        $saveImage = DB::table('product_images')
+        ->where('product_id', '=', $product_id)
+        ->update(
+          ['path' => $images[$i]]);
+
+        if($saveImage) {
+          $count++;
+          continue;
+        } else {
+          return false;
+        }
+      }
+
+      if($length === $count) {
+        return true;
+      }
+
+      return false;
+    }
+
     private function saveProductCategory(int $category_id, int $product_id): bool {
-      $saveCategory = DB::table('product_categories')->insert(['category_id' => $category_id, 'product_id' => $product_id]);
+      $saveCategory = DB::table('product_categories')
+      ->insert(['category_id' => $category_id, 
+      'product_id' => $product_id]);
+
+      if($saveCategory) {
+        return true;
+      }
+
+      return false;
+    }
+
+    private function updateProductCategory(int $category_id, int $product_id): bool {
+      $saveCategory = DB::table('product_categories')
+      ->where('product_id', '=', $product_id)
+      ->update(['category_id' => $category_id]);
 
       if($saveCategory) {
         return true;
