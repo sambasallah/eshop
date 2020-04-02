@@ -69,8 +69,10 @@ class ProductController extends Controller {
       'slug' => $slug
       ]);
 
+      $newAddedImages = isset($imageAdded) ? $imageAdded : null;
+
       if($updated || $updated === 0) {
-        $imagesUpdated = $this->updateProductImages($images, $id);
+        $imagesUpdated = $this->updateProductImages($images, $id, $newAddedImages);
         $categoryUpdated = $this->updateProductCategory($categoryID, $id);
         if($imagesUpdated && $categoryUpdated) {
           return response()->json(['Product Updated' => true, 'Status Code' => 201, 'Images & Category' => 'Updated']);
@@ -109,28 +111,114 @@ class ProductController extends Controller {
       return false;
     }
 
-    private function updateProductImages(array $images, int $product_id): bool {
+    private function updateProductImages(array $images, int $product_id, $addedImages) {
       $length = count($images);
       $count = 0;
-      for($i = 0; $i < $length; $i++) {
-        $saveImage = DB::table('product_images')
-        ->where('product_id', '=', $product_id)
-        ->update(
-          ['path' => $images[$i]]);
+      $imagesInDB = [];
+      $imgs = $this->getAllProductImages($product_id);
+      foreach($imgs as $img) {
+        array_push($imagesInDB, $img->path);
+      }
 
-        if($saveImage) {
-          $count++;
-          continue;
+      if(!is_null($addedImages)) {
+        for($i = 0; $i < $length; $i++) {
+          $saveImage = DB::table('product_images')
+          ->insert(
+            ['product_id' => $product_id,
+            'path' => $images[$i]]);
+  
+          if($saveImage) {
+            $count++;
+            continue;
+          } else {
+            return false;
+          }
+        }
+  
+        if($length === $count) {
+          return true;
+        }
+  
+        return false;
+      }
+
+      $imagesToDelete = array_diff($imagesInDB, $images);
+
+      if(empty($imagesToDelete)) {
+        for($i = 0; $i < $length; $i++) {
+          $saveImage = DB::table('product_images')
+          ->updateOrInsert(
+            ['product_id' => $product_id],
+            ['path' => $images[$i]]);
+  
+          if($saveImage) {
+            $count++;
+            continue;
+          } else {
+            return false;
+          }
+        }
+  
+        if($length === $count) {
+          return true;
+        }
+  
+        return false;
+      } else if(!empty($imagesToDelete)) {
+        $imagesRemoved = $this->removeImages(array_values($imagesToDelete)); 
+        
+        if($imagesRemoved) {
+          for($i = 0; $i < $length; $i++) {
+            $saveImage = DB::table('product_images')
+            ->updateOrInsert(
+              ['product_id' => $product_id],
+              ['path' => $images[$i]]);
+    
+            if($saveImage) {
+              $count++;
+              continue;
+            } else {
+              return false;
+            }
+          }
+    
+          if($length === $count) {
+            return true;
+          }
+    
+          return false;
         } else {
           return false;
         }
+      } else {
+        return false;
       }
+     
+    }
+    
+    private function getAllProductImages(int $product_id) {
+      return DB::table('product_images')->where('product_id', $product_id)->get();
+    }
 
-      if($length === $count) {
-        return true;
-      }
+    private function removeImages(array $images) {
+       $length = count($images);
+       $count = 0;
+       for($i = 0; $i < $length; $i++) {
+         $deleted = DB::table('product_images')->where('path',$images[$i])->delete();
 
-      return false;
+         if($deleted) {
+           continue;
+           $count++;
+         } else {
+            return false;
+         }
+        
+       }
+
+       if($count === $length) {
+          return true;
+       }
+       return false;
     }
 
     private function saveProductCategory(int $category_id, int $product_id): bool {

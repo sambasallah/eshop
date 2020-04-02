@@ -6,7 +6,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { openUploadWidget } from "../utils/CloudinaryService";
 import { CloudinaryContext } from 'cloudinary-react';
 import { slug, chunk } from '../utils/UtilityFunctions';
-import { Error, Updated, Created } from '../alerts/ProductsAlerts';
+import { Error, Success } from '../alerts/ProductsAlerts';
 
 
 
@@ -70,8 +70,10 @@ const AddProduct = () => {
         let data = await response.json();
         if(data) {
             setProduct(Object.assign({}, product, { updated: 'Product Updated' }));
+            console.log(product)
+            console.log(data);
         } else {
-            setProduct(Object.assign({}, product, { notUpdated: false, failed: 'Product Not Updated', formSubmitted: true }));
+            setProduct(Object.assign({}, product, { notUpdated: 'Product Not Updated', formSubmitted: true }));
         }
     }
 
@@ -120,7 +122,7 @@ const AddProduct = () => {
             product.images.push(data[i]);
           }
           let updatedImages = product.images; 
-          setProduct(Object.assign({}, product, { images: updatedImages }));
+          setProduct(Object.assign({}, product, { images: updatedImages, imageAdded: true }));
 
         } else if(photos.event === 'queues-end') {
             let files = photos.info.files;
@@ -212,8 +214,7 @@ const AddProduct = () => {
 
                                 <input type="submit" value="Publish" className="btn btn-success" />
                             </form>
-                            { product.created ? ( <Created /> ) : (<></>)}
-                            { product.updated ? ( <Updated /> ) : (<></>)}
+                            { product.created || product.updated ? ( <Success /> ) : (<></>)}
                             <button className="btn btn-warning" onClick={ () => beginUpload() } style={{ margin: '10px 0px'}}>Upload Images <i className="fa fa-upload"></i></button>
                         </div>
                     </div>
