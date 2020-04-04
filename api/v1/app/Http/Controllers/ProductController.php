@@ -72,7 +72,7 @@ class ProductController extends Controller {
       $newAddedImages = isset($imageAdded) ? $imageAdded : null;
 
       if($updated || $updated === 0) {
-        $imagesUpdated = $this->updateProductImages($images, $id, $newAddedImages);
+        $imagesUpdated = $this->updateProductImages($images, $imageNames,  $id, $newAddedImages);
         $categoryUpdated = $this->updateProductCategory($categoryID, $id);
         if($imagesUpdated && $categoryUpdated) {
           return response()->json(['Product Updated' => true, 'Status Code' => 201, 'Images & Category' => 'Updated']);
@@ -111,7 +111,7 @@ class ProductController extends Controller {
       return false;
     }
 
-    private function updateProductImages(array $images, int $product_id, $addedImages) {
+    private function updateProductImages(array $images, array $imageNames, int $product_id, $addedImages) {
       $length = count($images);
       $count = 0;
       $imagesInDB = [];
@@ -120,18 +120,21 @@ class ProductController extends Controller {
         array_push($imagesInDB, $img->path);
       }
 
-      if(!is_null($addedImages)) {
+      if(!is_null($addedImages) && $addedImages) {
         for($i = 0; $i < $length; $i++) {
-          $saveImage = DB::table('product_images')
+          $imageFound = $this->imgInDB($imageNames[$i]);
+          $count++;
+          if(!$imageFound) {
+            $saveImage = DB::table('product_images')
           ->insert(
             ['product_id' => $product_id,
             'path' => $images[$i]]);
   
           if($saveImage) {
-            $count++;
             continue;
           } else {
             return false;
+          }
           }
         }
   
@@ -149,7 +152,7 @@ class ProductController extends Controller {
           $saveImage = DB::table('product_images')
           ->updateOrInsert(
             ['product_id' => $product_id],
-            ['path' => $images[$i]]);
+            ['url' => $images[$i], 'img_name' => $imageNames[$i]]);
   
           if($saveImage) {
             $count++;
@@ -194,6 +197,16 @@ class ProductController extends Controller {
         return false;
       }
      
+    }
+
+    public function imgInDB($imageName): bool {
+      $found = DB::table('product_images')->where('img_name','=', $imageName)->get();
+
+      if($found) {
+        return true;
+      }
+      return false;
+
     }
     
     private function getAllProductImages(int $product_id) {

@@ -9,25 +9,22 @@ import { slug, chunk } from '../utils/UtilityFunctions';
 import { Error, Success } from '../alerts/ProductsAlerts';
 
 
-
-
 const AddProduct = () => {
 
   const [product, setProduct] = useState([{formSubmitted: false}]);
   const [category, setCategory] = useState([]);
 
-  const ProductImages = (prop) => {
+
+  const ImageList = (prop) => {
    
     let images = prop.images;
 
     const deleteImage = (image) => {
        let allPictures =  [].concat.apply([], images)
        let updatedArray = allPictures.filter( img => img !== image);
-       setProduct(Object.assign({}, product, { images : updatedArray }));
-        
+       setProduct(Object.assign({}, product, { images : updatedArray }));        
     }
 
-  
     return(
         <>
          { images.map((value, mainIndex) => {
@@ -69,11 +66,11 @@ const AddProduct = () => {
         let response = await fetch(url, {method : 'PUT', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
         let data = await response.json();
         if(data) {
-            setProduct(Object.assign({}, product, { updated: 'Product Updated' }));
+            setProduct(Object.assign({}, product, { updated: 'Product Updated', imageAdded: false }));
             console.log(product)
             console.log(data);
         } else {
-            setProduct(Object.assign({}, product, { notUpdated: 'Product Not Updated', formSubmitted: true }));
+            setProduct(Object.assign({}, product, { notUpdated: 'Product Not Updated', formSubmitted: true, imageAdded: false }));
         }
     }
 
@@ -115,22 +112,34 @@ const AddProduct = () => {
         if(photos.event === 'queues-end' && product.images){
           let files = photos.info.files;
           let data = [];
+          let imageName = [];
           for(let i = 0; i < files.length; i++) {
             data[i] = photos.info.files[i].uploadInfo.secure_url;
+            let namePath = photos.info.files[i].uploadInfo.public_id;
+            let fullName = namePath.substr(namePath.indexOf('/') + 1);
+            imageName[i] = fullName;
           }
           for(let i = 0; i < data.length; i++) {
             product.images.push(data[i]);
+            product.imageNames.push(imageName[i]);
           }
-          let updatedImages = product.images; 
-          setProduct(Object.assign({}, product, { images: updatedImages, imageAdded: true }));
+          let updatedImages = product.images;
+          let updatedImageNames = product.imageNames;
+
+          setProduct(Object.assign({}, product, { images: updatedImages, imageNames: updatedImageNames,  imageAdded: true }));
 
         } else if(photos.event === 'queues-end') {
-            let files = photos.info.files;
+          let files = photos.info.files;
           let data = [];
+          let names = [];
           for(let i = 0; i < files.length; i++) {
             data[i] = photos.info.files[i].uploadInfo.secure_url;
+            let namePath = photos.info.files[i].uploadInfo.public_id;
+            let fullName = namePath.substr(namePath.indexOf('/') + 1);
+            names[i] = fullName;
           }
-         setProduct(Object.assign({},product, { images : data }))
+         setProduct(Object.assign({},product, { images: data, imageNames: names  }));
+         console.log(product);
         }
       } else {
         console.log(error);
@@ -206,7 +215,7 @@ const AddProduct = () => {
                                     <div className="form-group">
                                         <label>Images</label>
                                         <div className="row">
-                                            <ProductImages images={ product.images ? chunk(4, product.images) : [[]] } />
+                                            <ImageList images={ product.images ? chunk(4, product.images) : [[]] } />
                                         </div>
                                     </div>
                                     </div>
