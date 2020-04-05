@@ -112,33 +112,22 @@ const AddProduct = () => {
         if(photos.event === 'queues-end' && product.images){
           let files = photos.info.files;
           let data = [];
-          let imageName = [];
           for(let i = 0; i < files.length; i++) {
             data[i] = photos.info.files[i].uploadInfo.secure_url;
-            let namePath = photos.info.files[i].uploadInfo.public_id;
-            let fullName = namePath.substr(namePath.indexOf('/') + 1);
-            imageName[i] = fullName;
           }
           for(let i = 0; i < data.length; i++) {
             product.images.push(data[i]);
-            product.imageNames.push(imageName[i]);
           }
           let updatedImages = product.images;
-          let updatedImageNames = product.imageNames;
-
-          setProduct(Object.assign({}, product, { images: updatedImages, imageNames: updatedImageNames,  imageAdded: true }));
+          setProduct(Object.assign({}, product, { images: updatedImages, imageAdded: true }));
 
         } else if(photos.event === 'queues-end') {
           let files = photos.info.files;
           let data = [];
-          let names = [];
           for(let i = 0; i < files.length; i++) {
             data[i] = photos.info.files[i].uploadInfo.secure_url;
-            let namePath = photos.info.files[i].uploadInfo.public_id;
-            let fullName = namePath.substr(namePath.indexOf('/') + 1);
-            names[i] = fullName;
           }
-         setProduct(Object.assign({},product, { images: data, imageNames: names  }));
+         setProduct(Object.assign({},product, { images: data }));
          console.log(product);
         }
       } else {

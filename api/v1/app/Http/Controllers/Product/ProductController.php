@@ -9,10 +9,14 @@ class ProductController extends Controller {
     
     
     public function allProducts() {
-      $products = DB::table("products")
-      ->join('product_categories','product_categories.product_id','=','products.id')
-      ->join('categories','categories.id','=','product_categories.category_id')->get();
-      return response()->json($products);
+      // $products = DB::table("products")->get();
+      return response()->json(['Testing' => true]);
+
+      // ->join('product_images', 'product_images.product_id','=','products.id')
+
+      // ->join('product_categories','product_categories.product_id','=','products.id')
+      // ->join('categories','categories.id','=','product_categories.category_id')
+    
     }
 
     public function singleProduct(int $id) {

@@ -32,8 +32,4 @@ $router->get('/admin/{id}', 'AdminController@admin');
 $router->post('/admin','AdminController@registerAdmin');
 $router->put('/admin/{id}', 'AdminController@updateAdmin');
 
-
-// Test Route
-$router->get('/test/{img}', 'ProductController@imgInDB');
-
 });
