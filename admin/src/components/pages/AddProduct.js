@@ -206,14 +206,15 @@ const AddProduct = () => {
                                         <div className="row">
                                             <ImageList images={ product.images ? chunk(4, product.images) : [[]] } />
                                         </div>
+                                        <a className="btn btn-warning" onClick={ () => beginUpload() } style={{ margin: '10px 0px'}}>Upload Images <i className="fa fa-upload"></i></a>
                                     </div>
+                                    
                                     </div>
                                 </div>
 
                                 <input type="submit" value="Publish" className="btn btn-success" />
                             </form>
                             { product.created || product.updated ? ( <Success /> ) : (<></>)}
-                            <button className="btn btn-warning" onClick={ () => beginUpload() } style={{ margin: '10px 0px'}}>Upload Images <i className="fa fa-upload"></i></button>
                         </div>
                     </div>
                 </div>
