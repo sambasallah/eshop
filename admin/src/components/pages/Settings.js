@@ -90,8 +90,7 @@ const Settings = () => {
             console.log(photos);
             if(photos.event === 'success'){
               let path = photos.info.public_id;
-              setSettings(Object.assign(settings,{ image : path }));
-              console.log(settings);
+              setSettings(Object.assign({},settings,{ image : path }));
             }
           } else {
             console.log(error);
@@ -143,18 +142,21 @@ const Settings = () => {
                                         <div className="row">
                                                   <div className="col-md-3">
                                                           <div className="card">
-                                                          <div className="card-body">
-                                                            <CloudinaryContext cloudName="ebaaba">
-                                                              <img src={ 'https://res.cloudinary.com/ebaaba/image/upload/v1585136586/' + settings.image }  width="100%"  />
-                                                            </CloudinaryContext>
-                                                          </div>
+                                                          <a onClick={ () => beginUpload() }>
+                                                            <div className="card-body">
+                                                                <CloudinaryContext cloudName="ebaaba">
+                                                                <img src={ 'https://res.cloudinary.com/ebaaba/image/upload/v1585136586/' + settings.image }  width="100%"  />
+                                                                </CloudinaryContext>
+                                                                {/* <a style={{ marginRight : '10px', marginBottom: '10px'}} onClick={() => beginUpload()} >Upload Profile Image <i className="fa fa-plus"></i></a> */}
+                                                            </div>
+                                                          </a>
                                                       </div>
                                                   </div>
                                               </div>
                                       
                                         <input type="submit" value="Update Profile" className="btn btn-success" />
                                     </form>
-                                    <button style={{ marginRight : '10px', marginBottom: '10px'}} onClick={() => beginUpload()} className="btn btn-warning">Upload Image <i className="fa fa-upload"></i></button>
+                                    
                                     { settings.success ? ( <Success /> ) : ( <></>)}
                                     { settings.failed ? ( <Error /> ) : ( <></> )}
                                   </>

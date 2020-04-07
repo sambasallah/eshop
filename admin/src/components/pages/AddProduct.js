@@ -77,12 +77,14 @@ const AddProduct = () => {
   }
 
   const getCategories = async () => {
-    let response = await fetch('http://localhost:8000/api/v1/categories');
+    let response = await fetch('http://localhost:8000/api/v1/product/categories');
     let data = await response.json();
     let arr = [];
-    for(let i = 0; i < data.length; i++) {
-       arr[i] = data[i];
-    }
+
+    data.map((value, index) => {
+        arr[index] = value;
+    }); 
+
     setCategory(Object.assign([],category, arr));
 }
 
@@ -206,7 +208,7 @@ const AddProduct = () => {
                                         <div className="row">
                                             <ImageList images={ product.images ? chunk(4, product.images) : [[]] } />
                                         </div>
-                                        <a className="btn btn-warning" onClick={ () => beginUpload() } style={{ margin: '10px 0px'}}>Upload Images <i className="fa fa-upload"></i></a>
+                                        <a onClick={ () => beginUpload() } style={{ margin: '10px 0px'}}>Click to add images <i className="fa fa-plus"></i></a>
                                     </div>
                                     
                                     </div>

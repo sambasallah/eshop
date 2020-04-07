@@ -24,12 +24,16 @@ $router->get('/products','ProductController@allProducts');
 $router->get('/products/{id}','ProductController@singleProduct');
 $router->post('/product', 'ProductController@createProduct');
 $router->put('/product/{id}', 'ProductController@updateProduct');
-$router->get('/categories', 'ProductController@getCategories');
+$router->get('/product/categories', 'ProductController@getCategories');
 
 // Admin Route
 $router->get('/admins', 'AdminController@allAdmin');
 $router->get('/admin/{id}', 'AdminController@admin');
 $router->post('/admin','AdminController@registerAdmin');
 $router->put('/admin/{id}', 'AdminController@updateAdmin');
+
+
+$router->get('/images/{id}', 'ProductController@getAllProductImages');
+$router->get('/delete', 'ProductController@deleteImg');
 
 });
