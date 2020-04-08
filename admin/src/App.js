@@ -21,6 +21,7 @@ const App = () => {
           <Route exact path="/settings" component={Settings}></Route>
           <Route exact path="/order" component={SingleOrder}></Route>
           <Route exact path="/add-product" component={AddProduct}></Route>
+          <Route exact path="/add-product/:slug" component={AddProduct}></Route>
         </Switch>
     </div>
   );

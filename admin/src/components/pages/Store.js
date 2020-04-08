@@ -2,16 +2,41 @@ import React, { useState, useEffect } from 'react'
 import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
+import { Image, Transformation } from 'cloudinary-react';
 
-const Store = () => {   
-    const [allProducts, setProducts] = useState({products: null });
+const Store = () => {
+    let originalState = {
+        name: "",
+        description: "",
+        regular_price: "",
+        sale_price: "",
+        quantity: "",
+        slug: "",
+        category_name: "",
+        url: []
+    };
+
+    const [allProducts, setProducts] = useState({products: [originalState] });
 
     const getAllProducts = async () => {
         let url = 'http://localhost:8000/api/v1/products';
         let response = await fetch(url);
         let data = await response.json();
         if(data) {
-            console.log(data[0].regular_price);
+            data.map((value, index) => {
+                setProducts(Object.assign({}, allProducts, { products: [
+                    {
+                        name: data[index].name,
+                        description: data[index].description,
+                        regular_price: data[index].regular_price,
+                        sale_price: data[index].sale_price,
+                        quantity: data[index].quantity,
+                        slug: data[index].slug,
+                        category_name: data[index].slug,
+                        url: JSON.parse(data[index].url) 
+                    }
+                ]}))
+            });
         }
     }
 
@@ -39,7 +64,6 @@ const Store = () => {
                             <div className="row">
                                 <div className="col-md-8">
                                     <h2>Products -  <Link style={{ padding: '8px 20px', fontSize: '17px', backgroundColor : '#33b27b', color: '#fff', borderRadius: '5px'}} to='/add-product'>Add Product</Link></h2>
-                                   
                                 </div>
                                 <div className="col-md-4">
                                     <form> 
@@ -53,10 +77,10 @@ const Store = () => {
                                 <div className="col-md-3">
                                     <div className="card">
                                         <div className="card-body">
-                                            <img src={require('../../media/b5.jpg')} style={{width : '100%'}} />
+                                          <img src={ allProducts.products[0].url[0] } width="100%" />
                                         </div>
                                         <div className="card-footer">
-                                            {/* { allProducts.products.name - allProducts.products.regular_price } */}
+                                            { allProducts.products[0].name + " - " + allProducts.products[0].regular_price + " " } <span style={{textDecoration: 'line-through'}}> { allProducts.products[0].sale_price } </span>
                                         </div>
                                     </div>
                                 </div>
