@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
-const Store = () => {
+const Store = () => {   
+    const [allProducts, setProducts] = useState({products: null });
+
+    const getAllProducts = async () => {
+        let url = 'http://localhost:8000/api/v1/products';
+        let response = await fetch(url);
+        let data = await response.json();
+        if(data) {
+            console.log(data[0].regular_price);
+        }
+    }
+
+    useEffect(() => {
+        getAllProducts();
+    },[]);
+
     return (
         <div>
              <Helmet>
@@ -41,7 +56,7 @@ const Store = () => {
                                             <img src={require('../../media/b5.jpg')} style={{width : '100%'}} />
                                         </div>
                                         <div className="card-footer">
-                                            Bag - D400
+                                            {/* { allProducts.products.name - allProducts.products.regular_price } */}
                                         </div>
                                     </div>
                                 </div>

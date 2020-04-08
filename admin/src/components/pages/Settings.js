@@ -48,6 +48,7 @@ const Settings = () => {
                 loading : false,
                 formSubmited: false 
             }));
+            console.log(settings);
         }
         
         

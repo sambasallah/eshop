@@ -12,15 +12,8 @@ class ProductController extends Controller {
       $products = DB::table('products')
       ->join('product_categories','product_categories.product_id','=','products.id')
       ->join('categories','categories.id','=','product_categories.category_id')
-      ->join('product_images', 'product_images.product_id', '=', 'products.id')
-      ->get();
-
-      // categories.*, product_images.*, group_concat(product_images.url) as url from products 
-      // inner join product_categories on product_categories.product_id = products.id 
-      // inner join categories on categories.id = product_categories.category_id 
-      // inner join product_images on product_images.product_id = products.id group by products.id, products.name"));
-
-        return response()->json($products);
+      ->join('product_images', 'product_images.product_id', '=', 'products.id')->get();
+      return response()->json($products);
     }
 
     public function singleProduct(int $id) {
