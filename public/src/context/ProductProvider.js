@@ -4,29 +4,7 @@ export const ProductContext = createContext();
 
 export const ProductProvider = (props) => {
 
-    const products =  [
-        {
-            "id": 1,
-            "product_name" : "Iphone Charger",
-            "product_price" : "D4,000",
-            "product_qty" : "3",
-            "slug" : "iphone-charger"
-        },
-        {
-            "id" : 2,
-            "product_name" : "Iphone",
-            "product_price" : "D8,000",
-            "product_qty" : "1",
-            "slug" : "iphone"
-        },
-        {
-            "id" : 3,
-            "product_name" : "Android Phone",
-            "product_price" : "D3,000",
-            "product_qty" : "1",
-            "slug" : "android-phone"
-        }
-    ];
+    const products =  [];
 
     // Products State
     const [allProducts,setProduct] = useState({
@@ -46,8 +24,10 @@ export const ProductProvider = (props) => {
          await fetch(url)
          .then((resp) => resp.json() )
          .then((data) => {
-            //  setProduct({ products : data.products });
-             console.log(data.products);
+            data.map((value, index) => {
+                products.push(value);
+            });
+            setProduct({products : products});
          })
          .catch((error) => {
              console.log(error);            
@@ -57,8 +37,7 @@ export const ProductProvider = (props) => {
 
     // Get a single product by id
     const getProduct = (id) => {
-        const product = allProducts.products.find(item => item.id === id);
-        return product;
+        return allProducts.products.find(item => item.id === id);
     }
 
     // Add product to single product state
@@ -70,19 +49,21 @@ export const ProductProvider = (props) => {
 
     // Update single prdouct state 
     const updateSingleState = () => {
-        const single = localStorage.getItem('single');
-        setSingle({single : JSON.parse(single)});
+        let single = localStorage.getItem('single'); 
+        setSingle({single: JSON.parse(single)});
+        console.log(single);
     }
 
-    // Load products 
-    const loadProducts = () => {
-        setProduct({products : products});
-    }
+    // // Load products 
+    // const loadProducts = () => {
+    //     setProduct({products : products});
+    //     console.log(allProducts)
+    // }
 
    useEffect(() => {
-        loadProducts();
+        // loadProducts();
         getProducts();
-        updateSingleState();
+        // updateSingleState();
     },[]);
    
     return (

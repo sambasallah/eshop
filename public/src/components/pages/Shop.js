@@ -10,14 +10,14 @@ const Product = ({ product, index, products }) => {
         <div className="col-md-3">
         <div className="product">
             <div className="product-img">
-                 <img src={require('../../media/images/b5.jpg')} style={{ width : "100%", height : "100%"}} />
+                 <img src={ JSON.parse(product.url)[0] } style={{ width : "100%", height : "100%"}} />
             </div>
             <div onClick={ () => products.handleProduct(product.id) } >
                 <Link to={ product.slug }>
                     <div className="product-description">
-                        <h3 className="title">{ limitTitle(product.product_name) }</h3>
+                        <h3 className="title">{ limitTitle(product.name) }</h3>
                         <hr className="below-title"></hr>
-                        <span className="price"><span className="currency-symbol">GMD</span> { product.product_price } </span> <sup className="orignal-price"><del> { product.discount_price } </del></sup>
+                        <span className="price"><span className="currency-symbol">GMD</span> { product.sale_price } </span> <sup className="orignal-price"><del> { product.regular_price } </del></sup>
                         <hr className="below-price"></hr>
                         <Link to="/cart" className="add-to-cart">Add to Cart</Link>
                     </div>

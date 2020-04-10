@@ -6,6 +6,16 @@ import { ProductContext } from '../../context/ProductProvider';
 
 const ProductSingle = (props) => {
 
+    const isJson = (str) => {
+        try {
+            JSON.parse(str);
+        } catch(e) {
+            return false;
+        }
+
+        return true;
+    }
+
     const product = useContext(ProductContext);
 
     const settings = {dots: true,
@@ -24,7 +34,7 @@ const ProductSingle = (props) => {
 
             <div className="breadcrumb">
                <div className="breadcrumb-container">
-                    <h2>{ product.single.product_name }</h2>
+                    <h2>{ product.single.name }</h2>
                </div>
             </div>
 
@@ -34,23 +44,22 @@ const ProductSingle = (props) => {
                        <div className="col-md-4">
                        <div className="product-slider">
                            <Slider {...settings}>
-                           <div className="img-container">
-                                <img src={require('../../media/images/chemise0.jpg')} style={{ width: '100%', height : '100%'}} />
-                            </div>
-                            <div className="img-container">
-                                <img src={require('../../media/images/chemise2.jpg')} style={{ width: '100%', height : '100%'}} />
-                            </div>
-                            <div className="img-container">
-                                <img src={require('../../media/images/chemise3.jpg')} style={{ width: '100%', height : '100%'}} />
-                            </div>
+                                {
+                                    JSON.parse(product.single.url).map((value, index) => {
+                                        return(
+                                            <div className="img-container" style={{padding: '200px', boxSizing : 'border-box'}}>
+                                                <img src={ value } style={{width: '100%'}} />
+                                             </div>
+                                        );
+                                   })   
+                                }
                            </Slider>
-                            
                         </div>
                        </div>
                        <div className="col-md-8">
                             <div className="product-details">
-                                <h2> { product.single.product_name } </h2>
-                                <h3>{ product.single.product_price } <sup><del>D4700</del> <span>You saved D700</span></sup></h3>
+                                <h2> { product.single.name } </h2>
+                                <h3>{ product.single.sale_price } <sup><del>{ product.single.regular_price }</del> <span>You saved D700</span></sup></h3>
                                 <h3><Link to="/cart" className="add-to-cart">Buy Now</Link></h3>
                                 <h3>
                                     <ul>
