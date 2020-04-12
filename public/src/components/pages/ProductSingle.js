@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import Slider  from 'react-slick';
+import ReactHtmlParser from 'react-html-parser';
 import { ProductContext } from '../../context/ProductProvider';
 
 const ProductSingle = (props) => {
@@ -12,7 +13,6 @@ const ProductSingle = (props) => {
         } catch(e) {
             return false;
         }
-
         return true;
     }
 
@@ -44,23 +44,23 @@ const ProductSingle = (props) => {
                        <div className="col-md-4">
                        <div className="product-slider">
                            <Slider {...settings}>
-                                {
+                                { isJson(product.single.url)?
                                     JSON.parse(product.single.url).map((value, index) => {
                                         return(
-                                            <div className="img-container" style={{padding: '200px', boxSizing : 'border-box'}}>
+                                            <div className="img-container">
                                                 <img src={ value } style={{width: '100%'}} />
                                              </div>
                                         );
-                                   })   
-                                }
+                                   }) : (<></>)  
+                                } 
                            </Slider>
                         </div>
                        </div>
                        <div className="col-md-8">
                             <div className="product-details">
                                 <h2> { product.single.name } </h2>
-                                <h3>{ product.single.sale_price } <sup><del>{ product.single.regular_price }</del> <span>You saved D700</span></sup></h3>
-                                <h3><Link to="/cart" className="add-to-cart">Buy Now</Link></h3>
+                                <h3>{ product.single.sale_price } <sup><del>{ product.single.regular_price }</del> <span> You Saved { Number(product.single.regular_price) - Number(product.single.sale_price) }</span></sup></h3>
+                                <h3><Link to="/cart" className="add-to-cart">Add To Cart</Link> </h3>
                                 <h3>
                                     <ul>
                                         <li><a href=""><i className="fa fa-facebook"></i></a></li>
@@ -82,13 +82,7 @@ const ProductSingle = (props) => {
                     <div className="row">
                         <div className="col-md-12">
                             <h3>Description</h3>
-                            <h5>
-                                <ul>
-                                    <li>Quality 100% Cotton</li>
-                                    <li>Best Quality</li>
-                                    <li>Long Lasting</li>
-                                </ul>
-                            </h5>
+                            { ReactHtmlParser(product.single.description) }
                             <h3>Return Policy</h3>
                             <p><i className="fa fa-repeat"></i> 7 Days Return Guarantee</p>
                             <h3>Delivery</h3>

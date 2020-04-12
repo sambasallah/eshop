@@ -51,7 +51,6 @@ export const ProductProvider = (props) => {
     const updateSingleState = () => {
         let single = localStorage.getItem('single'); 
         setSingle({single: JSON.parse(single)});
-        console.log(single);
     }
 
     // // Load products 
@@ -63,7 +62,7 @@ export const ProductProvider = (props) => {
    useEffect(() => {
         // loadProducts();
         getProducts();
-        // updateSingleState();
+        updateSingleState();
     },[]);
    
     return (

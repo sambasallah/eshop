@@ -208,7 +208,7 @@ const AddProduct = () => {
                                         <div className="row">
                                             <ImageList images={ product.images ? chunk(4, product.images) : [[]] } />
                                         </div>
-                                        <a onClick={ () => beginUpload() } style={{ margin: '10px 0px'}}>Click to add images <i className="fa fa-plus"></i></a>
+                                        <a onClick={ () => beginUpload() } style={{ margin: '10px 0px', cursor: 'pointer'}}>Click to add images <i className="fa fa-plus"></i></a>
                                     </div>
                                     
                                     </div>
