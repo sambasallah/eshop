@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import StoreList from './StoreList';
 
 const Store = () => {
+    
     let originalState = {
         name: "",
         description: "",
@@ -24,10 +25,8 @@ const Store = () => {
         let data = await response.json();
         if(data) {
             let arr = [];
-            data.map((value, index) => {
-                // setProducts(Object.assign({}, allProducts,{ products: [
-                
-                   let product =  {
+            data.map((value, index) => {        
+            let product =  {
                         name: value.name,
                         description: value.description,
                         regular_price: value.regular_price,
@@ -36,11 +35,8 @@ const Store = () => {
                         slug: value.slug,
                         category_name: value.slug,
                         url: JSON.parse(value.url) 
-                    }
-                // ]}));
-              
+                }      
                 arr.push(product);
-
             });
             setProducts({products : arr });
         }

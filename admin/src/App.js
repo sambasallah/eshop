@@ -9,6 +9,7 @@ import Store from './components/pages/Store';
 import Settings from './components/pages/Settings';
 import SingleOrder from './components/pages/SingleOrder';
 import AddProduct from './components/pages/AddProduct';
+import EditProduct from './components/pages/EditProduct';
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
           <Route exact path="/settings" component={Settings}></Route>
           <Route exact path="/order" component={SingleOrder}></Route>
           <Route exact path="/add-product" component={AddProduct}></Route>
-          <Route exact path="/add-product/:slug" component={AddProduct}></Route>
+          <Route exact path="/edit/:slug" component={EditProduct}></Route>
         </Switch>
     </div>
   );

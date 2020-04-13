@@ -28,8 +28,8 @@ const ProductSingle = (props) => {
 
     return (
         <div>
-            <Helmet>
-                <title> eBaaba Gambia </title>
+            <Helmet title={ product.single.name + " | eBaaba Gambia"  }>
+                {/* <title> eBaaba Gambia </title> */}
             </Helmet>
 
             <div className="breadcrumb">
@@ -42,8 +42,8 @@ const ProductSingle = (props) => {
                 <div className="product-single-info">
                    <div className="row">
                        <div className="col-md-4">
-                       <div className="product-slider">
-                           <Slider {...settings}>
+                       <div className="product-slider" style={{ padding: '50px'}}>
+                           <Slider {...settings} >
                                 { isJson(product.single.url)?
                                     JSON.parse(product.single.url).map((value, index) => {
                                         return(
@@ -80,7 +80,7 @@ const ProductSingle = (props) => {
 
                 <div className="single-product-description">
                     <div className="row">
-                        <div className="col-md-12">
+                        <div className="col-md-12" style={{ padding: '0px 30px'}}>
                             <h3>Description</h3>
                             { ReactHtmlParser(product.single.description) }
                             <h3>Return Policy</h3>

@@ -26,6 +26,16 @@ class ProductController extends Controller {
       return response()->json($product);
     }
 
+    public function getProductUsingSlug(string $slug) {
+      $product = DB::table('products')
+      ->join('product_categories','product_categories.product_id','=','products.id')
+      ->join('categories','categories.id','=','product_categories.category_id')
+      ->join('product_images', 'product_images.product_id', 'products.id')
+      ->where('products.slug',$slug)
+      ->get();
+      return response()->json($product);
+    }
+
     public function createProduct(Request $request) {
       $data = $request->input();
 

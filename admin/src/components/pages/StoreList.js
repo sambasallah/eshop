@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const StoreList = (props) => {
     return (
@@ -13,7 +14,7 @@ const StoreList = (props) => {
                                 <img src={ value.url[0] } style={{width: '100%'}} />
                             </div>
                             <div className="card-footer">
-                                { value.name + " " +value.sale_price + " - " + value.regular_price}
+                                <Link to={"/edit/" + value.slug }>{ value.name + " " +value.sale_price + " - " + value.regular_price}</Link>
                             </div>
                         </div>
                     </div>

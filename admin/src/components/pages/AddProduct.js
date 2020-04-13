@@ -4,18 +4,17 @@ import { Helmet } from 'react-helmet';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { openUploadWidget } from "../utils/CloudinaryService";
-import { CloudinaryContext } from 'cloudinary-react';
 import { slug, chunk } from '../utils/UtilityFunctions';
 import { Error, Success } from '../alerts/ProductsAlerts';
 
 
+
 const AddProduct = () => {
 
-  const [product, setProduct] = useState([{formSubmitted: false}]);
-  const [category, setCategory] = useState([]);
+    const [product, setProduct] = useState([{ formSubmitted: false }]);
+    const [category, setCategory] = useState([]);
 
-
-  const ImageList = (prop) => {
+    const ImageList = (prop) => {
    
     let images = prop.images;
 
@@ -86,9 +85,10 @@ const AddProduct = () => {
     }); 
 
     setCategory(Object.assign([],category, arr));
-}
+    }
 
-  useEffect(() => {
+ 
+  useEffect(() => { 
     getCategories();
   },[]);
 
@@ -138,91 +138,87 @@ const AddProduct = () => {
     });
   }
 
-
-
-    return (
-        <div>
-            <Helmet>
-                <title>Add Product | eBaaba Gambia</title>
-            </Helmet>
-
-            <div className="breadcrumb">
-                <div className="breadcrumb-inner">
-                    <h2>Add Product</h2>
+  return (  
+              <div>
+                <Helmet title="Add Product | eBaaba Gambia" />
+                <div className="breadcrumb">
+                    <div className="breadcrumb-inner">
+                        <h2>Add Product</h2>
+                    </div>
                 </div>
-            </div>
-
-            <div className="add-product">
-                <div className="add-product-inner">
-                    <div className="row">
-                        <div className="col-md-4 left">
-                            <div className="menu">
-                                <SideNav />
+        
+                <div className="add-product">
+                    <div className="add-product-inner">
+                        <div className="row">
+                            <div className="col-md-4 left">
+                                <div className="menu">
+                                    <SideNav />
+                                </div>
                             </div>
-                        </div>
-                        <div className="col-md-8 right">
-                            <h2>Product Information</h2>
-                            <form onSubmit={ saveForm }>
-                                <div className="form-group">
-                                    <label>Product Name</label>
-                                    <input type="text" placeholder="Product Name" onChange={ handleChange } id="productName" className="form-control" required/>
-                                </div>
-                                <div className="form-group">
-                                   <div className="row">
-                                       <div className="col-md-6">
-                                           <label>Regular Price (D)</label>
-                                           <input type="text" placeholder="Regular Price" onChange={ handleChange } id="regularPrice"  className="form-control" required/>
-                                       </div>
-                                       <div className="col-md-6">
-                                            <label>Sale Price (D)</label>
-                                            <input type="text" placeholder="Sale Price" onChange={ handleChange } id="salePrice"  className="form-control" required/>
-                                       </div>
-                                   </div>
-                                </div>
-                                <div className="form-group">
-                                    <label>Product Description</label>
-                                    {/* <textarea placeholder="Product Description" className="form-control" rows="5"></textarea> */}
-                                    <CKEditor editor={ ClassicEditor } 
-                                    onChange={ handleDescription } />    
-                                </div>
-                                
-                                <div className="row">
-                                    <div className="col-md-3">
+                            <div className="col-md-8 right">
+                                <h2>Product Information</h2>
+                                <form onSubmit={ saveForm }>
                                     <div className="form-group">
-                                        <select className="form-control"  id="categoryID" onChange={ handleChange }>
-                                            <option value="0">Category</option>
-                                            { category.map(
-                                                (value, index) => 
-                                                { return <option value={value.id}> {value.category_name} </option> }) }
-                                        </select>
-                                     </div>         
+                                        <label>Product Name</label>
+                                        <input type="text" placeholder="Product Name" onChange={ handleChange } id="productName" className="form-control" required/>
                                     </div>
-
-                                    <div className="col-md-2">
-                                        <input type="number" name="quantity" className="form-control" id="quantity" placeholder="Qty" onChange={ handleChange } />
-                                    </div>  
-
-                                    <div className="col-md-7">
                                     <div className="form-group">
-                                        <label>Images</label>
-                                        <div className="row">
-                                            <ImageList images={ product.images ? chunk(4, product.images) : [[]] } />
-                                        </div>
-                                        <a onClick={ () => beginUpload() } style={{ margin: '10px 0px', cursor: 'pointer'}}>Click to add images <i className="fa fa-plus"></i></a>
+                                       <div className="row">
+                                           <div className="col-md-6">
+                                               <label>Regular Price (D)</label>
+                                               <input type="text" placeholder="Regular Price" onChange={ handleChange } id="regularPrice"  className="form-control" required/>
+                                           </div>
+                                           <div className="col-md-6">
+                                                <label>Sale Price (D)</label>
+                                                <input type="text" placeholder="Sale Price" onChange={ handleChange } id="salePrice"  className="form-control" required/>
+                                           </div>
+                                       </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Product Description</label>
+                                        {/* <textarea placeholder="Product Description" className="form-control" rows="5"></textarea> */}
+                                        <CKEditor editor={ ClassicEditor } 
+                                        onChange={ handleDescription } />    
                                     </div>
                                     
+                                    <div className="row">
+                                        <div className="col-md-3">
+                                        <div className="form-group">
+                                            <select className="form-control"  id="categoryID" onChange={ handleChange }>
+                                                <option value="0">Category</option>
+                                                { category.map(
+                                                    (value, index) => 
+                                                    { return <option value={value.id}> {value.category_name} </option> }) }
+                                            </select>
+                                         </div>         
+                                        </div>
+        
+                                        <div className="col-md-2">
+                                            <input type="number" name="quantity" className="form-control" id="quantity" placeholder="Qty" onChange={ handleChange } />
+                                        </div>  
+        
+                                        <div className="col-md-7">
+                                        <div className="form-group">
+                                            <label>Images</label>
+                                            <div className="row">
+                                                <ImageList images={ product.images ? chunk(4, product.images) : [[]] } />
+                                            </div>
+                                            <a onClick={ () => beginUpload() } style={{ margin: '10px 0px', cursor: 'pointer'}}>Click to add images <i className="fa fa-plus"></i></a>
+                                        </div>
+                                        { console.log(product) }
+                                        </div>
                                     </div>
-                                </div>
-
-                                <input type="submit" value="Publish" className="btn btn-success" />
-                            </form>
-                            { product.created || product.updated ? ( <Success /> ) : (<></>)}
+        
+                                    <input type="submit" value="Publish" className="btn btn-success" />
+                                </form>
+                                { product.created || product.updated ? ( <Success /> ) : (<></>)}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        );
+
 }
 
-export default AddProduct
+export default AddProduct;

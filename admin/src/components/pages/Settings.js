@@ -108,7 +108,7 @@ const Settings = () => {
 
             <div className="breadcrumb">
                 <div className="breadcrumb-inner">
-                   <h2>Settings</h2>
+                   <h2>Settings </h2>
                 </div>
             </div>
             <div className="settings">
@@ -128,6 +128,7 @@ const Settings = () => {
                                     <>
                                     <h2>Profile Settings</h2>
                                     <form onSubmit= { saveForm } style={{ marginBottom : '10px' }}>
+                                        
                                         <div className="form-group">
                                             <input type="text" placeholder="Your Name" id="full_name" value={ settings.full_name } onChange={ handleFieldChange }  className="form-control" />
                                         </div>
