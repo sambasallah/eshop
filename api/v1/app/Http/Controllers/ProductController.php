@@ -98,7 +98,7 @@ class ProductController extends Controller {
       }
 
       return response()->json(['Error' => 'Post data Error', 'Updated' => $updated]);     
-      
+   
     }
 
     private function saveProductImages(array $images, int $product_id): bool {
@@ -113,10 +113,11 @@ class ProductController extends Controller {
     }
 
     private function updateProductImages(array $images, int $product_id, $addedImages) {
+
       $length = count($images);
       $imgs = $this->getAllProductImages($product_id);
 
-      if(!is_null($addedImages) && $addedImages) {
+      if(!is_null($addedImages)) {
 
         for($i = 0; $i < $length; $i++) {
           if(!in_array($images[$i], $imgs['images'])) {
@@ -125,41 +126,36 @@ class ProductController extends Controller {
         }
 
         $imagesUpdated = DB::table('product_images')
-        ->update(['product_id' => $product_id, 'url' => json_encode($imgs['images'])]);
+        ->where('product_id', $product_id)
+        ->update(['url' => array_values($imgs['images'])]);
         if($imagesUpdated) {
           return true;
         }
         return false;
 
-      }
+      } 
 
       $imagesToDelete = array_diff($imgs['images'], $images);
-
-      if(empty($imagesToDelete)) {
-        $updated = DB::table('product_images')
-        ->update(['product_id' => $product_id, 
-                   'url' => $imgs['images']]);
-
-        if($updated) {
-          return true;
-        }
-        return false;
-      } else if(!empty($imagesToDelete)) {  
+      
+      if(!empty($imagesToDelete)) {  
         
         $updated = array_diff($imgs['images'], $imagesToDelete);
     
         $updatedImaged = DB::table('product_images')
         ->where('product_id', $product_id)
-        ->update(['url' => json_encode($updated)]);
+        ->update(['url' => array_values($updated)]);
 
         if($updatedImaged) {
           return true;
         }
         return false;
       
-    }
+      }
+
+      return false;
 
   }
+
 
     public function getAllProductImages(int $product_id) {
       $images = DB::table('product_images')->where('product_id', $product_id)->get();

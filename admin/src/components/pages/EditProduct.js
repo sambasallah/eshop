@@ -10,8 +10,11 @@ import { useLocation } from 'react-router-dom';
 
 const EditProduct = () => {
 
-    const [edit, setEdit] = useState([{}]);
+    const [edit, setEdit] = useState([]);
     const [category, setCategory] = useState([]);
+    const [description, setDescription] = useState({description: ""});
+
+   
 
     let location = useLocation();
     let path = location.pathname.substr(1);
@@ -25,6 +28,7 @@ const EditProduct = () => {
         const deleteImage = (image) => {
            let allPictures =  [].concat.apply([], images)
            let updatedArray = allPictures.filter( img => img !== image);
+        //    updatedArray = Object.values(updatedArray);
            setEdit(Object.assign({}, edit, { images : updatedArray }));        
         }
     
@@ -49,35 +53,20 @@ const EditProduct = () => {
         )        
     }
     
-
-     // Handle saving and updating form
+  // Handle saving and updating form
   const saveForm = async (event) => {
     event.preventDefault();
     let slugName = slug(edit.productName);
     setEdit(Object.assign(edit, { slug: slugName }));
-
-    if(edit.id === undefined) {
-        let url = 'http://localhost:8000/api/v1/product';
-        let response = await fetch(url, {method : 'POST', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(edit) });
-        let data = await response.json();
-        if(data) {
-            setEdit(Object.assign({}, edit, { id: data.ID, created: 'Product Created'}));
-        }else {
-            setEdit(Object.assign({}, edit, { id: data.ID, notCreated: 'Product Not Created', formSubmitted: true }));
-        }
+    let url = 'http://localhost:8000/api/v1/product/' + edit.id;
+    let response = await fetch(url, {method : 'PUT', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(edit) });
+    let data = await response.json();
+    if(data) {
+        setEdit(Object.assign({},edit, { updated: true, imageAdded: false }));
     } else {
-        let url = 'http://localhost:8000/api/v1/product/' + edit.id;
-        let response = await fetch(url, {method : 'PUT', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(edit) });
-        let data = await response.json();
-        if(data) {
-            setEdit(Object.assign({}, edit, { updated: 'Product Updated', imageAdded: false }));
-            console.log(edit)
-            console.log(data);
-        } else {
-            setEdit(Object.assign({}, edit, { notUpdated: 'Product Not Updated', formSubmitted: true, imageAdded: false }));
-        }
+        setEdit(Object.assign({}, edit, { notUpdated: true, formSubmitted: true, imageAdded: false }));
     }
-
+    console.log(edit);
   }
 
   const getProductData = async (slug) => {
@@ -96,13 +85,16 @@ const EditProduct = () => {
         if(data) {
           let arr = {};
           data.map((value, index) => {
+            arr.id = value.product_id;
             arr.productName = value.name;
             arr.regularPrice = value.regular_price;
             arr.salePrice = value.sale_price;
             arr.categoryID = value.category_id;
             arr.quantity = value.quantity;
-            arr.url = JSON.parse(value.url);
+            arr.images = JSON.parse(value.url);
             arr.description = value.description;
+            arr.updated = false;
+            arr.notUpdated = false;
           });
           setEdit(Object.assign({}, edit, arr));
         }
@@ -134,6 +126,7 @@ const EditProduct = () => {
   
   const handleDescription = (event, editor) => {
         let data = editor.getData();
+        setDescription(Object.assign(description, { description: data}));
   }
 
 
@@ -166,7 +159,6 @@ const EditProduct = () => {
             data[i] = photos.info.files[i].uploadInfo.secure_url;
           }
          setEdit(Object.assign({},edit, { images: data }));
-         console.log(edit);
         }
       } else {
         console.log(error);
@@ -181,7 +173,7 @@ const EditProduct = () => {
 
     return (
         <div>
-        <Helmet title={ edit.productName } />
+        <Helmet title={ "Edit - " + edit.productName } />
         <div className="breadcrumb">
             <div className="breadcrumb-inner">
                 <h2>Edit - { edit.productName } </h2>
@@ -230,24 +222,25 @@ const EditProduct = () => {
                                     </select>
                                  </div>         
                                 </div>
-                               
+                                
                                 <div className="col-md-2">
                                     <input type="number" name="quantity" className="form-control" id="quantity" placeholder="Qty" value={edit.quantity} onChange={ handleChange } />
                                 </div>  
-
+                          
                                 <div className="col-md-7">
                                 <div className="form-group">
                                     <label>Images</label>
                                     <div className="row">
-                                        <ImageList images={ edit.url ? chunk(4, edit.url) : [[]] } />
+                                        <ImageList images={ edit.images ? chunk(4, Object.values(edit.images)) : [[]] } />
                                     </div>
                                     <a onClick={ () => beginUpload() } style={{ margin: '10px 0px', cursor: 'pointer'}}>Click to add images <i className="fa fa-plus"></i></a>
                                 </div>
                                 </div>
                             </div>
-
                             <input type="submit" value="Publish" className="btn btn-success" />
                         </form>
+                        { edit.updated? (<Success />) : console.log(edit.notUpdated) }
+                        { console.log(edit.images) }
                     </div>
                 </div>
             </div>
