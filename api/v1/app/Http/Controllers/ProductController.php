@@ -8,20 +8,22 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller {
     
     
-    public function allProducts(Request $request) {
+    public function allProducts(Request $request, $page_no) {
       $products = DB::table('products')
       ->join('product_categories','product_categories.product_id','=','products.id')
       ->join('categories','categories.id','=','product_categories.category_id')
-      ->join('product_images', 'product_images.product_id', '=', 'products.id')->get();
+      ->join('product_images', 'product_images.product_id', '=', 'products.id')
+      ->paginate(8);
       return response()->json($products);
     }
 
-    public function searchProduct(Request $request, string $searchValue) {
+    public function searchProduct(Request $request, string $searchValue, int $page_no) {
       $products = DB::table('products')
       ->where('products.name', 'LIKE', '%'. $searchValue .'%')
       ->join('product_categories','product_categories.product_id','=','products.id')
       ->join('categories','categories.id','=','product_categories.category_id')
-      ->join('product_images', 'product_images.product_id', '=', 'products.id')->get();
+      ->join('product_images', 'product_images.product_id', '=', 'products.id')
+      ->paginate(8);
       return response()->json($products);
     }
 

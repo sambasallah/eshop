@@ -4,19 +4,23 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import StoreList from './StoreList';
 
-const Store = () => {
-       const [allProducts, setProducts] = useState({products: [] });
-       const [search, setSearch] = useState({});
+const Store = (props) => {
+
+    let page_no = props.match.params.page? props.match.params.page : 1;
+    const [allProducts, setProducts] = useState({products: []});
+    const [pagination, setPagination] = useState({current_page: "", last_page: ""})
+    const [search, setSearch] = useState({});
+    const [page, setPage] = useState({page: page_no});
 
     const getAllProducts = async () => {
     
         if(search.searchBox === undefined) {
-            let url = 'http://localhost:8000/api/v1/products/';
+        let url = 'http://localhost:8000/api/v1/products/p/1?page=' + page.page;
         let response = await fetch(url);
         let data = await response.json();
         if(data) {
             let arr = [];
-            data.map((value, index) => {        
+            data.data.map((value, index) => {        
             let product =  {
                         name: value.name,
                         description: value.description,
@@ -25,19 +29,22 @@ const Store = () => {
                         quantity: value.quantity,
                         slug: value.slug,
                         category_name: value.slug,
-                        url: JSON.parse(value.url) 
+                        url: JSON.parse(value.url),
+                        last_page: value.last_page,
+                        current_page: value.current_page 
                 }      
                 arr.push(product);
             });
             setProducts({products : arr });
+            setPagination({current_page: data.current_page, last_page: data.last_page});
             }
         } else {
-            let url = 'http://localhost:8000/api/v1/products/search/' + search.searchBox;
+            let url = 'http://localhost:8000/api/v1/products/search/' + search.searchBox + '/' + page.page;
             let response = await fetch(url);
             let data = await response.json();
             if(data) {
                 let arr = [];
-                data.map((value, index) => {        
+                data.data.map((value, index) => {        
                 let product =  {
                             name: value.name,
                             description: value.description,
@@ -46,26 +53,44 @@ const Store = () => {
                             quantity: value.quantity,
                             slug: value.slug,
                             category_name: value.slug,
-                            url: JSON.parse(value.url) 
+                            url: JSON.parse(value.url),
+                            last_page: value.last_page,
+                            current_page: value.current_page 
                     }      
                     arr.push(product);
                 });
-                setProducts({products : arr });
+                setProducts({products : arr});
+                setPagination({current_page: data.current_page, last_page: data.last_page});
             }
-        }
-
-      
+        }   
     }
 
     const handleChange = (event) => {
         setSearch(Object.assign({}, search, { [event.target.id]: event.target.value }));
-
         console.log(search);
+    }
+
+    const next = (event) => {
+       event.preventDefault();
+       let currentPage = Number(page.page) + 1;
+       setPage({page: currentPage});
+       
+    }
+
+    
+    const prev = (event) => {
+        event.preventDefault();
+        let currentPage = Number(page.page) - 1;
+        if(currentPage === 0 ) {
+            setPage({page: 1});
+        } else {
+            setPage({page: currentPage});
+        }
     }
 
     useEffect(() => {
         getAllProducts();
-    },[search]);
+    },[search, page]);
 
     return (
         <div>
@@ -97,28 +122,36 @@ const Store = () => {
                                 </div>
                             </div>
                             <StoreList allProducts={ allProducts } />
-                         
-                        </div>
-                    </div>
-                
-
+                            { Number(pagination.last_page) > 1? 
+                         (
                             <nav aria-label="Products Navigation">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
+                            <ul class="pagination justify-content-center">
+                                <li class= { "page-item " +  (Number(page.page) === 1? "disabled" : "")}>
+                                    <a class="page-link" href="" onClick={ prev }>Previous</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="/store">1</a></li>
+                                <li class="page-item"><a class="page-link" href="/store/2">2</a></li>
+                                { pagination.last_page > 2? (
+                                     <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                ) : 
+                                (
+                                   ""
+                                )}
+                                <li class= { "page-item " +  (Number(page.page) === Number(pagination.last_page)? "disabled" : "")}>
+                                    <a class="page-link" href="" onClick={ next }>Next</a>
+                                </li>
+                            </ul>
+                            { console.log(page.page) }
+                        </nav>
+                         ): ""}
+                        </div>
+                        
+                    </div>
+                         
                        </div>
                    </div>
                </div>
-        
+                
 
     );
 }

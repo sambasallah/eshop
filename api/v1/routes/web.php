@@ -20,8 +20,8 @@ $router->put('/users/{id}','UserController@updateUser');
 $router->delete('/users/{id}', 'UserController@deleteUser');
 
 // Products Route
-$router->get('/products','ProductController@allProducts');
-$router->get('/products/search/{searchValue}','ProductController@searchProduct');
+$router->get('/products/p/{page}','ProductController@allProducts');
+$router->get('/products/search/{searchValue}/{page}','ProductController@searchProduct');
 $router->get('/products/{id}','ProductController@singleProduct');
 $router->post('/product', 'ProductController@createProduct');
 $router->put('/product/{id}', 'ProductController@updateProduct');
