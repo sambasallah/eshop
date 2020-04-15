@@ -5,22 +5,13 @@ import { Link } from 'react-router-dom';
 import StoreList from './StoreList';
 
 const Store = () => {
-    
-    let originalState = {
-        name: "",
-        description: "",
-        regular_price: "",
-        sale_price: "",
-        quantity: "",
-        slug: "",
-        category_name: "",
-        url: []
-    };
-
-    const [allProducts, setProducts] = useState({products: [originalState] });
+       const [allProducts, setProducts] = useState({products: [] });
+       const [search, setSearch] = useState({});
 
     const getAllProducts = async () => {
-        let url = 'http://localhost:8000/api/v1/products';
+    
+        if(search.searchBox === undefined) {
+            let url = 'http://localhost:8000/api/v1/products/';
         let response = await fetch(url);
         let data = await response.json();
         if(data) {
@@ -39,12 +30,42 @@ const Store = () => {
                 arr.push(product);
             });
             setProducts({products : arr });
+            }
+        } else {
+            let url = 'http://localhost:8000/api/v1/products/search/' + search.searchBox;
+            let response = await fetch(url);
+            let data = await response.json();
+            if(data) {
+                let arr = [];
+                data.map((value, index) => {        
+                let product =  {
+                            name: value.name,
+                            description: value.description,
+                            regular_price: value.regular_price,
+                            sale_price: value.sale_price,
+                            quantity: value.quantity,
+                            slug: value.slug,
+                            category_name: value.slug,
+                            url: JSON.parse(value.url) 
+                    }      
+                    arr.push(product);
+                });
+                setProducts({products : arr });
+            }
         }
+
+      
+    }
+
+    const handleChange = (event) => {
+        setSearch(Object.assign({}, search, { [event.target.id]: event.target.value }));
+
+        console.log(search);
     }
 
     useEffect(() => {
         getAllProducts();
-    },[]);
+    },[search]);
 
     return (
         <div>
@@ -70,7 +91,7 @@ const Store = () => {
                                 <div className="col-md-4">
                                     <form> 
                                         <div className="form-group">
-                                            <input type="text" placeholder="Search" className="form-control" />
+                                            <input type="text" placeholder="Search" id="searchBox" onChange={ handleChange } className="form-control" />
                                         </div>
                                     </form>
                                 </div>
