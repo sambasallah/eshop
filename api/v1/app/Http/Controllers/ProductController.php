@@ -13,7 +13,7 @@ class ProductController extends Controller {
       ->join('product_categories','product_categories.product_id','=','products.id')
       ->join('categories','categories.id','=','product_categories.category_id')
       ->join('product_images', 'product_images.product_id', '=', 'products.id')
-      ->paginate(1);
+      ->paginate(8);
       return response()->json($products);
     }
 
