@@ -139,20 +139,27 @@ const Store = (props) => {
                                 ) : (
                                     <>
                                     <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                    <li class="page-item"><a class="page-link" href={ "/store/" + ( Number(page.page) ) }>{ Number(page.page) }</a></li>
-                                    <li class="page-item"><a class="page-link" href={ "/store/" + ( Number(page.page) + 1) }>{ Number(page.page) + 1}</a></li>
-                                    <li class="page-item"><a class="page-link" href={ "/store/" + ( Number(page.page) + 2) }>{ Number(page.page) + 2 }</a></li>
-                                    </>
+                                    <li class="page-item"><a class="page-link" 
+                                    href={ "/store/" + ( Number(pagination.last_page) - Number(page.page) <= 3 ? 
+                                    Number(pagination.last_page) - 2 : Number(page.page) + 1 ) }>{ Number(pagination.last_page) - Number(page.page) <= 3 ? Number(pagination.last_page) - 2 : Number(page.page) + 1}</a></li>
+                                    <li class="page-item"><a class="page-link" 
+                                    href={ "/store/" + ( Number(pagination.last_page) - Number(page.page) -1 <= 2 ? 
+                                    Number(pagination.last_page) - 1 : Number(page.page) + 1 ) }>{ Number(pagination.last_page) - Number(page.page) -1 <= 2 ? Number(pagination.last_page) - 1 : Number(page.page) + 1}</a></li>
+                                    <li class="page-item"><a class="page-link" 
+                                    href={ "/store/" + ( (Number(page.page) + 2) >= Number(pagination.last_page) ? 
+                                    Number(pagination.last_page) : Number(page.page) + 2)}>
+                                        { Number(page.page) + 2 > Number(pagination.last_page) ? Number(pagination.last_page)  : Number(page.page) + 2 }</a></li>
+                                    </> 
                                 ) } 
-                                { pagination.last_page > 4 && (Number(pagination.last_page ) - Number(page.page)) <= 4? (
-                                    (pagination.last_page === page.page ? (
-                                        <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                    ) : (""))
-                                ) : 
-                                (
-                                   ""
-                                )}
-                                <li class="page-item"><a class="page-link" href={ "/store/" + Number(pagination.last_page) }> { pagination.last_page }</a></li>
+                                { pagination.last_page > 4 && (Number(pagination.last_page) - Number(page.page)) > 4 ? 
+                                   (    
+                                    <li class="page-item"><a class="page-link" href="#">...</a></li> 
+                                   ) 
+                                 : 
+                                ("")}
+                                { (Number(pagination.last_page) - Number(page.page)) >= 3? (
+                                      <li class="page-item"><a class="page-link" href={ "/store/" + Number(pagination.last_page) }> { pagination.last_page }</a></li>
+                                ) : ("")}
                                 <li class= { "page-item " +  (Number(page.page) === Number(pagination.last_page)? "disabled" : "")}>
                                     <a class="page-link" href={ "/store/" + Number(page.page) } onClick={ next }>Next</a>
                                 </li>
