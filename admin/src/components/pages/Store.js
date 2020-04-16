@@ -36,7 +36,7 @@ const Store = (props) => {
                 arr.push(product);
             });
             setProducts({products : arr });
-            setPagination({current_page: data.current_page, last_page: data.last_page});
+            setPagination({current_page: data.current_page, last_page: data.last_page, from: data.from});
             }
         } else {
             let url = 'http://localhost:8000/api/v1/products/search/' + search.searchBox + '/' + page.page;
@@ -60,7 +60,7 @@ const Store = (props) => {
                     arr.push(product);
                 });
                 setProducts({products : arr});
-                setPagination({current_page: data.current_page, last_page: data.last_page});
+                setPagination({current_page: data.current_page, last_page: data.last_page, from: data.from});
             }
         }   
     }
@@ -71,7 +71,7 @@ const Store = (props) => {
     }
 
     const next = (event) => {
-       event.preventDefault();
+    //    event.preventDefault();
        let currentPage = Number(page.page) + 1;
        setPage({page: currentPage});
        
@@ -79,7 +79,7 @@ const Store = (props) => {
 
     
     const prev = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         let currentPage = Number(page.page) - 1;
         if(currentPage === 0 ) {
             setPage({page: 1});
@@ -127,21 +127,37 @@ const Store = (props) => {
                             <nav aria-label="Products Navigation">
                             <ul class="pagination justify-content-center">
                                 <li class= { "page-item " +  (Number(page.page) === 1? "disabled" : "")}>
-                                    <a class="page-link" href="" onClick={ prev }>Previous</a>
+                                    <a class="page-link" href={ "/store/" + Number(page.page) } onClick={ prev }>Previous</a>
                                 </li>
                                 <li class="page-item"><a class="page-link" href="/store">1</a></li>
-                                <li class="page-item"><a class="page-link" href="/store/2">2</a></li>
-                                { pagination.last_page > 2? (
-                                     <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                { Number(page.page) < 4? (
+                                    <>
+                                    <li class="page-item"><a class="page-link" href="/store/2">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="/store/3">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="/store/4">4</a></li>
+                                    </>
+                                ) : (
+                                    <>
+                                    <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                    <li class="page-item"><a class="page-link" href={ "/store/" + ( Number(page.page) ) }>{ Number(page.page) }</a></li>
+                                    <li class="page-item"><a class="page-link" href={ "/store/" + ( Number(page.page) + 1) }>{ Number(page.page) + 1}</a></li>
+                                    <li class="page-item"><a class="page-link" href={ "/store/" + ( Number(page.page) + 2) }>{ Number(page.page) + 2 }</a></li>
+                                    </>
+                                ) } 
+                                { pagination.last_page > 4 && (Number(pagination.last_page ) - Number(page.page)) <= 4? (
+                                    (pagination.last_page === page.page ? (
+                                        <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                    ) : (""))
                                 ) : 
                                 (
                                    ""
                                 )}
+                                <li class="page-item"><a class="page-link" href={ "/store/" + Number(pagination.last_page) }> { pagination.last_page }</a></li>
                                 <li class= { "page-item " +  (Number(page.page) === Number(pagination.last_page)? "disabled" : "")}>
-                                    <a class="page-link" href="" onClick={ next }>Next</a>
+                                    <a class="page-link" href={ "/store/" + Number(page.page) } onClick={ next }>Next</a>
                                 </li>
                             </ul>
-                            { console.log(page.page) }
+                            
                         </nav>
                          ): ""}
                         </div>

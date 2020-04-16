@@ -19,12 +19,12 @@ export const ProductProvider = (props) => {
 
   
     const getProducts = async () => {
-        const url = "http://localhost:8000/api/v1/products";
+        const url = "http://localhost:8000/api/v1/products/p/1?page=1";
     
          await fetch(url)
          .then((resp) => resp.json() )
          .then((data) => {
-            data.map((value, index) => {
+            data.data.map((value, index) => {
                 products.push(value);
             });
             setProduct({products : products});
