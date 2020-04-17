@@ -2,6 +2,7 @@
 import 'bootstrap/dist/js/bootstrap.bundle';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Assets
 import './assets/css/style.css';
@@ -11,7 +12,6 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
 
 ReactDOM.render(
     <Router>

@@ -4,11 +4,12 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import StoreList from './StoreList';
 
+
 const Store = (props) => {
 
     let page_no = props.match.params.page? props.match.params.page : 1;
     let msg = props.match.params.deleted? props.match.params.deleted : "";
-    
+
     const [allProducts, setProducts] = useState({products: []});
     const [pagination, setPagination] = useState({current_page: "", last_page: ""})
     const [search, setSearch] = useState({});
@@ -73,15 +74,13 @@ const Store = (props) => {
     }
 
     const next = (event) => {
-    //    event.preventDefault();
        let currentPage = Number(page.page) + 1;
        setPage({page: currentPage});
        
     }
 
     
-    const prev = (event) => {
-        // event.preventDefault();
+    const prev = () => {
         let currentPage = Number(page.page) - 1;
         if(currentPage === 0 ) {
             setPage({page: 1});
@@ -113,7 +112,7 @@ const Store = (props) => {
                        <div className="col-md-8">
                             <div className="row">
                                 <div className="col-md-8">
-                                    <h2>Products -  <Link style={{ padding: '8px 20px', fontSize: '17px', backgroundColor : '#33b27b', color: '#fff', borderRadius: '5px'}} to='/add-product'>Add Product</Link></h2>
+                                    <h2>Products -  <Link style={{ padding: '8px 20px', fontSize: '17px', backgroundColor : '#33b27b', color: '#fff', borderRadius: '5px'}} to='/add-product' >Add Product</Link></h2>
                                 </div>
                                 <div className="col-md-4">
                                     <form> 

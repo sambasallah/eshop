@@ -21,6 +21,7 @@
     "react-dropzone": "^10.2.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
+    "react-toastify": "^5.5.0",
     "react-upload-gallery": "0.0.7"
   },
   "scripts": {

@@ -7,6 +7,9 @@ import { openUploadWidget } from "../utils/CloudinaryService";
 import { slug, chunk } from '../utils/UtilityFunctions';
 import { Error, Success } from '../alerts/ProductsAlerts';
 import { useLocation, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+toast.configure();
 
 const EditProduct = () => {
 
@@ -18,7 +21,6 @@ const EditProduct = () => {
     let location = useLocation();
     let path = location.pathname.substr(1);
     let pathArray = path.split('/');
-
     
     const ImageList = (prop) => {
    
@@ -115,17 +117,16 @@ const getCategories = async () => {
     }); 
     setCategory(Object.assign([],category, arr));
 }
-    
+
 const deleteProduct = async () => {
+    toast.success("Product Deleted !", {
+        position: toast.POSITION.TOP_LEFT
+    });
     let url = "http://localhost:8000/api/v1/product/"+edit.id;
     let response = await fetch(url, {method: 'DELETE'});
     let data = await response.json();
     if(data) {
-        // if(data.Deleted === true) {
-        //     setEdit(Object.assign({}, edit, {deleted: true}))
-        // } else {
-        //     console.log(data);
-        // }
+        console.log(data);
     }
 }
 
@@ -198,7 +199,7 @@ useEffect(() => {
                         </div>
                     </div>
                     <div className="col-md-8 right">
-                        <h2>Product Information <a class="edit-delete" href="/store" onClick={() => deleteProduct() }> delete <i class="fa fa-trash"></i></a></h2>
+                        <h2>Product Information <Link class="edit-delete" to="/store" onClick={() => deleteProduct() }> delete <i class="fa fa-trash"></i></Link></h2>
                         <form onSubmit={ saveForm }>
                             <div className="form-group">
                                 <label>Product Name</label>

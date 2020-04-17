@@ -14,7 +14,7 @@ const StoreList = (props) => {
                                 <img src={ value.url[0] } style={{maxWidth: '100%', maxHeight: '100%'}} />
                             </div>
                             <div className="card-footer">
-                                <Link to={"/edit/" + value.slug }>{ value.name }</Link>
+                                <Link  to={"/edit/" + value.slug }>{ value.name }</Link>
                             </div>
                         </div>
                     </div>
