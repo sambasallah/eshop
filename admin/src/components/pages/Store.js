@@ -138,11 +138,21 @@ const Store = (props) => {
                                  </nav>
                                 </>
                             ) : ("")}
-                             { Number(pagination.last_page) >= 3 ? (
+                             { Number(pagination.last_page) >= 3  && Number(pagination.last_page)  < 4 ? (
                                 <>
+                                <nav aria-label="Products Navigation">
+                                  <ul class="pagination justify-content-center">
+                                  <li class= { "page-item " +  (Number(page.page) === 1? "disabled" : "")}>
+                                    <a class="page-link" href={ "/store/" + Number(page.page) } onClick={ prev }>Previous</a>
+                                </li>
                                     <li class="page-item"><a class="page-link" href="/store/1">1</a></li>
                                     <li class="page-item"><a class="page-link" href="/store/2">2</a></li>
                                     <li class="page-item"><a class="page-link" href="/store/2">3</a></li>
+                                    <li class= { "page-item " +  (Number(page.page) === Number(pagination.last_page)? "disabled" : "")}>
+                                    <a class="page-link" href={ "/store/" + Number(page.page) } onClick={ next }>Next</a>
+                                </li>
+                                </ul>
+                                </nav>
                                 </>
                             ) : ("")}
 
