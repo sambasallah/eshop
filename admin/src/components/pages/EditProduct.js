@@ -121,11 +121,11 @@ const deleteProduct = async () => {
     let response = await fetch(url, {method: 'DELETE'});
     let data = await response.json();
     if(data) {
-        if(data.Deleted === true) {
-            setEdit(Object.assign({}, edit, {deleted: true}))
-        } else {
-            console.log(data);
-        }
+        // if(data.Deleted === true) {
+        //     setEdit(Object.assign({}, edit, {deleted: true}))
+        // } else {
+        //     console.log(data);
+        // }
     }
 }
 
@@ -178,7 +178,7 @@ const beginUpload = (tag) => {
 useEffect(() => {
     setEditing();
     getCategories();
-},[edit]);
+},[]);
 
     return (
         <div>

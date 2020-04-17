@@ -10,7 +10,7 @@ const StoreList = (props) => {
                 return (
                     <div className='col-md-3'>
                         <div className="card" style={{ height: '250px'}}>
-                            <div className="card-body">
+                            <div className="card-body" style={{ textAlign: 'center' }}>
                                 <img src={ value.url[0] } style={{maxWidth: '100%', maxHeight: '100%'}} />
                             </div>
                             <div className="card-footer">

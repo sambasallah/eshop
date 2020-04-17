@@ -18,13 +18,13 @@ const ProductSingle = (props) => {
 
     const product = useContext(ProductContext);
 
-    const settings = {dots: true,
+    const settings = {
+        dots: true,
         infinite: true,
         speed: 500,
         fade: true,
-        cssEase: 'linear'};
-
-    // const { product_name, product_price } = product.single;
+        cssEase: 'linear'
+    };
 
     return (
         <div>
@@ -42,12 +42,12 @@ const ProductSingle = (props) => {
                 <div className="product-single-info">
                    <div className="row">
                        <div className="col-md-4">
-                       <div className="product-slider">
+                       <div className="product-slider" >
                            <Slider {...settings} >
                                 { isJson(product.single.url)?
                                     JSON.parse(product.single.url).map((value, index) => {
                                         return(
-                                            <div className="img-container" style={{textAlign: 'center'}}>
+                                            <div className="img-container">
                                                 <img src={ value } style={{maxWidth: '100%', maxHeight:'100%'}} />
                                              </div>
                                         );
@@ -59,7 +59,9 @@ const ProductSingle = (props) => {
                        <div className="col-md-8">
                             <div className="product-details">
                                 <h2> { product.single.name } </h2>
-                                <h3>{ product.single.sale_price } <sup><del>{ product.single.regular_price }</del> <span> You Saved { Number(product.single.regular_price) - Number(product.single.sale_price) }</span></sup></h3>
+                                <h3>{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 'GMD' }).format( product.single.sale_price ) } 
+                                 <sup style={{paddingLeft: '5px'}}><del>{ new Intl.NumberFormat().format(product.single.regular_price) }</del> 
+                                <span> You Saved { new Intl.NumberFormat().format( Number(product.single.regular_price) - Number(product.single.sale_price)) }</span></sup></h3>
                                 <h3><Link to="/cart" className="add-to-cart">Add To Cart</Link> </h3>
                                 <h3>
                                     <ul>
