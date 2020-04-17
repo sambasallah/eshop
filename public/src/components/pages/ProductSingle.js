@@ -42,13 +42,13 @@ const ProductSingle = (props) => {
                 <div className="product-single-info">
                    <div className="row">
                        <div className="col-md-4">
-                       <div className="product-slider" style={{ padding: '50px'}}>
+                       <div className="product-slider">
                            <Slider {...settings} >
                                 { isJson(product.single.url)?
                                     JSON.parse(product.single.url).map((value, index) => {
                                         return(
-                                            <div className="img-container">
-                                                <img src={ value } style={{width: '100%'}} />
+                                            <div className="img-container" style={{textAlign: 'center'}}>
+                                                <img src={ value } style={{maxWidth: '100%', maxHeight:'100%'}} />
                                              </div>
                                         );
                                    }) : (<></>)  

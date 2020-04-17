@@ -9,8 +9,8 @@ const Product = ({ product, index, products }) => {
     return (
         <div className="col-md-3">
         <div className="product">
-            <div className="product-img" style={{ padding: '20px 0px'}}>
-                 <img src={ JSON.parse(product.url)[0] } style={{ width : "100%", height : "100%"}} />
+            <div className="product-img" style={{textAlign: 'center'}}>
+                 <img src={ JSON.parse(product.url)[0] } style={{ maxWidth : "100%", maxHeight : "100%"}} />
             </div>
             <div onClick={ () => products.handleProduct(product.id) } >
                 <Link to={ product.slug }>

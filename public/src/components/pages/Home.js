@@ -56,13 +56,13 @@ const Home = () => {
 				 <div className="col-md-3">
 				 	<div className="row">
 						 <div className="col-md-12 right-carousel">
-							 <div className="info-box">
+							 <div className="info-box" style={{textAlign: 'center'}}>
 								     <Link to="./product/chemise" className="btn-shop">Shop Now</Link>
-									 <img src={require('../../media/images/derby-shoe.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
+									 <img src={require('../../media/images/derby-shoe.jpg')} style={{ maxWidth : '100%', maxHeight : '100%'}} />
 							 </div>
-							 <div className="info-box">
+							 <div className="info-box" style={{textAlign: 'center'}}>
 								   <Link to="./product/chemise" className="btn-shop">Shop Now</Link>
-							       <img src={require('../../media/images/chemise1.jpg')} style={{ width : '80%', height : '100%', marginLeft : '10%'}} />
+							       <img src={require('../../media/images/chemise1.jpg')} style={{ maxWidth : '100%', maxHeight : '100%'}} />
 							 </div>
 						 </div>
 					 </div>

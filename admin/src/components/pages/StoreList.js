@@ -9,9 +9,9 @@ const StoreList = (props) => {
             (value, index) => {
                 return (
                     <div className='col-md-3'>
-                        <div className="card">
+                        <div className="card" style={{ height: '250px'}}>
                             <div className="card-body">
-                                <img src={ value.url[0] } style={{width: '100%'}} />
+                                <img src={ value.url[0] } style={{maxWidth: '100%', maxHeight: '100%'}} />
                             </div>
                             <div className="card-footer">
                                 <Link to={"/edit/" + value.slug }>{ value.name }</Link>

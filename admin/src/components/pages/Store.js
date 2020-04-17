@@ -7,6 +7,8 @@ import StoreList from './StoreList';
 const Store = (props) => {
 
     let page_no = props.match.params.page? props.match.params.page : 1;
+    let msg = props.match.params.deleted? props.match.params.deleted : "";
+    
     const [allProducts, setProducts] = useState({products: []});
     const [pagination, setPagination] = useState({current_page: "", last_page: ""})
     const [search, setSearch] = useState({});
@@ -122,7 +124,8 @@ const Store = (props) => {
                                 </div>
                             </div>
                             <StoreList allProducts={ allProducts } />
-                            { Number(pagination.last_page) <= 2 ? (
+                            { Number(pagination.last_page) <= 0? "" : ("")}
+                            { Number(pagination.last_page) >= 2  && Number(pagination.last_page) < 3? (
                                 <>
                                     <nav aria-label="Products Navigation">
                                   <ul class="pagination justify-content-center">

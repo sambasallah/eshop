@@ -6,7 +6,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { openUploadWidget } from "../utils/CloudinaryService";
 import { slug, chunk } from '../utils/UtilityFunctions';
 import { Error, Success } from '../alerts/ProductsAlerts';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 const EditProduct = () => {
 
@@ -14,7 +14,6 @@ const EditProduct = () => {
     const [category, setCategory] = useState([]);
     const [description, setDescription] = useState({description: ""});
 
-   
 
     let location = useLocation();
     let path = location.pathname.substr(1);
@@ -54,7 +53,7 @@ const EditProduct = () => {
     }
     
   // Handle saving and updating form
-  const saveForm = async (event) => {
+const saveForm = async (event) => {
     event.preventDefault();
     let slugName = slug(edit.productName);
     setEdit(Object.assign(edit, { slug: slugName }));
@@ -66,10 +65,9 @@ const EditProduct = () => {
     } else {
         setEdit(Object.assign({}, edit, { notUpdated: true, formSubmitted: true, imageAdded: false }));
     }
-    console.log(edit);
-  }
+}
 
-  const getProductData = async (slug) => {
+const getProductData = async (slug) => {
     if(slug.length > 0) {
       let url = 'http://localhost:8000/api/v1/product/'+ slug;
         let data = await fetch(url)
@@ -95,42 +93,53 @@ const EditProduct = () => {
             arr.description = value.description;
             arr.updated = false;
             arr.notUpdated = false;
+            arr.deleted = false;
           });
           setEdit(Object.assign({}, edit, arr));
         }
         }  else { 
             console.log('Slug not set');
         } 
-    } 
+} 
 
-    const setEditing = () => {
-        getProductData(pathArray[1]);
-    }  
+const setEditing = () => {
+    getProductData(pathArray[1]);
+}  
 
-    const getCategories = async () => {
-        let response = await fetch('http://localhost:8000/api/v1/product/categories');
-        let data = await response.json();
-        let arr = [];
+const getCategories = async () => {
+    let response = await fetch('http://localhost:8000/api/v1/product/categories');
+    let data = await response.json();
+    let arr = [];
+    data.map((value, index) => {
+        arr[index] = value;
+    }); 
+    setCategory(Object.assign([],category, arr));
+}
     
-        data.map((value, index) => {
-            arr[index] = value;
-        }); 
-    
-        setCategory(Object.assign([],category, arr));
+const deleteProduct = async () => {
+    let url = "http://localhost:8000/api/v1/product/"+edit.id;
+    let response = await fetch(url, {method: 'DELETE'});
+    let data = await response.json();
+    if(data) {
+        if(data.Deleted === true) {
+            setEdit(Object.assign({}, edit, {deleted: true}))
+        } else {
+            console.log(data);
+        }
     }
-    
-    
-  const handleChange = (event) => {
+}
+
+const handleChange = (event) => {
     setEdit(Object.assign({}, edit, { [event.target.id] : event.target.value }))
-  }
+}
   
-  const handleDescription = (event, editor) => {
-        let data = editor.getData();
-        setDescription(Object.assign(description, { description: data}));
-  }
+const handleDescription = (event, editor) => {
+    let data = editor.getData();
+    setDescription(Object.assign(description, { description: data}));
+}
 
 
-  const beginUpload = (tag) => {
+const beginUpload = (tag) => {
     const uploadOptions = {
       cloudName: "ebaaba",
       tags: [tag],
@@ -164,12 +173,12 @@ const EditProduct = () => {
         console.log(error);
       }
     });
-  }
+}
 
-    useEffect(() => {
-        setEditing();
-        getCategories();
-    },[]);
+useEffect(() => {
+    setEditing();
+    getCategories();
+},[edit]);
 
     return (
         <div>
@@ -189,7 +198,7 @@ const EditProduct = () => {
                         </div>
                     </div>
                     <div className="col-md-8 right">
-                        <h2>Product Information <a class="edit-delete"> delete <i class="fa fa-trash"></i></a></h2>
+                        <h2>Product Information <a class="edit-delete" href="/store" onClick={() => deleteProduct() }> delete <i class="fa fa-trash"></i></a></h2>
                         <form onSubmit={ saveForm }>
                             <div className="form-group">
                                 <label>Product Name</label>
@@ -239,8 +248,7 @@ const EditProduct = () => {
                             </div>
                             <input type="submit" value="Publish" className="btn btn-success" />
                         </form>
-                        { edit.updated? (<Success />) : console.log(edit.notUpdated) }
-                        { console.log(edit.images) }
+                        { edit.updated? (<Success />) : "" }
                     </div>
                 </div>
             </div>
