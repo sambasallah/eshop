@@ -27,6 +27,7 @@ $router->post('/product', 'ProductController@createProduct');
 $router->put('/product/{id}', 'ProductController@updateProduct');
 $router->get('/product/categories', 'ProductController@getCategories');
 $router->get('/product/{slug}', 'ProductController@getProductUsingSlug');
+$router->delete('/product/{id}', 'ProductController@deleteProduct');
 
 // Admin Route
 $router->get('/admins', 'AdminController@allAdmin');

@@ -112,6 +112,14 @@ class ProductController extends Controller {
    
     }
 
+    public function deleteProduct(int $id) {
+      $deleted = DB::table('products')->where('id','=', $id)->delete();
+      if($deleted) {
+        return response()->json(['Deleted' => true, 'Status' => response()->status()]);
+      }
+      return response()->json(['Deleted' => false, 'Status' => response()->status()]);
+    }
+
     private function saveProductImages(array $images, int $product_id): bool {
         $imageSaved = DB::table('product_images')
         ->insert(['product_id' => $product_id, 
