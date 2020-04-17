@@ -480,3 +480,23 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 	margin-bottom: 8px;
 	border-bottom: 1px solid #f5f5f5;
 }
+
+/** Edit Product **/
+
+.add-product .edit-delete {
+	padding: 5px 8px;
+	border-radius: 5px;
+	background-color: red;
+	color: #fff;
+	font-size: 17px;
+	cursor: pointer;
+	transition: 0.5s all;
+}
+
+.add-product .edit-delete:hover {
+	color: #f5f5f5
+}
+
+.add-product .edit-delete .fa.fa-trash {
+	font-size: 20px;
+}

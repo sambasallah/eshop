@@ -189,7 +189,7 @@ const EditProduct = () => {
                         </div>
                     </div>
                     <div className="col-md-8 right">
-                        <h2>Product Information</h2>
+                        <h2>Product Information <a class="edit-delete"> delete <i class="fa fa-trash"></i></a></h2>
                         <form onSubmit={ saveForm }>
                             <div className="form-group">
                                 <label>Product Name</label>
