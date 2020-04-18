@@ -6,8 +6,9 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { openUploadWidget } from "../utils/CloudinaryService";
 import { slug, chunk } from '../utils/UtilityFunctions';
 import { Error, Success } from '../alerts/ProductsAlerts';
+import { toast } from 'react-toastify';
 
-
+toast.configure();
 
 const AddProduct = () => {
 
@@ -56,9 +57,11 @@ const AddProduct = () => {
         let response = await fetch(url, {method : 'POST', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
         let data = await response.json();
         if(data) {
-            setProduct(Object.assign({}, product, { id: data.ID, created: 'Product Created'}));
+            setProduct(Object.assign({}, product, { id: data.ID, created: true}));
+            saved();
         }else {
-            setProduct(Object.assign({}, product, { id: data.ID, notCreated: 'Product Not Created', formSubmitted: true }));
+            setProduct(Object.assign({}, product, { id: data.ID, notCreated: true, formSubmitted: true }));
+            error();
         }
     } else {
         let url = 'http://localhost:8000/api/v1/product/' + product.id;
@@ -75,6 +78,15 @@ const AddProduct = () => {
 
   }
 
+  const saved = () =>  toast.success("Product Created!", {
+      position: toast.POSITION.TOP_LEFT
+  });
+
+  const error = () => toast.error("An Error Occurred!", {
+    position: toast.POSITION.TOP_LEFT
+  });
+
+
   const getCategories = async () => {
     let response = await fetch('http://localhost:8000/api/v1/product/categories');
     let data = await response.json();
@@ -86,11 +98,6 @@ const AddProduct = () => {
 
     setCategory(Object.assign([],category, arr));
     }
-
- 
-  useEffect(() => { 
-    getCategories();
-  },[]);
 
   const handleChange = (event) => {
     setProduct(Object.assign({}, product, { [event.target.id] : event.target.value }))
@@ -137,6 +144,12 @@ const AddProduct = () => {
       }
     });
   }
+
+   
+  useEffect(() => { 
+    getCategories();
+  },[]);
+
 
   return (  
               <div>
@@ -205,13 +218,10 @@ const AddProduct = () => {
                                             </div>
                                             <a onClick={ () => beginUpload() } style={{ margin: '10px 0px', cursor: 'pointer'}}>Click to add images <i className="fa fa-plus"></i></a>
                                         </div>
-                                        { console.log(product) }
                                         </div>
                                     </div>
-        
                                     <input type="submit" value="Publish" className="btn btn-success" />
                                 </form>
-                                { product.created || product.updated ? ( <Success /> ) : (<></>)}
                             </div>
                         </div>
                     </div>

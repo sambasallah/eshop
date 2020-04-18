@@ -6,12 +6,12 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { openUploadWidget } from "../utils/CloudinaryService";
 import { slug, chunk } from '../utils/UtilityFunctions';
 import { Error, Success } from '../alerts/ProductsAlerts';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 toast.configure();
 
-const EditProduct = () => {
+const EditProduct = (props) => {
 
     const [edit, setEdit] = useState([]);
     const [category, setCategory] = useState([]);
@@ -64,8 +64,10 @@ const saveForm = async (event) => {
     let data = await response.json();
     if(data) {
         setEdit(Object.assign({},edit, { updated: true, imageAdded: false }));
+        updated();
     } else {
         setEdit(Object.assign({}, edit, { notUpdated: true, formSubmitted: true, imageAdded: false }));
+        notUpdated();
     }
 }
 
@@ -118,17 +120,36 @@ const getCategories = async () => {
     setCategory(Object.assign([],category, arr));
 }
 
-const deleteProduct = async () => {
-    toast.success("Product Deleted !", {
-        position: toast.POSITION.TOP_LEFT
-    });
+const deleteProduct = async (event) => {
+    event.preventDefault();
     let url = "http://localhost:8000/api/v1/product/"+edit.id;
     let response = await fetch(url, {method: 'DELETE'});
     let data = await response.json();
     if(data) {
-        console.log(data);
+        if(data.Deleted === true) {
+            deleted();
+            props.history.push('/store');
+        } else {
+            notDeleted();
+        }
     }
 }
+
+const updated = () =>  toast.success("Product Updated!", {
+    position: toast.POSITION.TOP_LEFT
+});
+
+const notUpdated = () =>  toast.error("Product Not Updated!", {
+    position: toast.POSITION.TOP_LEFT
+});
+
+const deleted = () => toast.info("Product Deleted!", {
+    position: toast.POSITION.TOP_LEFT
+});
+
+const notDeleted = () =>  toast.error("Product Not Deleted!", {
+    position: toast.POSITION.TOP_LEFT
+});
 
 const handleChange = (event) => {
     setEdit(Object.assign({}, edit, { [event.target.id] : event.target.value }))
@@ -199,7 +220,7 @@ useEffect(() => {
                         </div>
                     </div>
                     <div className="col-md-8 right">
-                        <h2>Product Information <Link class="edit-delete" to="/store" onClick={() => deleteProduct() }> delete <i class="fa fa-trash"></i></Link></h2>
+                        <h2>Product Information <Link class="edit-delete" to="" onClick={ deleteProduct }> delete <i class="fa fa-trash"></i></Link></h2>
                         <form onSubmit={ saveForm }>
                             <div className="form-group">
                                 <label>Product Name</label>
@@ -247,9 +268,8 @@ useEffect(() => {
                                 </div>
                                 </div>
                             </div>
-                            <input type="submit" value="Publish" className="btn btn-success" />
+                            <input type="submit" value="Update" className="btn btn-success" />
                         </form>
-                        { edit.updated? (<Success />) : "" }
                     </div>
                 </div>
             </div>
