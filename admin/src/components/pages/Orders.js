@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
+import { Sparklines, SparklinesLine, SparklinesSpots, SparklinesBars } from 'react-sparklines';
 
-const Orders = () => {
+const Orders = () => {    
+
+    const createOrder = {
+        padding: '10px 30px', 
+        backgroundColor: '#33b27b',
+        fontSize: '16px',
+        color: '#fff',
+        borderRadius: '5px',
+        fontWeight: 'bold'
+    };
+
+   
+
     return (
         <div>
             <Helmet>
@@ -19,103 +33,79 @@ const Orders = () => {
                     <div className="col-md-4 left">
                         <SideNav />
                     </div>
-                    <div className="col-md-8 rights">
-                        <h2>Orders</h2>
-                        <div className="table-responsive">
-                            <table className="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Order Id</th>
-                                        <th>Created</th>
-                                        <th>Customer</th>
-                                        <th>Total</th>
-                                        <th>Profit</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>30024</td>
-                                        <td>2 min ago</td>
-                                        <td>Samba Sallah</td>
-                                        <td>D400</td>
-                                        <td>D150</td>
-                                        <td style={{color: "red"}}><b>Pending</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>30024</td>
-                                        <td>2 min ago</td>
-                                        <td>Samba Sallah</td>
-                                        <td>D400</td>
-                                        <td>D150</td>
-                                        <td style={{color: "red"}}><b>Pending</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>30024</td>
-                                        <td>2 min ago</td>
-                                        <td>Samba Sallah</td>
-                                        <td>D400</td>
-                                        <td>D150</td>
-                                        <td style={{color: "red"}}><b>Pending</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>30024</td>
-                                        <td>2 min ago</td>
-                                        <td>Samba Sallah</td>
-                                        <td>D400</td>
-                                        <td>D150</td>
-                                        <td style={{color: "red"}}><b>Pending</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>30024</td>
-                                        <td>2 min ago</td>
-                                        <td>Samba Sallah</td>
-                                        <td>D400</td>
-                                        <td>D150</td>
-                                        <td style={{color: "red"}}><b>Pending</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>30024</td>
-                                        <td>2 min ago</td>
-                                        <td>Samba Sallah</td>
-                                        <td>D400</td>
-                                        <td>D150</td>
-                                        <td style={{color: "red"}}><b>Pending</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>30024</td>
-                                        <td>2 min ago</td>
-                                        <td>Samba Sallah</td>
-                                        <td>D400</td>
-                                        <td>D150</td>
-                                        <td style={{color: "red"}}><b>Pending</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>30024</td>
-                                        <td>2 min ago</td>
-                                        <td>Samba Sallah</td>
-                                        <td>D400</td>
-                                        <td>D150</td>
-                                        <td style={{color: "red"}}><b>Pending</b></td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                   
-                                </tfoot>
-                            </table>
-                            <nav aria-label="Orders Navigation">
-                                        <ul class="pagination justify-content-center">
-                                            <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
-                                            </li>
-                                        </ul>
-                            </nav>
+                    <div className="col-md-8 right">
+                        <div className="row">
+                            <div className="col-md-6">
+                                <h2>Orders list</h2>
+                            </div>
+                            <div className="col-md-6" align="right">
+                                <Link to="/create-order" style={ createOrder }>Create</Link>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-3">
+                                <div className="order-info">
+                                    <div className="row">
+                                        <div className="col-md-5">  
+                                            <Sparklines data={[10,5,30,80,20]} width={100} height={80}>
+                                                <SparklinesLine style={{ strokeWidth: 3, stroke: "#336aff", fill: "none" }} />
+                                                <SparklinesSpots size={4}
+                                                    style={{ stroke: "#336aff", strokeWidth: 3, fill: "white" }} />
+                                            </Sparklines>
+                                        </div>   
+                                        <div className="col-md-7 right" >
+                                            <h5 style={{fontSize: '9px'}}>Active Orders</h5>
+                                            <h6>1 046</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-3">
+                               <div className="order-info">
+                               <div className="row">
+                                        <div className="col-md-5">  
+                                            <Sparklines data={[5, 10, 5, 20,15,40,80]} width={100} height={80}>
+                                                <SparklinesBars color="blue" />
+                                            </Sparklines>
+                                        </div>   
+                                        <div className="col-md-7 right" >
+                                            <h5 style={{fontSize: '9px'}}>Pending Recei...</h5>
+                                            <h6>300</h6>
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                            <div className="col-md-3">
+                                <div className="order-info">
+                                <div className="row">
+                                        <div className="col-md-5">  
+                                            <Sparklines data={[5, 10, 5, 20,15,40,80]} width={100} height={80}>
+                                                <SparklinesLine color="black" />
+                                            </Sparklines>
+                                        </div>   
+                                        <div className="col-md-7 right" >
+                                            <h5 style={{fontSize: '9px'}}>Unfulled</h5>
+                                            <h6>159</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-3">
+                                <div className="order-info">
+                                <div className="row">
+                                        <div className="col-md-5">  
+                                            <Sparklines data={[5, 10, 5, 20,15,40,80]} width={100} height={80}>
+                                                <SparklinesLine color="indigo" style={{ fill: 'none' }}/>
+                                                <SparklinesSpots />
+                                            </Sparklines>
+                                        </div>   
+                                        <div className="col-md-7 right" >
+                                            <h5 style={{fontSize: '9px'}}>Fulfilled</h5>
+                                            <h6>35</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
