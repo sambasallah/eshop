@@ -47,7 +47,7 @@ const Orders = () => {
                                 <div className="order-info">
                                     <div className="row">
                                         <div className="col-md-5">  
-                                            <Sparklines data={[10,5,30,80,20]} width={100} height={80}>
+                                            <Sparklines data={[0,0,0,1024]} width={100} height={80}>
                                                 <SparklinesLine style={{ strokeWidth: 3, stroke: "#336aff", fill: "none" }} />
                                                 <SparklinesSpots size={4}
                                                     style={{ stroke: "#336aff", strokeWidth: 3, fill: "white" }} />
@@ -64,7 +64,7 @@ const Orders = () => {
                                <div className="order-info">
                                <div className="row">
                                         <div className="col-md-5">  
-                                            <Sparklines data={[5, 10, 5, 20,15,40,80]} width={100} height={80}>
+                                            <Sparklines data={[0,0,0,80]} width={100} height={80}>
                                                 <SparklinesBars color="blue" />
                                             </Sparklines>
                                         </div>   
@@ -79,12 +79,12 @@ const Orders = () => {
                                 <div className="order-info">
                                 <div className="row">
                                         <div className="col-md-5">  
-                                            <Sparklines data={[5, 10, 5, 20,15,40,80]} width={100} height={80}>
+                                            <Sparklines data={[0,0,0,30]} width={100} height={80}>
                                                 <SparklinesLine color="black" />
                                             </Sparklines>
                                         </div>   
                                         <div className="col-md-7 right" >
-                                            <h5 style={{fontSize: '9px'}}>Unfulled</h5>
+                                            <h5 style={{fontSize: '9px'}}>Unfulfilled</h5>
                                             <h6>159</h6>
                                         </div>
                                     </div>

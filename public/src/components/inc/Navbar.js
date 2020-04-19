@@ -18,28 +18,28 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
                     <ul className="navbar-nav">
                     <li className="nav-item">
-                        <Link className="nav-link" to="/">home</Link>
+                        <a className="nav-link" href="/">home</a>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="shop">shop</Link>
+                        <a className="nav-link" href="shop">shop</a>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/about">about</Link>
+                        <a className="nav-link" href="/about">about</a>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/blog">blog</Link>
+                        <a className="nav-link" href="/blog">blog</a>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/contact">contact</Link>
+                        <a className="nav-link" href="/contact">contact</a>
                     </li> 
                     <li className="nav-item">
-                        <Link to="/cart" className="nav-link">
+                        <a href="/cart" className="nav-link">
                             <i className="fa fa-shopping-cart" title="Cart"></i>
                             <span className='badge badge-warning' id='lblCartCount'> 5 </span>
-                        </Link>
+                        </a>
                     </li>
                     <li className="nav-item">
-                        <Link to="auth" className="nav-link" ><i className="fa fa-sign-in" title="Login/Register"></i></Link>
+                        <a href="auth" className="nav-link" ><i className="fa fa-sign-in" title="Login/Register"></i></a>
                     </li>
                     </ul>
                 </div> 

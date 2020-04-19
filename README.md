@@ -1,9 +1,11 @@
 # What is eShop
 eShop is a modern ecommerce website
 # Home
-![Home](public/src/media/images/homepage.png)
-# Admin
-![Admin](public/src/media/images/ebaabaAdmin.png)
+![Home](public/src/media/images/Home.png)
+# Dashboard
+![Dashboard](public/src/media/images/Dashboard.png)
+# Store
+![Store](public/src/media/images/Store.png)
 # Tech Stack
 ### Frontend
   - HTML
