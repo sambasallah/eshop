@@ -3,6 +3,7 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-tabs/style/react-tabs.css';
 
 // Assets
 import './assets/css/style.css';

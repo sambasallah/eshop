@@ -392,57 +392,76 @@ ul {
   border-radius: 5px;
 }
 
-.single-order-inner .right h2 {
-  padding-bottom: 20px;
+.single-order-inner .right ul {
+  list-style: none;
+  margin-bottom: 5px;
 }
 
-.single-order-inner .col-md-3 {
+.single-order-inner .right ul li {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.single-order-inner .right ul li h4 {
+  font-weight: 400;
+}
+
+.single-order-inner .right ul li span.order-amount-summary {
+  padding: 3px 8px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  color: #000;
+}
+
+.single-order-inner .right ul li span.order-id {
+  padding: 3px 8px;
+  background-color: #90ee90;
+  border-radius: 5px;
+  color: #33b27b;
+}
+
+.single-order-inner .right h6 {
   margin-bottom: 10px;
 }
 
-.single-order-inner .customer-summary {
+.single-order-inner .right h6 span {
+  font-size: 13px;
+  padding-left: 5px;
+  color: grey;
+}
+
+.single-order-inner .right h3 {
+  margin: 15px 0px;
+}
+
+.single-order-inner .right .summary-info-box {
+  width: 100%;
   height: 100px;
   background-color: #f5f5f5;
+  padding: 5px 10px;
   box-sizing: border-box;
 }
 
-.customer-summary {
-  margin-bottom: 20px;
+.single-order-inner .right .summary-info-box h6 {
+  font-weight: 300;
+  padding: 5px;
+  border-bottom: 1px solid #000;
 }
 
-.customer-summary .row {
-  padding: 12px 8px;
+.single-order-inner .account ul {
+  list-style: none;
 }
 
-.customer-summary h5 {
-  font-size: 15px;
-  color: #b5b5b5;
-  padding-bottom: 2px;
+.single-order-inner .account ul li {
+  display: block;
 }
 
-.customer-summary h6 {
-  font-size: 18px;
+.single-order-inner .account ul li ul li {
+  display: inline-block;
 }
 
-.customer-summary .fa.fa-user {
-  font-size: 25px;
-}
-
-.order-summary .total-summary {
-  text-align: right;
-}
-
-.order-summary .total-summary h6 {
-  padding: 10px 0px;
-  border-bottom: 1px solid #f5f5f5;
-  width: 100%;
-  font-family: sans-serif;
-}
-
-.order-summary .total-summary h5 {
-  font-size: 18px;
-  padding: 10px 0px;
-  font-weight: 500;
+.single-order-inner .account ul li ul li:first-child {
+  width: 50%;
 }
 
 /** Add Product **/
