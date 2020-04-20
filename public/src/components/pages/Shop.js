@@ -2,11 +2,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { limitTitle }  from '../helpers/Helpers';
-// import { ProductContext } from '../../context/ProductProvider';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getProducts } from '../../actions/productActions';
+import { getProducts, getProductByID } from '../../actions/productActions';
 
-const Product = ({ product, index, products }) => {
+const Product = ({ product, index, products}) => {
 
     return (
         <div className="col-md-3">
@@ -14,8 +14,8 @@ const Product = ({ product, index, products }) => {
             <div className="product-img" style={{textAlign: 'center'}}>
                  <img src={ JSON.parse(product.url)[0] } style={{ maxWidth : "100%", maxHeight : "100%"}} />
             </div>
-            <div onClick={ () => products.handleProduct(product.id) } >
-                <Link to={ product.slug }>
+            <div>
+                <Link to={ product.slug } onClick={ () => {getProductByID(products, product.id) } }>
                     <div className="product-description">
                         <h3 className="title">{ limitTitle(product.name) }</h3>
                         <hr className="below-title"></hr>
@@ -107,7 +107,10 @@ const Shop = (props) => {
                         </div>
                         <div className="col-md-9">
                            <div className="row shop-items">
-                                {  props.products.map((product, index) => ( <Product key={index} index={index} product={product} products={props.products} /> )) }
+                                {  props.products.map((product, index) => (
+                                     <Product key={index} index={index} 
+                                product={product} getProduct={ props.getProductByID } products={props.products} 
+                                /> )) }
                            </div>
 
                             <div className="pagination">
@@ -123,7 +126,6 @@ const Shop = (props) => {
                             </div>
 
                         </div>
-                       
                     </div>
                 </div>
             </div>
@@ -132,8 +134,13 @@ const Shop = (props) => {
     )
 }
 
+Shop.propTypes = {
+    getProducts: PropTypes.func.isRequired,
+    products: PropTypes.array.isRequired
+};
+
 const mapStateToProps = state => (
     {products: state.products.items }
 );
 
-export default connect(mapStateToProps, { getProducts })(Shop);
+export default connect(mapStateToProps, { getProducts, getProductByID })(Shop);

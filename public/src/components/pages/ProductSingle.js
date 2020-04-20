@@ -3,9 +3,11 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import Slider  from 'react-slick';
 import ReactHtmlParser from 'react-html-parser';
-import { ProductContext } from '../../context/ProductProvider';
+import { connect } from 'react-redux';
 
 const ProductSingle = (props) => {
+
+    const product = props.product;
 
     const isJson = (str) => {
         try {
@@ -16,8 +18,6 @@ const ProductSingle = (props) => {
         return true;
     }
 
-    const product = useContext(ProductContext);
-
     const settings = {
         dots: true,
         infinite: true,
@@ -27,14 +27,15 @@ const ProductSingle = (props) => {
     };
 
     return (
+       
         <div>
-            <Helmet title={ product.single.name + " | eBaaba Gambia"  }>
+            <Helmet title={ product.name + " | eBaaba Gambia"  }>
                 {/* <title> eBaaba Gambia </title> */}
             </Helmet>
 
             <div className="breadcrumb">
                <div className="breadcrumb-container">
-                    <h2>{ product.single.name }</h2>
+                    <h2>{ product.name }</h2>
                </div>
             </div>
 
@@ -44,8 +45,8 @@ const ProductSingle = (props) => {
                        <div className="col-md-4">
                        <div className="product-slider" >
                            <Slider {...settings} >
-                                { isJson(product.single.url)?
-                                    JSON.parse(product.single.url).map((value, index) => {
+                                { isJson(product.url)?
+                                    JSON.parse(product.url).map((value, index) => {
                                         return(
                                             <div className="img-container">
                                                 <img src={ value } style={{maxWidth: '100%', maxHeight:'100%'}} />
@@ -58,10 +59,10 @@ const ProductSingle = (props) => {
                        </div>
                        <div className="col-md-8">
                             <div className="product-details">
-                                <h2> { product.single.name } </h2>
-                                <h3>{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 'GMD' }).format( product.single.sale_price ) } 
-                                 <sup style={{paddingLeft: '5px'}}><del>{ new Intl.NumberFormat().format(product.single.regular_price) }</del> 
-                                <span> You Saved { new Intl.NumberFormat().format( Number(product.single.regular_price) - Number(product.single.sale_price)) }</span></sup></h3>
+                                <h2> { product.name } </h2>
+                                <h3>{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 'GMD' }).format( product.sale_price ) } 
+                                 <sup style={{paddingLeft: '5px'}}><del>{ new Intl.NumberFormat().format(product.regular_price) }</del> 
+                                <span> You Saved { new Intl.NumberFormat().format( Number(product.regular_price) - Number(product.sale_price)) }</span></sup></h3>
                                 <h3><Link to="/cart" className="add-to-cart">Add To Cart</Link> </h3>
                                 <h3>
                                     <ul>
@@ -84,7 +85,7 @@ const ProductSingle = (props) => {
                     <div className="row">
                         <div className="col-md-12" style={{ padding: '0px 30px'}}>
                             <h3>Description</h3>
-                            { ReactHtmlParser(product.single.description) }
+                            { ReactHtmlParser(product.description) }
                             <h3>Return Policy</h3>
                             <p><i className="fa fa-repeat"></i> 7 Days Return Guarantee</p>
                             <h3>Delivery</h3>
@@ -99,4 +100,8 @@ const ProductSingle = (props) => {
     )
 }
 
-export default ProductSingle;
+const mapStateToProps = state => (
+    {product: state.products.single }
+);
+
+export default connect(mapStateToProps)(ProductSingle);
