@@ -121,7 +121,7 @@ const Orders = () => {
                                     <tr>
                                         <th width="10%">Order ID</th>
                                         <th width="10%">Created</th>
-                                        <th width="20%">Customer</th>
+                                        <th width="15%">Customer</th>
                                         <th width="10%">Total</th>
                                         <th width="10%">Profit</th>
                                         <th width="10%">Status</th>
@@ -144,8 +144,8 @@ const Orders = () => {
                                              color: '#fff',
                                              fontWeight: '300',
                                              borderRadius: '5px'}}>
-                                                <option for="Unpaid">Unpaid</option>
-                                                <option for="Paid">Paid</option>
+                                                <option for="Unpaid">Pending</option>
+                                                <option for="Paid">Delivered</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -156,7 +156,16 @@ const Orders = () => {
                                             <img src="https://res.cloudinary.com/ebaaba/image/upload/v1585136586/profile-pictures/profile_t72pk0" style={{ maxWidth: '12%', maxHeight: '12%', borderRadius: '50%', marginRight: '8px'}} />
                                             Samba Sallah
                                         </td>
-                                        <td>D2,000</td>
+                                        <td>D2,000
+                                            <sup style={{ paddingLeft: '5px'}}><span
+                                             style={{ padding: '0px 2px', backgroundColor: '#33b27b',
+                                            borderRadius: '3px',
+                                            color: '#fff',
+                                            fontWeight: 'bold',
+                                            fontSize: '10px'
+                                            }}
+                                             >PAID</span></sup>
+                                        </td>
                                         <td>D500</td>
                                         <td>
                                             <select style={{
@@ -165,8 +174,8 @@ const Orders = () => {
                                              color: '#fff',
                                              fontWeight: '300',
                                              borderRadius: '5px'}}>
-                                                <option for="Unpaid">Unpaid</option>
-                                                <option for="Paid">Paid</option>
+                                                <option for="Unpaid">Pending</option>
+                                                <option for="Paid">Delivered</option>
                                             </select>
                                         </td>
                                     </tr>   

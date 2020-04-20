@@ -111,6 +111,18 @@ const SingleOrder = () => {
                                     </tr>
                                 </tbody>
                             </table>
+                            <div className="row">
+                                <div className="col-md-8"></div>
+                                <dic className="col-md-4" align="right">
+                                    <a href="#" 
+                                    style={{ padding: '5px 15px',
+                                            backgroundColor: '#33b27b',
+                                            color: '#fff',
+                                            fontWeight: '300',
+                                            borderRadius: '5px'}}
+                                    >Completed</a>
+                                </dic>
+                            </div>
                         </div>
                     </div>
                 </div>

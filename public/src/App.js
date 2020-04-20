@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import './App.css';
+import './assets/css/style.css';
 
 /** Pages */
 import Home from './components/pages/Home';
@@ -19,6 +19,13 @@ import Account from './components/pages/Account';
 import Navbar from './components/inc/Navbar';
 import Footer from './components/inc/Footer';
 
+/** Redux Provider */
+import { Provider } from 'react-redux';
+
+/** Store */
+
+import store from './store';
+
 /** Context Provider */
 import { ProductProvider } from './context/ProductProvider';
 
@@ -29,7 +36,7 @@ const App = () => {
     <>
     
     <Navbar></Navbar>
-    <ProductProvider>
+    <Provider store={store}>
    <Switch>
     <Route exact path="/" component={Home}></Route>
     <Route exact path="/shop/" component={Shop}></Route>
@@ -43,7 +50,7 @@ const App = () => {
     <Route exact path="/:slug" component={Product}></Route>
     <Route component={Error}></Route>
    </Switch>
-   </ProductProvider>
+   </Provider>
    <Footer></Footer>
    
   </>

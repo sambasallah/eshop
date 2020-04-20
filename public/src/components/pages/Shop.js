@@ -2,7 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { limitTitle }  from '../helpers/Helpers';
-import { ProductContext } from '../../context/ProductProvider';
+// import { ProductContext } from '../../context/ProductProvider';
+import { connect } from 'react-redux';
+import { getProducts } from '../../actions/productActions';
 
 const Product = ({ product, index, products }) => {
 
@@ -29,9 +31,11 @@ const Product = ({ product, index, products }) => {
 }
 
 
-const Shop = () => {
+const Shop = (props) => {
 
-    const products = useContext(ProductContext);
+    useEffect(() => {
+        props.getProducts();
+    },[]);
 
     return (
         <div>
@@ -103,7 +107,7 @@ const Shop = () => {
                         </div>
                         <div className="col-md-9">
                            <div className="row shop-items">
-                                { products.products.map((product, index) => ( <Product key={index} index={index} product={product} products={products} /> )) }
+                                {  props.products.map((product, index) => ( <Product key={index} index={index} product={product} products={props.products} /> )) }
                            </div>
 
                             <div className="pagination">
@@ -128,4 +132,8 @@ const Shop = () => {
     )
 }
 
-export default Shop;
+const mapStateToProps = state => (
+    {products: state.products.items }
+);
+
+export default connect(mapStateToProps, { getProducts })(Shop);

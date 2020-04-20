@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useReducer } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 
 export const ProductContext = createContext();
 
