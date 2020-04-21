@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PRODUCT, GET_PRODUCT_BY_ID, ADD_SINGLE_PRODUCT } from './types';
+import { GET_PRODUCTS, GET_PRODUCT, GET_PRODUCT_BY_ID, ADD_SINGLE_PRODUCT, UPDATE_ITEM_STATE } from './types';
 
 // Returns array of products
 export const getProducts =  () => async (dispatch) => {
@@ -16,11 +16,13 @@ export const getProducts =  () => async (dispatch) => {
 }
 
 // Get product by id
-export const getProductByID = (state,id) => (dispatch) => {
-    // let item = state.filter((item) => id !== item.id);
-    // dispatch({
-    //     type: GET_PRODUCT_BY_ID,
-    //     payload: item
-    // });
-    alert('working')
+export const getProductByID = (state, id) => dispatch =>  {
+    let item = state.filter((item) => id === item.id);
+    dispatch({
+        type: GET_PRODUCT_BY_ID,
+        payload: item
+    });
 }
+
+
+

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import Slider  from 'react-slick';
@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 const ProductSingle = (props) => {
 
-    const product = props.product;
+    const product = props.product[0];
 
     const isJson = (str) => {
         try {
@@ -26,6 +26,7 @@ const ProductSingle = (props) => {
         cssEase: 'linear'
     };
 
+  
     return (
        
         <div>
@@ -101,7 +102,7 @@ const ProductSingle = (props) => {
 }
 
 const mapStateToProps = state => (
-    {product: state.products.single }
+    {product: state.products.item }
 );
 
 export default connect(mapStateToProps)(ProductSingle);

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProducts, getProductByID } from '../../actions/productActions';
 
-const Product = ({ product, index, products}) => {
+const Product = ({ product, index, products, getProductByID }) => {
 
     return (
         <div className="col-md-3">
@@ -15,7 +15,7 @@ const Product = ({ product, index, products}) => {
                  <img src={ JSON.parse(product.url)[0] } style={{ maxWidth : "100%", maxHeight : "100%"}} />
             </div>
             <div>
-                <Link to={ product.slug } onClick={ () => {getProductByID(products, product.id) } }>
+                <Link to={ product.slug } onClick={ () => { getProductByID(products, product.id) } }>
                     <div className="product-description">
                         <h3 className="title">{ limitTitle(product.name) }</h3>
                         <hr className="below-title"></hr>
@@ -109,7 +109,8 @@ const Shop = (props) => {
                            <div className="row shop-items">
                                 {  props.products.map((product, index) => (
                                      <Product key={index} index={index} 
-                                product={product} getProduct={ props.getProductByID } products={props.products} 
+                                product={product} products={props.products}
+                                getProductByID={ props.getProductByID } 
                                 /> )) }
                            </div>
 
