@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
+import { deleteItemFromCart } from '../../actions/productActions';
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, cartItems, deleteItem }) => {
      return(
         <tr>
             <td>
@@ -17,7 +18,7 @@ const CartItem = ({ item }) => {
             <sub>{ item.sale_price } x 1 Item</sub>
             </td>
             <td>
-                <h6 className="delete"><a href=""><i className="fa fa-trash"></i></a></h6>
+                <h6 className="delete"><Link to="/cart" onClick={ () => deleteItem(item,cartItems)}><i className="fa fa-trash"></i></Link></h6>
             </td>
         </tr>
         
@@ -51,10 +52,8 @@ const Cart = (props) => {
                         </thead>
                         <tbody>
                              {props.cartItems.map((value) => {
-                                 console.log(value);
                                  return(
-                                     <CartItem key={value.id} item= { value } />
-                                     
+                                     <CartItem key={value.id} item= { value } cartItems={props.cartItems} deleteItem={props.deleteItemFromCart} />   
                                  )
                              })}
                         </tbody>
@@ -64,7 +63,9 @@ const Cart = (props) => {
                                 <div className="cart-details">
                                     <ul>
                                         <li><h6>Order Summary</h6></li>
-                                        <li><h6>1 Item</h6></li>
+                                        <li><h6>{ 
+                                                props.itemInCart > 1? 
+                                                props.itemInCart + " items" : props.itemInCart + " item" }</h6></li>
                                     </ul>
                                     <hr />
                                     <ul>
@@ -90,7 +91,8 @@ const Cart = (props) => {
 }
 
 const mapStateToProps = (state) => (
-    { cartItems : state.products.cart }
+    { cartItems : state.products.cart,
+    itemInCart: state.products.cart.length }
 )
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps, { deleteItemFromCart })(Cart);

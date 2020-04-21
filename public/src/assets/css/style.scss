@@ -777,7 +777,7 @@
 	width: 100%;
 	height: auto;
 	border: 1px solid $secondary_color;
-	padding: 10px;
+	padding: 8px;
 	border-radius: 5px;
 	box-sizing: border-box;
 }
@@ -788,12 +788,12 @@
 
 .cart-details ul li:first-child {
 	display: inline-block;
-	width: 75%;
+	width: 70%;
 }
 
 .cart-details ul li:last-child {
 	display: inline-block;
-	width: 19%;
+	width: 30%;
 }
 
 .cart-details a {

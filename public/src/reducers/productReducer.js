@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PRODUCT, GET_PRODUCT_BY_ID, ADD_TO_CART, UPDATE_ITEM_STATE } from '../actions/types';
+import { GET_PRODUCTS, GET_PRODUCT, GET_PRODUCT_BY_ID, ADD_TO_CART, UPDATE_ITEM_STATE, DELETE_ITEM_FROM_CART } from '../actions/types';
 
 let initialState = {
     items :[],
@@ -22,6 +22,11 @@ export default function( state = initialState, action) {
                 return {
                     ...state,
                     cart: [...state.cart, action.payload]
+                }
+            case DELETE_ITEM_FROM_CART:
+                return {
+                    ...state,
+                    cart: action.payload
                 }
             default:
                 return state;
