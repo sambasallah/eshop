@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Slider  from 'react-slick';
 import ReactHtmlParser from 'react-html-parser';
 import { connect } from 'react-redux';
+import { addToCart } from '../../actions/productActions';
 
 const ProductSingle = (props) => {
 
@@ -64,7 +65,7 @@ const ProductSingle = (props) => {
                                 <h3>{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 'GMD' }).format( product.sale_price ) } 
                                  <sup style={{paddingLeft: '5px'}}><del>{ new Intl.NumberFormat().format(product.regular_price) }</del> 
                                 <span> You Saved { new Intl.NumberFormat().format( Number(product.regular_price) - Number(product.sale_price)) }</span></sup></h3>
-                                <h3><Link to="/cart" className="add-to-cart">Add To Cart</Link> </h3>
+                                <h3><Link to="/cart" className="add-to-cart" onClick={ () =>  props.addToCart(product) }>Add To Cart</Link> </h3>
                                 <h3>
                                     <ul>
                                         <li><a href=""><i className="fa fa-facebook"></i></a></li>
@@ -105,4 +106,4 @@ const mapStateToProps = state => (
     {product: state.products.item }
 );
 
-export default connect(mapStateToProps)(ProductSingle);
+export default connect(mapStateToProps, { addToCart })(ProductSingle);

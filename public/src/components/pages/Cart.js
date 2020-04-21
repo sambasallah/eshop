@@ -1,8 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { connect } from 'react-redux';
 
-const Cart = () => {
+const CartItem = ({ item }) => {
+     return(
+        <tr>
+            <td>
+                <h6><img src={JSON.parse(item.url)[0]} alt="" style={{ maxWidth: "40px", maxHeight:"40px"}} /> <span>Bag</span></h6>
+            </td>
+            <td>
+            <h6 className="qty-cart"><b>{ item.quantity }</b></h6>
+            </td>
+            <td>
+            <h5>{ item.sale_price } </h5>
+            <sub>{ item.sale_price } x 1 Item</sub>
+            </td>
+            <td>
+                <h6 className="delete"><a href=""><i className="fa fa-trash"></i></a></h6>
+            </td>
+        </tr>
+        
+        );
+}
+
+const Cart = (props) => {
     return (
         <div>
             <Helmet>
@@ -28,40 +50,15 @@ const Cart = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                
-                                <h6><img src={require('../../media/images/b6.jpg')} alt="" style={{ width: "40px", height:"40px"}} /> <span>Bag</span></h6>
-                            </td>
-                            <td>
-                        <h6 className="qty-cart"><b>2</b></h6>
-                            </td>
-                            <td>
-                                <h5>D12,000</h5>
-                                <sub>D12,000 x 1 Item</sub>
-                            </td>
-                            <td>
-                                <h6 className="delete"><a href=""><i className="fa fa-trash"></i></a></h6>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                
-                                <h6><img src={require('../../media/images/b6.jpg')} alt="" style={{width:"40px", height:"40px"}} /> <span>Bag</span></h6>
-                            </td>
-                            <td>
-                            <h6 className="qty-cart"><b>2</b></h6>
-                            </td>
-                            <td>
-                                <h5>D12,000</h5>
-                                <sub>D12,000 x 1 Item</sub>
-                            </td>
-                            <td>
-                                <h6 className="delete"> <a href="#"><i className="fa fa-trash"></i></a></h6>
-                            </td>
-                            </tr>
-                            </tbody>
-                                </table>
+                             {props.cartItems.map((value) => {
+                                 console.log(value);
+                                 return(
+                                     <CartItem key={value.id} item= { value } />
+                                     
+                                 )
+                             })}
+                        </tbody>
+                        </table>
                         </div>
                         <div className="col-md-3">
                                 <div className="cart-details">
@@ -92,4 +89,8 @@ const Cart = () => {
     )
 }
 
-export default Cart;
+const mapStateToProps = (state) => (
+    { cartItems : state.products.cart }
+)
+
+export default connect(mapStateToProps)(Cart);

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Navbar = () => {
+const Navbar = (props) => {
     return (
         <div className="main-nav">
             <nav className="navbar navbar-expand-md navbar-bg-color fixed-top justify-content-left">
@@ -35,7 +36,7 @@ const Navbar = () => {
                     <li className="nav-item">
                         <a href="/cart" className="nav-link">
                             <i className="fa fa-shopping-cart" title="Cart"></i>
-                            <span className='badge badge-warning' id='lblCartCount'> 5 </span>
+                            <span className='badge badge-warning' id='lblCartCount'> { props.itemInCart? props.itemInCart : 0 } </span>
                         </a>
                     </li>
                     <li className="nav-item">
@@ -49,5 +50,9 @@ const Navbar = () => {
     )
 }
 
-export default Navbar;
+const mapStateToProp = (state) => (
+    {itemInCart: state.products.cart.length }
+)
+
+export default connect(mapStateToProp)(Navbar);
 

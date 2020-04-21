@@ -34,9 +34,8 @@ const App = () => {
   return (
     
     <>
-    
-    <Navbar></Navbar>
     <Provider store={store}>
+    <Navbar></Navbar>
    <Switch>
     <Route exact path="/" component={Home}></Route>
     <Route exact path="/shop/" component={Shop}></Route>

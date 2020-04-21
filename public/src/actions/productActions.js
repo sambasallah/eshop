@@ -1,6 +1,5 @@
-import { GET_PRODUCTS, GET_PRODUCT, GET_PRODUCT_BY_ID, ADD_SINGLE_PRODUCT, UPDATE_ITEM_STATE } from './types';
+import { GET_PRODUCTS,GET_PRODUCT_BY_ID, ADD_TO_CART } from './types';
 
-// Returns array of products
 export const getProducts =  () => async (dispatch) => {
         const url = "http://localhost:8000/api/v1/products/p/1?page=1";
         let reponse = await fetch(url);
@@ -15,11 +14,17 @@ export const getProducts =  () => async (dispatch) => {
         });
 }
 
-// Get product by id
 export const getProductByID = (state, id) => dispatch =>  {
     let item = state.filter((item) => id === item.id);
     dispatch({
         type: GET_PRODUCT_BY_ID,
+        payload: item
+    });
+}
+
+export const addToCart = (item) => dispatch => {
+    dispatch({
+        type: ADD_TO_CART,
         payload: item
     });
 }
