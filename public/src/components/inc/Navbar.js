@@ -36,7 +36,7 @@ const Navbar = (props) => {
                     <li className="nav-item">
                         <a href="/cart" className="nav-link">
                             <i className="fa fa-shopping-cart" title="Cart"></i>
-                            <span className='badge badge-warning' id='lblCartCount'> { props.itemInCart? props.itemInCart : 0 } </span>
+                            { props.itemInCart? (<span className='badge badge-warning' id='lblCartCount'> { props.itemInCart } </span>) : '' } 
                         </a>
                     </li>
                     <li className="nav-item">

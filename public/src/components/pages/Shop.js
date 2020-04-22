@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom';
 import { limitTitle }  from '../helpers/Helpers';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getProducts, getProductByID } from '../../actions/productActions';
+import { getProducts, getProductByID, addToCart } from '../../actions/productActions';
+import { inCart } from '../utils/utils';
 
-const Product = ({ product, index, products, getProductByID }) => {
+const Product = ({ product, index, products, getProductByID, addToCart, cartItems }) => {
+
+    const addedToCart = inCart(product, cartItems);
 
     return (
         <div className="col-md-3">
@@ -15,15 +18,21 @@ const Product = ({ product, index, products, getProductByID }) => {
                  <img src={ JSON.parse(product.url)[0] } style={{ maxWidth : "100%", maxHeight : "100%"}} />
             </div>
             <div>
-                <Link to={ product.slug } onClick={ () => { getProductByID(products, product.id) } }>
                     <div className="product-description">
-                        <h3 className="title">{ limitTitle(product.name) }</h3>
-                        <hr className="below-title"></hr>
-                        <span className="price"><span style={{ fontSize: '15px', fontWeight: 'lighter' }}>D</span> { new Intl.NumberFormat().format(product.sale_price) } </span> <sup className="orignal-price"><del> { new Intl.NumberFormat().format(product.regular_price) } </del></sup>
+                        <Link to={ product.slug } onClick={ () => { getProductByID(products, product.id) } }>
+                            <h3 className="title">{ limitTitle(product.name) }</h3>
+                            <hr className="below-title"></hr>
+                            <span className="price"><span style={{ fontSize: '15px', fontWeight: 'lighter' }}>D</span> { new Intl.NumberFormat().format(product.sale_price) } </span> <sup className="orignal-price"><del> { new Intl.NumberFormat().format(product.regular_price) } </del></sup>
+                        </Link>
                         <hr className="below-price"></hr>
-                        <Link to="/cart" className="add-to-cart">Add to Cart</Link>
+                        <button className="add-to-cart" onClick={() => {
+                          let updatedProduct = {...product, qty: 1};
+                          addToCart(updatedProduct,cartItems)
+                        }
+                        } disabled={addedToCart}>
+                                { addedToCart ? 'Added' : 'Add To Cart' }</button>
                     </div>
-                </Link>
+                
             </div>
         </div>
     </div>
@@ -110,7 +119,8 @@ const Shop = (props) => {
                                 {  props.products.map((product, index) => (
                                      <Product key={index} index={index} 
                                 product={product} products={props.products}
-                                getProductByID={ props.getProductByID } 
+                                getProductByID={ props.getProductByID }
+                                addToCart={props.addToCart} cartItems={ props.cartItems }
                                 /> )) }
                            </div>
 
@@ -141,7 +151,8 @@ Shop.propTypes = {
 };
 
 const mapStateToProps = state => (
-    {products: state.products.items }
+    {products: state.products.items,
+     cartItems : state.products.cart }
 );
 
-export default connect(mapStateToProps, { getProducts, getProductByID })(Shop);
+export default connect(mapStateToProps, { getProducts, getProductByID, addToCart })(Shop);

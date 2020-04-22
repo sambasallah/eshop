@@ -1,8 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { connect } from 'react-redux';
 
-const Checkout = () => {
+const Checkout = (props) => {
+
+    let total  = 0;
+    props.cartItems.map((value) => {
+        total += Number(value.sale_price) * value.qty;
+    });
+
     return (
         <div>
             <Helmet>
@@ -274,17 +281,28 @@ const Checkout = () => {
             <div className="checkout-details">
                     <ul>
                         <li><h6>Order Summary</h6></li>
-                        <li><h6>1 Item</h6></li>
+                        <li><h6>{ props.cartItems.length === 1? '1 Item' : props.cartItems.length + ' Items' }</h6></li>
                     </ul>
                     <hr/>
+                    { props.cartItems.map((value) => {
+                            return(
+                                <>
+                                <ul>
+                                <li>{ value.name }</li>
+                                <li><img src={ JSON.parse(value.url)[0] } style={{maxWidth: '50%', maxHeight: '50%'}} /></li>
+                                </ul>
+                                </>
+                            )
+                        })}
+                     <hr />
                     <ul>
                         <li><sub>Subtotal</sub></li>
-                        <li><h6>D12,000</h6></li>
+                        <li><h6>{ 'D' + new Intl.NumberFormat().format(total) }</h6></li>
                     </ul>
                     <hr/>
                     <ul>
                         <li><h6>Total</h6></li>
-                        <li><h6>D12,000</h6></li>
+                        <li><h6>{ 'D' + new Intl.NumberFormat().format(total) }</h6></li>
                     </ul>
                     <hr/>
                     <Link to="/completed">Place Order</Link>
@@ -299,4 +317,10 @@ const Checkout = () => {
     )
 }
 
-export default Checkout;
+const mapStateToProps = (state) => (
+    {
+        cartItems: state.products.cart
+    }
+)
+
+export default connect(mapStateToProps)(Checkout);

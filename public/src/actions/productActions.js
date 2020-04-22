@@ -1,4 +1,4 @@
-import { GET_PRODUCTS,GET_PRODUCT_BY_ID, ADD_TO_CART, DELETE_ITEM_FROM_CART } from './types';
+import { GET_PRODUCTS,GET_PRODUCT_BY_ID, ADD_TO_CART, DELETE_ITEM_FROM_CART, ADDED_TO_CART } from './types';
 
 export const getProducts =  () => async (dispatch) => {
         const url = "http://localhost:8000/api/v1/products/p/1?page=1";
@@ -33,7 +33,7 @@ export const addToCart = (item, cartItems) => dispatch => {
 
 const inCart = (item, cartItems) => {
     let result = cartItems.filter((i) => i.id === item.id);
-    if(result.length <= 0) {
+    if(result.length === 0) {
         return false;
     }
     return true;
@@ -46,6 +46,7 @@ export const deleteItemFromCart = (item, cartItems) => dispatch => {
         payload: updatedCart
     })
 }
+
 
 
 

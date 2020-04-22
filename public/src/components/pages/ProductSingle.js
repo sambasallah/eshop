@@ -1,23 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import Slider  from 'react-slick';
 import ReactHtmlParser from 'react-html-parser';
 import { connect } from 'react-redux';
 import { addToCart } from '../../actions/productActions';
+import { inCart, isJson, increment, decrement } from '../utils/utils';
 
 const ProductSingle = (props) => {
 
-    const product = props.product[0];
+    const [qty, setQty] = useState({qty: 1});
 
-    const isJson = (str) => {
-        try {
-            JSON.parse(str);
-        } catch(e) {
-            return false;
-        }
-        return true;
-    }
+    const product = props.product[0];
+    const addedToCart = inCart(product, props.cartItems);
 
     const settings = {
         dots: true,
@@ -27,7 +21,20 @@ const ProductSingle = (props) => {
         cssEase: 'linear'
     };
 
-  
+    const increment = () => {
+        let currentQty = qty.qty;
+        setQty({...qty, qty: currentQty + 1});
+    }
+    
+    const decrement = () => {
+        let currentQty = qty.qty;
+        if(currentQty <= 1) {
+            setQty({...qty, qty: 1 });
+            return;
+        }
+        setQty({...qty, qty: currentQty - 1 });
+    }
+    
     return (
        
         <div>
@@ -65,12 +72,27 @@ const ProductSingle = (props) => {
                                 <h3>{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 'GMD' }).format( product.sale_price ) } 
                                  <sup style={{paddingLeft: '5px'}}><del>{ new Intl.NumberFormat().format(product.regular_price) }</del> 
                                 <span> You Saved { new Intl.NumberFormat().format( Number(product.regular_price) - Number(product.sale_price)) }</span></sup></h3>
-                                <h3><Link to="/cart" className="add-to-cart" onClick={ () =>  props.addToCart(product, props.cartItems) }>Add To Cart</Link> </h3>
+                                 <h3>
+                                     <div className="item-qty">
+                                        <i className="fa fa-minus" onClick={() => decrement(qty)}></i>
+                                        <span className="qty">{ qty.qty }</span>
+                                        <i className="fa fa-plus" onClick={() => increment(qty)}></i>
+                                     </div>
+                                 </h3>
+                                    <h3><button  className="add-to-cart" onClick={
+                                    () => {
+                                        let updateProduct = {...product, qty: qty.qty};
+                                        props.addToCart(updateProduct, props.cartItems)  
+                                    } 
+                                    } 
+                                    disabled={addedToCart}>{ addedToCart? 'Added' : 'Add To Cart' }</button> 
+                                 </h3>
                                 <h3>
-                                    <ul>
-                                        <li><a href=""><i className="fa fa-facebook"></i></a></li>
-                                        <li><a href=""><i className="fa fa-twitter"></i></a></li>
-                                    </ul>
+                                    <div className="icon-circle">
+                                        <i className="fa fa-facebook"></i>
+                                        <i className="fa fa-instagram"></i>
+                                        <i className="fa fa-twitter"></i>
+                                    </div>
                                 </h3>
                                 <h3>
                                     <ul>
@@ -107,4 +129,4 @@ const mapStateToProps = state => (
      cartItems : state.products.cart }
 );
 
-export default connect(mapStateToProps, { addToCart })(ProductSingle);
+export default connect(mapStateToProps, { addToCart  })(ProductSingle);

@@ -1,9 +1,9 @@
-import { GET_PRODUCTS, GET_PRODUCT, GET_PRODUCT_BY_ID, ADD_TO_CART, UPDATE_ITEM_STATE, DELETE_ITEM_FROM_CART } from '../actions/types';
+import { GET_PRODUCTS, GET_PRODUCT, GET_PRODUCT_BY_ID, ADD_TO_CART, UPDATE_ITEM_STATE, DELETE_ITEM_FROM_CART, ADDED_TO_CART } from '../actions/types';
 
 let initialState = {
     items :[],
     item: {},
-    cart: []    
+    cart: [] 
 };
 
 export default function( state = initialState, action) {
@@ -21,7 +21,8 @@ export default function( state = initialState, action) {
             case ADD_TO_CART:
                 return {
                     ...state,
-                    cart: [...state.cart, action.payload]
+                    cart: [...state.cart, action.payload],
+                    cartLoading: true
                 }
             case DELETE_ITEM_FROM_CART:
                 return {
