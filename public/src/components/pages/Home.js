@@ -12,66 +12,47 @@ const Home = () => {
 			 <div className="home-inner">
 		 <div className="carousel-container">
 			 <div className="row">
-				 <div className="col-md-9">
+				 <div className="col-md-12">
 				 <div id="myCarousel" className="carousel slide" data-ride="carousel">
-		 <ol className="carousel-indicators">
-		    <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
-		    <li data-target="#myCarousel" data-slide-to="1"></li>
-		    <li data-target="#myCarousel" data-slide-to="2"></li>
-  		</ol>
-		  <div className="carousel-inner text-center">
-		    <div className="carousel-item active">
-		      <img className="d-block w-100 img-responsive" src={require('../../media/images/banner1.jpg') } alt={"First Slide"} />
-		      <div className="text-content responsive">
-                <h1>Summer Discount Offer!</h1>
-                <a href="shop" className="shop-btn">SHOP NOW</a>
-            </div>
-		    </div>
-		    <div className="carousel-item">
-		      <img className="d-block w-100" src={require("../../media/images/banner2.jpg")} alt="Second slide" />
-		       <div className="text-content">
-                <h1>Classic Summer Wears</h1>
-                <a href="shop" className="shop-btn">SHOP NOW</a>
-            </div>
-		    </div>
-		    <div className="carousel-item">
-		      <img className="d-block w-100" src={require("../../media/images/banner3.jpg")} alt="Third slide" />
-		       <div className="text-content">
-                <h1>Classic Women Wears</h1>
-                <a href="shop" className="shop-btn">SHOP NOW</a>
-            </div>
-		    </div>
-		  </div>
-		  <a className="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-		    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-		    <span className="sr-only">Previous</span>
-		  </a>
-		  <a className="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-		    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-		    <span className="sr-only">Next</span>
-		  </a>
+				<ol className="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" className="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				</ol>
+			<div className="carousel-inner text-center">
+				<div className="carousel-item active">
+				<img className="d-block w-100 img-responsive" src={require('../../media/images/banner1.jpg') } alt={"First Slide"} />
+				<div className="text-content responsive">
+					<h1>Summer Discount Offer!</h1>
+					<a href="shop" className="shop-btn">SHOP NOW</a>
 				</div>
-				 </div>
-
-				 <div className="col-md-3">
-				 	<div className="row">
-						 <div className="col-md-12 right-carousel">
-							 <div className="info-box" style={{textAlign: 'center'}}>
-								     <Link to="./product/chemise" className="btn-shop">Shop Now</Link>
-									 <img src={require('../../media/images/derby-shoe.jpg')} style={{ maxWidth : '100%', maxHeight : '100%'}} />
-							 </div>
-							 <div className="info-box" style={{textAlign: 'center'}}>
-								   <Link to="./product/chemise" className="btn-shop">Shop Now</Link>
-							       <img src={require('../../media/images/chemise1.jpg')} style={{ maxWidth : '100%', maxHeight : '100%'}} />
-							 </div>
-						 </div>
-					 </div>
-					 <div className="row">
-						
-					 </div>
-				 </div>
-
-			 </div>
+				</div>
+				<div className="carousel-item">
+				<img className="d-block w-100" src={require("../../media/images/banner2.jpg")} alt="Second slide" />
+				<div className="text-content">
+					<h1>Classic Summer Wears</h1>
+					<a href="shop" className="shop-btn">SHOP NOW</a>
+				</div>
+				</div>
+				<div className="carousel-item">
+				<img className="d-block w-100" src={require("../../media/images/banner3.jpg")} alt="Third slide" />
+				<div className="text-content">
+					<h1>Classic Women Wears</h1>
+					<a href="shop" className="shop-btn">SHOP NOW</a>
+				</div>
+				</div>
+			</div>
+			<a className="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+				<span className="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span className="sr-only">Previous</span>
+			</a>
+			<a className="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+				<span className="carousel-control-next-icon" aria-hidden="true"></span>
+				<span className="sr-only">Next</span>
+			</a>
+					</div>
+					</div>
+				</div>
 	     </div>
 	 
 	 <div className="latest-deals">
@@ -179,103 +160,71 @@ const Home = () => {
 		 </div>
 		 </div>
 	 </div>
-
-	 
-	 {/* <div className="popular-products">
-		 <h2>Popular Products</h2>
-		 <div className="products">
-			 <div className="row">
-				 <div className="col-md-3">
-					 <img src={require('../media/images/chemise1.jpg')} style={{width : '70%', height : '80%'}} />
-					 <div className="product-description">
-						<h4>Chemise</h4>
-						<h5>GMD 600 <span className="original-price"><del>800</del></span></h5>
-					 </div>
-				 </div>
-				 <div className="col-md-3">
-				 	<img src={require('../media/images/b5.jpg')} style={{width : '70%', height : '80%'}} />
-					 <div className="product-description">
-						<h4>Bag</h4>
-						<h5>GMD 500 <span className="original-price"><del>700</del></span></h5>
-					 </div>
-				 </div>
-				 <div className="col-md-3">
-				 	<img src={require('../media/images/m7.jpg')} style={{width : '70%', height : '80%' }} />
-					 <div className="product-description">
-						<h4>Watch</h4>
-						<h5>GMD 800 <span className="original-price"><del>1100</del></span></h5>
-					 </div>
-				 </div>
-				 <div className="col-md-3">
-				 	<div className="row">
-						 <div className="col-md-12">
-						 <img src={require('../media/images/cat-shirt.jpg')} style={{width : '70%', height : '80%'}} />
-							<div className="product-description">
-								<h4>Shirt</h4>
-								<h5>GMD 600 <span className="original-price"><del>800</del></span></h5>
-							</div>
-						 </div>
-						 
-					 </div>
-				 </div>
-			 </div>
+		
+	 <div className="trending-category">
+		 <div className="trend-title">
+			 <h4>Trending Products</h4>
 		 </div>
-	 </div> */}
-
-	 <div className="recommended-categories">
-		<div className="recommended">
+		 <div className="trending-products">
 			<div className="row">
-				<div className="col-md-3">
-					<div className="item">
-						<img src={require('../../media/images/printer.jpg')} alt="printers" style={{width : '100%', height : '100%'}} />
-						<div className="description">
-							<h2>Printers</h2>
-							<p>
-								For all your printing needs...
-							</p>
-							<p className="shopBtn">Shop Now <i className="fa fa-angle-right"></i></p>
-						</div>
+				<div className="col-md-2">
+					<div className="trend-img">
+						<img  src={require('../../media/images/shirt3.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+					</div>
+					<div className="trend-description">
+						<h5>Men Shirt</h5>
+						<h6>D500 <sup><del>D700</del></sup></h6>
 					</div>
 				</div>
-				<div className="col-md-3">
-				<div className="item">
-						<img src={require('../../media/images/headphones.jpg')} alt="headphones" style={{width : '100%', height : '100%'}} />
-						<div className="description">
-							<h2>Headphones & Speakers</h2>
-							<p>
-								Quality Sound on the go...
-							</p>
-							<p className="shopBtn">Shop Now <i className="fa fa-angle-right"></i></p>
+				<div className="col-md-2">
+						<div className="trend-img">
+							<img  src={require('../../media/images/derby-shoe.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
 						</div>
+						<div className="trend-description">
+							<h5>Derby Shoe</h5>
+							<h6>D2500 <sup><del>D3000</del></sup></h6>
+						</div>
+				</div>
+				<div className="col-md-2">
+					<div className="trend-img">
+						<img  src={require('../../media/images/chemise3.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+					</div>
+					<div className="trend-description">
+						<h5>Lacoste Chemise</h5>
+						<h6>D900 <sup><del>D1200</del></sup></h6>
 					</div>
 				</div>
-				<div className="col-md-3">
-				<div className="item">
-						<img src={require('../../media/images/watch.jpg')} alt="watch" style={{width : '100%', height : '100%'}} />
-						<div className="description">
-							<h2>Watches</h2>
-							<p>
-								Upgrade your style
-							</p>
-							<p className="shopBtn">Shop Now <i className="fa fa-angle-right"></i></p>
-						</div>
+				<div className="col-md-2">
+					<div className="trend-img">
+						<img  src={require('../../media/images/m7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+					</div>
+					<div className="trend-description">
+						<h5>Men Watch</h5>
+						<h6>D1000 <sup><del>D1500</del></sup></h6>
 					</div>
 				</div>
-				<div className="col-md-3">
-				<div className="item">
-						<img src={require('../../media/images/beauty.jpg')} alt="beauty" style={{width : '100%', height : '100%'}} />
-						<div className="description">
-							<h2>Printers</h2>
-							<p>
-								For the perfect look...
-							</p>
-							<p className="shopBtn">Shop Now <i className="fa fa-angle-right"></i></p>
-						</div>
+				<div className="col-md-2">
+					<div className="trend-img">
+						<img  src={require('../../media/images/b7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+					</div>
+					<div className="trend-description">
+						<h5>Women Bag</h5>
+						<h6>D1000 <sup><del>D1500</del></sup></h6>
+					</div>
+				</div>
+				<div className="col-md-2">
+					<div className="trend-img">
+						<img  src={require('../../media/images/coat.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+					</div>
+					<div className="trend-description">
+						<h5>Coat</h5>
+						<h6>D400 <sup><del>D450</del></sup></h6>
 					</div>
 				</div>
 			</div>
-		</div>
+		 </div>
 	 </div>
+
 		
 	 <div className="about-eBaaba">
 		 <h2>eBaaba Gambia's No. 1 Online Shopping Platform</h2>

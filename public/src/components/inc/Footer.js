@@ -5,40 +5,7 @@ const Footer = () => {
         <div>
            <div className="contact-info">
 			 <div className="contact-info-inner">
-			 	<div className="row">
-					<div className="col-md-3">
-						<div className="row">
-							<div className="col-md-2">
-								<span><i className="fa fa-envelope"></i></span>
-							</div>
-							<div className="col-md-10">
-								<h4>Email Support</h4>
-								<p>help@ebaaba.xyz</p>
-							</div>
-						</div>
-					</div>
-					<div className="col-md-3">
-						<div className="row">
-							<div className="col-md-2">
-								<span><i className="fa fa-phone"></i></span>
-							</div>
-							<div className="col-md-10">
-								<h4>Phone Support</h4>
-								<p>+220-3911176 / +220-3727652</p>
-							</div>
-						</div>
-					</div>
-					<div className="col-md-3">
-                        <h4>Get Latest Deals</h4>
-						<p>Our best promotions sent to your inbox.</p>
-					</div>
-					<div className="col-md-3">
-						<form>
-							<input type="text" placeholder="Email Address" name="subscribe" />
-							<input type="submit" value="Subscribe" />
-						</form>
-					</div>
-				</div>
+			 		
 			 </div>
 			 </div>
 
@@ -46,7 +13,7 @@ const Footer = () => {
 				 <div className="footer-inner">
 					 <div className="row">
 						 <div className="col-md-2">
-                             <h4>ABOUT eBaaba</h4>
+                             <h4>ABOUT</h4>
 							 <ul>
 								 <li>Contact Us</li>
 								 <li>About Us</li>
