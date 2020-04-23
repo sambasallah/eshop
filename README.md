@@ -1,5 +1,4 @@
-# What is eShop
-eShop is a modern ecommerce website
+# Modern E-Commerce Website (Reactjs & Redux)
 # Home
 ![Home](public/src/media/images/Home.png)
 # Dashboard
