@@ -6,6 +6,10 @@ eShop is a modern ecommerce website
 ![Dashboard](public/src/media/images/Dashboard.png)
 # Store
 ![Store](public/src/media/images/Store.png)
+# Shop
+![Shop](public/src/media/images/Shop.png)
+# Single
+![Single](public/src/media/images/Single.png)
 # Tech Stack
 ### Frontend
   - HTML
