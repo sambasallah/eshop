@@ -123,7 +123,6 @@ ul {
 
 #myCarousel {
   border: 0.8px solid #d3d3d3;
-  border-radius: 5px;
 }
 
 .text-content {
@@ -234,7 +233,6 @@ ul {
   width: 97%;
   margin: 20px auto;
   background-color: #fff;
-  border-radius: 5px;
 }
 
 .latest-deals h2 {
@@ -340,7 +338,6 @@ ul {
   width: 97%;
   margin: 15px auto;
   background-color: #fff;
-  border-radius: 5px;
 }
 
 .trending-category .trend-title {
@@ -364,49 +361,10 @@ ul {
 .trending-products .trend-description h5 {
   font-size: 15px;
   font-weight: 600;
-  font-family: "Courier New", Courier, monospace;
 }
 
 .trending-products .trend-description h6 {
   font-weight: 400;
-}
-
-/** Recommend Categories **/
-.recommended-categories {
-  width: 97%;
-  margin: auto;
-}
-
-.item {
-  width: 100%;
-  margin-bottom: 20px;
-  border: 1px solid #f5f5f5;
-  border-radius: 5px;
-}
-
-.item .description {
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 0px 0px 5px 5px;
-  box-sizing: border-box;
-}
-
-.item .description h2 {
-  font-size: 1.2em;
-  color: #5a5f66;
-  margin-bottom: 20px;
-}
-
-.shopBtn {
-  text-transform: uppercase;
-  color: #8b054d;
-  font-weight: bold;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.shopBtn i.fa.fa-angle-right {
-  padding-left: 8px;
 }
 
 /** About **/
@@ -414,7 +372,6 @@ ul {
   width: 97%;
   margin: auto;
   background-color: #fff;
-  border-radius: 5px;
   padding: 15px;
   box-sizing: border-box;
 }
@@ -623,6 +580,15 @@ ul {
 
 .product-details .icon-circle i.fa.fa-twitter {
   color: #1DA1F2;
+}
+
+.product-details ul li {
+  font-size: 18px;
+  padding-right: 5px;
+}
+
+.product-details ul li i.fa.fa-truck {
+  font-size: 18px;
 }
 
 .single-product-description {

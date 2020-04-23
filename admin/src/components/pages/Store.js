@@ -8,7 +8,6 @@ import StoreList from './StoreList';
 const Store = (props) => {
 
     let page_no = props.match.params.page? props.match.params.page : 1;
-    let msg = props.match.params.deleted? props.match.params.deleted : "";
 
     const [allProducts, setProducts] = useState({products: []});
     const [pagination, setPagination] = useState({current_page: "", last_page: ""})
@@ -123,7 +122,7 @@ const Store = (props) => {
                                 </div>
                             </div>
                             <StoreList allProducts={ allProducts } />
-                            { Number(pagination.last_page) <= 0? "" : ("")}
+                            { Number(pagination.last_page) <= 0? "" : ""}
                             { Number(pagination.last_page) >= 2  && Number(pagination.last_page) < 3? (
                                 <>
                                     <nav aria-label="Products Navigation">
@@ -166,8 +165,9 @@ const Store = (props) => {
                                     <li class="page-item"><a class="page-link" href="/store/2">4</a></li>
                                 </>
                             ) : ("")}
+
                             { Number(pagination.last_page) > 4? 
-                         (
+                            (
                             <nav aria-label="Products Navigation">
                             <ul class="pagination justify-content-center">
                                 <li class= { "page-item " +  (Number(page.page) === 1? "disabled" : "")}>
@@ -195,6 +195,7 @@ const Store = (props) => {
                                         { Number(page.page) + 4 > Number(pagination.last_page) ? Number(pagination.last_page)  : Number(page.page) + 2 }</a></li>
                                     </> 
                                 ) } 
+                                
                                 { pagination.last_page > 4 && (Number(pagination.last_page) - Number(page.page)) > 4 ? 
                                    (    
                                     <li class="page-item"><a class="page-link" href="#">...</a></li> 

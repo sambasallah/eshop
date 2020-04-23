@@ -1,7 +1,7 @@
 import { GET_PRODUCTS, GET_PRODUCT, GET_PRODUCT_BY_ID, ADD_TO_CART, UPDATE_ITEM_STATE, DELETE_ITEM_FROM_CART, ADDED_TO_CART } from '../actions/types';
 
 let initialState = {
-    items :[],
+    items : {},
     item: {},
     cart: [] 
 };

@@ -32,13 +32,13 @@ import { ProductProvider } from './context/ProductProvider';
 
 const App = () => {
   return (
-    
     <>
     <Provider store={store}>
     <Navbar></Navbar>
    <Switch>
     <Route exact path="/" component={Home}></Route>
     <Route exact path="/shop/" component={Shop}></Route>
+    <Route exact path="/shop/:page" render={(props) => <Shop {...props } />}></Route>
     <Route exact path="/about/" component={About}></Route>
     <Route exact path="/contact/" component={Contact}></Route>
     <Route exact path="/checkout/" component={Checkout}></Route>

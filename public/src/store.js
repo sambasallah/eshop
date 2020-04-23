@@ -8,7 +8,7 @@ const middleware = [thunk];
 
 const persistedState = {
     products: {
-        items: [],
+        items: {},
         item: loadItemState(),
         cart: loadCartState()
     }
