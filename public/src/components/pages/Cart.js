@@ -8,7 +8,7 @@ const CartItem = ({ item, cartItems, deleteItem }) => {
      return(
         <tr>
             <td>
-                <h6><img src={JSON.parse(item.url)[0]} alt="" style={{ maxWidth: "40px", maxHeight:"40px"}} /> <span><Link to={ item.name }>{ item.name }</Link></span></h6>
+                <h6><img src={JSON.parse(item.url)[0]} alt="" style={{ maxWidth: "40px", maxHeight:"40px"}} /> <span>{ item.name }</span></h6>
             </td>
             <td>
             <h6 className="qty-cart"><b>{ item.qty }</b></h6>
@@ -50,7 +50,7 @@ const Cart = (props) => {
                                 <div className="empty-cart-content">
                                     <img src={require('../../media/svg/empty-cart.svg')} style={{ maxWidth: '40%', maxHeight: '40%'}}/>
                                     <h4>Your Cart Is Empty</h4>
-                                    <a href="" className="continue-shopping">Continue Shopping</a>
+                                    <a href="/shop" className="continue-shopping">Continue Shopping</a>
                                 </div>
                             </div>
                         </div>

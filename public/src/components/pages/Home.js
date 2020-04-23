@@ -54,6 +54,71 @@ const Home = () => {
 					</div>
 				</div>
 	     </div>
+
+	
+		 <div className="trending-category">
+		 <div className="trend-title">
+			 <h4>Trending Products</h4>
+		 </div>
+		 <div className="trending-products">
+			<div className="row">
+				<div className="col-md-2">
+					<div className="trend-img">
+						<img  src={require('../../media/images/shirt3.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+					</div>
+					<div className="trend-description">
+						<h5>Men Shirt</h5>
+						<h6>D500 <sup><del>D700</del></sup></h6>
+					</div>
+				</div>
+				<div className="col-md-2">
+						<div className="trend-img">
+							<img  src={require('../../media/images/derby-shoe.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+						</div>
+						<div className="trend-description">
+							<h5>Derby Shoe</h5>
+							<h6>D2500 <sup><del>D3000</del></sup></h6>
+						</div>
+				</div>
+				<div className="col-md-2">
+					<div className="trend-img">
+						<img  src={require('../../media/images/chemise3.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+					</div>
+					<div className="trend-description">
+						<h5>Lacoste Chemise</h5>
+						<h6>D900 <sup><del>D1200</del></sup></h6>
+					</div>
+				</div>
+				<div className="col-md-2">
+					<div className="trend-img">
+						<img  src={require('../../media/images/m7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+					</div>
+					<div className="trend-description">
+						<h5>Men Watch</h5>
+						<h6>D1000 <sup><del>D1500</del></sup></h6>
+					</div>
+				</div>
+				<div className="col-md-2">
+					<div className="trend-img">
+						<img  src={require('../../media/images/b7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+					</div>
+					<div className="trend-description">
+						<h5>Women Bag</h5>
+						<h6>D1000 <sup><del>D1500</del></sup></h6>
+					</div>
+				</div>
+				<div className="col-md-2">
+					<div className="trend-img">
+						<img  src={require('../../media/images/coat.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+					</div>
+					<div className="trend-description">
+						<h5>Coat</h5>
+						<h6>D400 <sup><del>D450</del></sup></h6>
+					</div>
+				</div>
+			</div>
+		 </div>
+	 </div>
 	 
 	 <div className="latest-deals">
 		 <h2>Recommended for you <Link to="/shop" className="see-all">See All Items</Link></h2>
@@ -160,72 +225,7 @@ const Home = () => {
 		 </div>
 		 </div>
 	 </div>
-		
-	 <div className="trending-category">
-		 <div className="trend-title">
-			 <h4>Trending Products</h4>
-		 </div>
-		 <div className="trending-products">
-			<div className="row">
-				<div className="col-md-2">
-					<div className="trend-img">
-						<img  src={require('../../media/images/shirt3.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-					</div>
-					<div className="trend-description">
-						<h5>Men Shirt</h5>
-						<h6>D500 <sup><del>D700</del></sup></h6>
-					</div>
-				</div>
-				<div className="col-md-2">
-						<div className="trend-img">
-							<img  src={require('../../media/images/derby-shoe.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-						</div>
-						<div className="trend-description">
-							<h5>Derby Shoe</h5>
-							<h6>D2500 <sup><del>D3000</del></sup></h6>
-						</div>
-				</div>
-				<div className="col-md-2">
-					<div className="trend-img">
-						<img  src={require('../../media/images/chemise3.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-					</div>
-					<div className="trend-description">
-						<h5>Lacoste Chemise</h5>
-						<h6>D900 <sup><del>D1200</del></sup></h6>
-					</div>
-				</div>
-				<div className="col-md-2">
-					<div className="trend-img">
-						<img  src={require('../../media/images/m7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-					</div>
-					<div className="trend-description">
-						<h5>Men Watch</h5>
-						<h6>D1000 <sup><del>D1500</del></sup></h6>
-					</div>
-				</div>
-				<div className="col-md-2">
-					<div className="trend-img">
-						<img  src={require('../../media/images/b7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-					</div>
-					<div className="trend-description">
-						<h5>Women Bag</h5>
-						<h6>D1000 <sup><del>D1500</del></sup></h6>
-					</div>
-				</div>
-				<div className="col-md-2">
-					<div className="trend-img">
-						<img  src={require('../../media/images/coat.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-					</div>
-					<div className="trend-description">
-						<h5>Coat</h5>
-						<h6>D400 <sup><del>D450</del></sup></h6>
-					</div>
-				</div>
-			</div>
-		 </div>
-	 </div>
-
-		
+			
 	 <div className="about-eBaaba">
 		 <h2>eBaaba Gambia's No. 1 Online Shopping Platform</h2>
 		 <p>

@@ -338,8 +338,7 @@ ul {
 /** Trending Category **/
 .trending-category {
   width: 97%;
-  margin: auto;
-  margin-bottom: 15px;
+  margin: 15px auto;
   background-color: #fff;
   border-radius: 5px;
 }
