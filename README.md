@@ -9,6 +9,10 @@
 ![Shop](public/src/media/images/Shop.png)
 # Single
 ![Single](public/src/media/images/Single.png)
+# Cart
+![Cart](public/src/media/images/Cart.png)
+# Checkout
+![Checkout](public/src/media/images/Checkout.png)
 # Tech Stack
 ### Frontend
   - HTML
