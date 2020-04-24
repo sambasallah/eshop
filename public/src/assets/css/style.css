@@ -122,7 +122,7 @@ ul {
 }
 
 #myCarousel {
-  border: 0.8px solid #d3d3d3;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .text-content {
@@ -863,25 +863,19 @@ ul {
   cursor: pointer;
 }
 
-.pagination ul {
-  list-style: none;
+.shop-container .right-loading {
+  height: 80vh;
 }
 
-.pagination ul li {
-  display: inline-block;
-  padding-right: 10px;
-  cursor: pointer;
+.shop-container .right-loading .loading-giff {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.pagination ul li:active {
-  color: #fff;
-}
-
-.pagination ul li span {
-  padding: 5px 10px;
-  background-color: #ed017f;
-  border-radius: 5px;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5);
+.loading-giff i.fa.fa-spinner.fa-spin {
+  font-size: 70px;
 }
 
 /* This is the checked state */
@@ -1045,11 +1039,12 @@ ul {
   width: 19%;
 }
 
-.checkout-details a {
+.checkout-details .place-order {
   padding: 5px 50px;
   background-color: #33b27b;
   color: #fff;
   border-radius: 5px;
+  border: none;
 }
 
 .checkout-details .fa.fa-cc-visa, .fa.fa-cc-mastercard, .fa.fa-cc-paypal {

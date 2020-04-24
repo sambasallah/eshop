@@ -10,6 +10,10 @@ const Checkout = (props) => {
         total += Number(value.sale_price) * value.qty;
     });
 
+    const checkout = () => {
+        props.history.push('/completed')
+    }
+
     return (
         <div>
             <Helmet>
@@ -21,15 +25,15 @@ const Checkout = (props) => {
                 </div>
             </div>
             <div className="checkout">
-    <div className="checkout-container">
-        <div className="row">
-            <div className="col-md-8">
-                <div className="personal-information">
-                    <form action="" method="post">
-                    <h2>Personal Information</h2>
-                    <input type="text" name="name" placeholder="Full Name" />
-                    <input type="text" name="address" placeholder="Your address" />
-                    <select>
+                 <div className="checkout-container">
+                 <form onSubmit={ checkout } >
+                    <div className="row">
+                        <div className="col-md-8">
+                            <div className="personal-information">
+                            <h2>Personal Information</h2>
+                    <input type="text" name="name" placeholder="Full Name" required/>
+                    <input type="text" name="address" placeholder="Your address" required/>
+                    <select required>
                         <option value="Choose country" selected>Choose Country</option>
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Albania">Albania</option>
@@ -271,49 +275,50 @@ const Checkout = (props) => {
                         <option value="Zambia">Zambia</option>
                         <option value="Zimbabwe">Zimbabwe</option>
                     </select>
-                    <input type="text" name="town_city" placeholder="Town / City" />
-                    <input type="text" name="phone_number" placeholder="Phone" />
-                    <input type="text" name="email" placeholder="Email" />
-                    </form>
-                </div>
-            </div>
-            <div className="col-md-4">
-            <div className="checkout-details">
-                    <ul>
-                        <li><h6>Order Summary</h6></li>
-                        <li><h6>{ props.cartItems.length === 1? '1 Item' : props.cartItems.length + ' Items' }</h6></li>
-                    </ul>
-                    <hr/>
-                    { props.cartItems.map((value) => {
-                            return(
-                                <>
+                    <input type="text" name="town_city" placeholder="Town / City" required/>
+                    <input type="text" name="phone_number" placeholder="Phone" required/>
+                    <input type="text" name="email" placeholder="Email" required/>
+
+                            </div>
+                        </div>
+                      <div className="col-md-4">
+                        <div className="checkout-details">
                                 <ul>
-                                    <li>{ value.name }</li>
-                                    <li><img src={ JSON.parse(value.url)[0] } style={{maxWidth: '50%', maxHeight: '50%'}} /></li>
+                                    <li><h6>Order Summary</h6></li>
+                                    <li><h6>{ props.cartItems.length === 1? '1 Item' : props.cartItems.length + ' Items' }</h6></li>
                                 </ul>
-                                </>
-                            )
-                        })}
-                     <hr />
-                    <ul>
-                        <li><sub>Subtotal</sub></li>
-                        <li><h6>{ 'D' + new Intl.NumberFormat().format(total) }</h6></li>
-                    </ul>
-                    <hr/>
-                    <ul>
-                        <li><h6>Total</h6></li>
-                        <li><h6>{ 'D' + new Intl.NumberFormat().format(total) }</h6></li>
-                    </ul>
-                    <hr/>
-                    <Link to="/completed">Place Order</Link>
-                    <hr />
-                    <sub>We Accept : <i className="fa fa-cc-visa"></i> <i className="fa fa-cc-mastercard"></i> <i className="fa fa-cc-paypal"></i></sub>
+                                <hr/>
+                                { props.cartItems.map((value) => {
+                                        return(
+                                            <>
+                                            <ul>
+                                                <li>{ value.name }</li>
+                                                <li><img src={ JSON.parse(value.url)[0] } style={{maxWidth: '50%', maxHeight: '50%'}} /></li>
+                                            </ul>
+                                            </>
+                                        )
+                                    })}
+                                <hr />
+                                <ul>
+                                    <li><sub>Subtotal</sub></li>
+                                    <li><h6>{ 'D' + new Intl.NumberFormat().format(total) }</h6></li>
+                                </ul>
+                                <hr/>
+                                <ul>
+                                    <li><h6>Total</h6></li>
+                                    <li><h6>{ 'D' + new Intl.NumberFormat().format(total) }</h6></li>
+                                </ul>
+                                <hr/>
+                                <input type="submit"  value="place order" className='place-order'/>
+                                <hr />
+                                <sub>We Accept : <i className="fa fa-cc-visa"></i> <i className="fa fa-cc-mastercard"></i> <i className="fa fa-cc-paypal"></i></sub>
+                            </div>
+                        </div>  
                 </div>
+            </form>
+            </div>
             </div>
         </div>
-            </div>
-        </div>
-    </div>
     )
 }
 

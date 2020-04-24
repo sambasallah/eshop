@@ -21,7 +21,7 @@ const Success = () => {
                     <h2><i className="fa fa-check-circle"></i></h2>
                     <h5>Your Payment is been processed</h5>
                     <h6 className="order_id">Your Order ID is #3421</h6>
-                    <Link to="./">Continue Shopping</Link>
+                    <Link to="/shop">Continue Shopping</Link>
                 </div>
             </div>
         </div>

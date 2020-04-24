@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch } from 'react-router-dom';
 import './assets/css/style.css';
 
 /** Pages */
@@ -37,7 +37,7 @@ const App = () => {
     <Navbar></Navbar>
    <Switch>
     <Route exact path="/" component={Home}></Route>
-    <Route exact path="/shop/" component={Shop}></Route>
+    <Route exact path="/shop" component={Shop}></Route>
     <Route exact path="/shop/:page" render={(props) => <Shop {...props } />}></Route>
     <Route exact path="/about/" component={About}></Route>
     <Route exact path="/contact/" component={Contact}></Route>

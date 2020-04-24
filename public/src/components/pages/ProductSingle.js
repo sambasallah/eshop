@@ -4,7 +4,7 @@ import Slider  from 'react-slick';
 import ReactHtmlParser from 'react-html-parser';
 import { connect } from 'react-redux';
 import { addToCart } from '../../actions/productActions';
-import { inCart, isJson, increment, decrement } from '../utils/utils';
+import { inCart, isJson } from '../utils/utils';
 
 const ProductSingle = (props) => {
 
