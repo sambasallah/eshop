@@ -1142,25 +1142,26 @@
 	@extend .page-setup;
 }
 
-.success .success_container {
+.success .success-container {
 	@extend .page-container-setup;
 	height: 500px;
 }
 
-.success .success_info {
+.success .success-info {
 	border: 1px solid $secondary_color;
 	padding: 20px;
-	box-sizing: border-box;
 	position: relative;
+	max-width: 400px;
+	max-height: 300px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
-	width: 40%;
 	border-radius: 5px;
 	text-align: center;
+	box-sizing: border-box;
 }
 
-.success .success_info h2 i.fa.fa-check-circle {
+.success .success-info h2 i.fa.fa-check-circle {
 	color: $primary_color;
 	font-size: 50px;
 }
@@ -1171,9 +1172,19 @@
 	background-color: $primary_color;
 }
 
-.success .order_id {
+.success .order-id {
 	margin-bottom: 30px;
 }
+
+.success .continue-shopping {
+	padding: 10px 30px;
+	width: auto;
+	color: #fff;
+	background-color: $primary_color;
+	box-sizing: border-box;
+}
+
+
 /** media query **/
 
 @media screen and (min-width: 320px) and (max-width: 568px) {
@@ -1233,8 +1244,8 @@
 		margin-bottom: 20px;
 	}
 
-	.success .success_info {
-		width: 90%;
+	.success .success-info {
+		width: 100%;
 	}
 }
 
@@ -1250,8 +1261,8 @@
 		margin-bottom: 20px;
 	}
 
-	.success .success_info {
-		width: 90%;
+	.success .success-info {
+		width: 95%;
 	}
 
 	.products .card img {
@@ -1271,8 +1282,8 @@
 		margin-bottom: 20px;
 	}
 
-	.success .success_info {
-		width: 90%;
+	.success .success-info {
+		width: 95%;
 	}
 
 	.products .card img {
@@ -1293,8 +1304,8 @@
 		margin-bottom: 20px;
 	}
 
-	.success .success_info {
-		width: 90%;
+	.success .success-info {
+		width: 95%;
 	}
 
 	.products .card img {
@@ -1315,8 +1326,8 @@
 		margin-bottom: 20px;
 	}
 
-	.success .success_info {
-		width: 90%;
+	.success .success-info {
+		width: 95%;
 	}
 
 	.products .card img {
@@ -1391,7 +1402,7 @@
 		margin-bottom: 20px;
 	}
 
-	.success .success_info {
+	.success .success-info {
 		width: 60%;
 	}
 
@@ -1435,7 +1446,7 @@
 		margin: 20px auto;
 	}
 
-	.success .success_info {
+	.success .success-info {
 		width: 60%;
 	}
 
@@ -1484,7 +1495,7 @@
 		margin: 20px auto;
 	}
 
-	.success .success_info {
+	.success .success-info {
 		width: 60%;
 	}
 
@@ -1520,7 +1531,7 @@
 		font-size: 40px;
 	}
 
-	.success .success_info {
+	.success .success-info {
 		width: 50%;
 	}
 

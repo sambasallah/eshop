@@ -1,17 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
+import { orderCompleted } from '../../actions/productActions';
 
 const Checkout = (props) => {
+
+    const [customer, setCustomer] = useState({});
 
     let total  = 0;
     props.cartItems.map((value) => {
         total += Number(value.sale_price) * value.qty;
     });
 
-    const checkout = () => {
-        props.history.push('/completed')
+    const checkout = async (event) => {
+        event.preventDefault();
+        let orderItems = [];
+        props.cartItems.map((value) => {
+            orderItems = [...orderItems, {product_id : value.id, qty: value.qty}];
+        });
+        let uniqpref = customer.fullName[0] + "" + customer.address[2]; 
+        let orderID = Math.floor(Math.random() * 90000) + 10000;
+        orderID = uniqpref + '-' + orderID;
+        let updatedCustomer = {...customer, orderItems: orderItems, orderID: orderID};
+        let response = await fetch('http://localhost:8000/api/v1/create-order', {method: 'POST', headers : {'Content-Type': 'application/json'}, body: JSON.stringify(updatedCustomer)});
+        let data = await response.json();
+
+        if(data) {
+            props.orderCompleted({customerName: customer.fullName, orderID: orderID});
+            localStorage.removeItem('cart');
+            props.history.push('/completed');
+        }
+    }
+
+    const handleChange = (event) => {
+        setCustomer({...customer,[event.target.id] : event.target.value});
     }
 
     return (
@@ -31,9 +54,9 @@ const Checkout = (props) => {
                         <div className="col-md-8">
                             <div className="personal-information">
                             <h2>Personal Information</h2>
-                    <input type="text" name="name" placeholder="Full Name" required/>
-                    <input type="text" name="address" placeholder="Your address" required/>
-                    <select required>
+                    <input type="text" name="name" placeholder="Full Name" id="fullName" onChange={ handleChange } required/>
+                    <input type="text" name="address" placeholder="Your address" id="address" onChange={ handleChange } required/>
+                    <select required id="country" onChange={ handleChange }>
                         <option value="Choose country" selected>Choose Country</option>
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Albania">Albania</option>
@@ -275,9 +298,9 @@ const Checkout = (props) => {
                         <option value="Zambia">Zambia</option>
                         <option value="Zimbabwe">Zimbabwe</option>
                     </select>
-                    <input type="text" name="town_city" placeholder="Town / City" required/>
-                    <input type="text" name="phone_number" placeholder="Phone" required/>
-                    <input type="text" name="email" placeholder="Email" required/>
+                    <input type="text" name="town_city" placeholder="Town / City" id="townCity" onChange={ handleChange } required/>
+                    <input type="text" name="phone_number" placeholder="Phone" id="phone" onChange={ handleChange } required/>
+                    <input type="text" name="email" placeholder="Email" id="email" onChange={ handleChange } required/>
 
                             </div>
                         </div>
@@ -324,8 +347,8 @@ const Checkout = (props) => {
 
 const mapStateToProps = (state) => (
     {
-        cartItems: state.products.cart
+        cartItems: state.products.cart,
     }
 )
 
-export default connect(mapStateToProps)(Checkout);
+export default connect(mapStateToProps, { orderCompleted })(Checkout);

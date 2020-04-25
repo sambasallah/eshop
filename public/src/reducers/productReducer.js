@@ -1,9 +1,10 @@
-import { GET_PRODUCTS, GET_PRODUCT, GET_PRODUCT_BY_ID, ADD_TO_CART, UPDATE_ITEM_STATE, DELETE_ITEM_FROM_CART, ADDED_TO_CART } from '../actions/types';
+import { GET_PRODUCTS, ORDER_COMPLETED, GET_PRODUCT_BY_ID, ADD_TO_CART, DELETE_ITEM_FROM_CART  } from '../actions/types';
 
 let initialState = {
     items : {},
     item: {},
-    cart: [] 
+    cart: [],
+    completedOrder: {} 
 };
 
 export default function( state = initialState, action) {
@@ -28,6 +29,11 @@ export default function( state = initialState, action) {
                 return {
                     ...state,
                     cart: action.payload
+                }
+            case ORDER_COMPLETED: 
+                return {
+                    ...state,
+                    completedOrder: action.payload
                 }
             default:
                 return state;

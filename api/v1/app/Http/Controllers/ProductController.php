@@ -176,17 +176,17 @@ class ProductController extends Controller {
   }
 
 
-    public function getAllProductImages(int $product_id) {
+  private function getAllProductImages(int $product_id) {
       $images = DB::table('product_images')->where('product_id', $product_id)->get();
       $urls = [];
       foreach($images as $image) {
         array_push($urls, $image->url);
       }
       return ['images' => json_decode($urls[0])];
-    }
+  }
 
     
-    private function saveProductCategory(int $category_id, int $product_id): bool {
+  private function saveProductCategory(int $category_id, int $product_id): bool {
       $saveCategory = DB::table('product_categories')
       ->insert(['category_id' => $category_id, 
       'product_id' => $product_id]);
@@ -196,9 +196,9 @@ class ProductController extends Controller {
       }
 
       return false;
-    }
+   }
 
-    private function updateProductCategory(int $category_id, int $product_id): bool {
+   private function updateProductCategory(int $category_id, int $product_id): bool {
       $saveCategory = DB::table('product_categories')
       ->where('product_id', '=', $product_id)
       ->update(['category_id' => $category_id]);

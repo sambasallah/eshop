@@ -126,7 +126,7 @@ const ProductSingle = (props) => {
 
 const mapStateToProps = state => (
     {product: state.products.item,
-     cartItems : state.products.cart }
+     cartItems : state.products.cart? state.products.cart : [] }
 );
 
 export default connect(mapStateToProps, { addToCart  })(ProductSingle);

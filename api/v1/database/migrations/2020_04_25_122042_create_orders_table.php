@@ -3,9 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
+USE Illuminate\Support\Facades\DB;
 
-class CreateProductStatusesTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,12 @@ class CreateProductStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_statuses', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
+        Schema::create('orders', function (Blueprint $table) {
+            $table->string('product_id');
+            $table->string('qty');
+            $table->string('order_number');
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
@@ -29,6 +32,6 @@ class CreateProductStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_statuses');
+        Schema::dropIfExists('orders');
     }
 }

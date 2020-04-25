@@ -67,7 +67,7 @@ const Shop = (props) => {
 
     return (
        <>   
-        { props.products !== undefined ? (
+        { props.products !== undefined && page.page <= props.last_page? (
              <div>
              <Helmet>
                   <title>Shop | eBaaba No. 1 Online Shopping Website in Gambia</title>
@@ -340,7 +340,7 @@ const mapStateToProps = state => (
     {products: state.products.items.products,
      current_page: state.products.items.current_page,
      last_page: state.products.items.last_page,
-     cartItems : state.products.cart }
+     cartItems : state.products.cart? state.products.cart : [] }
 );
 
 export default connect(mapStateToProps, { getProducts, getProductByID, addToCart })(Shop);

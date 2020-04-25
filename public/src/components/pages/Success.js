@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { connect } from 'react-redux';
 
-const Success = () => {
+const Success = (props) => {
     return (
         <div>
             <Helmet>
@@ -15,13 +15,13 @@ const Success = () => {
             </div>
 
             <div className="success">
-            <div className="success_container">
-                <div className="success_info">
+            <div className="success-container">
+                <div className="success-info">
                     <h2>Thank You For Your Order</h2>
                     <h2><i className="fa fa-check-circle"></i></h2>
                     <h5>Your Payment is been processed</h5>
-                    <h6 className="order_id">Your Order ID is #3421</h6>
-                    <Link to="/shop">Continue Shopping</Link>
+                    <h6 className="order-id">Your Order ID is { '#' + props.customerInfo.orderID } </h6>
+                    <a className="continue-shopping" href="/shop">Continue Shopping</a>
                 </div>
             </div>
         </div>
@@ -30,4 +30,10 @@ const Success = () => {
     )
 }
 
-export default Success;
+const mapStateToProps = (state) => (
+    {
+        customerInfo: state.products.completedOrder
+    }
+)
+
+export default connect(mapStateToProps)(Success);

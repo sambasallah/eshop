@@ -35,8 +35,7 @@ $router->get('/admin/{id}', 'AdminController@admin');
 $router->post('/admin','AdminController@registerAdmin');
 $router->put('/admin/{id}', 'AdminController@updateAdmin');
 
-
-$router->get('/images/{id}', 'ProductController@getAllProductImages');
-$router->get('/delete', 'ProductController@deleteImg');
+// Orders Route
+$router->post('/create-order', 'OrdersController@createOrder');
 
 });

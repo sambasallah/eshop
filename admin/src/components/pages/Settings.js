@@ -60,13 +60,11 @@ const Settings = () => {
         let url = 'http://localhost:8000/api/v1/admin/1';
         let response = await fetch(url, {method : 'PUT', cache : 'no-cache', cors : 'no-cors', headers : {'Content-Type' : 'application/json'}, body : JSON.stringify(settings) });
         let data = await response.json();
-
          if(data.Updated === true) {
             setSettings(Object.assign({},settings, { success : 'Settings Saved', formSubmited: true }));
          } else {
             setSettings(Object.assign({},settings, { failed : 'Error! Saving Settings' }));
          }
-
          return false;
     }
 

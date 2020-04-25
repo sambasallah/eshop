@@ -8,7 +8,7 @@ const Navbar = (props) => {
             <nav className="navbar navbar-expand-md navbar-bg-color fixed-top justify-content-left">
                 <div className="container">
 
-                <Link className="navbar-brand" to="/">eBaaba</Link>
+                <a className="navbar-brand" href="/">eBaaba</a>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span>

@@ -20,6 +20,18 @@ export const loadCartState = () => {
     } catch (err) {
       return undefined;
     }
+}
+
+export const loadOrderID = () => {
+  try {
+    const serializedState = localStorage.getItem('orderID');
+    if (serializedState === null) {
+      return "";
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
 };
 
 export const saveItemState = (state) =>  {
@@ -38,4 +50,13 @@ export const saveCartState = (state) =>  {
     } catch {
       // ignore write errors
     }
+}
+
+export const saveOrderID = (state) =>  {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('orderID', serializedState);
+  } catch {
+    // ignore write errors
+  }
 }

@@ -114,7 +114,7 @@ const Cart = (props) => {
 }
 
 const mapStateToProps = (state) => (
-    { cartItems : state.products.cart,
+    { cartItems : state.products.cart ? state.products.cart : [],
     itemInCart: state.products.cart.length }
 )
 

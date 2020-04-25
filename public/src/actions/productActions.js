@@ -1,7 +1,7 @@
-import { GET_PRODUCTS,GET_PRODUCT_BY_ID, ADD_TO_CART, DELETE_ITEM_FROM_CART, ADDED_TO_CART } from './types';
+import { GET_PRODUCTS,GET_PRODUCT_BY_ID, ADD_TO_CART, DELETE_ITEM_FROM_CART, ORDER_COMPLETED } from './types';
 
-export const getProducts =  (page_no) => async (dispatch) => {
-        const url = "http://localhost:8000/api/v1/products/p/1?page=" + page_no;
+export const getProducts =  (pageNo) => async (dispatch) => {
+        const url = "http://localhost:8000/api/v1/products/p/1?page=" + pageNo;
         let reponse = await fetch(url);
         let data = await reponse.json();
         let allData = {};
@@ -51,6 +51,12 @@ export const deleteItemFromCart = (item, cartItems) => dispatch => {
     })
 }
 
+export const orderCompleted = (orderDetails) => dispatch => {
+    dispatch({
+        type: ORDER_COMPLETED,
+        payload: orderDetails
+    });
+}
 
 
 
