@@ -6,7 +6,7 @@ import { orderCompleted } from '../../actions/productActions';
 
 const Checkout = (props) => {
 
-    const [customer, setCustomer] = useState({});
+    const [customer, setCustomer] = useState({customerInfo: {}});
 
     let total  = 0;
     props.cartItems.map((value) => {
@@ -19,22 +19,24 @@ const Checkout = (props) => {
         props.cartItems.map((value) => {
             orderItems = [...orderItems, {product_id : value.id, qty: value.qty}];
         });
-        let uniqpref = customer.fullName[0] + "" + customer.address[2]; 
+        let uniqpref = customer.customerInfo.fullName[0] + "" + customer.customerInfo.address[2]; 
         let orderID = Math.floor(Math.random() * 90000) + 10000;
         orderID = uniqpref + '-' + orderID;
         let updatedCustomer = {...customer, orderItems: orderItems, orderID: orderID};
         let response = await fetch('http://localhost:8000/api/v1/create-order', {method: 'POST', headers : {'Content-Type': 'application/json'}, body: JSON.stringify(updatedCustomer)});
         let data = await response.json();
 
-        if(data) {
+        if(data.Created === true) {
             props.orderCompleted({customerName: customer.fullName, orderID: orderID});
             localStorage.removeItem('cart');
             props.history.push('/completed');
+        } else {
+            console.log(data);
         }
     }
 
     const handleChange = (event) => {
-        setCustomer({...customer,[event.target.id] : event.target.value});
+        setCustomer({customerInfo : {...customer.customerInfo, [event.target.id] : event.target.value}});
     }
 
     return (

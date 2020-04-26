@@ -1151,8 +1151,8 @@
 	border: 1px solid $secondary_color;
 	padding: 20px;
 	position: relative;
-	max-width: 400px;
-	max-height: 300px;
+	width: 400px;
+	max-height: 350px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
@@ -1177,11 +1177,12 @@
 }
 
 .success .continue-shopping {
-	padding: 10px 30px;
-	width: auto;
+	padding: 10px 20px;
+	width: 100%;
 	color: #fff;
+	// flex-grow: 1;
+	// font-size: 12px;
 	background-color: $primary_color;
-	box-sizing: border-box;
 }
 
 

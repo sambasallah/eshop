@@ -1060,8 +1060,8 @@ ul {
   border: 1px solid #33b27b;
   padding: 20px;
   position: relative;
-  max-width: 400px;
-  max-height: 300px;
+  width: 400px;
+  max-height: 350px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -1086,11 +1086,10 @@ ul {
 }
 
 .success .continue-shopping {
-  padding: 10px 30px;
-  width: auto;
+  padding: 10px 20px;
+  width: 100%;
   color: #fff;
   background-color: #ed017f;
-  box-sizing: border-box;
 }
 
 /** media query **/

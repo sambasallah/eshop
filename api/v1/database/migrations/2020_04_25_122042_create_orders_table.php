@@ -15,6 +15,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('product_id');
             $table->string('qty');
             $table->string('order_number');

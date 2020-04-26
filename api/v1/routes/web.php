@@ -38,4 +38,6 @@ $router->put('/admin/{id}', 'AdminController@updateAdmin');
 // Orders Route
 $router->post('/create-order', 'OrdersController@createOrder');
 
+// test
+$router->get('/save-order', 'OrdersController@saveOrderInfo');
 });

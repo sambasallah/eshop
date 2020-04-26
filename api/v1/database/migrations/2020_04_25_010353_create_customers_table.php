@@ -18,6 +18,7 @@ class CreateCustomersTable extends Migration
             $table->bigIncrements('id');
             $table->string('full_name');
             $table->string('address');
+            $table->string('country');
             $table->string('town_city');
             $table->string('phone_number');
             $table->string('email');
