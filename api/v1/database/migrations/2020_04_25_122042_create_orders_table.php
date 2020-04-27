@@ -16,10 +16,10 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('product_id');
-            $table->string('qty');
+            $table->json('products');
             $table->string('order_number');
             $table->unsignedBigInteger('customer_id');
+            $table->string('total');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

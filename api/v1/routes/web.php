@@ -36,8 +36,8 @@ $router->post('/admin','AdminController@registerAdmin');
 $router->put('/admin/{id}', 'AdminController@updateAdmin');
 
 // Orders Route
+$router->get('/orders', 'OrdersController@getAllOrders');
+$router->get('/order/{order_number}', 'OrdersController@getOrder');
 $router->post('/create-order', 'OrdersController@createOrder');
 
-// test
-$router->get('/save-order', 'OrdersController@saveOrderInfo');
 });

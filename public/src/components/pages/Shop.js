@@ -19,11 +19,11 @@ const Product = ({ product, index, products, getProductByID, addToCart, cartItem
             </div>
             <div>
                     <div className="product-description">
-                        <Link to={ page ?'../' + product.slug : product.slug } onClick={ () => { getProductByID(products, product.id) } }>
+                        <a href={ page ?'../' + product.slug : product.slug } onClick={ () => { getProductByID(products, product.id) } }>
                             <h3 className="title">{ limitTitle(product.name) }</h3>
                             <hr className="below-title"></hr>
                             <span className="price"><span style={{ fontSize: '15px', fontWeight: 'lighter' }}>D</span> { new Intl.NumberFormat().format(product.sale_price) } </span> <sup className="orignal-price"><del> { new Intl.NumberFormat().format(product.regular_price) } </del></sup>
-                        </Link>
+                        </a>
                         <hr className="below-price"></hr>
                         <button className="add-to-cart" onClick={() => {
                           let updatedProduct = {...product, qty: 1};

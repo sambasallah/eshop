@@ -21,7 +21,7 @@ const App = () => {
           <Route exact path="/store" component={Store}></Route>
           <Route exact path="/store/:page" render={(props) => <Store {...props } />}></Route>
           <Route exact path="/settings" component={Settings}></Route>
-          <Route exact path="/order" component={SingleOrder}></Route>
+          <Route exact path="/order/:order_id" render={(props) => <SingleOrder {...props} />}></Route>
           <Route exact path="/add-product" component={AddProduct}></Route>
           <Route exact path="/edit/:slug" component={EditProduct}></Route>
         </Switch>

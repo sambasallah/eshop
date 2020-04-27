@@ -7,6 +7,7 @@ import { orderCompleted } from '../../actions/productActions';
 const Checkout = (props) => {
 
     const [customer, setCustomer] = useState({customerInfo: {}});
+    const [loading, setLoading] = useState({loading: false});
 
     let total  = 0;
     props.cartItems.map((value) => {
@@ -15,18 +16,21 @@ const Checkout = (props) => {
 
     const checkout = async (event) => {
         event.preventDefault();
+        setLoading({...loading, loading: true});
         let orderItems = [];
         props.cartItems.map((value) => {
-            orderItems = [...orderItems, {product_id : value.id, qty: value.qty}];
+            orderItems = [...orderItems, {productID : value.id, productName: value.name, qty: value.qty, 
+                salePrice: value.sale_price, img: JSON.parse(value.url)[0]}];
         });
         let uniqpref = customer.customerInfo.fullName[0] + "" + customer.customerInfo.address[2]; 
         let orderID = Math.floor(Math.random() * 90000) + 10000;
         orderID = uniqpref + '-' + orderID;
-        let updatedCustomer = {...customer, orderItems: orderItems, orderID: orderID};
+        let updatedCustomer = {...customer, orderItems: orderItems, orderID: orderID, total: total };
         let response = await fetch('http://localhost:8000/api/v1/create-order', {method: 'POST', headers : {'Content-Type': 'application/json'}, body: JSON.stringify(updatedCustomer)});
         let data = await response.json();
-
+        
         if(data.Created === true) {
+            setLoading({...loading, loading: false});
             props.orderCompleted({customerName: customer.fullName, orderID: orderID});
             localStorage.removeItem('cart');
             props.history.push('/completed');
@@ -334,7 +338,7 @@ const Checkout = (props) => {
                                     <li><h6>{ 'D' + new Intl.NumberFormat().format(total) }</h6></li>
                                 </ul>
                                 <hr/>
-                                <input type="submit"  value="place order" className='place-order'/>
+                                <button type="submit" className='place-order'>{ loading.loading === true? <i class="fa fa-spinner fa-spin"></i> : 'place order' }</button>
                                 <hr />
                                 <sub>We Accept : <i className="fa fa-cc-visa"></i> <i className="fa fa-cc-mastercard"></i> <i className="fa fa-cc-paypal"></i></sub>
                             </div>
