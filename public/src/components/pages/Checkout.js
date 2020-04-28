@@ -25,7 +25,9 @@ const Checkout = (props) => {
         let uniqpref = customer.customerInfo.fullName[0] + "" + customer.customerInfo.address[2]; 
         let orderID = Math.floor(Math.random() * 90000) + 10000;
         orderID = uniqpref + '-' + orderID;
-        let updatedCustomer = {...customer, orderItems: orderItems, orderID: orderID, total: total };
+        let updatedCustomer = {...customer, orderItems: orderItems, orderID: orderID, 
+            total: total, orderNote: customer.customerInfo.orderNote === undefined? '' : customer.customerInfo.orderNote,
+            shippingAddress: customer.customerInfo.shippingAddress };
         let response = await fetch('http://localhost:8000/api/v1/create-order', {method: 'POST', headers : {'Content-Type': 'application/json'}, body: JSON.stringify(updatedCustomer)});
         let data = await response.json();
         
@@ -34,9 +36,8 @@ const Checkout = (props) => {
             props.orderCompleted({customerName: customer.fullName, orderID: orderID});
             localStorage.removeItem('cart');
             props.history.push('/completed');
-        } else {
-            console.log(data);
         }
+
     }
 
     const handleChange = (event) => {
@@ -308,8 +309,13 @@ const Checkout = (props) => {
                     <input type="text" name="phone_number" placeholder="Phone" id="phone" onChange={ handleChange } required/>
                     <input type="text" name="email" placeholder="Email" id="email" onChange={ handleChange } required/>
 
-                            </div>
-                        </div>
+                    <h2>Shipping</h2>
+                    <input type="text" name="shipping_address" placeholder="Shipping Address" id="shippingAddress" onChange={ handleChange } required/>
+                    <textarea className="form-control order-note" rows="3" placeholder="Order Note (Optional)" id="orderNote" onChange={ handleChange }></textarea>
+                            
+                            
+                    </div>
+                </div>
                       <div className="col-md-4">
                         <div className="checkout-details">
                                 <ul>

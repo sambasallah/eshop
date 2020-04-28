@@ -3,7 +3,7 @@ import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
 import { FaClock, FaMapMarker, FaRegEnvelope  } from 'react-icons/fa';
 import { MdPhoneIphone } from 'react-icons/md';
-import Orders from './Orders';
+import { toast } from 'react-toastify';
 
 const SingleOrder = (props) => {
 
@@ -12,6 +12,22 @@ const SingleOrder = (props) => {
         products: []
     });
     const [loading, setLoading] = useState({loading: false});
+
+    const pendingOrder = { padding: '5px 15px',
+    backgroundColor: '#33b27b',
+    color: '#fff',
+    fontWeight: '300',
+    borderRadius: '5px',
+    border: 'none'}
+
+    const orderCompletd = {
+        padding: '5px 15px',
+        backgroundColor: '#f5f5f5',
+        color: '#000',
+        fontWeight: '300',
+        borderRadius: '5px',
+        border: 'none'
+    }
 
     const getOrderInfo = async () => {
         setLoading({...loading,loading: true});
@@ -32,12 +48,34 @@ const SingleOrder = (props) => {
             country: oInfo.country,
             address: oInfo.address,
             email: oInfo.email,
+            orderNote: oInfo.order_note,
+            shippingAddress: oInfo.shipping_address,
+            orderStatus: oInfo.order_status,
             phoneNumber: oInfo.phone_number,
             townCity: oInfo.town_city });
           setLoading({...loading, loading: false});
-          console.log(orderData);
         }
     }
+
+    const orderCompleted = () =>  toast.success("Order Completed", {
+        position: toast.POSITION.TOP_LEFT
+    });
+
+    const completeOrder = async () => {
+        let url = 'http://localhost:8000/api/v1/complete-order';
+        let response = await fetch(url, {method: 'PUT', headers : {'Content-Type': 'application/json'},
+         body: JSON.stringify({'order_number': order.orderNumber})});
+        let data = await response.json();
+
+        if(data) {
+            orderCompleted();
+            props.history.push('/orders');
+        } else {
+            console.log(data);
+        }
+    }
+
+   
 
     useEffect(() => {
         getOrderInfo();
@@ -116,11 +154,11 @@ const SingleOrder = (props) => {
                                   </div>
                                   <div className="col-md-3">
                                       <h6>SHIPPING</h6>
-                                      <p>Serigne Mass Jobe Avenue, Serrekunda, the Gambia</p>
+                                      <p>{ order.shippingAddress }</p>
                                   </div>
                                   <div className="col-md-2">
                                       <h6>ORDER NOTE</h6>
-                                      <p>I will like it delivered on Monday</p>
+                                      <p>{ order.orderNote }</p>
                                   </div>
                               </div>
                               <h3>Items</h3>
@@ -151,13 +189,11 @@ const SingleOrder = (props) => {
                               <div className="row">
                                   <div className="col-md-8"></div>
                                   <dic className="col-md-4" align="right">
-                                      <a href="#" 
-                                      style={{ padding: '5px 15px',
-                                              backgroundColor: '#33b27b',
-                                              color: '#fff',
-                                              fontWeight: '300',
-                                              borderRadius: '5px'}}
-                                      >Completed</a>
+                                      <button href="#" disabled={order.orderStatus === 'Completed'? 'disabled' : ''} 
+                                      onClick={ completeOrder } 
+                                      style={ order.orderStatus === 'Completed'? 
+                                      orderCompletd : pendingOrder}
+                                    >Completed</button>
                                   </dic>
                               </div>
                           </div>

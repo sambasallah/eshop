@@ -17,7 +17,8 @@ const App = () => {
        <Navbar />
         <Switch>
           <Route exact path="/" component={Dashboard}></Route>
-          <Route exact path="/orders" component={Orders}></Route>
+          <Route exact path="/orders" render={(props) => <Orders {...props} />}></Route>
+          <Route exact path="/orders/:page" render={(props) => <Orders {...props} />}></Route>
           <Route exact path="/store" component={Store}></Route>
           <Route exact path="/store/:page" render={(props) => <Store {...props } />}></Route>
           <Route exact path="/settings" component={Settings}></Route>

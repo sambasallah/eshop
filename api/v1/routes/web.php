@@ -37,6 +37,11 @@ $router->put('/admin/{id}', 'AdminController@updateAdmin');
 
 // Orders Route
 $router->get('/orders', 'OrdersController@getAllOrders');
+$router->get('/total-orders', 'OrdersController@totalOrders');
+$router->get('/today-orders', 'OrdersController@getTodayOrders');
+$router->get('/pending-orders', 'OrdersController@getTotalPendingOrders');
+$router->get('/completed-orders', 'OrdersController@getCompletedOrders');
+$router->put('/complete-order', 'OrdersController@completeOrder');
 $router->get('/order/{order_number}', 'OrdersController@getOrder');
 $router->post('/create-order', 'OrdersController@createOrder');
 

@@ -1084,6 +1084,14 @@
 	margin: auto;
 }
 
+.checkout .personal-information h2 {
+	padding: 10px 0px;
+}
+
+.checkout .personal-information .order-note {
+	border: 1px solid $primary-color  !important;
+}
+
 .checkout .personal-information input[type=text], select {
 	width:100%;
 	margin: 10px 0px;

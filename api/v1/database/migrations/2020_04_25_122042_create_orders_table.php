@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->json('products');
             $table->string('order_number');
+            $table->string('order_status');
             $table->unsignedBigInteger('customer_id');
             $table->string('total');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');

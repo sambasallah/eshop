@@ -6,11 +6,17 @@ import { Link } from 'react-router-dom';
 
 const OrderItem = ({ items }) => {
 
-    const status = {
+    const statusProcessing = {
     padding: '5px 20px', 
     backgroundColor: '#ed017f', 
     borderRadius: '5px', 
     color: '#fff'}
+
+    const statusCompeleted = {
+        padding: '5px 20px', 
+        backgroundColor: '#f5f5f5', 
+        borderRadius: '5px', 
+        color: '#000'}
     
     return(
        <>
@@ -28,7 +34,8 @@ const OrderItem = ({ items }) => {
                           <td>{ value.full_name }</td>
                           <td>{ new Intl.NumberFormat().format(value.total) } </td>
                           <td>{  new Intl.NumberFormat().format(Number(value.total) * 10/100) }</td>
-                          <td><span style={status}>Pending</span></td>
+                          <td><span style={value.order_status === 'Completed'? 
+                          statusCompeleted : statusProcessing}>{ value.order_status }</span></td>
                          </tr>
                       ) : ""}
                      </>
@@ -40,9 +47,17 @@ const OrderItem = ({ items }) => {
     )
 }
 
-const Orders = () => {
+const Orders = (props) => {
+
+    let page_no = props.match.params.page? props.match.params.page : 1;
     
     const [orders, setOrders] = useState([]);
+    const [page, setPage] = useState({page: page_no});
+    const [pagination, setPagination] = useState({current_page: "", last_page: ""})
+    const [totalOrders, setTotalOrders] = useState({total: 0});
+    const [todayOrders, setTodayOrders] = useState({total: 0});
+    const [pendingOrders, setPendingOrders] = useState({total: 0});
+    const [completedOrders, setCompletedOrders] = useState({total: 0});
 
     const orderAnalytics = {
         marginBottom: '15px'
@@ -50,28 +65,85 @@ const Orders = () => {
     
 
     const getAllOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/orders';
+        let url = 'http://localhost:8000/api/v1/orders?page='+ page.page;
         let response = await fetch(url);
         let data = await response.json();
 
         if(data) {
            let orderItems = [];
-           data.map((value) => {
+           data.data.map((value) => {
                 orders.push(value);
            });
-
+           setPagination({current_page: data.current_page, last_page: data.last_page, from: data.from});
            setOrders([...orders,orderItems]);
-           console.log(orders);
         } else {
             console.log(data);
         }
-
-
-
     }
+
+    const getTotalOrders = async () => {
+        let url = 'http://localhost:8000/api/v1/total-orders';
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if(data) {
+            setTotalOrders({...totalOrders, total: data.Total});
+        }
+    }
+
+    const getTodayOrders = async () => {
+        let url = 'http://localhost:8000/api/v1/today-orders';
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if(data) {
+            setTodayOrders({...todayOrders, total: data.Today});
+        }
+    }
+
+    const getPendingOrders = async () => {
+        let url = 'http://localhost:8000/api/v1/pending-orders';
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if(data) {
+            setPendingOrders({...pendingOrders, total: data.Pending});
+        }
+    }
+
+    
+    const getCompletedOrders = async () => {
+        let url = 'http://localhost:8000/api/v1/completed-orders';
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if(data) {
+            setCompletedOrders({...completedOrders, total: data.Completed});
+        }
+    }
+
+
+    const next = (event) => {
+        let currentPage = Number(page.page) + 1;
+        setPage({page: currentPage});
+     }
+ 
+     
+     const prev = () => {
+         let currentPage = Number(page.page) - 1;
+         if(currentPage === 0 ) {
+             setPage({page: 1});
+         } else {
+             setPage({page: currentPage});
+         }
+     }
 
     useEffect(() => {
         getAllOrders();
+        getTotalOrders();
+        getTodayOrders();
+        getPendingOrders();
+        getCompletedOrders();
     },[])
 
     return (
@@ -104,25 +176,25 @@ const Orders = () => {
                             <div className="row">
                                 <div className="col-md-3">
                                     <div className="order-info">
-                                        <h3>100</h3>
+                                        <h3>{ totalOrders.total }</h3>
                                         <h6>All Orders</h6>
                                     </div>
                                 </div>
                                 <div className="col-md-3">
                                 <div className="order-info">
-                                         <h3>10</h3>
+                                         <h3>{ todayOrders.total }</h3>
                                         <h6>Orders Today</h6>
                                 </div>
                                 </div>
                                 <div className="col-md-3">
                                     <div className="order-info">
-                                        <h3>5</h3>
+                                        <h3>{ pendingOrders.total }</h3>
                                         <h6>Pending Orders</h6>
                                     </div>
                                 </div>
                                 <div className="col-md-3">
                                     <div className="order-info">
-                                        <h3>95</h3>
+                                        <h3>{ completedOrders.total }</h3>
                                         <h6>Completed</h6>
                                     </div>
                                 </div>
@@ -145,6 +217,96 @@ const Orders = () => {
                                     <OrderItem items={ orders? orders : [] } />
                                  </tbody>  
                             </table>
+                            { Number(pagination.last_page) <= 0? "" : ""}
+                            { Number(pagination.last_page) >= 2  && Number(pagination.last_page) < 3? (
+                                <>
+                                    <nav aria-label="Products Navigation">
+                                  <ul class="pagination justify-content-center">
+                                  <li class= { "page-item " +  (Number(page.page) === 1? "disabled" : "")}>
+                                    <a class="page-link" href={ "/orders/" + Number(page.page) } onClick={ prev }>Previous</a>
+                                </li>
+                                    <li class="page-item"><a class="page-link" href="/orders/1">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="/orders/2">2</a></li>
+                                    <li class= { "page-item " +  (Number(page.page) === Number(pagination.last_page)? "disabled" : "")}>
+                                    <a class="page-link" href={ "/orders/" + Number(page.page) } onClick={ next }>Next</a>
+                                </li>
+                                 </ul>
+                                 </nav>
+                                </>
+                            ) : ("")}
+                             { Number(pagination.last_page) >= 3  && Number(pagination.last_page)  < 4 ? (
+                                <>
+                                <nav aria-label="Products Navigation">
+                                  <ul class="pagination justify-content-center">
+                                  <li class= { "page-item " +  (Number(page.page) === 1? "disabled" : "")}>
+                                    <a class="page-link" href={ "/orders/" + Number(page.page) } onClick={ prev }>Previous</a>
+                                </li>
+                                    <li class="page-item"><a class="page-link" href="/orders/1">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="/orders/2">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="/orders/2">3</a></li>
+                                    <li class= { "page-item " +  (Number(page.page) === Number(pagination.last_page)? "disabled" : "")}>
+                                    <a class="page-link" href={ "/orders/" + Number(page.page) } onClick={ next }>Next</a>
+                                </li>
+                                </ul>
+                                </nav>
+                                </>
+                            ) : ("")}
+
+                            { Number(pagination.last_page) > 3 && Number(pagination.last_page) <= 4 ? (
+                                <>
+                                    <li class="page-item"><a class="page-link" href="/orders/1">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="/orders/2">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="/orders/2">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="/orders/2">4</a></li>
+                                </>
+                            ) : ("")}
+
+                            { Number(pagination.last_page) > 4? 
+                            (
+                            <nav aria-label="Products Navigation">
+                            <ul class="pagination justify-content-center">
+                                <li class= { "page-item " +  (Number(page.page) === 1? "disabled" : "")}>
+                                    <a class="page-link" href={ "/orders/" + Number(page.page) } onClick={ prev }>Previous</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="/orders">1</a></li>
+                                { Number(page.page) < 4? (
+                                    <>
+                                    <li class="page-item"><a class="page-link" href="/orders/2">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="/orders/3">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="/orders/4">4</a></li>
+                                    </>
+                                ) : (
+                                    <>
+                                    <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                    <li class="page-item"><a class="page-link" 
+                                    href={ "/orders/" + ( Number(pagination.last_page) - Number(page.page) <= 3 ? 
+                                    Number(pagination.last_page) - 2 : Number(page.page) ) }>{ Number(pagination.last_page) - Number(page.page) <= 3 ? Number(pagination.last_page) - 2 : Number(page.page)}</a></li>
+                                    <li class="page-item"><a class="page-link" 
+                                    href={ "/orders/" + ( Number(pagination.last_page) - Number(page.page) -1 <= 2 ? 
+                                    Number(pagination.last_page) - 1 : Number(page.page) + 1 ) }>{ Number(pagination.last_page) - Number(page.page) -1 <= 2 ? Number(pagination.last_page) - 1 : Number(page.page) + 1}</a></li>
+                                    <li class="page-item"><a class="page-link" 
+                                    href={ "/orders/" + ( (Number(page.page) + 4) >= Number(pagination.last_page) ? 
+                                    Number(pagination.last_page) : Number(page.page) + 2)}>
+                                        { Number(page.page) + 4 > Number(pagination.last_page) ? Number(pagination.last_page)  : Number(page.page) + 2 }</a></li>
+                                    </> 
+                                ) } 
+                                
+                                { pagination.last_page > 4 && (Number(pagination.last_page) - Number(page.page)) > 4 ? 
+                                   (    
+                                    <li class="page-item"><a class="page-link" href="#">...</a></li> 
+                                   ) 
+                                 : 
+                                ("")}
+                                { (Number(pagination.last_page) - Number(page.page)) > 3? (
+                                      <li class="page-item"><a class="page-link" href={ "/orders/" + Number(pagination.last_page) }> { pagination.last_page }</a></li>
+                                ) : ("")}
+                                <li class= { "page-item " +  (Number(page.page) === Number(pagination.last_page)? "disabled" : "")}>
+                                    <a class="page-link" href={ "/orders/" + Number(page.page) } onClick={ next }>Next</a>
+                                </li>
+                            </ul>
+                            
+                        </nav>
+                         ): ""}
                         </div>
                        
                     </div>
