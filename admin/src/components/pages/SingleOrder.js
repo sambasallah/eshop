@@ -102,7 +102,7 @@ const SingleOrder = (props) => {
                           <div className="col-md-8 right">
                               <ul>
                                   <li><h4>{ order.fullName }</h4></li>
-                                  <li><span className="order-amount-summary">{ new Intl.NumberFormat().format(order.total) }</span></li>
+                                  <li><span className="order-amount-summary">{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 'GMD' }).format(order.total) }</span></li>
                                   <li><span className="order-id">{ order.id }</span></li>
                               </ul>
                               <h6>{ '#' + order.orderNumber } <span><FaClock /> Updated on { order.updatedAt } </span></h6>
@@ -141,7 +141,7 @@ const SingleOrder = (props) => {
                                           <li>
                                               <ul>
                                                   <li>Order Amount</li>
-                                                  <li>{ order.total }</li>
+                                                  <li>{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 'GMD' }).format(order.total) }</li>
                                               </ul>
                                           </li>
                                           <li>

@@ -45,4 +45,12 @@ $router->put('/complete-order', 'OrdersController@completeOrder');
 $router->get('/order/{order_number}', 'OrdersController@getOrder');
 $router->post('/create-order', 'OrdersController@createOrder');
 
+// Dashboard Route
+$router->get('/total-sales', 'DashboardController@getTotalSales');
+$router->get('/weekly-sales', 'DashboardController@getWeeklySales');
+$router->get('/all-orders', 'DashboardController@getAllOrders');
+$router->get('/new-orders', 'DashboardController@newOrders');
+$router->get('/weekly-data', 'DashboardController@getWeeklyData');
+$router->get('/total-profit', 'DashboardController@getTotalProfit');
+
 });
