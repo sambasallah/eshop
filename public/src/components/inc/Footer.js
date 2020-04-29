@@ -38,7 +38,7 @@ const Footer = () => {
 								 <li>Buyer Safety Center</li>
 								 <li>FAQs</li>
 								 <li>Delivery</li>
-								 <li>Konga Return Policy</li>
+								 <li>eBaaba Return Policy</li>
 								 <li>Digital Services</li>
 								 <li>Bulk Purchase</li>
 							 </ul>

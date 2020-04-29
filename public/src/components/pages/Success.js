@@ -19,7 +19,7 @@ const Success = (props) => {
                 <div className="success-info">
                     <h2>Thank You For Your Order</h2>
                     <h2><i className="fa fa-check-circle"></i></h2>
-                    <h5>Your Payment is been processed</h5>
+                    <h5>Your order is been processed</h5>
                     <h6 className="order-id">Your Order ID is { '#' + props.customerInfo.orderID } </h6>
                     <a className="continue-shopping" href="/shop">Continue Shopping</a>
                 </div>

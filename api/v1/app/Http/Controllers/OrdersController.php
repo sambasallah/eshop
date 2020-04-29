@@ -87,7 +87,7 @@ class OrdersController extends Controller
     public function getTotalPendingOrders() {
         $pending_orders = DB::table('orders')
         ->select(DB::raw('*'))
-        ->where('order_status', 'Pending')->get();
+        ->where('order_status', 'Processing')->get();
 
         return response()->json(['Pending' => count($pending_orders)]);
     }
