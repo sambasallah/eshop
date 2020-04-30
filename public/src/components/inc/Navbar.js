@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { FaShoppingCart, FaSignInAlt } from 'react-icons/fa';
 
 const Navbar = (props) => {
     return (
@@ -35,12 +36,12 @@ const Navbar = (props) => {
                     </li> 
                     <li className="nav-item">
                         <a href="/cart" className="nav-link">
-                            <i className="fa fa-shopping-cart" title="Cart"></i>
+                            <FaShoppingCart style={{ color: '#33b27b', fontSize: '20px'}}/>
                             { props.itemInCart? (<span className='badge badge-warning' id='lblCartCount'> { props.itemInCart } </span>) : '' } 
                         </a>
                     </li>
                     <li className="nav-item">
-                        <a href="auth" className="nav-link" ><i className="fa fa-sign-in" title="Login/Register"></i></a>
+                        <a href="auth" className="nav-link" ><FaSignInAlt style={{color: '#000', fontSize: '20px'}} /></a>
                     </li>
                     </ul>
                 </div> 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
-import { FaClock, FaMapMarker, FaRegEnvelope  } from 'react-icons/fa';
+import { FaClock, FaMapMarker, FaRegEnvelope } from 'react-icons/fa';
 import { MdPhoneIphone } from 'react-icons/md';
 import { toast } from 'react-toastify';
 

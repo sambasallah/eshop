@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import { limitTitle }  from '../helpers/Helpers';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProducts, getProductByID, addToCart } from '../../actions/productActions';
+import { FaPlus, FaMinus } from 'react-icons/fa';
 import { inCart } from '../utils/utils';
 
 const Product = ({ product, index, products, getProductByID, addToCart, cartItems, page }) => {
@@ -45,6 +44,8 @@ const Shop = (props) => {
     let page_no = props.match.params.page? props.match.params.page : 1;
 
     const [page, setPage] = useState({page: page_no});
+    const [plusMinusPrice, setPlusMinusPrice] = useState({plus: true});
+    const [plusMinusCategories, setPlusMinusCategories] = useState({plus: true});
 
     const next = (event) => {
         let currentPage = Number(page.page) + 1;
@@ -59,6 +60,22 @@ const Shop = (props) => {
          } else {
              setPage({page: currentPage});
          }
+     }
+
+     const changeToMinusPlusPrice = () => {
+        if(plusMinusPrice.plus === true) {
+            setPlusMinusPrice({...plusMinusPrice, plus: false});
+        } else {
+            setPlusMinusPrice({...plusMinusPrice, plus: true});
+        }
+     }
+
+     const changeToMinusPlusCategories = () => {
+        if(plusMinusCategories.plus === true) {
+            setPlusMinusCategories({...plusMinusCategories, plus: false});
+        } else {
+            setPlusMinusCategories({...plusMinusCategories, plus: true});
+        }
      }
 
     useEffect(() => {
@@ -83,7 +100,9 @@ const Shop = (props) => {
                          <div className="col-md-3 shop-left">
                              <ul>
                                  <li className="filter-title">Price</li>
-                                 <li><a type="button" data-toggle="collapse" data-target="#price"><i className="fa fa-plus"></i></a></li>
+                                 <li><a type="button" data-toggle="collapse" data-target="#price" onClick={ changeToMinusPlusPrice }>
+                                        {plusMinusPrice.plus === true ? <FaPlus /> : <FaMinus />}
+                                     </a></li>
                              </ul>
                              <div id="price" className="collapse">
                                      <form>
@@ -121,7 +140,9 @@ const Shop = (props) => {
                                  <hr></hr>
                              <ul>
                                  <li className="filter-title">Categories</li>
-                                 <li><a type="button" data-toggle="collapse" data-target="#categories"><i className="fa fa-plus"></i></a></li>
+                                 <li><a type="button" data-toggle="collapse" data-target="#categories" onClick={ changeToMinusPlusCategories }>
+                                        {plusMinusCategories.plus === true ? <FaPlus /> : <FaMinus />}
+                                     </a></li>
                              </ul>
                              <div id="categories" className="collapse">
                                  <ul>
@@ -322,8 +343,55 @@ const Shop = (props) => {
                              </div>
                          </div>
                         <div className="col-md-9 right-loading">
-                            <div className="loading-giff">
-                                 <i class="fa fa-spinner fa-spin"></i>
+                            <div className="row">
+                                <div className="col-md-3">
+                                    <div className="product">
+                                        <div className="product-img"></div>
+                                        <div className="product-description"></div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="product">
+                                        <div className="product-img"></div>
+                                        <div className="product-description"></div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="product">
+                                        <div className="product-img"></div>
+                                        <div className="product-description"></div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="product">
+                                        <div className="product-img"></div>
+                                        <div className="product-description"></div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="product">
+                                        <div className="product-img"></div>
+                                        <div className="product-description"></div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="product">
+                                        <div className="product-img"></div>
+                                        <div className="product-description"></div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="product">
+                                        <div className="product-img"></div>
+                                        <div className="product-description"></div>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="product">
+                                        <div className="product-img"></div>
+                                        <div className="product-description"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

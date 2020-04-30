@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function getTotalSales() {
-        $total_sales = DB::table('orders')->sum('orders.total');
-        return response()->json(['Total' => $total_sales]);
+        $total_sales = DB::table('orders')
+        ->select(DB::raw('total'))
+        ->sum('total');
+        return response()->json(['TotalSales' => intval($total_sales)]);
     }
 
     public function getWeeklySales() {
         $weekly_sales = DB::table('orders')
         ->select(DB::raw('*'))
-        ->whereRaw('YEARWEEK(created_at)=YEARWEEK(NOW())')
+        ->whereRaw('created_at >= Date_add(NOW(), interval - 7 day)')
         ->sum('total');
 
-        return response()->json(['Weekly' => $weekly_sales]);
+        return response()->json(['Weekly' => intval($weekly_sales)]);
     }
 
     public function getWeeklyData() {

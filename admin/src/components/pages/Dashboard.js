@@ -39,7 +39,7 @@ const Dashboard = () => {
         let data = await response.json();
 
         if(data) {
-            setTotalSales({...totalSales, total: data.Total});
+            setTotalSales({...totalSales, total: data.TotalSales});
         }
     }
 
@@ -193,9 +193,9 @@ const Dashboard = () => {
                                                 <div className="col-md-7">
                                                     <h2>Sales</h2>
                                                     <h3>{ new Intl.NumberFormat('en-GM', 
-                                                    { style: 'currency', currency: 'GMD', maximumSignificantDigits: 2 })
+                                                    { style: 'currency', currency: 'GMD', maximumSignificantDigits: 12 })
                                                     .format(totalSales.total)}.<span className="decimal-point">00</span></h3>
-                                                    <h6>{ new Intl.NumberFormat().format(totalWeeklySales.weeklySales)} This Week.</h6>
+                                                    <h6>{ '+' + new Intl.NumberFormat().format(totalWeeklySales.weeklySales)} This Week.</h6>
                                                 </div>
                                                 <div className="col-md-5 dash-graph">
                                                  { weeklySales.weeklySales.length > 0? (
@@ -242,7 +242,7 @@ const Dashboard = () => {
                                         <div className="row">
                                                 <div className="col-md-7">
                                                     <h2>Profit</h2>
-                                                    <h3>{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 'GMD', maximumSignificantDigits: 2 }).format(totalProfit.totalProfit)}.<span className="decimal-point">00</span></h3>
+                                                    <h3>{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 'GMD', maximumSignificantDigits: 12 }).format(totalProfit.totalProfit)}.<span className="decimal-point">00</span></h3>
                                                     <h6>{ '+' + totalWeeklyProfit.totalWeeklyProfit } This Week</h6>
                                                 </div>
                                                 <div className="col-md-5 dash-graph">
