@@ -243,7 +243,7 @@ const Orders = (props) => {
                                 </li>
                                     <li class="page-item"><a class="page-link" href="/orders/1">1</a></li>
                                     <li class="page-item"><a class="page-link" href="/orders/2">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="/orders/2">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="/orders/3">3</a></li>
                                     <li class= { "page-item " +  (Number(page.page) === Number(pagination.last_page)? "disabled" : "")}>
                                     <a class="page-link" href={ "/orders/" + Number(page.page) } onClick={ next }>Next</a>
                                 </li>
@@ -254,10 +254,21 @@ const Orders = (props) => {
 
                             { Number(pagination.last_page) > 3 && Number(pagination.last_page) <= 4 ? (
                                 <>
-                                    <li class="page-item"><a class="page-link" href="/orders/1">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="/orders/2">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="/orders/2">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="/orders/2">4</a></li>
+                                    <nav aria-label="Products Navigation">
+                                    <ul class="pagination justify-content-center">
+                                    <li class= { "page-item " +  (Number(page.page) === 1? "disabled" : "")}>
+                                        <a class="page-link" href={ "/orders/" + Number(page.page) } onClick={ prev }>Previous</a>
+                                     </li>
+                                        <li class="page-item"><a class="page-link" href="/orders/1">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="/orders/2">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="/orders/3">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="/orders/4">4</a></li>
+                                        <li class= { "page-item " +  (Number(page.page) === Number(pagination.last_page)? "disabled" : "")}>
+                                    <a class="page-link" href={ "/orders/" + Number(page.page) } onClick={ next }>Next</a>
+                                </li>
+
+                                    </ul>
+                                    </nav>
                                 </>
                             ) : ("")}
 

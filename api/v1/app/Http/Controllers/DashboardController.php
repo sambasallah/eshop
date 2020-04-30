@@ -31,15 +31,7 @@ class DashboardController extends Controller
     }
 
     public function totalDailySalesForOneWeek() {
-        // $total_daily_sales = DB::select(DB::raw('select created_at, sum(coalesce(total,0)) as daily_sale, dayofweek(created_at) as day
-        // from orders
-        // where created_at <= NOW()
-        // and created_at >= Date_add(Now(),interval - 7 day)
-        // group by Date(created_at)'));
-
         $total_daily_sales = DB::table('orders')
-        // ->select(DB::raw('Date(created_at) date_only, sum(total) 
-        // as daily_sale, dayofweek(created_at) as day'))
         ->select(DB::raw('dayofweek(created_at) as day, sum(total) as daily_sale'))
         ->whereRaw('created_at <= NOW()')
         ->where('created_at','>=','Date_add(Now(),interval - 7 day)')
@@ -60,11 +52,46 @@ class DashboardController extends Controller
         return response()->json(['NewOrders' => count($new_orders)]);
     }
 
+    public function getTotalDailyOrdersForOneWeek() {
+        $total_daily_orders = DB::table('orders')
+        ->select(DB::raw('dayofweek(created_at) as day, count(*) as daily_orders'))
+        ->whereRaw('created_at <= NOW()')
+        ->where('created_at','>=','Date_add(Now(),interval - 7 day)')
+        ->groupBy('day')->get();
+        return response()->json(['WeeklyOrders' => $total_daily_orders]);
+    }
+
     public function getTotalProfit() {
         $total_profit = DB::table('orders')
         ->select(DB::raw('total'))
         ->sum('total');
 
         return response()->json(['Profit' => intval((10/100) * $total_profit)]);
+    }
+
+    public function getTotalWeeklyProfit() {
+        $total_weekly_profit = DB::table('orders')
+        ->select(DB::raw('dayofweek(created_at) as day, sum(total) as total_daily_profit'))
+        ->whereRaw('created_at <= NOW()')
+        ->where('created_at','>=','Date_add(Now(),interval - 7 day)')
+        ->groupBy('day')->get();
+
+        $total_profit = 0;
+
+        foreach($total_weekly_profit as $total) {
+            $total_profit += intval($total->total_daily_profit * (10/100));
+        }
+
+        return response()->json(['TotalWeeklyProfit' => intval($total_profit)]);
+    }
+
+    public function getTotalDailyProfit() {
+        $total_daily_profit = DB::table('orders')
+        ->select(DB::raw('dayofweek(created_at) as day, sum(total) as total_daily_profit'))
+        ->whereRaw('created_at <= NOW()')
+        ->where('created_at','>=','Date_add(Now(),interval - 7 day)')
+        ->groupBy('day')->get();
+
+        return response()->json(['TotalDailyProfit' => $total_daily_profit]);
     }
 }

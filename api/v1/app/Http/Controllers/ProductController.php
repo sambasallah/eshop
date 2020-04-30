@@ -10,9 +10,11 @@ class ProductController extends Controller {
     
     public function allProducts() {
       $products = DB::table('products')
+      ->select(DB::raw('*'))
       ->join('product_categories','product_categories.product_id','=','products.id')
       ->join('categories','categories.id','=','product_categories.category_id')
       ->join('product_images', 'product_images.product_id', '=', 'products.id')
+      ->orderBy('products.created_at','desc')
       ->paginate(8);
       return response()->json($products);
     }

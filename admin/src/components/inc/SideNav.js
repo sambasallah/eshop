@@ -7,7 +7,7 @@ const SideNav = () => {
         <div className="admin-profile">
             <div className="row">
                 <div className="col-md-8">
-                    <img src={require('../../media/profile.jpg')} style={{width:'60%', height: '60%', borderRadius : '50%', margin: '10px'}} />
+                    <img src={require('../../media/profile.jpg')} style={{maxWidth:'70%', maxHeight: '70%', borderRadius : '50%', margin: '10px'}} />
                     <h6>Samba Sallah</h6>
                 </div>
             </div>

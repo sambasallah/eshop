@@ -48,10 +48,13 @@ $router->post('/create-order', 'OrdersController@createOrder');
 // Dashboard Route
 $router->get('/total-sales', 'DashboardController@getTotalSales');
 $router->get('/total-weekly-sales', 'DashboardController@getWeeklySales');
-$router->get('/all-orders', 'DashboardController@getAllOrders');
 $router->get('/weekly-sales', 'DashboardController@totalDailySalesForOneWeek');
+$router->get('/all-orders', 'DashboardController@getAllOrders');
 $router->get('/new-orders', 'DashboardController@newOrders');
+$router->get('/weekly-orders', 'DashboardController@getTotalDailyOrdersForOneWeek');
 $router->get('/weekly-data', 'DashboardController@getWeeklyData');
 $router->get('/total-profit', 'DashboardController@getTotalProfit');
+$router->get('/total-weekly-profit', 'DashboardController@getTotalWeeklyProfit');
+$router->get('/total-daily-profit', 'DashboardController@getTotalDailyProfit');
 
 });

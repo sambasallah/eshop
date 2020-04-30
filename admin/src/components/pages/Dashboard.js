@@ -13,12 +13,25 @@ const Dashboard = () => {
     const [totalWeeklySales, setTotalWeeklySales] = useState({weeklySales: 0});
     const [totalProfit, setTotalProfit] = useState({totalProfit: 0});
     const [weeklySales, setWeeklySales] = useState({weeklySales: []});
+    const [weeklyOrders, setWeeklyOrders] = useState({weeklyOrders: []});
+    const [totalWeeklyProfit, setTotalWeeklyProfit] = useState({totalWeeklyProfit : 0});
+    const [totalDailyProfit, setTotalDailyProfit] = useState({totalDailyProfit: []});
 
-    let data = [];
-
+    let salesData = [];
+    let orderData = [];
+    let dailyProfitData = [];
+    
     weeklySales.weeklySales.map((value) => {
-       data.push(value.daily_sale);
+       salesData.push(value.daily_sale);
     });
+
+    weeklyOrders.weeklyOrders.map((value) => {
+        orderData.push(value.daily_orders);
+    });
+
+    totalDailyProfit.totalDailyProfit.map((value) => {
+        dailyProfitData.push(Number(value.total_daily_profit) * Number(10/100));
+    })
 
     const getTotalSales = async () => {
         let url = 'http://localhost:8000/api/v1/total-sales';
@@ -101,6 +114,16 @@ const Dashboard = () => {
         }
     }
 
+    const getWeeklyOrders = async () => {
+        let url = 'http://localhost:8000/api/v1/weekly-orders';
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if(data) {
+            setWeeklyOrders({...weeklyOrders, weeklyOrders: data.WeeklyOrders});
+        }
+    }
+
     const getTotalProfit = async () => {
         let url = 'http://localhost:8000/api/v1/total-profit';
         let response = await fetch(url);
@@ -111,6 +134,26 @@ const Dashboard = () => {
         }
     }
 
+    const getTotalWeeklyProfit = async () => {
+        let url = 'http://localhost:8000/api/v1/total-weekly-profit';
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if(data) {
+            setTotalWeeklyProfit({...totalWeeklyProfit,totalWeeklyProfit: data.TotalWeeklyProfit});
+        }
+    }
+
+    const getTotalDailyProfit = async () => {
+        let url = 'http://localhost:8000/api/v1/total-daily-profit';
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if(data) {
+            setTotalDailyProfit({...totalDailyProfit,totalDailyProfit: data.TotalDailyProfit});
+        }
+    }
+
     useEffect(() => {
         getTotalSales();
         getAllOrders();
@@ -118,6 +161,9 @@ const Dashboard = () => {
         getTotalWeeklySales();
         getWeeklySales();
         getTotalProfit();
+        getWeeklyOrders();
+        getTotalWeeklyProfit();
+        getTotalDailyProfit();
     },[])
 
     return (
@@ -154,7 +200,7 @@ const Dashboard = () => {
                                                 <div className="col-md-5 dash-graph">
                                                  { weeklySales.weeklySales.length > 0? (
                                                      <>
-                                                    <Sparklines data={data} height={100} width={100}>
+                                                    <Sparklines data={salesData} height={90} width={100}>
                                                         <SparklinesLine color="#8b054d" />
                                                     </Sparklines>
                                                      </>
@@ -176,9 +222,15 @@ const Dashboard = () => {
                                                     <h6>{ newOrders.newOrders } New Orders</h6>
                                                 </div>
                                                 <div className="col-md-6 dash-graph">
-                                                    <Sparklines data={[900,500,800,1024]} height={75} width={100}>
-                                                        <SparklinesBars />
-                                                    </Sparklines>
+                                                    { weeklyOrders.weeklyOrders.length > 0? (
+                                                        <>
+                                                            <Sparklines data={orderData}  height={70} width={100}>
+                                                                <SparklinesBars />
+                                                            </Sparklines>
+                                                        </>
+                                                    ) : (
+                                                        'loading'
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
@@ -191,13 +243,17 @@ const Dashboard = () => {
                                                 <div className="col-md-7">
                                                     <h2>Profit</h2>
                                                     <h3>{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 'GMD', maximumSignificantDigits: 2 }).format(totalProfit.totalProfit)}.<span className="decimal-point">00</span></h3>
-                                                    <h6>+3000 This Week</h6>
+                                                    <h6>{ '+' + totalWeeklyProfit.totalWeeklyProfit } This Week</h6>
                                                 </div>
                                                 <div className="col-md-5 dash-graph">
-                                                <Sparklines data={[5, 10, 5, 20,15,40,80]} width={100} height={100}>
-                                                    <SparklinesLine color="indigo" style={{ fill: 'none' }}/>
-                                                    <SparklinesSpots />
-                                                </Sparklines>
+                                                 { totalDailyProfit.totalDailyProfit.length > 0? (
+                                                     <>
+                                                        <Sparklines data={dailyProfitData}  width={100} height={90}>
+                                                            <SparklinesLine color="indigo" style={{ fill: 'none' }}/>
+                                                            <SparklinesSpots />
+                                                         </Sparklines>
+                                                     </>
+                                                 ) : 'loading'}
                                                 </div>
                                             </div>
                                         </div>

@@ -30,7 +30,7 @@ const Home = () => {
 				<div className="carousel-item">
 				<img className="d-block w-100" src={require("../../media/images/banner2.jpg")} alt="Second slide" />
 				<div className="text-content">
-					<h1>Classic Summer Wears</h1>
+					<h1>Men Office Wears</h1>
 					<a href="shop" className="shop-btn">SHOP NOW</a>
 				</div>
 				</div>
