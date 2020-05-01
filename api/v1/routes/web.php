@@ -60,4 +60,8 @@ $router->get('/total-profit', 'DashboardController@getTotalProfit');
 $router->get('/total-weekly-profit', 'DashboardController@getTotalWeeklyProfit');
 $router->get('/total-daily-profit', 'DashboardController@getTotalDailyProfit');
 
+// Categories Route
+$router->get('/categories/product-categories', 'CategoryController@getAllCategories');
+$router->post('/categories/create-category', 'CategoryController@createCategory');
+$router->delete('/categories/delete-category', 'CategoryController@deleteCategory');
 });

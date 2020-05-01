@@ -238,7 +238,7 @@ class ProductController extends Controller {
 
     public function filterByCategory($category_name) {
       $filtered_result = DB::table('products')
-      ->where('categories.category_name', '=', $category_name)
+      ->where('categories.category_name', '=', $category_name )
       ->join('product_categories','product_categories.product_id','=','products.id')
       ->join('categories','categories.id','=','product_categories.category_id')
       ->join('product_images', 'product_images.product_id', '=', 'products.id')
