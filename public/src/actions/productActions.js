@@ -1,6 +1,6 @@
-import { GET_PRODUCTS,GET_PRODUCT_BY_ID, ADD_TO_CART, DELETE_ITEM_FROM_CART, ORDER_COMPLETED } from './types';
+import { GET_PRODUCTS,GET_PRODUCT_BY_ID, ADD_TO_CART, DELETE_ITEM_FROM_CART, ORDER_COMPLETED, FILTER_BY_PRICE } from './types';
 
-export const getProducts =  (pageNo) => async (dispatch) => {
+export const getProducts =  (pageNo) => async dispatch => {
         const url = "http://localhost:8000/api/v1/products/p/1?page=" + pageNo;
         let reponse = await fetch(url);
         let data = await reponse.json();
@@ -49,6 +49,25 @@ export const deleteItemFromCart = (item, cartItems) => dispatch => {
         type: DELETE_ITEM_FROM_CART,
         payload: updatedCart
     })
+}
+
+export const filterByPrice = (page, priceRange) => async dispatch => {
+    let url = 'http://localhost:8000/api/v1/filter-by-price/' + priceRange + '?page=' + page;
+    let response = await fetch(url);
+    let data = await response.json();
+    console.log(data);
+    let allData = {};
+    let products = [];
+    data.data.map((value, index) => {
+         products.push(value);
+    });
+    allData.last_page = data.last_page;
+    allData.current_page = data.current_page;
+    allData.products = products;
+    dispatch({
+        type: FILTER_BY_PRICE,
+        payload: allData
+    });
 }
 
 export const orderCompleted = (orderDetails) => dispatch => {

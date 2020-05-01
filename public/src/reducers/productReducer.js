@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, ORDER_COMPLETED, GET_PRODUCT_BY_ID, ADD_TO_CART, DELETE_ITEM_FROM_CART  } from '../actions/types';
+import { GET_PRODUCTS, ORDER_COMPLETED, GET_PRODUCT_BY_ID, ADD_TO_CART, DELETE_ITEM_FROM_CART, FILTER_BY_PRICE  } from '../actions/types';
 
 let initialState = {
     items : {},
@@ -14,6 +14,11 @@ export default function( state = initialState, action) {
                     ...state,
                     items: action.payload
                 }
+            case FILTER_BY_PRICE:
+                    return {
+                        ...state,
+                        items: action.payload
+                    }
             case GET_PRODUCT_BY_ID: 
                 return {
                     ...state,

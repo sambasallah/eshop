@@ -24,6 +24,7 @@ $router->get('/products/p/{page}','ProductController@allProducts');
 $router->get('/products/search/{searchValue}/{page}','ProductController@searchProduct');
 $router->get('/products/{id}','ProductController@singleProduct');
 $router->post('/product', 'ProductController@createProduct');
+$router->get('/filter-by-price/{price_range}', 'ProductController@filterByPrice');
 $router->put('/product/{id}', 'ProductController@updateProduct');
 $router->get('/product/categories', 'ProductController@getCategories');
 $router->get('/product/{slug}', 'ProductController@getProductUsingSlug');

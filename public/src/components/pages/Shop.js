@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { limitTitle }  from '../helpers/Helpers';
 import { connect } from 'react-redux';
-import { getProducts, getProductByID, addToCart } from '../../actions/productActions';
+import { getProducts, getProductByID, addToCart, filterByPrice } from '../../actions/productActions';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { inCart } from '../utils/utils';
 
@@ -46,8 +46,9 @@ const Shop = (props) => {
     const [page, setPage] = useState({page: page_no});
     const [plusMinusPrice, setPlusMinusPrice] = useState({plus: true});
     const [plusMinusCategories, setPlusMinusCategories] = useState({plus: true});
+    const [priceFilter, setPriceFilter] = useState([]);
 
-    const next = (event) => {
+    const next = () => {
         let currentPage = Number(page.page) + 1;
         setPage({page: currentPage});
      }
@@ -78,9 +79,17 @@ const Shop = (props) => {
         }
      }
 
+     const filter = (event) => {
+        setPriceFilter([event.target.value]);
+     }
+
     useEffect(() => {
-        props.getProducts(page.page);
-    },[]);
+            if(priceFilter.length > 0) {
+                props.filterByPrice(page.page, priceFilter);
+            } else {
+                props.getProducts(page.page);
+            }
+    },[priceFilter]);
 
     return (
        <>   
@@ -107,32 +116,32 @@ const Shop = (props) => {
                              <div id="price" className="collapse">
                                      <form>
                                          <div className="custom-control custom-radio">
-                                             <input type="radio" className="custom-control-input" id="customSwitch1" name="radio-btn" />
+                                             <input type="radio" className="custom-control-input" id="customSwitch1"  onClick={ filter } value="0-2000" name="radio-btn" />
                                              <label className="custom-control-label" htmlFor="customSwitch1">Under GMD2,000</label>
                                          </div>
                                          
                                          <div className="custom-control custom-radio">
-                                             <input type="radio" className="custom-control-input" id="customSwitch2" name="radio-btn" />
+                                             <input type="radio" className="custom-control-input" id="customSwitch2" value="2000-5000" onClick={ filter } name="radio-btn" />
                                              <label className="custom-control-label" htmlFor="customSwitch2">GMD2,000 - GMD5,000</label>
                                          </div>
                                      
                                          <div className="custom-control custom-radio">
-                                             <input type="radio" className="custom-control-input" id="customSwitch3" name="radio-btn" />
+                                             <input type="radio" className="custom-control-input" id="customSwitch3" value="5000-10000" onClick={ filter } name="radio-btn" />
                                              <label className="custom-control-label" htmlFor="customSwitch3">GMD5,000 - GMD10,000</label>
                                          </div>
                                      
                                          <div className="custom-control custom-radio">
-                                             <input type="radio" className="custom-control-input" id="customSwitch4" name="radio-btn" />
+                                             <input type="radio" className="custom-control-input" id="customSwitch4" value="10000-20000" onClick={ filter } name="radio-btn" />
                                              <label className="custom-control-label" htmlFor="customSwitch4">GMD10,000 - GMD20,000</label>
                                          </div>
                                        
                                          <div className="custom-control custom-radio">
-                                             <input type="radio" className="custom-control-input" id="customSwitch5" name="radio-btn" />
+                                             <input type="radio" className="custom-control-input" id="customSwitch5" value="20000-40000" onClick={ filter } name="radio-btn" />
                                              <label className="custom-control-label" htmlFor="customSwitch5">GMD20,000 - GMD40,000</label>
                                          </div>
                                         
                                          <div className="custom-control custom-radio">
-                                             <input type="radio" className="custom-control-input" id="customSwitch6" name="radio-btn" />
+                                             <input type="radio" className="custom-control-input" id="customSwitch6" value="40000" onClick={ filter } name="radio-btn" />
                                              <label className="custom-control-label" htmlFor="customSwitch6">Above GMD40,000</label>
                                          </div>
                                      </form>
@@ -411,4 +420,4 @@ const mapStateToProps = state => (
      cartItems : state.products.cart? state.products.cart : [] }
 );
 
-export default connect(mapStateToProps, { getProducts, getProductByID, addToCart })(Shop);
+export default connect(mapStateToProps, { getProducts, getProductByID, addToCart, filterByPrice })(Shop);

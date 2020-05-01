@@ -5,3 +5,4 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const ADDED_TO_CART = 'ADDED_TO_CART';
 export const DELETE_ITEM_FROM_CART = 'DELETE_ITEM_FROM_CART';
 export const ORDER_COMPLETED = 'ORDER_COMPLETED';
+export const FILTER_BY_PRICE = 'FILTER_BY_PRICE';
