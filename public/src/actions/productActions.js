@@ -1,4 +1,6 @@
-import { GET_PRODUCTS,GET_PRODUCT_BY_ID, ADD_TO_CART, DELETE_ITEM_FROM_CART, ORDER_COMPLETED, FILTER_BY_PRICE } from './types';
+import { GET_PRODUCTS,GET_PRODUCT_BY_ID, ADD_TO_CART, DELETE_ITEM_FROM_CART, 
+    ORDER_COMPLETED, FILTER_BY_PRICE, FILTER_BY_CATEGORY, 
+    FILTER_BY_PRICE_CATEGORY } from './types';
 
 export const getProducts =  (pageNo) => async dispatch => {
         const url = "http://localhost:8000/api/v1/products/p/1?page=" + pageNo;
@@ -55,10 +57,9 @@ export const filterByPrice = (page, priceRange) => async dispatch => {
     let url = 'http://localhost:8000/api/v1/filter-by-price/' + priceRange + '?page=' + page;
     let response = await fetch(url);
     let data = await response.json();
-    console.log(data);
     let allData = {};
     let products = [];
-    data.data.map((value, index) => {
+    data.data.map((value) => {
          products.push(value);
     });
     allData.last_page = data.last_page;
@@ -66,6 +67,42 @@ export const filterByPrice = (page, priceRange) => async dispatch => {
     allData.products = products;
     dispatch({
         type: FILTER_BY_PRICE,
+        payload: allData
+    });
+}
+
+export const filterByCategory = (page, categoryName) => async dispatch => {
+    let url = 'http://localhost:8000/api/v1/filter-by-category/' + categoryName + '?page=' + page;
+    let response = await fetch(url);
+    let data = await response.json();
+    let allData = {};
+    let products = [];
+    data.data.map((value) => {
+         products.push(value);
+    });
+    allData.last_page = data.last_page;
+    allData.current_page = data.current_page;
+    allData.products = products;
+    dispatch({
+        type: FILTER_BY_CATEGORY,
+        payload: allData
+    });
+}
+
+export const filterByPriceCategory = (page, priceRange, categoryName) => async dispatch => {
+    let url = 'http://localhost:8000/api/v1/filter-by-price-category/' + priceRange + '/' + categoryName + '?page=' + page;
+    let response = await fetch(url);
+    let data = await response.json();
+    let allData = {};
+    let products = [];
+    data.data.map((value) => {
+         products.push(value);
+    });
+    allData.last_page = data.last_page;
+    allData.current_page = data.current_page;
+    allData.products = products;
+    dispatch({
+        type: FILTER_BY_PRICE_CATEGORY,
         payload: allData
     });
 }

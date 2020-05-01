@@ -236,6 +236,44 @@ class ProductController extends Controller {
         }
     }
 
+    public function filterByCategory($category_name) {
+      $filtered_result = DB::table('products')
+      ->where('categories.category_name', '=', $category_name)
+      ->join('product_categories','product_categories.product_id','=','products.id')
+      ->join('categories','categories.id','=','product_categories.category_id')
+      ->join('product_images', 'product_images.product_id', '=', 'products.id')
+      ->orderBy('products.created_at','desc')
+      ->paginate(8);
+
+      return response()->json($filtered_result);
+    }
+
+    public function filterByPriceCategory($price_range, $category_name) {
+      if(count(explode('-', $price_range)) == 2) {
+        $arr = explode('-',$price_range);
+        $filtered_result = DB::table('products')
+        ->where('products.sale_price','>=', intval($arr[0]))
+        ->where('products.sale_price', '<=', intval($arr[1]))
+        ->where('categories.category_name', '=', $category_name)
+        ->join('product_categories','product_categories.product_id','=','products.id')
+        ->join('categories','categories.id','=','product_categories.category_id')
+        ->join('product_images', 'product_images.product_id', '=', 'products.id')
+        ->orderBy('products.created_at','desc')
+        ->paginate(8);
+        return response()->json($filtered_result);
+      } else {
+        $filtered_result = DB::table('products')
+        ->where('products.sale_price', '>=', intval($price_range))
+        ->where('categories.category_name', '=', $category_name)
+        ->join('product_categories','product_categories.product_id','=','products.id')
+        ->join('categories','categories.id','=','product_categories.category_id')
+        ->join('product_images', 'product_images.product_id', '=', 'products.id')
+        ->orderBy('products.created_at','desc')
+        ->paginate(8);
+        return response()->json($filtered_result);
+      }
+  }
+
     public function getCategories() {
       $all_categories = DB::table('categories')->get();
       return response()->json($all_categories);

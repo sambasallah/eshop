@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { limitTitle }  from '../helpers/Helpers';
 import { connect } from 'react-redux';
-import { getProducts, getProductByID, addToCart, filterByPrice } from '../../actions/productActions';
+import { getProducts, getProductByID, addToCart, filterByPrice, 
+    filterByCategory,filterByPriceCategory } from '../../actions/productActions';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { inCart } from '../utils/utils';
 
@@ -47,6 +48,24 @@ const Shop = (props) => {
     const [plusMinusPrice, setPlusMinusPrice] = useState({plus: true});
     const [plusMinusCategories, setPlusMinusCategories] = useState({plus: true});
     const [priceFilter, setPriceFilter] = useState([]);
+    const [categories, setCategories] = useState({categories: []});
+    const [categoryFilter, setCategoryFilter] = useState([]);
+
+
+    const getCategories = async () => {
+        let url = 'http://localhost:8000/api/v1/product/categories';
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if(data) {
+            let categoriesData = [];
+            data.map((value) => {
+                categoriesData.push(value);             
+            }) 
+            setCategories({...categories, categories: categoriesData});
+               
+        }
+    }
 
     const next = () => {
         let currentPage = Number(page.page) + 1;
@@ -83,13 +102,27 @@ const Shop = (props) => {
         setPriceFilter([event.target.value]);
      }
 
+     const filterCategory = (event) => {
+         setCategoryFilter([event.target.value]);
+     }
     useEffect(() => {
             if(priceFilter.length > 0) {
-                props.filterByPrice(page.page, priceFilter);
+                if(priceFilter.length > 0 && categoryFilter.length > 0) {
+                    props.filterByPriceCategory(page.page, priceFilter, categoryFilter);
+                } else {
+                    props.filterByPrice(page.page, priceFilter);
+                }
+            } else if(categoryFilter.length > 0) {
+                if(priceFilter.length > 0 && categoryFilter.length > 0) {
+                    props.filterByPriceCategory(page.page, priceFilter, categoryFilter);
+                } else {
+                    props.filterByCategory(page.page, categoryFilter);
+             }
             } else {
                 props.getProducts(page.page);
             }
-    },[priceFilter]);
+            getCategories();
+    },[priceFilter, categoryFilter]);
 
     return (
        <>   
@@ -154,25 +187,32 @@ const Shop = (props) => {
                                      </a></li>
                              </ul>
                              <div id="categories" className="collapse">
-                                 <ul>
-                                     <li>Fashion</li>
-                                     <li>Groceries</li>
-                                     <li>Mobile Phones</li>
-                                     <li>Electronics</li>
-                                     <li>Home & Kitchen</li>
-                                     <li>Baby, Toys & Kids</li>
-                                 </ul>
+                                    <form>
+                                        { categories.categories.map((value, index) => {
+                                            return(
+                                                <>
+                                                <div className="custom-control custom-radio">
+                                                    <input type="radio" className="custom-control-input" id={ 'categorySwitch' + index}  value={ value.category_name } onClick={ filterCategory } name="radio-btn" />
+                                                    <label className="custom-control-label" htmlFor={ 'categorySwitch' + index}>{ value.category_name }</label>
+                                                </div>
+                                                { console.log(value)}
+                                                </>
+                                            )
+                                        })}     
+                                     </form>
                              </div>
                          </div>
                          <div className="col-md-9">
                             <div className="row shop-items">
-                                 {  props.products.map((product, index) => (
+                                 { props.products.length > 0? ( props.products.map((product, index) => (
                                       <Product key={index} index={index} 
                                  product={product} products={props.products}
                                  getProductByID={ props.getProductByID }
                                  addToCart={props.addToCart} cartItems={ props.cartItems }
                                  page={page.page}
-                                 /> )) }
+                                 /> ))) : (
+                                     <h1>No Product Found</h1>
+                                 ) }
                             </div>
  
                              {/* <div className="pagination">
@@ -420,4 +460,5 @@ const mapStateToProps = state => (
      cartItems : state.products.cart? state.products.cart : [] }
 );
 
-export default connect(mapStateToProps, { getProducts, getProductByID, addToCart, filterByPrice })(Shop);
+export default connect(mapStateToProps, { getProducts, getProductByID, addToCart, filterByPrice, 
+    filterByCategory, filterByPriceCategory })(Shop);
