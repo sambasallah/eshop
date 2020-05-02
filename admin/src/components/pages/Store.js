@@ -3,6 +3,7 @@ import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import StoreList from './StoreList';
+import Navbar from '../inc/Navbar';
 
 
 const Store = (props) => {
@@ -94,6 +95,7 @@ const Store = (props) => {
 
     return (
         <div>
+            <Navbar />
              <Helmet>
                 <title>Store | eBaaba Dashboard</title>
             </Helmet>

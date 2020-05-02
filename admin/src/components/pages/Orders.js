@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-
+import Navbar from '../inc/Navbar';
 
 const OrderItem = ({ items }) => {
 
@@ -148,6 +148,7 @@ const Orders = (props) => {
 
     return (
         <div>
+            <Navbar />
             <Helmet>
                 <title>Orders | eBaaba Dashboard</title>
             </Helmet>

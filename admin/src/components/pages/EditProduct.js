@@ -5,9 +5,9 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { openUploadWidget } from "../utils/CloudinaryService";
 import { slug, chunk } from '../utils/UtilityFunctions';
-import { Error, Success } from '../alerts/ProductsAlerts';
 import { useLocation, Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Navbar from '../inc/Navbar';
 
 toast.configure();
 
@@ -204,6 +204,7 @@ useEffect(() => {
 
     return (
         <div>
+         <Navbar />
         <Helmet title={ "Edit - " + edit.productName } />
         <div className="breadcrumb">
             <div className="breadcrumb-inner">

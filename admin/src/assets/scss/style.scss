@@ -295,6 +295,95 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 	margin-bottom: 15px;
 }
 
+/** Categories **/
+.categories {
+	@extend .page-setup;
+}
+
+.categories .categories-inner {
+	@extend .page-inner-setup;
+}
+
+.categories-inner .admin-profile {
+	text-align: center;
+}
+
+.categories-inner .admin-profile h6 {
+	font-size: 18px;
+	font-weight: lighter;
+}
+
+.categories-inner .left {
+	// background-color: #f5f5f5;
+	margin-bottom: 15px;
+	padding: 15px 10px;
+}
+
+.categories-inner .left ul {
+	list-style: none;
+}
+
+.categories-inner .left ul li i.fa.fa-tachometer, i.fa.fa-gift, i.fa.fa-shopping-basket, i.fa.fa-cog, i.fa.fa-line-chart {
+	width: 15%;
+}
+
+.categories-inner .left ul li {
+	font-size: 20px;
+	padding: 10px 5px;
+	cursor: pointer;
+}
+
+.categories-inner .left ul li .link {
+	color: #000;
+}
+
+.categories-inner .left ul li:hover {
+	background-color: $secondary-color;
+	border-radius: 5px;
+}
+
+.categories-inner .right h2 {
+	padding-bottom: 15px;
+}
+
+.categories-inner .category-name, .category-submit {
+	width: 100%;
+}
+
+.categories-inner form input[type=text] {
+	height: 50px;
+	border: none;
+	border-bottom: 1px solid #90ee90;
+	margin-bottom: 8px;
+	padding: 0px 8px;
+}
+
+.categories-inner form input[type=submit] {
+	border: none;
+	background-color: $primary-color;
+	height: 40px;
+	color: #fff;
+	font-size: 17px;
+}
+
+.categories-inner ul.categories-list {
+	list-style: none;
+	margin-top: 15px;
+}
+
+.categories-inner ul.categories-list li {
+	padding: 10px 40px;
+	background-color: $secondary-color;
+	color: #fff;
+	margin-bottom: 10px;
+}
+
+.categories-inner ul.categories-list i {
+	padding-right: 8px;
+	cursor: pointer;
+	color: #000;
+}
+
 /** Settings **/
 .settings {
 	@extend .page-setup;
@@ -379,7 +468,7 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 	list-style: none;
 }
 
-.single-order-inner .left ul li i.fa.fa-tachometer, i.fa.fa-gift, i.fa.fa-shopping-basket, i.fa.fa-cog, i.fa.fa-line-chart {
+.single-order-inner .left ul li i.fa.fa-tachometer, i.fa.fa-gift, i.fa.fa-shopping-basket, i.fa.fa-cog, i.fa.fa-line-chart, i.fa.fa-list-alt {
 	width: 15%;
 }
 
@@ -479,6 +568,14 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 	@extend .page-inner-setup;
 }
 
+.add-product-inner .admin-profile {
+	text-align: center;
+}
+
+.add-product-inner .admin-profile h6 {
+	font-size: 18px;
+	font-weight: lighter;
+}
 
 .add-product-inner .left {
 	// background-color: #f5f5f5;
@@ -533,4 +630,50 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 
 .add-product .edit-delete .fa.fa-trash {
 	font-size: 20px;
+}
+
+/** Admin Login **/
+.admin-login {
+	width: 100%;
+	height: 100vh;
+	background-color: $bg-color;
+}
+
+.admin-login .admin-inner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	min-width: 30%;
+	min-height: 40%;
+	background-color: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.admin-login h2 {
+	padding-bottom: 10px;
+	font-weight: 600;
+}
+
+.admin-inner form .username, .password {
+	width: 100%;
+	height: 40px;
+	margin-bottom: 15px;
+	padding: 0px 8px;
+	border: 1px solid $primary-color;
+	border-radius: 5px;
+}
+
+.admin-inner form .submit {
+	background: #f953c6;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #b91d73, #f953c6);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	border: none;
+	width: 100%;
+	height: 50px;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	border-radius: 5px;
 }

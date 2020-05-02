@@ -7,6 +7,7 @@ import { openUploadWidget } from "../utils/CloudinaryService";
 import { slug, chunk } from '../utils/UtilityFunctions';
 import { Error, Success } from '../alerts/ProductsAlerts';
 import { toast } from 'react-toastify';
+import Navbar from '../inc/Navbar';
 
 toast.configure();
 
@@ -153,6 +154,7 @@ const AddProduct = () => {
 
   return (  
               <div>
+                <Navbar />
                 <Helmet title="Add Product | eBaaba Gambia" />
                 <div className="breadcrumb">
                     <div className="breadcrumb-inner">

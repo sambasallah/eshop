@@ -7,7 +7,7 @@ export const slug = (string) => {
       .replace(/[^\w\-]+/g, "")
       .replace(/\-\-+/g, "-")
       .replace(/^-+/, "")
-      .replace(/-+$/, "");
+      .replace(/-+$/, "") + '-' + Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
   }
 
 export const chunk = (size, xs) => 

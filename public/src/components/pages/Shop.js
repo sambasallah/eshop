@@ -192,10 +192,9 @@ const Shop = (props) => {
                                             return(
                                                 <>
                                                 <div className="custom-control custom-radio">
-                                                    <input type="radio" className="custom-control-input" id={ 'categorySwitch' + index}  value={ value.category_name } onClick={ filterCategory } name="radio-btn" />
+                                                    <input type="radio" className="custom-control-input" id={ 'categorySwitch' + index}  value={ value.id } onClick={ filterCategory } name="radio-btn" />
                                                     <label className="custom-control-label" htmlFor={ 'categorySwitch' + index}>{ value.category_name }</label>
                                                 </div>
-                                                { console.log(value)}
                                                 </>
                                             )
                                         })}     

@@ -33,7 +33,7 @@ const DashboardChart = ({ weeklySales }) => {
         <Line
          data={chart.data}
          width={100}
-         height={400}
+         height={450}
          options={{ maintainAspectRatio: false }}
      />
      </div>

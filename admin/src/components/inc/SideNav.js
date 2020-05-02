@@ -17,6 +17,7 @@ const SideNav = () => {
                 <li><i className="fa fa-tachometer"></i> <Link to="/" className="link">Dashboard</Link></li>
                 <li><i className="fa fa-gift"></i> <Link to="/orders" className="link">Orders</Link></li>
                 <li><i className="fa fa-shopping-basket"></i> <Link to="/store" className="link">Store</Link></li>
+                <li><i className="fa fa-list-alt"></i> <Link to="/categories" className="link">Categories</Link></li>
                 <li><i className="fa fa-line-chart"></i> <Link to="/analytics" className="link">Analytics</Link></li>
                 <li><i className="fa fa-cog"></i> <Link to="/settings" className="link">Settings</Link></li>
             </ul>

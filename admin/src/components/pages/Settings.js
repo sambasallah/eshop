@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { Error, Success } from '../alerts/SettingsAlerts';
 import { openUploadWidget } from "../utils/CloudinaryService";
 import { CloudinaryContext } from 'cloudinary-react';
+import Navbar from '../inc/Navbar';
 
 const Settings = () => {
 
@@ -100,6 +101,7 @@ const Settings = () => {
   
     return (
         <div>
+            <Navbar />
             <Helmet>
                 <title>Settings | eBaaba Dashboard</title>
             </Helmet>

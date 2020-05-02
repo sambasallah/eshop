@@ -71,8 +71,8 @@ export const filterByPrice = (page, priceRange) => async dispatch => {
     });
 }
 
-export const filterByCategory = (page, categoryName) => async dispatch => {
-    let url = 'http://localhost:8000/api/v1/filter-by-category/' + categoryName + '?page=' + page;
+export const filterByCategory = (page, categoryID) => async dispatch => {
+    let url = 'http://localhost:8000/api/v1/filter-by-category/' + categoryID + '?page=' + page;
     let response = await fetch(url);
     let data = await response.json();
     let allData = {};
@@ -89,8 +89,8 @@ export const filterByCategory = (page, categoryName) => async dispatch => {
     });
 }
 
-export const filterByPriceCategory = (page, priceRange, categoryName) => async dispatch => {
-    let url = 'http://localhost:8000/api/v1/filter-by-price-category/' + priceRange + '/' + categoryName + '?page=' + page;
+export const filterByPriceCategory = (page, priceRange, categoryID) => async dispatch => {
+    let url = 'http://localhost:8000/api/v1/filter-by-price-category/' + priceRange + '/' + categoryID + '?page=' + page;
     let response = await fetch(url);
     let data = await response.json();
     let allData = {};

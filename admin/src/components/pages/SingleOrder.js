@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { FaClock, FaMapMarker, FaRegEnvelope } from 'react-icons/fa';
 import { MdPhoneIphone } from 'react-icons/md';
 import { toast } from 'react-toastify';
+import Navbar from '../inc/Navbar';
 
 const SingleOrder = (props) => {
 
@@ -85,6 +86,7 @@ const SingleOrder = (props) => {
        <>
          { orderID !== 0 && loading.loading === false? (
               <div>
+                <Navbar />
               <Helmet>
                   <title>Order Summary | eBaaba Dashboard</title>
               </Helmet>
@@ -204,6 +206,7 @@ const SingleOrder = (props) => {
          ) : (
              <>
                  <div>
+               <Navbar />
               <Helmet>
                   <title>Order Summary | eBaaba Dashboard</title>
               </Helmet>

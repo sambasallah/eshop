@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import DashboardChart from '../charts/DashboardChart';
 import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
-import { Sparklines, SparklinesLine, SparklinesSpots, SparklinesBars } from 'react-sparklines';
+import { Sparklines, SparklinesLine, SparklinesSpots, 
+    SparklinesBars, SparklinesCurve } from 'react-sparklines';
+import Navbar from '../inc/Navbar';
 
 const Dashboard = () => {
 
@@ -168,6 +170,7 @@ const Dashboard = () => {
 
     return (
         <div>
+            <Navbar />
             <Helmet>
                 <title>eBaaba Dashboard</title>
             </Helmet>
@@ -201,7 +204,9 @@ const Dashboard = () => {
                                                  { weeklySales.weeklySales.length > 0? (
                                                      <>
                                                     <Sparklines data={salesData} height={90} width={100}>
-                                                        <SparklinesLine color="#8b054d" />
+                                                        <SparklinesLine style={{ strokeWidth: 3, stroke: "#336aff", fill: "#000" }} />
+                                                        <SparklinesSpots size={4}
+                                                            style={{ stroke: "#336aff", strokeWidth: 3, fill: "white" }} />
                                                     </Sparklines>
                                                      </>
                                                  ) : (
