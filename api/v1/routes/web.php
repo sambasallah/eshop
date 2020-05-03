@@ -10,7 +10,7 @@
 |
 */
 
-$router->group(['prefix' => 'api/v1', 'middleware' => 'cors'], function() use($router) {
+$router->group(['prefix' => 'api/v1', 'middleware' => ['cors']], function() use($router) {
   
 // Users Route
 $router->get('/users', 'UserController@allUsers');
@@ -38,6 +38,7 @@ $router->get('/admin/{id}', 'AdminController@admin');
 $router->post('/admin','AdminController@registerAdmin');
 $router->put('/admin/{id}', 'AdminController@updateAdmin');
 
+
 // Orders Route
 $router->get('/orders', 'OrdersController@getAllOrders');
 $router->get('/total-orders', 'OrdersController@totalOrders');
@@ -64,4 +65,12 @@ $router->get('/total-daily-profit', 'DashboardController@getTotalDailyProfit');
 $router->get('/categories/product-categories', 'CategoryController@getAllCategories');
 $router->post('/categories/create-category', 'CategoryController@createCategory');
 $router->delete('/categories/delete-category', 'CategoryController@deleteCategory');
+
+
+$router->post('/admin-login', 'AuthController@authenticate');
+
+$router->group(['middleware' => 'jwt.auth'], function() use($router) {
+    $router->get('/dashboard', 'AdminController@welcome');
+});
+
 });

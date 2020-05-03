@@ -61,7 +61,7 @@ $app->singleton(
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 $app->middleware([
-    App\Http\Middleware\Cors::class
+    App\Http\Middleware\Cors::class,
 ]);
 
 
@@ -69,7 +69,9 @@ $app->middleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
 $app->routeMiddleware([
-    "cors" => App\Http\Middleware\Cors::class
+    "cors" => App\Http\Middleware\Cors::class,
+    'auth' => App\Http\Middleware\Authenticate::class,
+    'jwt.auth' => App\Http\Middleware\JwtMiddleware::class
 ]);
 /*
 |--------------------------------------------------------------------------
@@ -84,7 +86,7 @@ $app->routeMiddleware([
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
 
