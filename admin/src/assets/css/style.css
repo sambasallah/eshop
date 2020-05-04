@@ -34,13 +34,13 @@ ul {
 }
 
 /** reset code **/
-.page-setup, .add-product, .single-order, .settings, .categories, .store, .orders, .dashboard {
+.page-setup, .users, .add-product, .single-order, .settings, .categories, .store, .orders, .dashboard {
   width: 100%;
   background-color: #f5f5f5;
   padding: 20px;
 }
 
-.page-inner-setup, .add-product .add-product-inner, .single-order .single-order-inner, .settings .settings-inner, .categories .categories-inner, .store .store-inner, .orders .orders-inner, .dashboard .dashboard-inner {
+.page-inner-setup, .users .users-inner, .add-product .add-product-inner, .single-order .single-order-inner, .settings .settings-inner, .categories .categories-inner, .store .store-inner, .orders .orders-inner, .dashboard .dashboard-inner {
   width: 95%;
   margin: 0px auto;
   padding: 20px;
@@ -656,6 +656,51 @@ ul {
   font-size: 18px;
   font-weight: bold;
   border-radius: 5px;
+}
+
+/** Users **/
+.users-inner .admin-profile {
+  text-align: center;
+}
+
+.users-inner .admin-profile h6 {
+  font-size: 18px;
+  font-weight: lighter;
+}
+
+.users-inner .left {
+  margin-bottom: 15px;
+  padding: 15px 10px;
+}
+
+.users-inner .left ul {
+  list-style: none;
+}
+
+.users-inner .left ul li i.fa.fa-tachometer,
+i.fa.fa-gift, i.fa.fa-shopping-basket,
+i.fa.fa-cog, i.fa.fa-line-chart, i.fa.fa-user {
+  width: 15%;
+}
+
+.users-inner .left ul li {
+  font-size: 20px;
+  padding: 10px 5px;
+  cursor: pointer;
+  color: #000;
+}
+
+.users-inner .left ul li .link {
+  color: #000;
+}
+
+.users-inner .left ul li:hover {
+  background-color: #33b27b;
+  border-radius: 5px;
+}
+
+.users-inner .right h2 {
+  padding-bottom: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

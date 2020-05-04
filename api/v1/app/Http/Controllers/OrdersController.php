@@ -57,7 +57,7 @@ class OrdersController extends Controller
         $all_orders = DB::table('orders')
         ->join('customers','customers.id', 'orders.customer_id')
         ->orderBy('orders.created_at', 'desc')
-        ->paginate(6);
+        ->paginate(7);
 
         return response()->json($all_orders);
     }
