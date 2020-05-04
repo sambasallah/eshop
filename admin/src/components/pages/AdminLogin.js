@@ -1,8 +1,10 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const AdminLogin = () => {
     return (
         <div>
+            <Helmet title="Admin Login | eBaaba" />
            <div className="admin-login">
                <div className="admin-inner">
                    <h2>Admin Login</h2>

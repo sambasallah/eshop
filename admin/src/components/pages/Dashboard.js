@@ -5,8 +5,9 @@ import { Helmet } from 'react-helmet';
 import { Sparklines, SparklinesLine, SparklinesSpots, 
     SparklinesBars, SparklinesCurve } from 'react-sparklines';
 import Navbar from '../inc/Navbar';
+import { connect } from 'react-redux';
 
-const Dashboard = () => {
+const Dashboard = (props) => {
 
 
     const [totalSales, setTotalSales] = useState({total: 0});
@@ -282,4 +283,10 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+const mapStateToProps = (state) => (
+    {
+        admin: state.admin.token
+    }
+)
+
+export default connect(mapStateToProps)(Dashboard);
