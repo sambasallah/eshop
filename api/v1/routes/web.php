@@ -66,6 +66,9 @@ $router->get('/categories/product-categories', 'CategoryController@getAllCategor
 $router->post('/categories/create-category', 'CategoryController@createCategory');
 $router->delete('/categories/delete-category', 'CategoryController@deleteCategory');
 
+// Admin_Customers Route
+$router->post('/create-admin-or-customer', 'AdminCustomerController@createAdminOrCustomer');
+
 
 $router->post('/admin-login', 'AuthController@authenticate');
 

@@ -749,3 +749,58 @@ i.fa.fa-cog, i.fa.fa-line-chart, i.fa.fa-user {
 	color: #fff;
 	font-size: 18px;
 }
+
+/** Add User **/
+
+.add-user {
+	@extend .page-setup;
+}
+
+.add-user .add-user-inner {
+	@extend .page-inner-setup;
+}
+
+.add-user-inner .admin-profile {
+	text-align: center;
+}
+
+.add-user-inner .admin-profile h6 {
+	font-size: 18px;
+	font-weight: lighter;
+}
+
+.add-user-inner .left {
+	// background-color: #f5f5f5;
+	margin-bottom: 15px;
+	padding: 15px 10px;
+}
+
+.add-user-inner .left ul {
+	list-style: none;
+}
+
+.add-user-inner .left ul li i.fa.fa-tachometer,
+ i.fa.fa-gift, i.fa.fa-shopping-basket, 
+i.fa.fa-cog, i.fa.fa-line-chart, i.fa.fa-user {
+	width: 15%;
+}
+
+.add-user-inner .left ul li{
+	font-size: 20px;
+	padding: 10px 5px;
+	cursor: pointer;
+	color: #000;
+}
+
+.add-user-inner .left ul li .link {
+	color: #000;
+}
+
+.add-user-inner .left ul li:hover {
+	background-color: $secondary-color;
+	border-radius: 5px; 
+}
+
+.add-user-inner h2 {
+	padding-bottom: 20px;
+}

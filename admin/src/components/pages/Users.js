@@ -21,7 +21,7 @@ const Users = () => {
                             <SideNav />
                         </div>
                         <div className="col-md-8 right">
-                            <h2>User List - <Link to="/add-users" className="add-user">Add User</Link></h2>
+                            <h2>User List - <Link to="/add-user" className="add-user">Add User</Link></h2>
                             <table class="table">
                                     <thead>
                                     <tr>

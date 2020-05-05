@@ -15,8 +15,8 @@ class DashboardController extends Controller
 
     public function getWeeklySales() {
         $weekly_sales = DB::table('orders')
-        ->select(DB::raw('*'))
-        ->whereRaw('created_at >= Date_add(NOW(), interval - 7 day)')
+        ->select(DB::raw('DATE(created_at) as date, *'))
+        ->whereRaw('created_at >= Date_add(NOW(), interval - 6 day) and created_at <= NOW()')
         ->sum('total');
 
         return response()->json(['Weekly' => intval($weekly_sales)]);
@@ -70,10 +70,9 @@ class DashboardController extends Controller
 
     public function getTotalWeeklyProfit() {
         $total_weekly_profit = DB::table('orders')
-        ->select(DB::raw('dayofweek(created_at) as day, sum(total) as total_daily_profit'))
-        ->whereRaw('created_at <= NOW()')
-        ->where('created_at','>=','Date_add(Now(),interval - 7 day)')
-        ->groupBy('day')->get();
+        ->select(DB::raw('DATE(created_at) as date, dayofweek(created_at) as day, sum(total) as total_daily_profit'))
+        ->whereRaw('created_at >= Date_add(Now(),interval - 6 day) and created_at <= NOW()')
+        ->groupByRaw('date, day')->get();
 
         $total_profit = 0;
 

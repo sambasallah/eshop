@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\App;
-use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\AdminCustomerController;
 
 class OrdersControllerTest extends TestCase
 {
@@ -14,9 +15,9 @@ class OrdersControllerTest extends TestCase
      */
     public function test_save_order()
     {
-        $ordersController = App::make(OrdersController::class);
+        $ordersController = App::make(AdminCustomerController::class);
 
-        $this->assertTrue($ordersController->saveOrderInfo(['product_id' => 32, 'qty' => 1],'Sn-3262', 4));
+        $this->assertTrue($ordersController->emailExists('sambasallah10@gmail.com', 'customers'));
 
     }
 }

@@ -17,10 +17,10 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('full_name');
-            $table->string('address');
-            $table->string('country');
-            $table->string('town_city');
-            $table->string('phone_number');
+            $table->string('address')->nullable();
+            $table->string('country')->nullable();
+            $table->string('town_city')->nullable();
+            $table->string('phone_number')->nullable();
             $table->string('email');
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

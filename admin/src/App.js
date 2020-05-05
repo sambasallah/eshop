@@ -18,6 +18,7 @@ import EditProduct from './components/pages/EditProduct';
 import Categories from './components/pages/Categories';
 import AdminLogin from './components/pages/AdminLogin';
 import Users from './components/pages/Users';
+import AddUser from './components/pages/AddUser';
 
 
 
@@ -39,6 +40,7 @@ const App = () => {
                 <Route exact path="/add-product" component={AddProduct}></Route>
                 <Route exact path="/edit/:slug" component={EditProduct}></Route>
                 <Route exact path="/users" component={Users}></Route>
+                <Route exact path="/add-user" component={AddUser}></Route>
                </>
              ) : (
              <>

@@ -5,7 +5,6 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { openUploadWidget } from "../utils/CloudinaryService";
 import { slug, chunk } from '../utils/UtilityFunctions';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Navbar from '../inc/Navbar';
 
