@@ -5,7 +5,7 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { openUploadWidget } from "../utils/CloudinaryService";
 import { slug, chunk } from '../utils/UtilityFunctions';
-import { Error, Success } from '../alerts/ProductsAlerts';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Navbar from '../inc/Navbar';
 
@@ -171,7 +171,7 @@ const AddProduct = () => {
                                 </div>
                             </div>
                             <div className="col-md-8 right">
-                                <h2>Product Information</h2>
+                                <h2>Product Information - <a href="/add-product" className="new">New</a></h2>
                                 <form onSubmit={ saveForm }>
                                     <div className="form-group">
                                         <label>Product Name</label>

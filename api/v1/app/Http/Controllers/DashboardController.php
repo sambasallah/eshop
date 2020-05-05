@@ -33,10 +33,9 @@ class DashboardController extends Controller
 
     public function totalDailySalesForOneWeek() {
         $total_daily_sales = DB::table('orders')
-        ->select(DB::raw('dayofweek(created_at) as day, sum(total) as daily_sale'))
-        ->whereRaw('created_at <= NOW()')
-        ->where('created_at','>=','Date_add(Now(),interval - 7 day)')
-        ->groupBy('day')->get();
+        ->select(DB::raw('DATE(created_at) as date, dayofweek(created_at) as day, sum(total) as daily_sale'))
+        ->whereRaw('created_at >= Date_add(Now(),interval - 6 day) and created_at <= NOW()')
+        ->groupByRaw('date, day')->get();
 
         return response()->json(["WeeklySales" => $total_daily_sales]);
     }
@@ -55,10 +54,9 @@ class DashboardController extends Controller
 
     public function getTotalDailyOrdersForOneWeek() {
         $total_daily_orders = DB::table('orders')
-        ->select(DB::raw('dayofweek(created_at) as day, count(*) as daily_orders'))
-        ->whereRaw('created_at <= NOW()')
-        ->where('created_at','>=','Date_add(Now(),interval - 7 day)')
-        ->groupBy('day')->get();
+        ->select(DB::raw('DATE(created_at) as date,dayofweek(created_at) as day, count(*) as daily_orders'))
+        ->whereRaw('created_at >= Date_add(Now(),interval - 6 day) and created_at <= NOW()')
+        ->groupByRaw('date,day')->get();
         return response()->json(['WeeklyOrders' => $total_daily_orders]);
     }
 
@@ -88,10 +86,9 @@ class DashboardController extends Controller
 
     public function getTotalDailyProfit() {
         $total_daily_profit = DB::table('orders')
-        ->select(DB::raw('dayofweek(created_at) as day, sum(total) as total_daily_profit'))
-        ->whereRaw('created_at <= NOW()')
-        ->where('created_at','>=','Date_add(Now(),interval - 7 day)')
-        ->groupBy('day')->get();
+        ->select(DB::raw('DATE(created_at) as date, dayofweek(created_at) as day, sum(total) as total_daily_profit'))
+        ->whereRaw('created_at >= Date_add(Now(),interval - 6 day) and created_at <= NOW()')
+        ->groupByRaw('date,day')->get();
 
         return response()->json(['TotalDailyProfit' => $total_daily_profit]);
     }

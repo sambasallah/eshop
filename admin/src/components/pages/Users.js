@@ -1,6 +1,7 @@
 import React from 'react';
 import SideNav from '../inc/SideNav';
 import Navbar from '../inc/Navbar';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 const Users = () => {
@@ -20,7 +21,7 @@ const Users = () => {
                             <SideNav />
                         </div>
                         <div className="col-md-8 right">
-                            <h2>User List</h2>
+                            <h2>User List - <Link to="/add-users" className="add-user">Add User</Link></h2>
                             <table class="table">
                                     <thead>
                                     <tr>
