@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Navbar from '../inc/Navbar';
 import SideNav from '../inc/SideNav';
+import { toast } from 'react-toastify';
 
 const AddUser = (props) => {
 
@@ -15,27 +16,46 @@ const AddUser = (props) => {
         let data = await response.json();
 
         if(data) {
-            // if(data.EmailExists === true) {
-            //     console.log('Email Exists');
-            // }
-            // if(data.UsernameExists === true) {
-            //     console.log('Username Exists');
-            // }
+            if(data.EmailExists === true) {
+                emailExists();
+            }
+            if(data.UsernameExists === true) {
+                usernameExists();
+            }
 
-            // if(data.Created === true) {
-            //     props.history.push('/users');
-            // } else {
-            //     console.log('Error Occured');
-            // }
-            console.log(data);
+            if(data.Created === true) {
+                props.history.push('/users');
+                userCreated();
+            } 
+
+            if(data.Created === false) {
+                errorOccured();
+            }
+          
         }
-        
     }
 
     const handleChange = (event) => {
         setAdminCust({...adminCust, [event.target.id]: event.target.value});
         console.log(adminCust);
     }
+
+    const userCreated = () =>  toast.success("User Created!", {
+        position: toast.POSITION.TOP_LEFT
+    });
+
+    
+    const emailExists = () =>  toast.warn("Email Exists!", {
+        position: toast.POSITION.TOP_LEFT
+    });
+
+    const usernameExists = () =>  toast.warn("Username Exists!", {
+        position: toast.POSITION.TOP_LEFT
+    });
+
+    const errorOccured = () =>  toast.error("Error Occured!", {
+        position: toast.POSITION.TOP_LEFT
+    });
 
     return (
         <div>

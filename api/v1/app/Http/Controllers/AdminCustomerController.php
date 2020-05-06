@@ -21,18 +21,22 @@ class AdminCustomerController extends Controller
                 return response()->json(['UsernameExists' => true]);
             }
 
-            $customer_id = DB::table('customers')
-            ->insertGetID([
-                'full_name' => $data['firstName'] . ' ' . $data['lastName'],
+            $customer_created = DB::table('customers')
+            ->insert([
+                'full_name' => $data['firstName']. ' ' . $data['lastName'],
                 'email' => $data['email'],
                 'username' => $data['username'],
                 'password' => Hash::make($data['password'])
             ]);
-            if($customer_id !== 0) {
+
+            if($customer_created) {
                $admin_customers = DB::table('admin_customers')
                ->insert([
-                   'admin_or_customer_id' => $customer_id,
-                   'user_role' => 'Customer'
+                'full_name' => $data['firstName']. ' ' . $data['lastName'],
+                'email' => $data['email'],
+                'username' => $data['username'],
+                'password' => Hash::make($data['password']),
+                'user_role' => 'Customer'
                ]);
 
                if($admin_customers) {
@@ -42,6 +46,7 @@ class AdminCustomerController extends Controller
             }
             return response()->json(['Created' => false]);
         } else if($data['role'] === 'Administrator') {
+            
             if($this->emailExists($data['email'], 'admin')) {
                 return response()->json(['EmailExists' => true]);
             }
@@ -50,19 +55,22 @@ class AdminCustomerController extends Controller
                 return response()->json(['UsernameExists' => true]);
             }
 
-            $admin_id = DB::table('admin')
-            ->insertGetID([
+            $admin_created = DB::table('admin')
+            ->insert([
                 'full_name' => $data['firstName']. ' ' . $data['lastName'],
                 'email' => $data['email'],
                 'username' => $data['username'],
                 'password' => Hash::make($data['password'])
             ]);
 
-            if($admin_id !== 0) {
+            if($admin_created) {
                $admin_customers = DB::table('admin_customers')
                ->insert([
-                   'admin_or_customer_id' => $admin_id,
-                   'user_role' => 'Administrator'
+                'full_name' => $data['firstName']. ' ' . $data['lastName'],
+                'email' => $data['email'],
+                'username' => $data['username'],
+                'password' => Hash::make($data['password']),
+                'user_role' => 'Administrator'
                ]);
 
                if($admin_customers) {
@@ -73,6 +81,12 @@ class AdminCustomerController extends Controller
             return response()->json(['Created' => false]);
         }
     
+    }
+
+    public function getAdminsAndCustomers() {
+        $admins_customers = DB::table('admin_customers')->get();
+
+        return response()->json($admins_customers);
     }
 
     private function emailExists(string $email, string $table) {

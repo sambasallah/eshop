@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SideNav from '../inc/SideNav';
 import Navbar from '../inc/Navbar';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 const Users = () => {
+
+    const [adminCust, setAdminCust] = useState([]);
+
+    const getAdminsAndCustomers = async () => {
+        let url = 'http://localhost:8000/api/v1/admins-customers';
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if(data) {
+           setAdminCust([...adminCust, ...data])
+        }
+    }
+
+    useEffect(() => {
+        getAdminsAndCustomers();
+    }, []);
+
     return (
         <div>
             <Navbar />
@@ -25,35 +42,36 @@ const Users = () => {
                             <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>First Name</th>
-                                        <th>Lastname</th>
+                                        <th>Full Name</th>
                                         <th>Email</th>
                                         <th>Role</th>
                                         <th>Edit</th>
+                                        <th>Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>John</td>
-                                        <td>Doe</td>
-                                        <td>john@example.com</td>
-                                        <td>Customer</td>
-                                        <td><i className="fa fa-pencil"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mary</td>
-                                        <td>Moe</td>
-                                        <td>mary@example.com</td>
-                                        <td>Admin</td>
-                                        <td><i className="fa fa-pencil"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>July</td>
-                                        <td>Dooley</td>
-                                        <td>july@example.com</td>
-                                        <td>Customer</td>
-                                        <td><i className="fa fa-pencil"></i></td>
-                                    </tr>
+                                    { adminCust.length > 0 ? (
+                                        adminCust.map((value) => {
+                                            return(
+                                                <>
+                                                     <tr>
+                                                        <td>{ value.full_name }</td>
+                                                        <td>{ value.email }</td>
+                                                        <td>{ value.user_role}</td>
+                                                        <td><i className="fa fa-pencil"></i></td>
+                                                        <td><i className="fa fa-trash"></i></td>
+                                                    </tr>
+                                                </>
+                                            )
+                                        })
+                                    ) : (
+                                       <>
+                                        <tr>
+                                            <td><h5>No User</h5></td>
+                                        </tr>
+                                       </>
+                                    )}
+                                    { console.log(adminCust)}
                                     </tbody>
                             </table>
                         </div>

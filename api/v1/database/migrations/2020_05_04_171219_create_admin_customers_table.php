@@ -16,7 +16,10 @@ class CreateAdminCustomersTable extends Migration
     {
         Schema::create('admin_customers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('admin_or_customer_id');
+            $table->string('full_name');
+            $table->string('email');
+            $table->string('username');
+            $table->string('password');
             $table->string('user_role');
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

@@ -22,6 +22,8 @@ class CreateCustomersTable extends Migration
             $table->string('town_city')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email');
+            $table->string('username')->nullable();
+            $table->string('password')->nullable();
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
