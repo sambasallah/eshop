@@ -27,10 +27,7 @@ const App = () => {
     <div className="App">
         <Provider store={store}>
           <Switch>
-             { store.getState().auth.isLoggedIn? (
-               <>
-                <Redirect to="/" component={Dashboard}></Redirect>
-                <Route exact path="/" component={Dashboard}></Route>
+                <Route exact path="/login" component={AdminLogin}></Route>
                 <Route exact path="/orders" render={(props) => <Orders {...props} />}></Route>
                 <Route exact path="/orders/:page" render={(props) => <Orders {...props} />}></Route>
                 <Route exact path="/store" component={Store}></Route>
@@ -42,12 +39,27 @@ const App = () => {
                 <Route exact path="/edit/:slug" component={EditProduct}></Route>
                 <Route exact path="/users" component={Users}></Route>
                 <Route exact path="/add-user" component={AddUser}></Route>
+                <Route exact path="/" component={Dashboard}></Route>
+             {/* { store.getState().auth.isLoggedIn? (
+               <>
+                <Route exact path="/orders" render={(props) => <Orders {...props} />}></Route>
+                <Route exact path="/orders/:page" render={(props) => <Orders {...props} />}></Route>
+                <Route exact path="/store" component={Store}></Route>
+                <Route exact path="/store/:page" render={(props) => <Store {...props } />}></Route>
+                <Route exact path='/categories' component={Categories}></Route>
+                <Route exact path="/settings" component={Settings}></Route>
+                <Route exact path="/order/:order_id" render={(props) => <SingleOrder {...props} />}></Route>
+                <Route exact path="/add-product" component={AddProduct}></Route>
+                <Route exact path="/edit/:slug" component={EditProduct}></Route>
+                <Route exact path="/users" component={Users}></Route>
+                <Route exact path="/add-user" component={AddUser}></Route>
+                <Route exact path="/" component={Dashboard}></Route>
                </>
              ) : (
              <>
              <Route exact path="/login" component={AdminLogin}></Route>
              <Redirect to="/login"></Redirect>
-             </>)} 
+             </>)}  */}
           </Switch>
         </Provider>
     </div>

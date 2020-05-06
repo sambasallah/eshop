@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import StoreList from './StoreList';
 import Navbar from '../inc/Navbar';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 
 const Store = (props) => {
@@ -93,6 +94,8 @@ const Store = (props) => {
     useEffect(() => {
         getAllProducts();
     },[search, page]);
+
+    if(!props.token) return <Redirect to='/login'></Redirect>
 
     return (
         <div>

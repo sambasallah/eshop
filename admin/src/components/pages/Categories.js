@@ -4,6 +4,7 @@ import SideNav from '../inc/SideNav';
 import { toast } from 'react-toastify';
 import Navbar from '../inc/Navbar';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const Categories = (props) => {
 
@@ -81,6 +82,8 @@ const Categories = (props) => {
     useEffect(() => {
         getCategories();
     }, []);
+
+    if(!props.token) return <Redirect to='/login'></Redirect>
 
     return (
         <div>

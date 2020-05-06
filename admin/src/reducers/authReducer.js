@@ -1,9 +1,10 @@
-import { LOGIN_ADMIN } from '../actions/types';
+import { LOGIN_ADMIN, LOGOUT, IS_LOADING, LOGIN_FAILED } from '../actions/types';
 
 let initialState = {
     token: "",
     isLoggedIn: false,
-    redirect: false
+    isLoading: false,
+    loginFailed: false
 };
 
 export default function(state=initialState, action) {
@@ -13,7 +14,22 @@ export default function(state=initialState, action) {
                 ...state,
                 token: action.payload,
                 isLoggedIn: true,
-                redirect: true
+                isLoading: false
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                isLoggedIn: false
+            }
+        case IS_LOADING: 
+            return {
+                ...state,
+                isLoading: true
+            }
+        case LOGIN_FAILED:
+            return {
+                ...state,
+                loginFailed: true
             }
         default:
             return state;

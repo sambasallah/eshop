@@ -4,6 +4,7 @@ import Navbar from '../inc/Navbar';
 import SideNav from '../inc/SideNav';
 import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const AddUser = (props) => {
 
@@ -57,6 +58,8 @@ const AddUser = (props) => {
     const errorOccured = () =>  toast.error("Error Occured!", {
         position: toast.POSITION.TOP_LEFT
     });
+
+    if(!props.token) return <Redirect to='/login'></Redirect>
 
     return (
         <div>

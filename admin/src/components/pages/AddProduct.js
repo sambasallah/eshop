@@ -8,6 +8,7 @@ import { slug, chunk } from '../utils/UtilityFunctions';
 import { toast } from 'react-toastify';
 import Navbar from '../inc/Navbar';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 toast.configure();
 
@@ -70,8 +71,6 @@ const AddProduct = (props) => {
         let data = await response.json();
         if(data) {
             setProduct(Object.assign({}, product, { updated: 'Product Updated', imageAdded: false }));
-            console.log(product)
-            console.log(data);
         } else {
             setProduct(Object.assign({}, product, { notUpdated: 'Product Not Updated', formSubmitted: true, imageAdded: false }));
         }
@@ -151,6 +150,8 @@ const AddProduct = (props) => {
     getCategories();
   },[]);
 
+
+  if(!props.token) return <Redirect to='/login'></Redirect>
 
   return (  
               <div>

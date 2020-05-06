@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const Users = (props) => {
 
@@ -44,6 +45,8 @@ const Users = (props) => {
     useEffect(() => {
         getAdminsAndCustomers();
     }, []);
+
+    if(!props.token) return <Redirect to='/login'></Redirect>
 
     return (
         <div>

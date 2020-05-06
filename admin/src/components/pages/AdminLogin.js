@@ -2,24 +2,33 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { loginAdmin } from '../../actions/AdminActions';
+import { toast } from 'react-toastify';
 
 const AdminLogin = (props) => {
 
-    const [loginDetails, setLoginDetails] = useState({});
+    const [loginDetails, setLoginDetails] = useState({
+        isLoading: props.isLoading
+    });
 
-    const login = async (event) => {
+    const login = (event) => {
         event.preventDefault();
-        await props.loginAdmin(loginDetails);
-        if(props.redirect === true) {
-            props.history.push('/dashboard');
-            console.log(props.redirect)
+        props.loginAdmin(loginDetails);
+        if(props.loginFailed === true) {
+            invalidLoginCredentials();
         }
-
+        if(props.isLoggedIn) {
+            props.history.push('/');
+        }
+      
     }
 
     const handleChange = (event) => {
         setLoginDetails({...loginDetails, [event.target.id]: event.target.value});
     }
+
+    const invalidLoginCredentials = () =>  toast.error("Invalid Login Details!", {
+        position: toast.POSITION.TOP_LEFT
+    });
 
     return (
         <div>
@@ -30,7 +39,12 @@ const AdminLogin = (props) => {
                    <form onSubmit={ login }>
                        <input type="text" name="username" placeholder="Email" id="email" onChange={ handleChange } className="username" required/>
                        <input type="password" name="password" placeholder="Password" id="password" onChange={ handleChange } className="password" required/>
-                       <input type="submit" value="Login" className="submit"/>
+                       { props.isLoading? (
+                            <input type="submit" value="Loading..." className="submit"/>
+                       ) : (
+                            <input type="submit" value="Login" className="submit"/>
+                       )}
+                       { console.log(props.isLoading)}
                    </form>
                </div>
            </div>
@@ -40,7 +54,9 @@ const AdminLogin = (props) => {
 
 const mapStateToProps = (state) => (
     {
-        redirect: state.auth.redirect
+        isLoggedIn: state.auth.isLoggedIn, 
+        isLoading: state.auth.isLoading,
+        loginFailed: state.auth.loginFailed
     }
 )
 

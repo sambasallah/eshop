@@ -6,6 +6,7 @@ import { MdPhoneIphone } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import Navbar from '../inc/Navbar';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const SingleOrder = (props) => {
 
@@ -82,6 +83,8 @@ const SingleOrder = (props) => {
     useEffect(() => {
         getOrderInfo();
     }, []);
+
+    if(!props.token) return <Redirect to='/login'></Redirect>
 
     return (
        <>

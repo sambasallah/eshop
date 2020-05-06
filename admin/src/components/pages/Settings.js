@@ -5,8 +5,10 @@ import { Error, Success } from '../alerts/SettingsAlerts';
 import { openUploadWidget } from "../utils/CloudinaryService";
 import { CloudinaryContext } from 'cloudinary-react';
 import Navbar from '../inc/Navbar';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-const Settings = () => {
+const Settings = (props) => {
 
     const originalState = {
         id : '',
@@ -98,7 +100,8 @@ const Settings = () => {
         });
       }
 
-  
+    if(!props.token) return <Redirect to='/login'></Redirect>
+      
     return (
         <div>
             <Navbar />
@@ -171,4 +174,10 @@ const Settings = () => {
     )
 }
 
-export default Settings
+const mapStateToProps = (state) => (
+    {
+        token: state.auth.token
+    }
+)
+
+export default connect(mapStateToProps)(Settings)

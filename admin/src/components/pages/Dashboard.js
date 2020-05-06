@@ -6,9 +6,9 @@ import { Sparklines, SparklinesLine, SparklinesSpots,
     SparklinesBars, SparklinesCurve } from 'react-sparklines';
 import Navbar from '../inc/Navbar';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const Dashboard = (props) => {
-
 
     const [totalSales, setTotalSales] = useState({total: 0});
     const [allOrders, setOrders] = useState({orders: 0});
@@ -19,6 +19,7 @@ const Dashboard = (props) => {
     const [weeklyOrders, setWeeklyOrders] = useState({weeklyOrders: []});
     const [totalWeeklyProfit, setTotalWeeklyProfit] = useState({totalWeeklyProfit : 0});
     const [totalDailyProfit, setTotalDailyProfit] = useState({totalDailyProfit: []});
+
 
     let salesData = [];
     let orderData = [];
@@ -62,7 +63,7 @@ const Dashboard = (props) => {
         let data = await response.json();
         let weeklySalesData = [];
         let day = "";
-        if(data) {
+        if(data.WeeklySales) {
             data.WeeklySales.map((value) => {
                  switch(value.day) {
                      case 1: 
@@ -168,6 +169,8 @@ const Dashboard = (props) => {
         getTotalWeeklyProfit();
         getTotalDailyProfit();
     },[])
+
+    if(!props.token) return <Redirect to='/login'></Redirect>
 
     return (
         <div>

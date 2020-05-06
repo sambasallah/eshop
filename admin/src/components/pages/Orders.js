@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import Navbar from '../inc/Navbar';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const OrderItem = ({ items }) => {
 
@@ -146,6 +147,8 @@ const Orders = (props) => {
         getPendingOrders();
         getCompletedOrders();
     },[])
+
+    if(!props.token) return <Redirect to='/login'></Redirect>
 
     return (
         <div>

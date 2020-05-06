@@ -202,6 +202,8 @@ useEffect(() => {
     getCategories();
 },[]);
 
+    if(!props.token) return <Redirect to='/login'></Redirect>
+
     return (
         <div>
          <Navbar />

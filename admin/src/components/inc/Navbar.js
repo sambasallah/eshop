@@ -1,7 +1,19 @@
 import React from 'react';
 import { FaGift } from 'react-icons/fa';
+import { connect } from 'react-redux';
+import { logout } from '../../actions/AdminActions';
+import { Redirect } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = (props) => {
+
+    const logout = () => {
+        props.logout();
+        localStorage.removeItem('token');
+        localStorage.removeItem('loggedIn');
+    }
+
+    if(!props.token) return <Redirect to='/login'></Redirect>
+
     return (
         <div>
             <div className="main-nav">
@@ -28,7 +40,7 @@ const Navbar = () => {
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="#">Logout</a>
+                        <a class="nav-link"  href="/login" onClick={ logout }>Logout</a>
                     </li>
                     </ul>
                 </div> 
@@ -39,4 +51,8 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+const mapStateToProps = (state) => ({
+    token: state.auth.token
+});
+
+export default connect(mapStateToProps, { logout })(Navbar);
