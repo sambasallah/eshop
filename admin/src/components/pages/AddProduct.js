@@ -7,10 +7,11 @@ import { openUploadWidget } from "../utils/CloudinaryService";
 import { slug, chunk } from '../utils/UtilityFunctions';
 import { toast } from 'react-toastify';
 import Navbar from '../inc/Navbar';
+import { connect } from 'react-redux';
 
 toast.configure();
 
-const AddProduct = () => {
+const AddProduct = (props) => {
 
     const [product, setProduct] = useState([{ formSubmitted: false }]);
     const [category, setCategory] = useState([]);
@@ -53,7 +54,7 @@ const AddProduct = () => {
     setProduct(Object.assign(product, { slug: slugName }));
 
     if(product.id === undefined) {
-        let url = 'http://localhost:8000/api/v1/product';
+        let url = 'http://localhost:8000/api/v1/product?token=' + props.token;
         let response = await fetch(url, {method : 'POST', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
         let data = await response.json();
         if(data) {
@@ -64,7 +65,7 @@ const AddProduct = () => {
             error();
         }
     } else {
-        let url = 'http://localhost:8000/api/v1/product/' + product.id;
+        let url = 'http://localhost:8000/api/v1/product/' + product.id + '?token=' + props.token;
         let response = await fetch(url, {method : 'PUT', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
         let data = await response.json();
         if(data) {
@@ -88,7 +89,7 @@ const AddProduct = () => {
 
 
   const getCategories = async () => {
-    let response = await fetch('http://localhost:8000/api/v1/product/categories');
+    let response = await fetch('http://localhost:8000/api/v1/product/categories?token=' + props.token);
     let data = await response.json();
     let arr = [];
 
@@ -232,4 +233,10 @@ const AddProduct = () => {
 
 }
 
-export default AddProduct;
+const mapStateToProps = (state) => (
+    {
+        token: state.auth.token
+    }
+);
+
+export default connect(mapStateToProps)(AddProduct);

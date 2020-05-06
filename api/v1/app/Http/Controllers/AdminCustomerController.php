@@ -21,25 +21,29 @@ class AdminCustomerController extends Controller
                 return response()->json(['UsernameExists' => true]);
             }
 
-            $customer_created = DB::table('customers')
-            ->insert([
-                'full_name' => $data['firstName']. ' ' . $data['lastName'],
-                'email' => $data['email'],
-                'username' => $data['username'],
-                'password' => Hash::make($data['password'])
-            ]);
 
-            if($customer_created) {
-               $admin_customers = DB::table('admin_customers')
-               ->insert([
+            $admin_customers_id = DB::table('admin_customers')
+               ->insertGetId([
                 'full_name' => $data['firstName']. ' ' . $data['lastName'],
                 'email' => $data['email'],
                 'username' => $data['username'],
                 'password' => Hash::make($data['password']),
-                'user_role' => 'Customer'
+                'user_role' => 'Customer',
                ]);
 
-               if($admin_customers) {
+           
+
+            if($admin_customers_id !== 0) {
+                $customer_created = DB::table('customers')
+                ->insert([
+                    'full_name' => $data['firstName']. ' ' . $data['lastName'],
+                    'email' => $data['email'],
+                    'username' => $data['username'],
+                    'password' => Hash::make($data['password']),
+                    'admin_customers_id' => $admin_customers_id
+                ]);
+
+               if($customer_created) {
                    return response()->json(['Created' => true]);
                }
                return response()->json(['Created' => false]);
@@ -55,25 +59,26 @@ class AdminCustomerController extends Controller
                 return response()->json(['UsernameExists' => true]);
             }
 
-            $admin_created = DB::table('admin')
-            ->insert([
-                'full_name' => $data['firstName']. ' ' . $data['lastName'],
-                'email' => $data['email'],
-                'username' => $data['username'],
-                'password' => Hash::make($data['password'])
-            ]);
-
-            if($admin_created) {
-               $admin_customers = DB::table('admin_customers')
-               ->insert([
+            $admin_customers_id = DB::table('admin_customers')
+               ->insertGetId([
                 'full_name' => $data['firstName']. ' ' . $data['lastName'],
                 'email' => $data['email'],
                 'username' => $data['username'],
                 'password' => Hash::make($data['password']),
-                'user_role' => 'Administrator'
+                'user_role' => 'Administrator',
+                
                ]);
 
-               if($admin_customers) {
+            if($admin_customers_id !== 0) {
+                $admin_created = DB::table('admin')
+                    ->insertGetId([
+                        'full_name' => $data['firstName']. ' ' . $data['lastName'],
+                        'email' => $data['email'],
+                        'username' => $data['username'],
+                        'password' => Hash::make($data['password']),
+                        'admin_customers_id' => $admin_customers_id
+                    ]);
+               if($admin_created) {
                    return response()->json(['Created' => true]);
                }
                return response()->json(['Created' => false]);
@@ -85,8 +90,31 @@ class AdminCustomerController extends Controller
 
     public function getAdminsAndCustomers() {
         $admins_customers = DB::table('admin_customers')->get();
-
         return response()->json($admins_customers);
+    }
+
+    public function delete(Request $request) {
+        $data = $request->input();
+
+        if($data['userRole'] === 'Customer') {
+            $deleted_user = DB::table('admin_customers')
+            ->where('email', $data['email'])->delete();
+
+            if($deleted_user === 1) {
+                return response()->json(['Deleted' => true]);
+            }
+            return response()->json(['Deleted' => false]);   
+        } else if ($data['userRole'] === 'Administrator') {
+                $deleted_user = DB::table('admin_customers')
+                ->where('email', $data['email'])->delete();
+    
+                if($deleted_user === 1) {
+                    return response()->json(['Deleted' => true]);
+                }
+                return response()->json(['Deleted' => false]);   
+        }
+        
+        
     }
 
     private function emailExists(string $email, string $table) {

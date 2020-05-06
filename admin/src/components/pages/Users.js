@@ -3,13 +3,15 @@ import SideNav from '../inc/SideNav';
 import Navbar from '../inc/Navbar';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { toast } from 'react-toastify';
+import { connect } from 'react-redux';
 
-const Users = () => {
+const Users = (props) => {
 
     const [adminCust, setAdminCust] = useState([]);
 
     const getAdminsAndCustomers = async () => {
-        let url = 'http://localhost:8000/api/v1/admins-customers';
+        let url = 'http://localhost:8000/api/v1/admins-customers?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -17,6 +19,27 @@ const Users = () => {
            setAdminCust([...adminCust, ...data])
         }
     }
+
+    const deleteUser = async (email, userRole) => {
+        let url = 'http://localhost:8000/api/v1/admins-customers-delete?token=' + props.token;
+        let response = await fetch(url, {method: 'POST', 
+        headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email: email, userRole: userRole})});
+        let data = await response.json();
+
+        if(data) {
+            if(data.Deleted === true) {
+                props.history.push('/');
+                userDeleted();
+                props.history.push('/users');
+            } else {
+                console.log(data);
+            }
+        }
+    }
+
+    const userDeleted = () =>  toast.success("User Deleted!", {
+        position: toast.POSITION.TOP_LEFT
+    });
 
     useEffect(() => {
         getAdminsAndCustomers();
@@ -59,7 +82,7 @@ const Users = () => {
                                                         <td>{ value.email }</td>
                                                         <td>{ value.user_role}</td>
                                                         <td><i className="fa fa-pencil"></i></td>
-                                                        <td><i className="fa fa-trash"></i></td>
+                                                        <td><i className="fa fa-trash" style={{cursor: 'pointer'}}  onClick={ () => deleteUser(value.email, value.user_role) }></i></td>
                                                     </tr>
                                                 </>
                                             )
@@ -71,7 +94,7 @@ const Users = () => {
                                         </tr>
                                        </>
                                     )}
-                                    { console.log(adminCust)}
+                    
                                     </tbody>
                             </table>
                         </div>
@@ -82,4 +105,10 @@ const Users = () => {
     )
 }
 
-export default Users
+const mapStateToProps = (state) => (
+    {
+        token: state.auth.token
+    }
+);
+
+export default connect(mapStateToProps)(Users);

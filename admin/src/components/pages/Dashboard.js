@@ -5,8 +5,9 @@ import { Helmet } from 'react-helmet';
 import { Sparklines, SparklinesLine, SparklinesSpots, 
     SparklinesBars, SparklinesCurve } from 'react-sparklines';
 import Navbar from '../inc/Navbar';
+import { connect } from 'react-redux';
 
-const Dashboard = () => {
+const Dashboard = (props) => {
 
 
     const [totalSales, setTotalSales] = useState({total: 0});
@@ -36,7 +37,7 @@ const Dashboard = () => {
     })
 
     const getTotalSales = async () => {
-        let url = 'http://localhost:8000/api/v1/total-sales';
+        let url = 'http://localhost:8000/api/v1/total-sales?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -46,7 +47,7 @@ const Dashboard = () => {
     }
 
     const getTotalWeeklySales = async () => {
-        let url = 'http://localhost:8000/api/v1/total-weekly-sales';
+        let url = 'http://localhost:8000/api/v1/total-weekly-sales?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -56,7 +57,7 @@ const Dashboard = () => {
     }
 
     const getWeeklySales = async () => {
-        let url = 'http://localhost:8000/api/v1/weekly-sales';
+        let url = 'http://localhost:8000/api/v1/weekly-sales?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
         let weeklySalesData = [];
@@ -97,7 +98,7 @@ const Dashboard = () => {
     }
 
     const getAllOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/all-orders';
+        let url = 'http://localhost:8000/api/v1/all-orders?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -107,7 +108,7 @@ const Dashboard = () => {
     }
 
     const getNewOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/new-orders';
+        let url = 'http://localhost:8000/api/v1/new-orders?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -117,7 +118,7 @@ const Dashboard = () => {
     }
 
     const getWeeklyOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/weekly-orders';
+        let url = 'http://localhost:8000/api/v1/weekly-orders?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -127,7 +128,7 @@ const Dashboard = () => {
     }
 
     const getTotalProfit = async () => {
-        let url = 'http://localhost:8000/api/v1/total-profit';
+        let url = 'http://localhost:8000/api/v1/total-profit?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -137,7 +138,7 @@ const Dashboard = () => {
     }
 
     const getTotalWeeklyProfit = async () => {
-        let url = 'http://localhost:8000/api/v1/total-weekly-profit';
+        let url = 'http://localhost:8000/api/v1/total-weekly-profit?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -147,7 +148,7 @@ const Dashboard = () => {
     }
 
     const getTotalDailyProfit = async () => {
-        let url = 'http://localhost:8000/api/v1/total-daily-profit';
+        let url = 'http://localhost:8000/api/v1/total-daily-profit?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -282,5 +283,10 @@ const Dashboard = () => {
     )
 }
 
+const mapStateToProps = (state) => (
+    {
+        token: state.auth.token
+    }
+)
 
-export default Dashboard;
+export default connect(mapStateToProps)(Dashboard);

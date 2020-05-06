@@ -54,8 +54,8 @@ class AuthController extends Controller
      * @return mixed
      */
     public function authenticate(Request $request) {
-        $user_details = $request->input();
-        $user = DB::table('admin')->where('email', $user_details['email'])->first();
+
+        $user = DB::table('admin')->where('email', $request->input('email'))->first();
 
 
         if (!$user) {
@@ -69,19 +69,19 @@ class AuthController extends Controller
         }
 
         // Verify the password and generate the token
-        // if (Hash::check($this->request->input('password'), $user->password)) {
-        //     return response()->json([
-        //         'token' => $this->jwt($user)
-        //     ], 200);
-        // }
+        if (Hash::check($this->request->input('password'), $user->password)) {
+            return response()->json([
+                'token' => $this->jwt($user)
+            ], 200);
+        }
 
-        return response()->json([
-                    'token' => $this->jwt($user)
-         ], 200);
+        // return response()->json([
+        //             'token' => $this->jwt($user)
+        //  ], 200);
 
         // Bad Request response
-        // return response()->json([
-        //     'error' => 'Email or password is wrong.'
-        // ], 400);
+        return response()->json([
+            'error' => 'Email or password is wrong.'
+        ], 400);
     }
 }

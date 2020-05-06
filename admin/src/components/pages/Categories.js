@@ -3,8 +3,9 @@ import { Helmet }  from 'react-helmet';
 import SideNav from '../inc/SideNav';
 import { toast } from 'react-toastify';
 import Navbar from '../inc/Navbar';
+import { connect } from 'react-redux';
 
-const Categories = () => {
+const Categories = (props) => {
 
     const [categoryName, setCategoryName] = useState({categoryName: ''});
     const [category, setCategory] = useState({categories: []});
@@ -12,7 +13,7 @@ const Categories = () => {
     const addCategory = async (event) => {
         event.preventDefault(); 
         setCategory({...category,categories:[...category.categories, categoryName.categoryName] });
-        let url = 'http:///localhost:8000/api/v1/categories/create-category';
+        let url = 'http:///localhost:8000/api/v1/categories/create-category?token=' + props.token;
         let response = await fetch(url, {method: 'POST', headers: {'Content-Type' : 'application/json'},
          body: JSON.stringify({categoryName: categoryName.categoryName})});
          let data = await response.json();
@@ -26,7 +27,7 @@ const Categories = () => {
     }
 
     const getCategories = async () => {
-        let url = 'http://localhost:8000/api/v1/categories/product-categories';
+        let url = 'http://localhost:8000/api/v1/categories/product-categories?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -44,7 +45,7 @@ const Categories = () => {
         let categoryToDelete = category.categories.filter((category) => (category === event.target.getAttribute('value')));
         let updatedList = category.categories.filter((category) => (category !== event.target.getAttribute('value')));
         setCategory({...category, categories: updatedList});
-        let url = 'http://localhost:8000/api/v1/categories/delete-category';
+        let url = 'http://localhost:8000/api/v1/categories/delete-category?token=' + props.token;
         let response = await fetch(url, {method: 'DELETE',
          headers:{'Content-Type': 'application/json'}, 
          body: JSON.stringify({categoryName: categoryToDelete.pop()})});
@@ -128,4 +129,10 @@ const Categories = () => {
     )
 }
 
-export default Categories
+const mapStateToProps = (state) => (
+    {
+        token: state.auth.token
+    }
+);
+
+export default connect(mapStateToProps)(Categories)

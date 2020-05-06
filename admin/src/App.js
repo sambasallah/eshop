@@ -29,6 +29,7 @@ const App = () => {
           <Switch>
              { store.getState().auth.isLoggedIn? (
                <>
+                <Redirect to="/" component={Dashboard}></Redirect>
                 <Route exact path="/" component={Dashboard}></Route>
                 <Route exact path="/orders" render={(props) => <Orders {...props} />}></Route>
                 <Route exact path="/orders/:page" render={(props) => <Orders {...props} />}></Route>

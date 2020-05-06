@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import Navbar from '../inc/Navbar';
 import SideNav from '../inc/SideNav';
 import { toast } from 'react-toastify';
+import { connect } from 'react-redux';
 
 const AddUser = (props) => {
 
@@ -10,7 +11,7 @@ const AddUser = (props) => {
 
     const register = async (event) => {
         event.preventDefault();
-        let url = 'http://localhost:8000/api/v1/create-admin-or-customer';
+        let url = 'http://localhost:8000/api/v1/create-admin-or-customer?token=' + props.token;
         let response = await fetch(url, {method: 'POST', 
         headers: {'Content-Type': 'application/json'}, body: JSON.stringify(adminCust)});
         let data = await response.json();
@@ -114,4 +115,10 @@ const AddUser = (props) => {
     )
 }
 
-export default AddUser
+const mapStateToProps = (state) => (
+    {
+        token: state.auth.token
+    }
+);
+
+export default connect(mapStateToProps)(AddUser)

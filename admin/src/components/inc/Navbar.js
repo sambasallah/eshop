@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { FaGift } from 'react-icons/fa';
 
 const Navbar = () => {
     return (
@@ -17,22 +18,23 @@ const Navbar = () => {
 
                 <div className="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
                     <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">
+                    <li className="nav-item dropdown">
+                        <a className="nav-link" data-toggle="dropdown" href="#">
                             <i className="fa fa-bell"></i>
                             <span className='badge badge-warning' id='notification'> 5 </span>
                         </a>
+                        <div className="dropdown-menu">
+                            <a href="#" className="dropdown-item"><FaGift /> 5 New Orders</a>
+                        </div>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/about">
-                            <i className="fa fa-cog"></i>
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="#">Logout</a>
                     </li>
                     </ul>
                 </div> 
                 </div>
             </nav>	
-	</div>
+	    </div>
         </div>
     )
 }

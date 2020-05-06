@@ -12,13 +12,6 @@
 
 $router->group(['prefix' => 'api/v1', 'middleware' => ['cors']], function() use($router) {
   
-// Users Route
-$router->get('/users', 'UserController@allUsers');
-$router->get('/users/{id}', 'UserController@singleUser');
-$router->post('/users','UserController@registerUser');
-$router->put('/users/{id}','UserController@updateUser');
-$router->delete('/users/{id}', 'UserController@deleteUser');
-
 // Products Route
 $router->get('/products/p/{page}','ProductController@allProducts');
 $router->get('/products/search/{searchValue}/{page}','ProductController@searchProduct');
@@ -31,6 +24,18 @@ $router->put('/product/{id}', 'ProductController@updateProduct');
 $router->get('/product/categories', 'ProductController@getCategories');
 $router->get('/product/{slug}', 'ProductController@getProductUsingSlug');
 $router->delete('/product/{id}', 'ProductController@deleteProduct');
+
+// Categories Route
+$router->get('/categories/product-categories', 'CategoryController@getAllCategories');
+$router->post('/categories/create-category', 'CategoryController@createCategory');
+$router->delete('/categories/delete-category', 'CategoryController@deleteCategory');
+
+// Admin_Customers Route
+$router->post('/create-admin-or-customer', 'AdminCustomerController@createAdminOrCustomer');
+$router->get('/admins-customers', 'AdminCustomerController@getAdminsAndCustomers');
+$router->post('/admins-customers-delete', 'AdminCustomerController@delete');
+
+$router->group(['middleware' => 'jwt.auth'], function() use($router) {
 
 // Admin Route
 $router->get('/admins', 'AdminController@allAdmin');
@@ -61,19 +66,16 @@ $router->get('/total-profit', 'DashboardController@getTotalProfit');
 $router->get('/total-weekly-profit', 'DashboardController@getTotalWeeklyProfit');
 $router->get('/total-daily-profit', 'DashboardController@getTotalDailyProfit');
 
-// Categories Route
-$router->get('/categories/product-categories', 'CategoryController@getAllCategories');
-$router->post('/categories/create-category', 'CategoryController@createCategory');
-$router->delete('/categories/delete-category', 'CategoryController@deleteCategory');
+// Users Route
+$router->get('/users', 'UserController@allUsers');
+$router->get('/users/{id}', 'UserController@singleUser');
+$router->post('/users','UserController@registerUser');
+$router->put('/users/{id}','UserController@updateUser');
+$router->delete('/users/{id}', 'UserController@deleteUser');
 
-// Admin_Customers Route
-$router->post('/create-admin-or-customer', 'AdminCustomerController@createAdminOrCustomer');
-$router->get('/admins-customers', 'AdminCustomerController@getAdminsAndCustomers');
-
-$router->post('/admin-login', 'AuthController@authenticate');
-
-$router->group(['middleware' => 'jwt.auth'], function() use($router) {
-    $router->get('/dashboard', 'AdminController@welcome');
 });
+
+// Login Admin
+$router->post('/admin-login', 'AuthController@authenticate');
 
 });

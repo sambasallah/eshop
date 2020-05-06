@@ -5,6 +5,7 @@ import { FaClock, FaMapMarker, FaRegEnvelope } from 'react-icons/fa';
 import { MdPhoneIphone } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import Navbar from '../inc/Navbar';
+import { connect } from 'react-redux';
 
 const SingleOrder = (props) => {
 
@@ -32,7 +33,7 @@ const SingleOrder = (props) => {
 
     const getOrderInfo = async () => {
         setLoading({...loading,loading: true});
-        let url = 'http://localhost:8000/api/v1/order/' + orderID;
+        let url = 'http://localhost:8000/api/v1/order/' + orderID + '?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -63,7 +64,7 @@ const SingleOrder = (props) => {
     });
 
     const completeOrder = async () => {
-        let url = 'http://localhost:8000/api/v1/complete-order';
+        let url = 'http://localhost:8000/api/v1/complete-order?token=' + props.token;
         let response = await fetch(url, {method: 'PUT', headers : {'Content-Type': 'application/json'},
          body: JSON.stringify({'order_number': order.orderNumber})});
         let data = await response.json();
@@ -234,4 +235,11 @@ const SingleOrder = (props) => {
     )
 }
 
-export default SingleOrder;
+const mapStateToProps = (state) => (
+    {
+        token: state.auth.token
+    }
+);
+
+
+export default connect(mapStateToProps)(SingleOrder);

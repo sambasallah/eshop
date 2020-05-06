@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import StoreList from './StoreList';
 import Navbar from '../inc/Navbar';
+import { connect } from 'react-redux';
 
 
 const Store = (props) => {
@@ -18,7 +19,7 @@ const Store = (props) => {
     const getAllProducts = async () => {
     
         if(search.searchBox === undefined) {
-        let url = 'http://localhost:8000/api/v1/products/p/1?page=' + page.page;
+        let url = 'http://localhost:8000/api/v1/products/p/1?page=' + page.page + '?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
         if(data) {
@@ -42,7 +43,7 @@ const Store = (props) => {
             setPagination({current_page: data.current_page, last_page: data.last_page, from: data.from});
             }
         } else {
-            let url = 'http://localhost:8000/api/v1/products/search/' + search.searchBox + '/' + page.page;
+            let url = 'http://localhost:8000/api/v1/products/search/' + search.searchBox + '/' + page.page + '?token=' + props.token;
             let response = await fetch(url);
             let data = await response.json();
             if(data) {
@@ -226,4 +227,10 @@ const Store = (props) => {
     );
 }
 
-export default Store
+const mapStateToProps = (state) => (
+    {
+        token: state.auth.token
+    }
+);
+
+export default connect(mapStateToProps)(Store)

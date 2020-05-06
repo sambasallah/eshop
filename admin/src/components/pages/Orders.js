@@ -3,6 +3,7 @@ import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import Navbar from '../inc/Navbar';
+import { connect } from 'react-redux';
 
 const OrderItem = ({ items }) => {
 
@@ -65,7 +66,7 @@ const Orders = (props) => {
     
 
     const getAllOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/orders?page='+ page.page;
+        let url = 'http://localhost:8000/api/v1/orders?page='+ page.page + '&&token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -82,7 +83,7 @@ const Orders = (props) => {
     }
 
     const getTotalOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/total-orders';
+        let url = 'http://localhost:8000/api/v1/total-orders?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -92,7 +93,7 @@ const Orders = (props) => {
     }
 
     const getTodayOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/today-orders';
+        let url = 'http://localhost:8000/api/v1/today-orders?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -102,7 +103,7 @@ const Orders = (props) => {
     }
 
     const getPendingOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/pending-orders';
+        let url = 'http://localhost:8000/api/v1/pending-orders?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -113,7 +114,7 @@ const Orders = (props) => {
 
     
     const getCompletedOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/completed-orders';
+        let url = 'http://localhost:8000/api/v1/completed-orders?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
 
@@ -330,4 +331,10 @@ const Orders = (props) => {
     )
 }
 
-export default Orders
+const mapStateToProps = (state) => (
+    {
+        token: state.auth.token
+    }
+);
+
+export default connect(mapStateToProps)(Orders);
