@@ -14,7 +14,8 @@ export const loginAdmin = (loginDetails) => async (dispatch) => {
         dispatch(
             {
                 type: LOGIN_ADMIN,
-                payload: data.token
+                token: data.token,
+                user: loginDetails.email
             }
         );
     } else {

@@ -3,23 +3,17 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { loginAdmin } from '../../actions/AdminActions';
 import { toast } from 'react-toastify';
+import { Redirect } from 'react-router-dom';
 
 const AdminLogin = (props) => {
 
-    const [loginDetails, setLoginDetails] = useState({
-        isLoading: props.isLoading
-    });
+    const [loginDetails, setLoginDetails] = useState({});
+    const [errorHandler, setErrorHandler] = useState({handle: false});
 
-    const login = (event) => {
+
+    const login = async (event) => {
         event.preventDefault();
-        props.loginAdmin(loginDetails);
-        if(props.loginFailed === true) {
-            invalidLoginCredentials();
-        }
-        if(props.isLoggedIn) {
-            props.history.push('/');
-        }
-      
+        await props.loginAdmin(loginDetails);
     }
 
     const handleChange = (event) => {
@@ -30,6 +24,11 @@ const AdminLogin = (props) => {
         position: toast.POSITION.TOP_LEFT
     });
 
+    if(props.isLoggedIn) return <Redirect to='/'></Redirect>
+    if(props.loginFailed && !errorHandler.handle) {
+        invalidLoginCredentials();
+        setErrorHandler({...errorHandler, handle: true});
+    }
     return (
         <div>
             <Helmet title="Admin Login | eBaaba" />
@@ -39,12 +38,11 @@ const AdminLogin = (props) => {
                    <form onSubmit={ login }>
                        <input type="text" name="username" placeholder="Email" id="email" onChange={ handleChange } className="username" required/>
                        <input type="password" name="password" placeholder="Password" id="password" onChange={ handleChange } className="password" required/>
-                       { props.isLoading? (
+                       { props.isLoading && !props.loginFailed? (
                             <input type="submit" value="Loading..." className="submit"/>
                        ) : (
                             <input type="submit" value="Login" className="submit"/>
                        )}
-                       { console.log(props.isLoading)}
                    </form>
                </div>
            </div>

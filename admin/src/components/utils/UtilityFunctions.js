@@ -18,3 +18,7 @@ xs.reduce(
       : segments, 
   []
 );
+
+export const isPasswordChanged = (oldPassword,newPassword) => {
+  return (oldPassword !== newPassword);
+}

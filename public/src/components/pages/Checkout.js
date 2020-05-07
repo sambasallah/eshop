@@ -327,7 +327,7 @@ const Checkout = (props) => {
                                         return(
                                             <>
                                             <ul>
-                                                <li>{ value.name }</li>
+                                                <li>{ value.name + ' * ' + value.qty } </li>
                                                 <li><img src={ JSON.parse(value.url)[0] } style={{maxWidth: '50%', maxHeight: '50%'}} /></li>
                                             </ul>
                                             </>

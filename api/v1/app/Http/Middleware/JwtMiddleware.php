@@ -23,9 +23,17 @@ class JwtMiddleware
         try {
             $credentials = JWT::decode($token, env('JWT_SECRET'), ['HS256']);
         } catch(ExpiredException $e) {
-            return response()->json([
-                'Expired' => 'Provided token is expired.'
-            ], 400);
+            // return response()->json([
+            //     'Expired' => 'Provided token is expired.'
+            // ], 400);
+            $payload = [
+                'iss' => "ebaaba-jwt", // Issuer of the token
+                'sub' => '12345', // Subject of the token
+                'iat' => time(), // Time when JWT was issued. 
+                'exp' => time() + 60 * 1 // Expiration time
+            ];
+            $token = JWT::encode($payload, env('JWT_SECRET'));
+            $credentials = JWT::decode($token, env('JWT_SECRET'), ['HS256']);
         } catch(Exception $e) {
             return response()->json([
                 'error' => 'An error while decoding token.'

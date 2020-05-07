@@ -20,22 +20,23 @@ const Dashboard = (props) => {
     const [totalWeeklyProfit, setTotalWeeklyProfit] = useState({totalWeeklyProfit : 0});
     const [totalDailyProfit, setTotalDailyProfit] = useState({totalDailyProfit: []});
 
-
     let salesData = [];
     let orderData = [];
     let dailyProfitData = [];
-    
+        
     weeklySales.weeklySales.map((value) => {
-       salesData.push(value.daily_sale);
+            salesData.push(value.daily_sale);
     });
-
+         
     weeklyOrders.weeklyOrders.map((value) => {
-        orderData.push(value.daily_orders);
+            orderData.push(value.daily_orders);
     });
-
+         
     totalDailyProfit.totalDailyProfit.map((value) => {
-        dailyProfitData.push(Number(value.total_daily_profit) * Number(10/100));
-    })
+            dailyProfitData.push(Number(value.total_daily_profit) * Number(10/100));
+    });
+    
+    
 
     const getTotalSales = async () => {
         let url = 'http://localhost:8000/api/v1/total-sales?token=' + props.token;
@@ -134,7 +135,7 @@ const Dashboard = (props) => {
         let data = await response.json();
 
         if(data) {
-            setTotalProfit({...totalProfit, totalProfit: data.Profit});
+          setTotalProfit({...totalProfit, totalProfit: data.Profit});
         }
     }
 
@@ -152,7 +153,6 @@ const Dashboard = (props) => {
         let url = 'http://localhost:8000/api/v1/total-daily-profit?token=' + props.token;
         let response = await fetch(url);
         let data = await response.json();
-
         if(data) {
             setTotalDailyProfit({...totalDailyProfit,totalDailyProfit: data.TotalDailyProfit});
         }
@@ -160,14 +160,14 @@ const Dashboard = (props) => {
 
     useEffect(() => {
         getTotalSales();
-        getAllOrders();
-        getNewOrders();
-        getTotalWeeklySales();
-        getWeeklySales();
-        getTotalProfit();
-        getWeeklyOrders();
-        getTotalWeeklyProfit();
-        getTotalDailyProfit();
+            getAllOrders();
+            getNewOrders();
+            getTotalWeeklySales();
+            getWeeklySales();
+            getTotalProfit();
+            getWeeklyOrders();
+            getTotalWeeklyProfit();
+            getTotalDailyProfit();
     },[])
 
     if(!props.token) return <Redirect to='/login'></Redirect>
@@ -251,9 +251,12 @@ const Dashboard = (props) => {
                                         <div className="row">
                                                 <div className="col-md-7">
                                                     <h2>Profit</h2>
-                                                    <h3>{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 'GMD', maximumSignificantDigits: 12 }).format(totalProfit.totalProfit)}.<span className="decimal-point">00</span></h3>
+                                                    <h3>{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 
+                                                    'GMD', maximumSignificantDigits: 12 }).
+                                                    format(totalProfit.totalProfit)}.<span className="decimal-point">00</span></h3>
                                                     <h6>{ '+' + totalWeeklyProfit.totalWeeklyProfit } This Week</h6>
                                                 </div>
+                                                
                                                 <div className="col-md-5 dash-graph">
                                                  { totalDailyProfit.totalDailyProfit.length > 0? (
                                                      <>

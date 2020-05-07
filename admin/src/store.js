@@ -1,7 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './reducers';
 import thunk from 'redux-thunk';
-import { loadTokenState, loadLoggedInState, saveTokenState, saveLoggedInState } from './localStorage';
+import { loadTokenState, loadLoggedInState, 
+    loadUserState, loadTokenExpiredState, saveTokenState, 
+    saveLoggedInState, saveUserState, saveTokenExpiredState } from './localStorage';
 import throttle from 'lodash/throttle';
 
 const middleware = [thunk];
@@ -9,7 +11,10 @@ const middleware = [thunk];
 let persistedState = {
    auth: {
         token: loadTokenState(),
-        isLoggedIn: loadLoggedInState()
+        user: loadUserState(),
+        isLoggedIn: loadLoggedInState(),
+        isLoading: false,
+        loginFailed: false
     }
 } 
 
@@ -19,6 +24,7 @@ const store = createStore(rootReducer, persistedState,
 store.subscribe(throttle(() => {
     saveTokenState(store.getState().auth.token);
     saveLoggedInState(store.getState().auth.isLoggedIn);
+    saveUserState(store.getState().auth.user);
 }, 1000));
 
 export default store;

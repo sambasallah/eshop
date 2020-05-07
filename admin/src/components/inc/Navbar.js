@@ -10,6 +10,7 @@ const Navbar = (props) => {
         props.logout();
         localStorage.removeItem('token');
         localStorage.removeItem('loggedIn');
+        localStorage.removeItem('user');
     }
 
     if(!props.token) return <Redirect to='/login'></Redirect>

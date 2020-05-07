@@ -8,6 +8,7 @@ import { slug, chunk } from '../utils/UtilityFunctions';
 import { useLocation, Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Navbar from '../inc/Navbar';
+import { connect } from 'react-redux';
 
 toast.configure();
 
@@ -59,7 +60,7 @@ const saveForm = async (event) => {
     event.preventDefault();
     let slugName = slug(edit.productName);
     setEdit(Object.assign(edit, { slug: slugName }));
-    let url = 'http://localhost:8000/api/v1/product/' + edit.id;
+    let url = 'http://localhost:8000/api/v1/product/' + edit.id + '?token=' + props.token;
     let response = await fetch(url, {method : 'PUT', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(edit) });
     let data = await response.json();
     if(data) {
@@ -73,7 +74,7 @@ const saveForm = async (event) => {
 
 const getProductData = async (slug) => {
     if(slug.length > 0) {
-      let url = 'http://localhost:8000/api/v1/product/'+ slug;
+      let url = 'http://localhost:8000/api/v1/product/'+ slug + '?token=' + props.token;
         let data = await fetch(url)
          .then((response) => {
              return response.json();
@@ -111,7 +112,7 @@ const setEditing = () => {
 }  
 
 const getCategories = async () => {
-    let response = await fetch('http://localhost:8000/api/v1/product/categories');
+    let response = await fetch('http://localhost:8000/api/v1/product/categories?token=' + props.token);
     let data = await response.json();
     let arr = [];
     data.map((value, index) => {
@@ -122,7 +123,7 @@ const getCategories = async () => {
 
 const deleteProduct = async (event) => {
     event.preventDefault();
-    let url = "http://localhost:8000/api/v1/product/"+edit.id;
+    let url = "http://localhost:8000/api/v1/product/"+edit.id + '?token=' + props.token;
     let response = await fetch(url, {method: 'DELETE'});
     let data = await response.json();
     if(data) {
@@ -281,4 +282,9 @@ useEffect(() => {
     )
 }
 
-export default EditProduct
+const mapStateToProps = (state) => (
+    {
+        token: state.auth.token
+    }
+)
+export default connect(mapStateToProps)(EditProduct);

@@ -1,82 +1,82 @@
 import React, { useState, useEffect } from 'react';
 import SideNav from '../inc/SideNav';
 import { Helmet } from 'react-helmet';
-import { Error, Success } from '../alerts/SettingsAlerts';
 import { openUploadWidget } from "../utils/CloudinaryService";
-import { CloudinaryContext } from 'cloudinary-react';
 import Navbar from '../inc/Navbar';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { isPasswordChanged } from '../utils/UtilityFunctions';
 
 const Settings = (props) => {
 
-    const originalState = {
-        id : '',
-        full_name : '',
-        username : '',
-        password : '',
-        email : '',
-        success : '',
-        failed : '',
-        image : '',
-        loading: true,
-        formSubmited: false
-     };
+    const [admin, setAdmin] = useState({
+        fullNname: '',
+        email: '',
+        username: '',
+        image: '',
+        password: '',
+        oldPassword: '',
+        passwordChanged: false,
+        loading: false
+    });  
 
-    const [settings, setSettings] = useState([originalState]);  
+    const getAdminInfo = async () => {
+       setAdmin({...admin, loading: true});
+       let url = 'http://localhost:8000/api/v1/get-admin?token=' + props.token;
+       let response = await fetch(url, {method: 'POST', 
+    headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email: props.email})});
+       let data = await response.json();
 
-    const getProfileInformation = async () => {
-        let url = 'http://localhost:8000/api/v1/admin/1';
-        let data = await fetch(url)
-         .then((response) => {
-             return response.json();
-         })
-         .catch((error) => {
-             if(error) {
-                 setSettings(originalState);
-             }
-         })
-         
-        if(data) {
-        setSettings(Object.assign({},settings, 
-            {
-                id : data[0].id,
-                full_name : data[0].full_name, 
-                email : data[0].email,
-                username : data[0].username,
-                password : data[0].password,
-                success : '',
-                failed : '',
-                image : data[0].img,
-                loading : false,
-                formSubmited: false 
-            }));
-            console.log(settings);
-        }
-        
-        
-    }
+       if(data.data) {
+           let adminData = data.data[0];
+           setAdmin({
+               fullName: adminData.full_name,
+               username: adminData.username,
+               email: adminData.email,
+               password: adminData.password,
+               oldPassword: adminData.password,
+               image: adminData.img,
+               passwordChanged: false,
+               loading: false
+           });
+       }
+    }  
 
-    // Handle Saving Form
-    const saveForm = async (event) => {
+   
+    const update = async (event) => {
         event.preventDefault();
-        let url = 'http://localhost:8000/api/v1/admin/1';
-        let response = await fetch(url, {method : 'PUT', cache : 'no-cache', cors : 'no-cors', headers : {'Content-Type' : 'application/json'}, body : JSON.stringify(settings) });
+        let url = 'http://localhost:8000/api/v1/update-admin?token=' + props.token;
+        let passwordChanged = isPasswordChanged(admin.oldPassword, admin.password);
+        setAdmin(Object.assign({}, admin, {passwordChanged: passwordChanged}));
+        let response = await fetch(url, {method : 'PUT',
+        headers : {'Content-Type' : 'application/json'}, 
+        body : JSON.stringify(admin) });
         let data = await response.json();
-         if(data.Updated === true) {
-            setSettings(Object.assign({},settings, { success : 'Settings Saved', formSubmited: true }));
-         } else {
-            setSettings(Object.assign({},settings, { failed : 'Error! Saving Settings' }));
-         }
-         return false;
+        
+        // if(data.Updated === true) {
+        //      console.log(passwordChanged);
+        //      updated();
+        //  } else {
+        //     error();
+        //  }
+        console.log(data);
     }
 
-    const handleFieldChange = (event) => {
-        setSettings(Object.assign({}, settings, { [event.target.id]: event.target.value }));
+    const handleChange = (event) => {
+        setAdmin({...admin,[event.target.id]: event.target.value});
     }
+
+    const updated = () =>  toast.success("Profile Updated!", {
+        position: toast.POSITION.TOP_LEFT
+    });
+  
+    const error = () => toast.error("An Error Occurred!", {
+      position: toast.POSITION.TOP_LEFT
+    });
 
     useEffect(() => {
-        getProfileInformation();
+        getAdminInfo();
     },[]); 
 
 
@@ -91,8 +91,8 @@ const Settings = (props) => {
           if (!error) {
             console.log(photos);
             if(photos.event === 'success'){
-              let path = photos.info.public_id;
-              setSettings(Object.assign({},settings,{ image : path }));
+              let path = photos.info.secure_url;
+              setAdmin({...admin, image : path});
             }
           } else {
             console.log(error);
@@ -121,7 +121,7 @@ const Settings = (props) => {
                             <SideNav />
                         </div>
                         <div className="col-md-8 right">
-                            { settings.loading ? (
+                            { admin.loading? (
                                     <>
                                     <div className='loading-screen' style={{ position : 'relative', marginTop : '30%', marginLeft : '50%', transform : 'translate(-50%,-50%)'}}>
                                        <h2>Loading... <i className="fa fa-spinner fa-spin"></i></h2>
@@ -130,29 +130,30 @@ const Settings = (props) => {
                                 ) : (
                                     <>
                                     <h2>Profile Settings</h2>
-                                    <form onSubmit= { saveForm } style={{ marginBottom : '10px' }}>
+                                    <form onSubmit={ update } style={{ marginBottom : '10px' }}>
                                         
                                         <div className="form-group">
-                                            <input type="text" placeholder="Your Name" id="full_name" value={ settings.full_name } onChange={ handleFieldChange }  className="form-control" />
+                                            <input type="text" placeholder="Your Name" id="fullName" value={ admin.fullName } onChange={ handleChange }  className="form-control" />
                                         </div>
                                         <div className="form-group">
-                                            <input type="text" placeholder="Your Email" id="email" value={ settings.email } onChange={ handleFieldChange }  className="form-control" />
+                                            <input type="text" placeholder="Your Email" id="email" value={ admin.email } onChange={ handleChange }  className="form-control" />
                                         </div>
                                         <div className="form-group">
-                                            <input type="text" placeholder="Your Username" id="username" value={ settings.username } onChange={ handleFieldChange }  className="form-control" />
+                                            <input type="text" placeholder="Your Username" id="username" value={ admin.username } onChange={ handleChange }  className="form-control" />
                                         </div>
                                         <div className="form-group">
-                                            <input type="password" placeholder="Your Password" id="password" value={ settings.password } onChange={ handleFieldChange }  className="form-control" />
+                                            <input type="password" placeholder="Your Password" id="password" value={ admin.password } onChange={ handleChange }  className="form-control" />
                                         </div>
                                         <div className="row">
                                                   <div className="col-md-3">
                                                           <div className="card">
                                                           <a onClick={ () => beginUpload() }>
                                                             <div className="card-body">
-                                                                <CloudinaryContext cloudName="ebaaba">
-                                                                <img src={ 'https://res.cloudinary.com/ebaaba/image/upload/v1585136586/' + settings.image }  width="100%"  />
-                                                                </CloudinaryContext>
-                                                                {/* <a style={{ marginRight : '10px', marginBottom: '10px'}} onClick={() => beginUpload()} >Upload Profile Image <i className="fa fa-plus"></i></a> */}
+                                                                { admin.image?(
+                                                                    <img src={ admin.image }  style={{maxWidth: '100%', maxHeight: '100%'}}  />
+                                                                ) : (
+                                                                    <h2>Click to Upload Image <i className="fa fa-upload"></i></h2>
+                                                                )}
                                                             </div>
                                                           </a>
                                                       </div>
@@ -161,11 +162,9 @@ const Settings = (props) => {
                                       
                                         <input type="submit" value="Update Profile" className="btn btn-success" />
                                     </form>
-                                    
-                                    { settings.success ? ( <Success /> ) : ( <></>)}
-                                    { settings.failed ? ( <Error /> ) : ( <></> )}
                                   </>
                                   )  }
+                                  { console.log(admin) }
                         </div>
                     </div>
                 </div>
@@ -176,7 +175,8 @@ const Settings = (props) => {
 
 const mapStateToProps = (state) => (
     {
-        token: state.auth.token
+        token: state.auth.token,
+        email: state.auth.user
     }
 )
 

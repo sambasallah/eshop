@@ -35,13 +35,16 @@ $router->post('/create-admin-or-customer', 'AdminCustomerController@createAdminO
 $router->get('/admins-customers', 'AdminCustomerController@getAdminsAndCustomers');
 $router->post('/admins-customers-delete', 'AdminCustomerController@delete');
 
+// Orders
+$router->post('/create-order', 'OrdersController@createOrder');
+
 $router->group(['middleware' => 'jwt.auth'], function() use($router) {
 
 // Admin Route
 $router->get('/admins', 'AdminController@allAdmin');
-$router->get('/admin/{id}', 'AdminController@admin');
+$router->post('/get-admin', 'AdminController@admin');
 $router->post('/admin','AdminController@registerAdmin');
-$router->put('/admin/{id}', 'AdminController@updateAdmin');
+$router->put('/update-admin', 'AdminController@updateAdmin');
 
 
 // Orders Route
@@ -52,7 +55,6 @@ $router->get('/pending-orders', 'OrdersController@getTotalPendingOrders');
 $router->get('/completed-orders', 'OrdersController@getCompletedOrders');
 $router->put('/complete-order', 'OrdersController@completeOrder');
 $router->get('/order/{order_number}', 'OrdersController@getOrder');
-$router->post('/create-order', 'OrdersController@createOrder');
 
 // Dashboard Route
 $router->get('/total-sales', 'DashboardController@getTotalSales');
@@ -77,5 +79,9 @@ $router->delete('/users/{id}', 'UserController@deleteUser');
 
 // Login Admin
 $router->post('/admin-login', 'AuthController@authenticate');
+
+// Check Token Expired
+$router->get('/token-expired', 'AuthController@checkTokenExpired');
+
 
 });

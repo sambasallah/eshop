@@ -40,9 +40,9 @@ const Navbar = (props) => {
                             { props.itemInCart? (<span className='badge badge-warning' id='lblCartCount'> { props.itemInCart } </span>) : '' } 
                         </a>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <a href="auth" className="nav-link" ><FaSignInAlt style={{color: '#000', fontSize: '20px'}} /></a>
-                    </li>
+                    </li> */}
                     </ul>
                 </div> 
                 </div>
