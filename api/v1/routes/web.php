@@ -45,6 +45,7 @@ $router->get('/admins', 'AdminController@allAdmin');
 $router->post('/get-admin', 'AdminController@admin');
 $router->post('/admin','AdminController@registerAdmin');
 $router->put('/update-admin', 'AdminController@updateAdmin');
+$router->post('/profile-picture', 'AdminController@getProfilePicture');
 
 
 // Orders Route

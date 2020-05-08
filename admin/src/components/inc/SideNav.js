@@ -1,14 +1,41 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const SideNav = () => {
+const SideNav = (props) => {
+
+    const [image, setImage] = useState({img: ''});
+
+    const getProfilePicture = async () => {
+        let url = 'http://localhost:8000/api/v1/profile-picture?token=' + props.token;
+        let response = await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: props.user})
+        });
+        let data = await response.json();
+
+        if(data.Img) {
+            setImage({...image, img: data.Img});
+        }
+    }
+
+    useEffect(()=> {
+        getProfilePicture();
+    },[]);
+
     return (
         <div>
         <div className="admin-profile">
             <div className="row">
                 <div className="col-md-8">
-                    <img src={require('../../media/profile.jpg')} style={{maxWidth:'70%', maxHeight: '70%', borderRadius : '50%', margin: '10px'}} />
-                    <h6>Samba Sallah</h6>
+                     { !image.img? (
+                         'Loading'
+                     ) : (
+                        <img src={image.img} 
+                        style={{maxWidth:'70%', maxHeight: '50%', border: '1px solid black', margin: '10px'}} />
+                     )}
+                    <h6>{ props.name? props.name : '....' }</h6>
                 </div>
             </div>
         </div>
@@ -26,4 +53,12 @@ const SideNav = () => {
     )
 }
 
-export default SideNav;
+const mapStateToProps = (state) => (
+    {
+        token: state.auth.token,
+        user: state.auth.user,
+        name: state.auth.fullName
+    }
+)
+
+export default connect(mapStateToProps)(SideNav);

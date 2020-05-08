@@ -20,7 +20,7 @@ const Store = (props) => {
     const getAllProducts = async () => {
     
         if(search.searchBox === undefined) {
-        let url = 'http://localhost:8000/api/v1/products/p/1?page=' + page.page + '?token=' + props.token;
+        let url = 'http://localhost:8000/api/v1/products/p/1?page=' + page.page;
         let response = await fetch(url);
         let data = await response.json();
         if(data) {
@@ -75,7 +75,7 @@ const Store = (props) => {
         console.log(search);
     }
 
-    const next = (event) => {
+    const next = () => {
        let currentPage = Number(page.page) + 1;
        setPage({page: currentPage});
        

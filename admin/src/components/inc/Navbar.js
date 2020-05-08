@@ -1,17 +1,34 @@
-import React from 'react';
-import { FaGift } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaGift, FaSignOutAlt } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/AdminActions';
 import { Redirect } from 'react-router-dom';
 
 const Navbar = (props) => {
 
+    const [notification, setNotification] = useState({orderNumber: 0});
+
     const logout = () => {
         props.logout();
         localStorage.removeItem('token');
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('user');
+        localStorage.removeItem('name');
     }
+
+    const getNumberOfOrders = async () => {
+        let url = 'http://localhost:8000/api/v1/pending-orders?token=' + props.token;
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if(data.Pending) {
+            setNotification({...notification, orderNumber: data.Pending});
+        }
+    }
+
+    useEffect(() => {
+        getNumberOfOrders();
+    },[]);
 
     if(!props.token) return <Redirect to='/login'></Redirect>
 
@@ -34,14 +51,19 @@ const Navbar = (props) => {
                     <li className="nav-item dropdown">
                         <a className="nav-link" data-toggle="dropdown" href="#">
                             <i className="fa fa-bell"></i>
-                            <span className='badge badge-warning' id='notification'> 5 </span>
+                             { notification.orderNumber > 0? (
+                                <span className='badge badge-warning' id='notification'> { notification.orderNumber }</span>
+                             ) : (
+                                 ''
+                             )}
+                            
                         </a>
                         <div className="dropdown-menu">
-                            <a href="#" className="dropdown-item"><FaGift /> 5 New Orders</a>
+                            <a href="/orders" className="dropdown-item"><FaGift /> { notification.orderNumber >= 1? notification.orderNumber + ' new '+ (notification.orderNumber > 1? ' orders' : ' order') : ' No Order' }</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="/login" onClick={ logout }>Logout</a>
+                        <a class="nav-link"  href="/login" onClick={ logout }><FaSignOutAlt style={{fontSize: '20px'}}/></a>
                     </li>
                     </ul>
                 </div> 

@@ -18,40 +18,41 @@ class AdminController extends Controller {
         return response()->json(['data' => $admin]);
     }
 
+    public function getProfilePicture(Request $request) {
+        $profile_url = DB::table('admin')->where('email', $request->input('email'))->first();
+        return response()->json(['Img' => $profile_url->img]);
+    }
+
     public function updateAdmin(Request $request) {
         $data = $request->input();
 
-        // $update_admin_customers = DB::table('admin_customers')
-        // ->where('email', $data['email'])
-        // ->update([
-        //     'full_name' => $data['fullName'],
-        //     'email' => $data['email'],
-        //     'username' => $data['username'],
-        //     'password' => Hash::make($data['password'])]
-        // );
-        $password = "";
-
-        if($data['passwordChanged'] === true) {
-            $password = Hash::make($data['password']);
+        if($data['oldPassword'] === $data['password']) {
+            $updated_admin = DB::table('admin')
+            ->where('email', $data['email'])
+            ->update([
+                'full_name' => $data['fullName'],
+                'username' => $data['username'],
+                'img' => $data['image']
+                ]
+            );
+            if($updated_admin || $updated_admin === 0) {
+                return response()->json(['Updated' => true]);
+            } 
         } else {
-            $password = $data['password'];
+            $updated_admin = DB::table('admin')
+            ->where('email', $data['email'])
+            ->update([
+                'full_name' => $data['fullName'],
+                'username' => $data['username'],
+                'password' => Hash::make($data['password']),
+                'img' => $data['image']
+                ]
+            );
+            if($updated_admin || $updated_admin === 0) {
+                return response()->json(['Updated' => true]);
+            }
         }
-
-        // $updated_admin = DB::table('admin')
-        // ->where('email', $data['email'])
-        // ->update([
-        //     'full_name' => $data['fullName'],
-        //     'username' => $data['username'],
-        //     'password' => $password,
-        //     'img' => $data['image']
-        //     ]
-        // );
-        
-        // if($updated_admin || $updated_admin === 0) {
-        //     return response()->json(['Updated' => true, 'passwordChanged' => $data['passwordChanged']]);
-        // }
-        // return response()->json(['Updated' => false]);
-        return response()->json(['Data' => $data]);
+        return response()->json(['Updated' => false]);
     }
 
 

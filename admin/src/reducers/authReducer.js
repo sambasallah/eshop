@@ -1,8 +1,9 @@
-import { LOGIN_ADMIN, LOGOUT, IS_LOADING, LOGIN_FAILED, TOKEN_EXPIRED } from '../actions/types';
+import { LOGIN_ADMIN, LOGOUT, IS_LOADING, LOGIN_FAILED } from '../actions/types';
 
 let initialState = {
     token: "",
     user: "",
+    fullName: "",
     isLoggedIn: false,
     isLoading: false,
     loginFailed: false
@@ -15,6 +16,7 @@ export default function(state=initialState, action) {
                 ...state,
                 token: action.token,
                 user: action.user,
+                fullName: action.fullName,
                 isLoggedIn: true,
                 isLoading: false
             }

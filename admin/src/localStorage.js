@@ -34,17 +34,17 @@ export const loadUserState = () => {
   }
 }
 
-// export const loadTokenExpiredState = () => {
-//   try {
-//     const serializedState = localStorage.getItem('tokenExpired');
-//     if (serializedState === null) {
-//       return "";
-//     }
-//     return JSON.parse(serializedState);
-//   } catch (err) {
-//     return undefined;
-//   }
-// }
+export const loadFullNameState = () => {
+  try {
+    const serializedState = localStorage.getItem('name');
+    if (serializedState === null) {
+      return "";
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
+}
 
 export const saveTokenState = (state) =>  {
     try {
@@ -74,12 +74,12 @@ export const saveUserState = (state) =>  {
 }
 
 
-// export const saveTokenExpiredState = (state) =>  {
-//   try {
-//     const serializedState = JSON.stringify(state);
-//     localStorage.setItem('tokenExpired', serializedState);
-//   } catch {
-//     // ignore write errors
-//   }
+export const saveFullNameState = (state) =>  {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('name', serializedState);
+  } catch {
+    // ignore write errors
+  }
 
-// }
+}

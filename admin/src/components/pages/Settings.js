@@ -17,7 +17,6 @@ const Settings = (props) => {
         image: '',
         password: '',
         oldPassword: '',
-        passwordChanged: false,
         loading: false
     });  
 
@@ -37,7 +36,6 @@ const Settings = (props) => {
                password: adminData.password,
                oldPassword: adminData.password,
                image: adminData.img,
-               passwordChanged: false,
                loading: false
            });
        }
@@ -47,20 +45,15 @@ const Settings = (props) => {
     const update = async (event) => {
         event.preventDefault();
         let url = 'http://localhost:8000/api/v1/update-admin?token=' + props.token;
-        let passwordChanged = isPasswordChanged(admin.oldPassword, admin.password);
-        setAdmin(Object.assign({}, admin, {passwordChanged: passwordChanged}));
         let response = await fetch(url, {method : 'PUT',
         headers : {'Content-Type' : 'application/json'}, 
         body : JSON.stringify(admin) });
-        let data = await response.json();
-        
-        // if(data.Updated === true) {
-        //      console.log(passwordChanged);
-        //      updated();
-        //  } else {
-        //     error();
-        //  }
-        console.log(data);
+        let data = await response.json()
+        if(data.Updated === true) {
+             updated();
+         } else {
+            error();
+         }
     }
 
     const handleChange = (event) => {
