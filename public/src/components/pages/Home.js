@@ -1,8 +1,53 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import Swiper from 'react-id-swiper';
+import { FaMobileAlt } from 'react-icons/fa';
 
 const Home = () => {
+
+	const params = {
+		slidesPerView: 5,
+		spaceBetween: 30,
+		slidesPerGroup: 3,
+		loop: true,
+		loopFillGroupWithBlank: true,
+		pagination: {
+		  el: '.swiper-pagination',
+		  clickable: true
+		},
+		// navigation: {
+		//   nextEl: '.swiper-button-next',
+		//   prevEl: '.swiper-button-prev'
+		// },
+		breakpoints: {
+			320: {
+				slidesPerView: 1,
+				slidesPerGroup: 1
+			},
+			340: {
+				slidesPerView: 1,
+				slidesPerGroup: 1
+			},
+			500 : {
+				slidesPerView: 1,
+				slidesPerGroup: 1
+			},
+			640: {
+			  slidesPerView: 2,
+			  slidesPerGroup: 2
+			},
+			768: {
+			  slidesPerView: 4,
+			  spaceBetween: 40,
+			},
+			1024: {
+			  slidesPerView: 5,
+			  spaceBetween: 50,
+			}
+		}
+	  }
+
     return (
      <div>
 		 <Helmet>
@@ -55,69 +100,118 @@ const Home = () => {
 				</div>
 	     </div>
 
-	
-		 <div className="trending-category">
-		 <div className="trend-title">
-			 <h4>Trending Products</h4>
+		 <div className="category">
+		<div className="category-tile">
+			<h4>Trending <img src={require('../../media/icons/trending.png')} /></h4>
+		</div>
+	 <Swiper {...params}>
+		 <div className="item">
+			 <div className="product-img">
+			 	<img  src={require('../../media/images/b7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+			 </div>
+			 <div className="product-description">
+				 <h6>Spark 4 - D4,000</h6>
+			 </div>
 		 </div>
-		 <div className="trending-products">
-			<div className="row">
-				<div className="col-md-2">
-					<div className="trend-img">
-						<img  src={require('../../media/images/shirt3.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-					</div>
-					<div className="trend-description">
-						<h5>Men Shirt</h5>
-						<h6>D500 <sup><del>D700</del></sup></h6>
-					</div>
+		 <div className="item">
+			<div className="product-img">
+					<img  src={require('../../media/images/chemise1.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
 				</div>
-				<div className="col-md-2">
-						<div className="trend-img">
-							<img  src={require('../../media/images/derby-shoe.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-						</div>
-						<div className="trend-description">
-							<h5>Derby Shoe</h5>
-							<h6>D2500 <sup><del>D3000</del></sup></h6>
-						</div>
+				<div className="product-description">
+					<h6>Spark 4 - D4,000</h6>
 				</div>
-				<div className="col-md-2">
-					<div className="trend-img">
-						<img  src={require('../../media/images/chemise3.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-					</div>
-					<div className="trend-description">
-						<h5>Lacoste Chemise</h5>
-						<h6>D900 <sup><del>D1200</del></sup></h6>
-					</div>
-				</div>
-				<div className="col-md-2">
-					<div className="trend-img">
-						<img  src={require('../../media/images/m7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-					</div>
-					<div className="trend-description">
-						<h5>Men Watch</h5>
-						<h6>D1000 <sup><del>D1500</del></sup></h6>
-					</div>
-				</div>
-				<div className="col-md-2">
-					<div className="trend-img">
-						<img  src={require('../../media/images/b7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-					</div>
-					<div className="trend-description">
-						<h5>Women Bag</h5>
-						<h6>D1000 <sup><del>D1500</del></sup></h6>
-					</div>
-				</div>
-				<div className="col-md-2">
-					<div className="trend-img">
-						<img  src={require('../../media/images/coat.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-					</div>
-					<div className="trend-description">
-						<h5>Coat</h5>
-						<h6>D400 <sup><del>D450</del></sup></h6>
-					</div>
-				</div>
-			</div>
 		 </div>
+		 <div className="item">
+		 <div className="product-img">
+			 	<img  src={require('../../media/images/derby-shoe.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+			 </div>
+			 <div className="product-description">
+				 <h6>Spark 4 - D4,000</h6>
+			 </div>
+		 </div>
+		 <div className="item">
+		 <div className="product-img">
+			 	<img  src={require('../../media/images/m7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+			 </div>
+			 <div className="product-description">
+				 <h6>Spark 4 - D4,000</h6>
+			 </div>
+		 </div>
+		 <div className="item">
+		 <div className="product-img">
+			 	<img  src={require('../../media/images/coat.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+			 </div>
+			 <div className="product-description">
+				 <h6>Spark 4 - D4,000</h6>
+			 </div>
+		 </div>
+		 <div className="item">
+		 <div className="product-img">
+			 	<img  src={require('../../media/images/chemise0.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+			 </div>
+			 <div className="product-description">
+				 <h6>Spark 4 - D4,000</h6>
+			 </div>
+		 </div>
+      </Swiper>
+	 </div>
+
+
+
+	 <div className="category">
+		<div className="category-tile">
+			<h4>Mobile Phones <img src={require('../../media/icons/mobile.png')} /></h4>
+		</div>
+	 <Swiper {...params}>
+		 <div className="item">
+			 <div className="product-img">
+			 	<img  src={require('../../media/images/b7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+			 </div>
+			 <div className="product-description">
+				 <h6>Spark 4 - D4,000</h6>
+			 </div>
+		 </div>
+		 <div className="item">
+			<div className="product-img">
+					<img  src={require('../../media/images/chemise1.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+				</div>
+				<div className="product-description">
+					<h6>Spark 4 - D4,000</h6>
+				</div>
+		 </div>
+		 <div className="item">
+		 <div className="product-img">
+			 	<img  src={require('../../media/images/derby-shoe.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+			 </div>
+			 <div className="product-description">
+				 <h6>Spark 4 - D4,000</h6>
+			 </div>
+		 </div>
+		 <div className="item">
+		 <div className="product-img">
+			 	<img  src={require('../../media/images/m7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+			 </div>
+			 <div className="product-description">
+				 <h6>Spark 4 - D4,000</h6>
+			 </div>
+		 </div>
+		 <div className="item">
+		 <div className="product-img">
+			 	<img  src={require('../../media/images/coat.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+			 </div>
+			 <div className="product-description">
+				 <h6>Spark 4 - D4,000</h6>
+			 </div>
+		 </div>
+		 <div className="item">
+		 <div className="product-img">
+			 	<img  src={require('../../media/images/chemise0.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+			 </div>
+			 <div className="product-description">
+				 <h6>Spark 4 - D4,000</h6>
+			 </div>
+		 </div>
+      </Swiper>
 	 </div>
 	 
 	 <div className="latest-deals">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { orderCompleted } from '../../actions/productActions';
@@ -8,11 +8,13 @@ const Checkout = (props) => {
 
     const [customer, setCustomer] = useState({customerInfo: {}});
     const [loading, setLoading] = useState({loading: false});
-
+    
     let total  = 0;
-    props.cartItems.map((value) => {
-        total += Number(value.sale_price) * value.qty;
-    });
+    if(props.cartItems.length > 0) {
+        props.cartItems.map((value) => {
+            total += Number(value.sale_price) * value.qty;
+        });
+    }
 
     const checkout = async (event) => {
         event.preventDefault();
@@ -30,7 +32,6 @@ const Checkout = (props) => {
             shippingAddress: customer.customerInfo.shippingAddress };
         let response = await fetch('http://localhost:8000/api/v1/create-order', {method: 'POST', headers : {'Content-Type': 'application/json'}, body: JSON.stringify(updatedCustomer)});
         let data = await response.json();
-        
         if(data.Created === true) {
             setLoading({...loading, loading: false});
             props.orderCompleted({customerName: customer.fullName, orderID: orderID});
@@ -43,6 +44,8 @@ const Checkout = (props) => {
     const handleChange = (event) => {
         setCustomer({customerInfo : {...customer.customerInfo, [event.target.id] : event.target.value}});
     }
+
+    if(props.cartItems.length <= 0) return <Redirect to='/shop'></Redirect>
 
     return (
         <div>

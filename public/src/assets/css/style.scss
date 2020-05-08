@@ -261,6 +261,29 @@
 	color: $secondary-color;
 }
 
+.category {
+	width: 97%;
+	height: 300px;
+	background-color: #fff;
+	margin: 15px auto;
+}
+
+.category .category-tile {
+	width: 100%;
+	height: 40px;
+	border-bottom: 1px solid #f5f5f5;
+	box-sizing: border-box;
+	padding: 5px 10px;
+}
+
+.category div.item {
+	padding: 10px 0px;
+	width: 100px;
+	height: 260px;
+	text-align: center;
+}
+
+
 /** Popular Categories **/
 .popular-products {
 	width: 97%;
@@ -912,6 +935,32 @@
 	height: 200px;
 }
 
+.right-loading .product-loading {
+	width: 100%;
+	height: 230px;
+	animation: pulse 1s infinite ease-in-out;
+	-webkit-animation: pulse 1s infinite ease-in-out;
+}
+
+.right-loading .product-load {
+	box-sizing: border-box;
+	margin-bottom: 20px;
+	transition: 0.2s ease-in-out;
+	border-radius: 5px;
+}
+
+@keyframes pulse {
+	0% {
+		background-color: rgba(165,165,165,.1);
+	}
+	50% {
+		background-color: rgba(165,165,165,.3);
+	}
+	100% {
+		background-color: rgba(165,165,165,.1);
+	}
+}
+
 .product:hover {
 	box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.5);
 	border-radius: 5px;
@@ -922,16 +971,6 @@
 	height: 80vh;
 }
 
-.shop-container .right-loading .loading-giff {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.loading-giff i.fa.fa-spinner.fa-spin {
-	font-size: 70px;
-}
 /* This is the checked state */
 .custom-radio .custom-control-input:checked~.custom-control-label::before,
 .custom-radio .custom-control-input:checked~.custom-control-label::after {

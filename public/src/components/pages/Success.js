@@ -1,8 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const Success = (props) => {
+    
+    const removeOrderID = () => {
+        localStorage.removeItem('orderID');
+    }
+    
     return (
         <div>
             <Helmet>
@@ -21,7 +27,7 @@ const Success = (props) => {
                     <h2><i className="fa fa-check-circle"></i></h2>
                     <h5>Your order is been processed</h5>
                     <h6 className="order-id">Your Order ID is { '#' + props.customerInfo.orderID } </h6>
-                    <a className="continue-shopping" href="/shop">Continue Shopping</a>
+                    <a className="continue-shopping" href="/shop" onClick={ removeOrderID }>Continue Shopping</a>
                 </div>
             </div>
         </div>
@@ -32,7 +38,8 @@ const Success = (props) => {
 
 const mapStateToProps = (state) => (
     {
-        customerInfo: state.products.completedOrder
+        customerInfo: state.products.completedOrder,
+        orderID: state.products.orderID
     }
 )
 

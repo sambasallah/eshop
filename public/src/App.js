@@ -2,6 +2,10 @@ import React from 'react';
 import {Route, Switch } from 'react-router-dom';
 import './assets/css/style.css';
 
+/** Swiper */
+// css
+import 'swiper/css/swiper.css';
+
 /** Pages */
 import Home from './components/pages/Home';
 import Shop from './components/pages/Shop';
@@ -23,11 +27,8 @@ import Footer from './components/inc/Footer';
 import { Provider } from 'react-redux';
 
 /** Store */
-
 import store from './store';
 
-/** Context Provider */
-import { ProductProvider } from './context/ProductProvider';
 
 
 const App = () => {

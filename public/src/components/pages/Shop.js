@@ -342,37 +342,7 @@ const Shop = (props) => {
                                  <li><a type="button" data-toggle="collapse" data-target="#price"><i className="fa fa-plus"></i></a></li>
                              </ul>
                              <div id="price" className="collapse">
-                                     <form>
-                                         <div className="custom-control custom-radio">
-                                             <input type="radio" className="custom-control-input" id="customSwitch1" name="radio-btn" />
-                                             <label className="custom-control-label" htmlFor="customSwitch1">Under GMD2,000</label>
-                                         </div>
-                                         
-                                         <div className="custom-control custom-radio">
-                                             <input type="radio" className="custom-control-input" id="customSwitch2" name="radio-btn" />
-                                             <label className="custom-control-label" htmlFor="customSwitch2">GMD2,000 - GMD5,000</label>
-                                         </div>
-                                     
-                                         <div className="custom-control custom-radio">
-                                             <input type="radio" className="custom-control-input" id="customSwitch3" name="radio-btn" />
-                                             <label className="custom-control-label" htmlFor="customSwitch3">GMD5,000 - GMD10,000</label>
-                                         </div>
-                                     
-                                         <div className="custom-control custom-radio">
-                                             <input type="radio" className="custom-control-input" id="customSwitch4" name="radio-btn" />
-                                             <label className="custom-control-label" htmlFor="customSwitch4">GMD10,000 - GMD20,000</label>
-                                         </div>
-                                       
-                                         <div className="custom-control custom-radio">
-                                             <input type="radio" className="custom-control-input" id="customSwitch5" name="radio-btn" />
-                                             <label className="custom-control-label" htmlFor="customSwitch5">GMD20,000 - GMD40,000</label>
-                                         </div>
-                                        
-                                         <div className="custom-control custom-radio">
-                                             <input type="radio" className="custom-control-input" id="customSwitch6" name="radio-btn" />
-                                             <label className="custom-control-label" htmlFor="customSwitch6">Above GMD40,000</label>
-                                         </div>
-                                     </form>
+                                   
                                  </div>
                                  <hr></hr>
                              <ul>
@@ -380,64 +350,48 @@ const Shop = (props) => {
                                  <li><a type="button" data-toggle="collapse" data-target="#categories"><i className="fa fa-plus"></i></a></li>
                              </ul>
                              <div id="categories" className="collapse">
-                                 <ul>
-                                     <li>Fashion</li>
-                                     <li>Groceries</li>
-                                     <li>Mobile Phones</li>
-                                     <li>Electronics</li>
-                                     <li>Home & Kitchen</li>
-                                     <li>Baby, Toys & Kids</li>
-                                 </ul>
                              </div>
                          </div>
                         <div className="col-md-9 right-loading">
                             <div className="row">
                                 <div className="col-md-3">
-                                    <div className="product">
-                                        <div className="product-img"></div>
-                                        <div className="product-description"></div>
+                                    <div className="product-load">
+                                        <div className="product-loading"></div>
                                     </div>
                                 </div>
                                 <div className="col-md-3">
-                                    <div className="product">
-                                        <div className="product-img"></div>
-                                        <div className="product-description"></div>
+                                    <div className="product-load">
+                                        <div className="product-loading"></div>
                                     </div>
                                 </div>
                                 <div className="col-md-3">
-                                    <div className="product">
-                                        <div className="product-img"></div>
-                                        <div className="product-description"></div>
+                                    <div className="product-load">
+                                        <div className="product-loading"></div>
                                     </div>
                                 </div>
                                 <div className="col-md-3">
-                                    <div className="product">
-                                        <div className="product-img"></div>
-                                        <div className="product-description"></div>
+                                    <div className="product-load">
+                                        <div className="product-loading"></div>
                                     </div>
                                 </div>
                                 <div className="col-md-3">
-                                    <div className="product">
-                                        <div className="product-img"></div>
-                                        <div className="product-description"></div>
+                                    <div className="product-load">
+                                        <div className="product-loading"></div>
                                     </div>
                                 </div>
                                 <div className="col-md-3">
-                                    <div className="product">
-                                        <div className="product-img"></div>
-                                        <div className="product-description"></div>
+                                    <div className="product-load">
+                                        <div className="product-loading"></div>
                                     </div>
                                 </div>
                                 <div className="col-md-3">
-                                    <div className="product">
-                                        <div className="product-img"></div>
-                                        <div className="product-description"></div>
+                                    <div className="product-load">
+                                        <div className="product-loading"></div>
                                     </div>
                                 </div>
                                 <div className="col-md-3">
-                                    <div className="product">
-                                        <div className="product-img"></div>
-                                        <div className="product-description"></div>
+                                    <div className="product-load">
+                                        <div className="product-loading"></div>
                                     </div>
                                 </div>
                             </div>
