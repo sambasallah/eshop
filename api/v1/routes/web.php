@@ -24,6 +24,7 @@ $router->put('/product/{id}', 'ProductController@updateProduct');
 $router->get('/product/categories', 'ProductController@getCategories');
 $router->get('/product/{slug}', 'ProductController@getProductUsingSlug');
 $router->delete('/product/{id}', 'ProductController@deleteProduct');
+$router->get('/mobile-phones', 'ProductController@getAllPhones');
 
 // Categories Route
 $router->get('/categories/product-categories', 'CategoryController@getAllCategories');

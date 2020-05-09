@@ -278,11 +278,32 @@
 
 .category div.item {
 	padding: 10px 0px;
-	width: 100px;
+	width: 100%;
 	height: 260px;
 	text-align: center;
 }
 
+.category div.item .product-description {
+	padding: 5px;
+}
+
+.category .loading-item {
+	width: 100%;
+	height: 260px;
+	animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes pulse {
+	0% {
+		background-color: rgba(165,165,165,.2);
+	}
+	50% {
+		background-color: rgba(165,165,165,.3);
+	}
+	100% {
+		background-color: rgba(165,165,165,.1);
+	}
+}
 
 /** Popular Categories **/
 .popular-products {
@@ -526,9 +547,10 @@
 }
 
 .product-slider .img-container {
-	padding: 20px;
 	width: 100%;
 	height: 400px;
+	margin: 40px 0px;
+	text-align: center;
 }
 
 .product-details {

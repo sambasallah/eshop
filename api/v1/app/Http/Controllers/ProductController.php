@@ -60,16 +60,17 @@ class ProductController extends Controller {
       'regular_price' => $regularPrice,
       'sale_price' => $salePrice,
       'quantity' => $quantity,
-      'slug' => $slug
+      'slug' => $slug,
+      'trending' => isset($trending)? 'Yes' : ''
       ]);
 
       if(!empty($id)) {
         $imagesSaved = $this->saveProductImages($images, $id);
         $categorySaved = $this->saveProductCategory($categoryID, $id);
         if($imagesSaved && $categorySaved) {
-          return response()->json(['Product Created' => true, 'Status Code' => 201, 'ID' => $id]);
+          return response()->json(['Created' => true, 'Status Code' => 201, 'ID' => $id]);
         } else {
-          return response()->json(['Product Created' => true, 'Status Code' => 201, 'Error' => 'Cannot save images']);
+          return response()->json(['Created' => true, 'Status Code' => 201, 'Error' => 'Cannot save images']);
         }
       }
 
@@ -79,9 +80,7 @@ class ProductController extends Controller {
 
     public function updateProduct(Request $request, int $id) {
       $data = $request->input();
-
       extract($data);
-
       $updated = DB::table('products')
       ->where('id', $id)
       ->update([
@@ -99,14 +98,14 @@ class ProductController extends Controller {
         $imagesUpdated = $this->updateProductImages($images,$id, $newAddedImages);
         $categoryUpdated = $this->updateProductCategory($categoryID, $id);
         if($imagesUpdated && $categoryUpdated) {
-          return response()->json(['Product Updated' => true, 'Status Code' => 201, 'Images & Category' => 'Updated']);
+          return response()->json(['Updated' => true, 'Status Code' => 201, 'Images & Category' => 'Updated']);
         } else if($imagesUpdated) {
-          return response()->json(['Product Updated' => true, 'Status Code' => 201, 'Images' => 'Updated']);
+          return response()->json(['Updated' => true, 'Status Code' => 201, 'Images' => 'Updated']);
         } else if($categoryUpdated) {
-          return response()->json(['Product Updated' => true, 'Status Code' => 201, 'Category' => 'Updated']);
+          return response()->json(['Updated' => true, 'Status Code' => 201, 'Category' => 'Updated']);
         }
         else {
-          return response()->json(['Product Updated' => true, 'Status Code' => 201, 'Error' => 'Cannot save images and category']);
+          return response()->json(['Updated' => true, 'Status Code' => 201, 'Error' => 'Cannot save images and category']);
         }
       }
 
@@ -210,6 +209,19 @@ class ProductController extends Controller {
       }
 
       return false;
+    }
+
+    public function getAllPhones() {
+      $filtered_result = DB::table('products')
+      ->where('categories.category_name', 'LIKE', 'Mobile%Phones' )
+      ->join('product_categories','product_categories.product_id','=','products.id')
+      ->join('categories','categories.id','=','product_categories.category_id')
+      ->join('product_images', 'product_images.product_id', '=', 'products.id')
+      ->orderBy('products.created_at','desc')
+      ->limit(15)
+      ->get();
+
+      return response()->json($filtered_result);
     }
 
     public function filterByPrice($price_range) {

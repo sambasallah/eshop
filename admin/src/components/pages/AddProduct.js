@@ -14,17 +14,17 @@ toast.configure();
 
 const AddProduct = (props) => {
 
-    const [product, setProduct] = useState([{ formSubmitted: false }]);
+    const [product, setProduct] = useState({});
     const [category, setCategory] = useState([]);
 
-    const ImageList = (prop) => {
+    const ImageList = (props) => {
    
-    let images = prop.images;
+    let images = props.images;
 
     const deleteImage = (image) => {
        let allPictures =  [].concat.apply([], images)
        let updatedArray = allPictures.filter( img => img !== image);
-       setProduct(Object.assign({}, product, { images : updatedArray }));        
+       setProduct({...product, images : updatedArray });        
     }
 
     return(
@@ -48,31 +48,28 @@ const AddProduct = (props) => {
     )        
 }
 
-  // Handle saving and updating form
-  const saveForm = async (event) => {
+  const saveProduct = async (event) => {
     event.preventDefault();
-    let slugName = slug(product.productName);
-    setProduct(Object.assign(product, { slug: slugName }));
-
     if(product.id === undefined) {
         let url = 'http://localhost:8000/api/v1/product?token=' + props.token;
-        let response = await fetch(url, {method : 'POST', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
+        let response = await fetch(url, {method : 'POST',
+         headers : {'Content-Type': 'application/json', 'Accept': 'application/json'}, body : JSON.stringify(product) });
         let data = await response.json();
-        if(data) {
-            setProduct(Object.assign({}, product, { id: data.ID, created: true}));
+        if(data.Created === true) {
+            setProduct({...product, id: data.ID});
             saved();
         }else {
-            setProduct(Object.assign({}, product, { id: data.ID, notCreated: true, formSubmitted: true }));
             error();
         }
     } else {
         let url = 'http://localhost:8000/api/v1/product/' + product.id + '?token=' + props.token;
-        let response = await fetch(url, {method : 'PUT', headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
+        let response = await fetch(url, {method : 'PUT', 
+        headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
         let data = await response.json();
-        if(data) {
-            setProduct(Object.assign({}, product, { updated: 'Product Updated', imageAdded: false }));
+        if(data.Updated === true) {
+            updated();
         } else {
-            setProduct(Object.assign({}, product, { notUpdated: 'Product Not Updated', formSubmitted: true, imageAdded: false }));
+            error();
         }
     }
 
@@ -82,6 +79,10 @@ const AddProduct = (props) => {
       position: toast.POSITION.TOP_LEFT
   });
 
+  const updated = () =>  toast.success("Product Updated!", {
+    position: toast.POSITION.TOP_LEFT
+  });
+ 
   const error = () => toast.error("An Error Occurred!", {
     position: toast.POSITION.TOP_LEFT
   });
@@ -100,12 +101,16 @@ const AddProduct = (props) => {
     }
 
   const handleChange = (event) => {
-    setProduct(Object.assign({}, product, { [event.target.id] : event.target.value }))
+    setProduct({...product, [event.target.id] : event.target.value });
+    if(event.target.id === 'productName') {
+        let slugName = slug(event.target.value);
+        setProduct({...product, productName: event.target.value, slug: slugName});
+    }
   }
   
   const handleDescription = (event, editor) => {
         const data = editor.getData();
-        setProduct(Object.assign({}, product, { description : data }));
+        setProduct({...product, description: data });
   }
 
   const beginUpload = (tag) => {
@@ -128,7 +133,7 @@ const AddProduct = (props) => {
             product.images.push(data[i]);
           }
           let updatedImages = product.images;
-          setProduct(Object.assign({}, product, { images: updatedImages, imageAdded: true }));
+          setProduct({...product, images: updatedImages, imageAdded: true });
 
         } else if(photos.event === 'queues-end') {
           let files = photos.info.files;
@@ -136,8 +141,7 @@ const AddProduct = (props) => {
           for(let i = 0; i < files.length; i++) {
             data[i] = photos.info.files[i].uploadInfo.secure_url;
           }
-         setProduct(Object.assign({},product, { images: data }));
-         console.log(product);
+         setProduct({...product,  images: data });
         }
       } else {
         console.log(error);
@@ -173,7 +177,7 @@ const AddProduct = (props) => {
                             </div>
                             <div className="col-md-8 right">
                                 <h2>Product Information - <a href="/add-product" className="new">New</a></h2>
-                                <form onSubmit={ saveForm }>
+                                <form onSubmit={ saveProduct }>
                                     <div className="form-group">
                                         <label>Product Name</label>
                                         <input type="text" placeholder="Product Name" onChange={ handleChange } id="productName" className="form-control" required/>
@@ -213,7 +217,7 @@ const AddProduct = (props) => {
                                             <input type="number" name="quantity" className="form-control" id="quantity" placeholder="Qty" onChange={ handleChange } />
                                         </div>  
         
-                                        <div className="col-md-7">
+                                        <div className="col-md-5">
                                         <div className="form-group">
                                             <label>Images</label>
                                             <div className="row">
@@ -221,6 +225,9 @@ const AddProduct = (props) => {
                                             </div>
                                             <a onClick={ () => beginUpload() } style={{ margin: '10px 0px', cursor: 'pointer'}}>Click to add images <i className="fa fa-plus"></i></a>
                                         </div>
+                                        </div>
+                                        <div className="col-md-2">
+                                            Trending <input type="checkbox" onChange={ handleChange } id="trending" />
                                         </div>
                                     </div>
                                     <input type="submit" value="Publish" className="btn btn-success" />

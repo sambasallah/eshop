@@ -1,12 +1,67 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Swiper from 'react-id-swiper';
-import { FaMobileAlt } from 'react-icons/fa';
+import { connect } from 'react-redux';
+import { getProductByID } from '../../actions/productActions';
 
-const Home = () => {
+const MobilePhone = ({ value, getProductByID, products }) => {
+	return (
+		<>
+		<div className="item">
+			<div className="product-img">
+				<img  src={JSON.parse(value.url)[0]} style={{maxWidth: '100%', maxHeight: '100%'}} />
+			</div>
+			<div className="product-description">
+				<h6><a href={value.slug } 
+				onClick={ () => { getProductByID(products, value.id) } }>
+					{ value.name } - { 'D' + new Intl.NumberFormat().format(value.sale_price)}</a></h6>
+			</div>
+	 </div>
+	 </>
+	)
+}
+
+const Home = (props) => {
+
+	const [mobilePhones, setMobilePhones] = useState([]);
 
 	const params = {
+		slidesPerView: 5,
+		spaceBetween: 30,
+		pagination: {
+		  el: '.swiper-pagination',
+		  clickable: true,
+		},
+		breakpoints: {
+			320: {
+				slidesPerView: 1,
+				slidesPerGroup: 1
+			},
+			340: {
+				slidesPerView: 1,
+				slidesPerGroup: 1
+			},
+			500 : {
+				slidesPerView: 1,
+				slidesPerGroup: 1
+			},
+			640: {
+			  slidesPerView: 2,
+			  slidesPerGroup: 2
+			},
+			768: {
+			  slidesPerView: 4,
+			  spaceBetween: 40,
+			},
+			1024: {
+			  slidesPerView: 5,
+			  spaceBetween: 50,
+			}
+		}
+	  }
+
+	const param = {
 		slidesPerView: 5,
 		spaceBetween: 30,
 		slidesPerGroup: 3,
@@ -47,6 +102,20 @@ const Home = () => {
 			}
 		}
 	  }
+
+	  const getAllMobilePhones = async () => {
+		  let url = 'http://localhost:8000/api/v1/mobile-phones';
+		  let response = await fetch(url);
+		  let data = await response.json();
+
+		  if(data) {
+			  setMobilePhones([...mobilePhones, ...data]);
+		  }
+	  }
+
+	useEffect(() => {
+		getAllMobilePhones();
+	}, []);
 
     return (
      <div>
@@ -153,51 +222,9 @@ const Home = () => {
 				 <h6>Spark 4 - D4,000</h6>
 			 </div>
 		 </div>
-      </Swiper>
-	 </div>
-
-
-
-	 <div className="category">
-		<div className="category-tile">
-			<h4>Mobile Phones <img src={require('../../media/icons/mobile.png')} /></h4>
-		</div>
-	 <Swiper {...params}>
-		 <div className="item">
-			 <div className="product-img">
-			 	<img  src={require('../../media/images/b7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-			 </div>
-			 <div className="product-description">
-				 <h6>Spark 4 - D4,000</h6>
-			 </div>
-		 </div>
-		 <div className="item">
-			<div className="product-img">
-					<img  src={require('../../media/images/chemise1.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-				</div>
-				<div className="product-description">
-					<h6>Spark 4 - D4,000</h6>
-				</div>
-		 </div>
 		 <div className="item">
 		 <div className="product-img">
-			 	<img  src={require('../../media/images/derby-shoe.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-			 </div>
-			 <div className="product-description">
-				 <h6>Spark 4 - D4,000</h6>
-			 </div>
-		 </div>
-		 <div className="item">
-		 <div className="product-img">
-			 	<img  src={require('../../media/images/m7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-			 </div>
-			 <div className="product-description">
-				 <h6>Spark 4 - D4,000</h6>
-			 </div>
-		 </div>
-		 <div className="item">
-		 <div className="product-img">
-			 	<img  src={require('../../media/images/coat.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
+			 	<img  src={require('../../media/images/chemise0.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
 			 </div>
 			 <div className="product-description">
 				 <h6>Spark 4 - D4,000</h6>
@@ -212,6 +239,40 @@ const Home = () => {
 			 </div>
 		 </div>
       </Swiper>
+	 </div>
+
+
+
+	 <div className="category">
+		<div className="category-tile">
+			<h4>Mobile Phones <img src={require('../../media/icons/mobile.png')} /></h4>
+		</div>
+		
+		 { mobilePhones.length > 1? (
+			 <>
+			 <Swiper {...params} key={mobilePhones.length}>
+			{ mobilePhones.map((value, index) => {
+				return (
+				  <div className="swiper-slide" key={index}>
+					  <MobilePhone value={value} getProductByID={ props.getProductByID } 
+				products={ mobilePhones } key={ index } />
+				  </div>
+				)	 
+			})}
+			</Swiper>
+			 </>
+		 ): (
+			 <>
+			  <Swiper {...params}>
+			  		<div className="loading-item"></div>
+					<div className="loading-item"></div>
+					<div className="loading-item"></div>
+					<div className="loading-item"></div>
+					<div className="loading-item"></div>
+			  </Swiper>
+			</>
+		 )}
+	  
 	 </div>
 	 
 	 <div className="latest-deals">
@@ -335,4 +396,8 @@ const Home = () => {
     )
 }
 
-export default Home;
+const mapStateToProps = (state) => (
+	{}
+); 
+
+export default connect(mapStateToProps, { getProductByID })(Home);

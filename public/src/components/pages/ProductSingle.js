@@ -5,6 +5,7 @@ import ReactHtmlParser from 'react-html-parser';
 import { connect } from 'react-redux';
 import { addToCart } from '../../actions/productActions';
 import { inCart, isJson } from '../utils/utils';
+import Swiper from 'react-id-swiper';
 
 const ProductSingle = (props) => {
 
@@ -20,6 +21,14 @@ const ProductSingle = (props) => {
         fade: true,
         cssEase: 'linear'
     };
+
+    const params = {
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          dynamicBullets: true
+        }
+      }
 
     const increment = () => {
         let currentQty = qty.qty;
@@ -53,17 +62,19 @@ const ProductSingle = (props) => {
                    <div className="row">
                        <div className="col-md-4">
                        <div className="product-slider" >
-                           <Slider {...settings} >
+                           <Swiper {...params} >
                                 { isJson(product.url)?
                                     JSON.parse(product.url).map((value, index) => {
                                         return(
-                                            <div className="img-container">
-                                                <img src={ value } style={{maxWidth: '100%', maxHeight:'100%'}} />
-                                             </div>
+                                           <div className="swiper-slide" key={index}>
+                                                <div className="img-container">
+                                                    <img src={ value } style={{maxWidth: '100%', maxHeight:'100%'}} />
+                                                </div>
+                                           </div>
                                         );
-                                   }) : (<></>)  
+                                   }) : ('Loading')  
                                 } 
-                           </Slider>
+                           </Swiper>
                         </div>
                        </div>
                        <div className="col-md-8">
