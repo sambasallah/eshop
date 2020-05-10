@@ -214,7 +214,7 @@ const AddProduct = (props) => {
                                         </div>
         
                                         <div className="col-md-2">
-                                            <input type="number" name="quantity" className="form-control" id="quantity" placeholder="Qty" onChange={ handleChange } />
+                                            <input type="number" name="quantity" min='1' className="form-control" id="quantity" placeholder="Qty" onChange={ handleChange } />
                                         </div>  
         
                                         <div className="col-md-5">
@@ -227,8 +227,19 @@ const AddProduct = (props) => {
                                         </div>
                                         </div>
                                         <div className="col-md-2">
-                                            Trending <input type="checkbox" onChange={ handleChange } id="trending" />
-                                        </div>
+                                            <label>Trending</label> <br /> 
+                                            <select id="trending" onChange={handleChange}>
+                                                <option>Choose</option>
+                                                <option for="Yes">Yes</option>
+                                                <option for="No">No</option>
+                                            </select>
+                                            <label>Recommended</label>
+                                            <select id="recommended" onChange={handleChange}>
+                                                <option>Choose</option>
+                                                <option for="Yes">Yes</option>
+                                                <option for="No">No</option>
+                                            </select> 
+                                                </div>
                                     </div>
                                     <input type="submit" value="Publish" className="btn btn-success" />
                                 </form>

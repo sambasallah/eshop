@@ -89,7 +89,8 @@ class ProductController extends Controller {
       'regular_price' => $regularPrice,
       'sale_price' => $salePrice,
       'quantity' => $quantity,
-      'slug' => $slug
+      'slug' => $slug,
+      'trending' => isset($trending) && $trending === 'Yes'? 'Yes' : null
       ]);
 
       $newAddedImages = isset($imageAdded) ? $imageAdded : null;
@@ -222,6 +223,19 @@ class ProductController extends Controller {
       ->get();
 
       return response()->json($filtered_result);
+    }
+
+    public function getTrendingProducts() {
+      $trending = DB::table('products')
+      ->where('products.trending', '=', 'Yes' )
+      ->join('product_categories','product_categories.product_id','=','products.id')
+      ->join('categories','categories.id','=','product_categories.category_id')
+      ->join('product_images', 'product_images.product_id', '=', 'products.id')
+      ->orderBy('products.updated_at','desc')
+      ->limit(15)
+      ->get();
+
+      return response()->json($trending);
     }
 
     public function filterByPrice($price_range) {

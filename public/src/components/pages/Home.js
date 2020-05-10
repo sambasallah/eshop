@@ -25,6 +25,7 @@ const MobilePhone = ({ value, getProductByID, products }) => {
 const Home = (props) => {
 
 	const [mobilePhones, setMobilePhones] = useState([]);
+	const [trending, setTrending] = useState([]);
 
 	const params = {
 		slidesPerView: 5,
@@ -61,47 +62,6 @@ const Home = (props) => {
 		}
 	  }
 
-	const param = {
-		slidesPerView: 5,
-		spaceBetween: 30,
-		slidesPerGroup: 3,
-		loop: true,
-		loopFillGroupWithBlank: true,
-		pagination: {
-		  el: '.swiper-pagination',
-		  clickable: true
-		},
-		// navigation: {
-		//   nextEl: '.swiper-button-next',
-		//   prevEl: '.swiper-button-prev'
-		// },
-		breakpoints: {
-			320: {
-				slidesPerView: 1,
-				slidesPerGroup: 1
-			},
-			340: {
-				slidesPerView: 1,
-				slidesPerGroup: 1
-			},
-			500 : {
-				slidesPerView: 1,
-				slidesPerGroup: 1
-			},
-			640: {
-			  slidesPerView: 2,
-			  slidesPerGroup: 2
-			},
-			768: {
-			  slidesPerView: 4,
-			  spaceBetween: 40,
-			},
-			1024: {
-			  slidesPerView: 5,
-			  spaceBetween: 50,
-			}
-		}
-	  }
 
 	  const getAllMobilePhones = async () => {
 		  let url = 'http://localhost:8000/api/v1/mobile-phones';
@@ -113,8 +73,19 @@ const Home = (props) => {
 		  }
 	  }
 
+	  const getTrendingProducts = async () => {
+		let url = 'http://localhost:8000/api/v1/trending-products';
+		let response = await fetch(url);
+		let data = await response.json();
+
+		if(data) {
+			setTrending([...trending, ...data]);
+		}
+	}
+
 	useEffect(() => {
 		getAllMobilePhones();
+		getTrendingProducts();
 	}, []);
 
     return (
@@ -173,72 +144,30 @@ const Home = (props) => {
 		<div className="category-tile">
 			<h4>Trending <img src={require('../../media/icons/trending.png')} /></h4>
 		</div>
-	 <Swiper {...params}>
-		 <div className="item">
-			 <div className="product-img">
-			 	<img  src={require('../../media/images/b7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-			 </div>
-			 <div className="product-description">
-				 <h6>Spark 4 - D4,000</h6>
-			 </div>
-		 </div>
-		 <div className="item">
-			<div className="product-img">
-					<img  src={require('../../media/images/chemise1.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-				</div>
-				<div className="product-description">
-					<h6>Spark 4 - D4,000</h6>
-				</div>
-		 </div>
-		 <div className="item">
-		 <div className="product-img">
-			 	<img  src={require('../../media/images/derby-shoe.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-			 </div>
-			 <div className="product-description">
-				 <h6>Spark 4 - D4,000</h6>
-			 </div>
-		 </div>
-		 <div className="item">
-		 <div className="product-img">
-			 	<img  src={require('../../media/images/m7.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-			 </div>
-			 <div className="product-description">
-				 <h6>Spark 4 - D4,000</h6>
-			 </div>
-		 </div>
-		 <div className="item">
-		 <div className="product-img">
-			 	<img  src={require('../../media/images/coat.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-			 </div>
-			 <div className="product-description">
-				 <h6>Spark 4 - D4,000</h6>
-			 </div>
-		 </div>
-		 <div className="item">
-		 <div className="product-img">
-			 	<img  src={require('../../media/images/chemise0.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-			 </div>
-			 <div className="product-description">
-				 <h6>Spark 4 - D4,000</h6>
-			 </div>
-		 </div>
-		 <div className="item">
-		 <div className="product-img">
-			 	<img  src={require('../../media/images/chemise0.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-			 </div>
-			 <div className="product-description">
-				 <h6>Spark 4 - D4,000</h6>
-			 </div>
-		 </div>
-		 <div className="item">
-		 <div className="product-img">
-			 	<img  src={require('../../media/images/chemise0.jpg')} style={{maxWidth: '100%', maxHeight: '100%'}} />
-			 </div>
-			 <div className="product-description">
-				 <h6>Spark 4 - D4,000</h6>
-			 </div>
-		 </div>
-      </Swiper>
+		 { trending.length > 1? (
+			 <>
+			<Swiper {...params} key={trending.length}>
+			{ trending.map((value, index) => {
+				return (
+				  <div className="swiper-slide" key={index}>
+					  <MobilePhone value={value} getProductByID={ props.getProductByID } 
+				products={ trending } key={ index } />
+				  </div>
+				)	 
+			})}
+			</Swiper>
+			 </>
+		 ) : (
+			 <>
+			  <Swiper {...params}>
+			  		<div className="loading-item"></div>
+					<div className="loading-item"></div>
+					<div className="loading-item"></div>
+					<div className="loading-item"></div>
+					<div className="loading-item"></div>
+			  </Swiper>
+			 </>
+		 )}
 	 </div>
 
 

@@ -22,6 +22,8 @@ const EditProduct = (props) => {
     let location = useLocation();
     let path = location.pathname.substr(1);
     let pathArray = path.split('/');
+
+    console.log(pathArray);
     
     const ImageList = (prop) => {
    
@@ -65,6 +67,7 @@ const saveForm = async (event) => {
     let data = await response.json();
     if(data) {
         setEdit(Object.assign({},edit, { updated: true, imageAdded: false }));
+        props.history.push('/edit/' + slugName);
         updated();
     } else {
         setEdit(Object.assign({}, edit, { notUpdated: true, formSubmitted: true, imageAdded: false }));
@@ -96,6 +99,7 @@ const getProductData = async (slug) => {
             arr.quantity = value.quantity;
             arr.images = JSON.parse(value.url);
             arr.description = value.description;
+            arr.trending = value.trending;
             arr.updated = false;
             arr.notUpdated = false;
             arr.deleted = false;
@@ -107,9 +111,9 @@ const getProductData = async (slug) => {
         } 
 } 
 
-const setEditing = () => {
-    getProductData(pathArray[1]);
-}  
+// const setEditing = () => {
+//     getProductData(pathArray[1]);
+// }  
 
 const getCategories = async () => {
     let response = await fetch('http://localhost:8000/api/v1/product/categories?token=' + props.token);
@@ -199,8 +203,9 @@ const beginUpload = (tag) => {
 }
 
 useEffect(() => {
-    setEditing();
+    // setEditing();
     getCategories();
+    getProductData(pathArray[1]);
 },[]);
 
     if(!props.token) return <Redirect to='/login'></Redirect>
@@ -253,7 +258,7 @@ useEffect(() => {
                                 <div className="form-group">
                                     <select className="form-control"  id="categoryID" value={ edit.categoryID } onChange={ handleChange }>
                                     { category.map((value, index) =>
-                                    <option value={value.id}> {value.category_name} </option>) }
+                                    <option value={value.id} key={index}> {value.category_name} </option>) }
                                     </select>
                                  </div>         
                                 </div>
@@ -262,7 +267,7 @@ useEffect(() => {
                                     <input type="number" name="quantity" className="form-control" id="quantity" placeholder="Qty" value={edit.quantity} onChange={ handleChange } />
                                 </div>  
                           
-                                <div className="col-md-7">
+                                <div className="col-md-5">
                                 <div className="form-group">
                                     <label>Images</label>
                                     <div className="row">
@@ -270,6 +275,20 @@ useEffect(() => {
                                     </div>
                                     <a onClick={ () => beginUpload() } style={{ margin: '10px 0px', cursor: 'pointer'}}>Click to add images <i className="fa fa-plus"></i></a>
                                 </div>
+                                </div>
+                                <div className="col-md-2">
+                                     <label>Trending</label> <br /> 
+                                     <select id="trending" onChange={handleChange} value={edit.trending}>
+                                        <option>Choose</option>
+                                        <option for="Yes">Yes</option>
+                                        <option for="No">No</option>
+                                     </select>
+                                     <label>Recommended</label>
+                                     <select id="recommended" onChange={handleChange}>
+                                        <option>Choose</option>
+                                        <option for="Yes">Yes</option>
+                                        <option for="No">No</option>
+                                     </select> 
                                 </div>
                             </div>
                             <input type="submit" value="Update" className="btn btn-success" />

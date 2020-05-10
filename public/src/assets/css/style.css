@@ -831,6 +831,11 @@ ul {
   font-weight: 500;
 }
 
+.shop-left #categories {
+  height: 250px;
+  overflow-y: scroll;
+}
+
 .shop-left #categories ul li {
   display: block;
   padding-bottom: 10px;

@@ -369,6 +369,8 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 .categories-inner ul.categories-list {
 	list-style: none;
 	margin-top: 15px;
+	overflow-y: scroll;
+	height: 500px;
 }
 
 .categories-inner ul.categories-list li {
