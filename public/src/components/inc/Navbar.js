@@ -29,7 +29,7 @@ const Navbar = (props) => {
                         <a className="nav-link" href="/about">about</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/blog">blog</a>
+                        <a className="nav-link" href="#">blog</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="/contact">contact</a>

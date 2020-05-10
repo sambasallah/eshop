@@ -100,6 +100,7 @@ const getProductData = async (slug) => {
             arr.images = JSON.parse(value.url);
             arr.description = value.description;
             arr.trending = value.trending;
+            arr.recommended = value.recommended;
             arr.updated = false;
             arr.notUpdated = false;
             arr.deleted = false;
@@ -284,7 +285,7 @@ useEffect(() => {
                                         <option for="No">No</option>
                                      </select>
                                      <label>Recommended</label>
-                                     <select id="recommended" onChange={handleChange}>
+                                     <select id="recommended" onChange={handleChange} value={edit.recommended}>
                                         <option>Choose</option>
                                         <option for="Yes">Yes</option>
                                         <option for="No">No</option>

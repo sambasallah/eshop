@@ -61,7 +61,8 @@ class ProductController extends Controller {
       'sale_price' => $salePrice,
       'quantity' => $quantity,
       'slug' => $slug,
-      'trending' => isset($trending)? 'Yes' : ''
+      'trending' => isset($trending) && $trending === 'Yes'? 'Yes' : null,
+      'recommended' => isset($recommended) && $recommended === 'Yes'? 'Yes': null
       ]);
 
       if(!empty($id)) {
@@ -90,7 +91,8 @@ class ProductController extends Controller {
       'sale_price' => $salePrice,
       'quantity' => $quantity,
       'slug' => $slug,
-      'trending' => isset($trending) && $trending === 'Yes'? 'Yes' : null
+      'trending' => isset($trending) && $trending === 'Yes'? 'Yes' : null,
+      'recommended' => isset($recommended) && $recommended === 'Yes'? 'Yes' : null
       ]);
 
       $newAddedImages = isset($imageAdded) ? $imageAdded : null;
@@ -236,6 +238,19 @@ class ProductController extends Controller {
       ->get();
 
       return response()->json($trending);
+    }
+
+    public function getRecommendedProducts() {
+      $recommended = DB::table('products')
+      ->where('products.recommended', '=', 'Yes' )
+      ->join('product_categories','product_categories.product_id','=','products.id')
+      ->join('categories','categories.id','=','product_categories.category_id')
+      ->join('product_images', 'product_images.product_id', '=', 'products.id')
+      ->orderBy('products.updated_at','desc')
+      ->limit(15)
+      ->get();
+
+      return response()->json($recommended);
     }
 
     public function filterByPrice($price_range) {
