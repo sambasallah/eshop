@@ -94,13 +94,17 @@
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.text-content{
+.carousel-inner .text-content{
   position: absolute;
   color: $tertiary_white;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   box-sizing: border-box;
+}
+
+.carousel-inner {
+	max-height: 450px !important;
 }
 
 .text-content h1 {
@@ -248,6 +252,10 @@
 
 .latest-deals .deal-info p{
 	font-size: 18px;
+}
+
+.deal-info .left {
+	text-align: center;
 }
 
 .latest-deals .deal-info h6 .sale-price {
@@ -912,7 +920,6 @@
 	box-sizing: border-box;
 	margin-bottom: 20px;
 	transition: 0.2s ease-in-out;
-	border-radius: 5px;
 }
 
 .product .product-description h3.title {

@@ -229,7 +229,7 @@ const Home = (props) => {
 							<div className="deal">
 								<div className="deal-info">
 									<div className="row">
-										<div className="col-md-3">
+										<div className="col-md-3 left">
 											<img src={JSON.parse(value.url)[0]} style={{ maxWidth : '100%', maxHeight: '100%'}}/>
 										</div>
 										<div className="col-md-9">
