@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Swiper from 'react-id-swiper';
 import { connect } from 'react-redux';
@@ -65,17 +64,28 @@ const Home = (props) => {
 
 
 	  const getAllMobilePhones = async () => {
-		  let url = 'http://localhost:8000/api/v1/mobile-phones';
+		  let url = '';
+		  if(process.env.NODE_ENV === 'development') {
+			 url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/mobile-phones';
+		  } else {
+			 url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/mobile-phones';
+		  }  
+		   
 		  let response = await fetch(url);
 		  let data = await response.json();
-
+		  console.log(process.env);
 		  if(data) {
 			  setMobilePhones([...mobilePhones, ...data]);
 		  }
 	  }
 
 	  const getTrendingProducts = async () => {
-		let url = 'http://localhost:8000/api/v1/trending-products';
+		let url = '';
+		if(process.env.NODE_ENV === 'development') {
+		   url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/trending-products';
+		} else {
+		   url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/trending-products';
+		}  
 		let response = await fetch(url);
 		let data = await response.json();
 
@@ -85,7 +95,12 @@ const Home = (props) => {
 	}
 
 	 const getRecommendedProducts = async () => {
-		 let url = 'http://localhost:8000/api/v1/recommended-products';
+		let url = '';
+		 if(process.env.NODE_ENV === 'development') {
+			url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/recommended-products';
+		 } else {
+			url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/recommended-products';
+		 }
 		 let response = await fetch(url);
 		 let data = await response.json();
 

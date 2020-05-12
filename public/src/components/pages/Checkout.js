@@ -30,7 +30,15 @@ const Checkout = (props) => {
         let updatedCustomer = {...customer, orderItems: orderItems, orderID: orderID, 
             total: total, orderNote: customer.customerInfo.orderNote === undefined? '' : customer.customerInfo.orderNote,
             shippingAddress: customer.customerInfo.shippingAddress };
-        let response = await fetch('http://localhost:8000/api/v1/create-order', {method: 'POST', headers : {'Content-Type': 'application/json'}, body: JSON.stringify(updatedCustomer)});
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/create-order';
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/create-order';
+        }
+        let response = await fetch(url, 
+        {method: 'POST', headers : {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(updatedCustomer)});
         let data = await response.json();
         if(data.Created === true) {
             setLoading({...loading, loading: false});

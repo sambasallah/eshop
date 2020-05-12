@@ -53,17 +53,17 @@ const Shop = (props) => {
 
 
     const getCategories = async () => {
-        let url = 'http://localhost:8000/api/v1/product/categories';
+        let url = '';
+		  if(process.env.NODE_ENV === 'development') {
+			 url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/product/categories';
+		  } else {
+			 url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/product/categories';
+		  }
         let response = await fetch(url);
         let data = await response.json();
 
         if(data) {
-            let categoriesData = [];
-            data.map((value) => {
-                categoriesData.push(value);             
-            }) 
-            setCategories({...categories, categories: categoriesData});
-               
+            setCategories({...categories, categories: [...data]});
         }
     }
 
@@ -225,7 +225,6 @@ const Shop = (props) => {
                                      <li><span>Next</span></li>
                                  </ul>
                              </div> */}
-                             { console.log(props.last_page)}
                             { Number(props.last_page) <= 0? "" : ""}
                             { Number(props.last_page) >= 2  && Number(props.last_page) < 3? (
                                 <>

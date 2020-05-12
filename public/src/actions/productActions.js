@@ -3,7 +3,12 @@ import { GET_PRODUCTS,GET_PRODUCT_BY_ID, ADD_TO_CART, DELETE_ITEM_FROM_CART,
     FILTER_BY_PRICE_CATEGORY } from './types';
 
 export const getProducts =  (pageNo) => async dispatch => {
-        const url = "http://localhost:8000/api/v1/products/p/1?page=" + pageNo;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+           url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/products/p/1?page=' + pageNo;
+        } else {
+           url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/products/p/1?page=' + pageNo;;
+        }
         let reponse = await fetch(url);
         let data = await reponse.json();
         let allData = {};
@@ -54,7 +59,12 @@ export const deleteItemFromCart = (item, cartItems) => dispatch => {
 }
 
 export const filterByPrice = (page, priceRange) => async dispatch => {
-    let url = 'http://localhost:8000/api/v1/filter-by-price/' + priceRange + '?page=' + page;
+    let url = '';
+        if(process.env.NODE_ENV === 'development') {
+           url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/filter-by-price/' + priceRange + '?page=' + page;
+        } else {
+           url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/filter-by-price/' + priceRange + '?page=' + page;
+        }
     let response = await fetch(url);
     let data = await response.json();
     let allData = {};
@@ -72,7 +82,12 @@ export const filterByPrice = (page, priceRange) => async dispatch => {
 }
 
 export const filterByCategory = (page, categoryID) => async dispatch => {
-    let url = 'http://localhost:8000/api/v1/filter-by-category/' + categoryID + '?page=' + page;
+    let url = '';
+    if(process.env.NODE_ENV === 'development') {
+       url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/filter-by-category/' + categoryID + '?page=' + page;
+    } else {
+       url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/filter-by-category/' + categoryID + '?page=' + page;
+    }
     let response = await fetch(url);
     let data = await response.json();
     let allData = {};
@@ -90,7 +105,12 @@ export const filterByCategory = (page, categoryID) => async dispatch => {
 }
 
 export const filterByPriceCategory = (page, priceRange, categoryID) => async dispatch => {
-    let url = 'http://localhost:8000/api/v1/filter-by-price-category/' + priceRange + '/' + categoryID + '?page=' + page;
+    let url = '';
+    if(process.env.NODE_ENV === 'development') {
+       url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/filter-by-price-category/' + priceRange + '/' + categoryID + '?page=' + page;
+    } else {
+       url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/filter-by-price-category/' + priceRange + '/' + categoryID + '?page=' + page;
+    }
     let response = await fetch(url);
     let data = await response.json();
     let allData = {};

@@ -134,10 +134,6 @@ ul {
   box-sizing: border-box;
 }
 
-.carousel-inner {
-  max-height: 450px !important;
-}
-
 .text-content h1 {
   margin-bottom: 25px;
   font-size: 50px;
