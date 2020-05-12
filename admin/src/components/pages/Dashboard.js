@@ -39,7 +39,12 @@ const Dashboard = (props) => {
     
 
     const getTotalSales = async () => {
-        let url = 'http://localhost:8000/api/v1/total-sales?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/total-sales?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/total-sales?token=' + props.token;
+        } 
         let response = await fetch(url);
         let data = await response.json();
 
@@ -49,7 +54,12 @@ const Dashboard = (props) => {
     }
 
     const getTotalWeeklySales = async () => {
-        let url = 'http://localhost:8000/api/v1/total-weekly-sales?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/total-weekly-sales?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/total-weekly-sales?token=' + props.token;
+        } 
         let response = await fetch(url);
         let data = await response.json();
 
@@ -59,7 +69,12 @@ const Dashboard = (props) => {
     }
 
     const getWeeklySales = async () => {
-        let url = 'http://localhost:8000/api/v1/weekly-sales?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/weekly-sales?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/weekly-sales?token=' + props.token;
+        } 
         let response = await fetch(url);
         let data = await response.json();
         let weeklySalesData = [];
@@ -99,8 +114,13 @@ const Dashboard = (props) => {
         }
     }
 
-    const getAllOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/all-orders?token=' + props.token;
+    const getAllOrders = async () => { 
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/all-orders?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/all-orders?token=' + props.token;
+        }
         let response = await fetch(url);
         let data = await response.json();
 
@@ -110,7 +130,12 @@ const Dashboard = (props) => {
     }
 
     const getNewOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/new-orders?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/new-orders?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/new-orders?token=' + props.token;
+        }
         let response = await fetch(url);
         let data = await response.json();
 
@@ -120,7 +145,12 @@ const Dashboard = (props) => {
     }
 
     const getWeeklyOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/weekly-orders?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/weekly-orders?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/weekly-orders?token=' + props.token;
+        }
         let response = await fetch(url);
         let data = await response.json();
 
@@ -130,7 +160,12 @@ const Dashboard = (props) => {
     }
 
     const getTotalProfit = async () => {
-        let url = 'http://localhost:8000/api/v1/total-profit?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/total-profit?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/total-profit?token=' + props.token;
+        }
         let response = await fetch(url);
         let data = await response.json();
 
@@ -140,7 +175,12 @@ const Dashboard = (props) => {
     }
 
     const getTotalWeeklyProfit = async () => {
-        let url = 'http://localhost:8000/api/v1/total-weekly-profit?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/total-weekly-profit?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/total-weekly-profit?token=' + props.token;
+        }
         let response = await fetch(url);
         let data = await response.json();
 
@@ -150,7 +190,13 @@ const Dashboard = (props) => {
     }
 
     const getTotalDailyProfit = async () => {
-        let url = 'http://localhost:8000/api/v1/total-daily-profit?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/total-daily-profit?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/total-daily-profit?token=' + props.token;
+        }
+        console.log(process.env.REACT_APP_DEVELOPMENT_API_URL);
         let response = await fetch(url);
         let data = await response.json();
         if(data) {

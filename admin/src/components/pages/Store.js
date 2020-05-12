@@ -20,7 +20,12 @@ const Store = (props) => {
     const getAllProducts = async () => {
     
         if(search.searchBox === undefined) {
-        let url = 'http://localhost:8000/api/v1/products/p/1?page=' + page.page;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/products/p/1?page=' + page.page;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/products/p/1?page=' + page.page;
+        }
         let response = await fetch(url);
         let data = await response.json();
         if(data) {
@@ -44,7 +49,12 @@ const Store = (props) => {
             setPagination({current_page: data.current_page, last_page: data.last_page, from: data.from});
             }
         } else {
-            let url = 'http://localhost:8000/api/v1/products/search/' + search.searchBox + '/' + page.page + '?token=' + props.token;
+           let url = '';
+            if(process.env.NODE_ENV === 'development') {
+                url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/products/search/' + search.searchBox + '/' + page.page + '?token=' + props.token;
+            } else {
+                url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/products/search/' + search.searchBox + '/' + page.page + '?token=' + props.token;
+            }
             let response = await fetch(url);
             let data = await response.json();
             if(data) {

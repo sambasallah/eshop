@@ -67,7 +67,12 @@ const Orders = (props) => {
     
 
     const getAllOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/orders?page='+ page.page + '&&token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/orders?page='+ page.page + '&&token=' + props.token
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/orders?page='+ page.page + '&&token=' + props.token
+        }
         let response = await fetch(url);
         let data = await response.json();
 
@@ -84,7 +89,12 @@ const Orders = (props) => {
     }
 
     const getTotalOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/total-orders?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/total-orders?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/total-orders?token=' + props.token;
+        }
         let response = await fetch(url);
         let data = await response.json();
 
@@ -94,7 +104,12 @@ const Orders = (props) => {
     }
 
     const getTodayOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/today-orders?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/today-orders?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/today-orders?token=' + props.token;
+        }
         let response = await fetch(url);
         let data = await response.json();
 
@@ -104,7 +119,12 @@ const Orders = (props) => {
     }
 
     const getPendingOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/pending-orders?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/pending-orders?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/pending-orders?token=' + props.token;
+        }
         let response = await fetch(url);
         let data = await response.json();
 
@@ -115,7 +135,12 @@ const Orders = (props) => {
 
     
     const getCompletedOrders = async () => {
-        let url = 'http://localhost:8000/api/v1/completed-orders?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/completed-orders?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/completed-orders?token=' + props.token;
+        }
         let response = await fetch(url);
         let data = await response.json();
 

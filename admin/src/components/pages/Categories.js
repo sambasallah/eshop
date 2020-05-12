@@ -46,7 +46,13 @@ const Categories = (props) => {
         let categoryToDelete = category.categories.filter((category) => (category === event.target.getAttribute('value')));
         let updatedList = category.categories.filter((category) => (category !== event.target.getAttribute('value')));
         setCategory({...category, categories: updatedList});
-        let url = 'http://localhost:8000/api/v1/categories/delete-category?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/categories/delete-category?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/categories/delete-category?token=' + props.token;
+        }  
+      
         let response = await fetch(url, {method: 'DELETE',
          headers:{'Content-Type': 'application/json'}, 
          body: JSON.stringify({categoryName: categoryToDelete.pop()})});

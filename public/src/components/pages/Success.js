@@ -1,7 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 const Success = (props) => {
     

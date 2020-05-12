@@ -22,7 +22,12 @@ const Settings = (props) => {
 
     const getAdminInfo = async () => {
        setAdmin({...admin, loading: true});
-       let url = 'http://localhost:8000/api/v1/get-admin?token=' + props.token;
+       let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/get-admin?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/get-admin?token=' + props.token;
+        }
        let response = await fetch(url, {method: 'POST', 
     headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email: props.email})});
        let data = await response.json();
@@ -44,7 +49,12 @@ const Settings = (props) => {
    
     const update = async (event) => {
         event.preventDefault();
-        let url = 'http://localhost:8000/api/v1/update-admin?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/update-admin?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/update-admin?token=' + props.token;
+        }
         let response = await fetch(url, {method : 'PUT',
         headers : {'Content-Type' : 'application/json'}, 
         body : JSON.stringify(admin) });

@@ -73,7 +73,7 @@ const Home = (props) => {
 		   
 		  let response = await fetch(url);
 		  let data = await response.json();
-		  console.log(process.env);
+
 		  if(data) {
 			  setMobilePhones([...mobilePhones, ...data]);
 		  }

@@ -4,7 +4,12 @@ export const loginAdmin = (loginDetails) => async (dispatch) => {
     dispatch({
         type: IS_LOADING
     });
-    let url = 'http://localhost:8000/api/v1/admin-login';
+    let url = '';
+    if(process.env.NODE_ENV === 'development') {
+        url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/admin-login';
+    } else {
+        url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/admin-login';
+    }
     let response = await fetch(url, {method: 'POST', 
     headers: {'Content-Type': 'application/json'}, 
     body: JSON.stringify({email: loginDetails.email, password: loginDetails.password})});

@@ -51,7 +51,12 @@ const AddProduct = (props) => {
   const saveProduct = async (event) => {
     event.preventDefault();
     if(product.id === undefined) {
-        let url = 'http://localhost:8000/api/v1/product?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/product?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/product?token=' + props.token;
+        }
         let response = await fetch(url, {method : 'POST',
          headers : {'Content-Type': 'application/json', 'Accept': 'application/json'}, body : JSON.stringify(product) });
         let data = await response.json();
@@ -62,7 +67,12 @@ const AddProduct = (props) => {
             error();
         }
     } else {
-        let url = 'http://localhost:8000/api/v1/product/' + product.id + '?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/product/' + product.id + '?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/product/' + product.id + '?token=' + props.token;
+        }
         let response = await fetch(url, {method : 'PUT', 
         headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
         let data = await response.json();
@@ -89,7 +99,13 @@ const AddProduct = (props) => {
 
 
   const getCategories = async () => {
-    let response = await fetch('http://localhost:8000/api/v1/product/categories?token=' + props.token);
+    let url = '';
+    if(process.env.NODE_ENV === 'development') {
+        url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/product/categories?token=' + props.token
+    } else {
+        url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/product/categories?token=' + props.token
+    }  
+    let response = await fetch(url);
     let data = await response.json();
     let arr = [];
 
