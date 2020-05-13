@@ -10,9 +10,10 @@
   - HTML
   - CSS/SASS
   - ReactJS & Redux
-
 ### Backend API
   - PHP (Laravel/Lumen)
+### Database
+  - MySQL
 ### CDN (Images & Videos)
   - [Cloudinary](https://cloudinary.com)
 ### Live Website (Under Development)
