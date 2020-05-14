@@ -253,31 +253,32 @@ class ProductController extends Controller {
       return response()->json($recommended);
     }
 
-    public function getUpsell(int $category_id, int $product_id) {
+    public function getUpsell(int $category_id, string $slug) {
       $upsell = DB::table('products')
-      ->where('categories.id', '=',  $category_id)
-      ->where('products.id', '!=', $product_id )
+      ->where('products.slug', '!=', $slug)
+      ->where('categories.id', '=', $category_id)
       ->join('product_categories','product_categories.product_id','=','products.id')
       ->join('categories','categories.id','=','product_categories.category_id')
       ->join('product_images', 'product_images.product_id', '=', 'products.id')
-      ->orderBy('products.updated_at','desc')
+      ->inRandomOrder()
       ->limit(5)
       ->get();
 
-      if(count($upsell) > 1) {
+       if(count($upsell) > 0) {
         return response()->json($upsell);
-      } 
-      
-      $random_products = DB::table('products')
-      ->join('product_categories','product_categories.product_id','=','products.id')
-      ->join('categories','categories.id','=','product_categories.category_id')
-      ->join('product_images', 'product_images.product_id', '=', 'products.id')
-      ->orderBy('products.updated_at','desc')
-      ->limit(5)
-      ->get();
-      return response()->json($random_products);
-      
-      
+       } 
+        
+       $random_products = DB::table('products')
+        ->join('product_categories','product_categories.product_id','=','products.id')
+        ->join('categories','categories.id','=','product_categories.category_id')
+        ->join('product_images', 'product_images.product_id', '=', 'products.id')
+        ->inRandomOrder()
+        ->limit(5)
+        ->get();
+  
+        return response()->json($random_products);
+       
+       
     }
 
     public function filterByPrice($price_range) {

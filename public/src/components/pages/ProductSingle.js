@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-// import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser from 'react-html-parser';
 import { connect } from 'react-redux';
 import { addToCart, getProductByID } from '../../actions/productActions';
 import { inCart, isJson } from '../utils/utils';
@@ -60,26 +60,19 @@ const ProductSingle = (props) => {
     const getUpsell = async () => {
         let url = '';
         let categoryID = product.category_id;
-        let productID = product.id;
+        let productSlug = product.slug;
         if(process.env.NODE_ENV === 'development') {
              url = process.env.REACT_APP_DEVELOPMENT_API_URL 
-            + '/api/v1/upsell/' + categoryID + '/' + productID;
+            + '/api/v1/upsell/' + categoryID + '/' + productSlug;
         } else {
              url = process.env.REACT_APP_PRODUCTION_API_URL 
-            + '/api/v1/upsell/' + categoryID + '/' + productID;
+            + '/api/v1/upsell/' + categoryID + '/' + productSlug;
         }
         let response = await fetch(url);
         let data = await response.json();
         if(data) {
-             let upsellData = [];
-            //  data.map((value) => {
-            //      upsellData.push(value);
-            //  });
             setUpsell([...upsell, ...data]);
-
-            console.log(data);
         }
-        // console.log();
     }
 
     const increment = () => {
@@ -176,7 +169,7 @@ const ProductSingle = (props) => {
                     <div className="row">
                         <div className="col-md-12" style={{ padding: '0px 30px'}}>
                             <h3>Description</h3>
-                            {/* { ReactHtmlParser(product.description) } */}
+                            { ReactHtmlParser(product.description) }
                             <h3>Return Policy</h3>
                             <p><i className="fa fa-repeat"></i> 7 Days Return Guarantee</p>
                             <h3>Delivery</h3>
