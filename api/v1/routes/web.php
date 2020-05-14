@@ -10,7 +10,7 @@
 |
 */
 
-$router->group(['prefix' => 'api/v1', 'middleware' => ['cors']], function() use($router) {
+$router->group(['prefix' => 'api/v1', 'middleware' => 'cors'], function() use($router) {
   
 // Products Route
 $router->get('/products/p/{page}','ProductController@allProducts');
