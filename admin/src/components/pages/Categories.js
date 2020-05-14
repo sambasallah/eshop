@@ -14,7 +14,12 @@ const Categories = (props) => {
     const addCategory = async (event) => {
         event.preventDefault(); 
         setCategory({...category,categories:[...category.categories, categoryName.categoryName] });
-        let url = 'http:///localhost:8000/api/v1/categories/create-category?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/categories/create-category?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/categories/create-category?token=' + props.token;
+        }  
         let response = await fetch(url, {method: 'POST', headers: {'Content-Type' : 'application/json'},
          body: JSON.stringify({categoryName: categoryName.categoryName})});
          let data = await response.json();
@@ -28,7 +33,13 @@ const Categories = (props) => {
     }
 
     const getCategories = async () => {
-        let url = 'http://localhost:8000/api/v1/categories/product-categories?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/categories/product-categories?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/aapi/v1/categories/product-categories?token=' + props.token;
+        }  
+        
         let response = await fetch(url);
         let data = await response.json();
 

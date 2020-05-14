@@ -7,7 +7,12 @@ const SideNav = (props) => {
     const [image, setImage] = useState({img: ''});
 
     const getProfilePicture = async () => {
-        let url = 'http://localhost:8000/api/v1/profile-picture?token=' + props.token;
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/profile-picture?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/profile-picture?token=' + props.token;
+        }  
         let response = await fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},

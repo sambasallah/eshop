@@ -7,9 +7,9 @@ class Cors
 
 public function handle($request, Closure $next)
 {
-    $allowedDomains = array("*");
+    $allowedDomains = array("https://www.ebaaba.xyz");
     $origin = $request->server('HTTP_ORIGIN');
-    if(true){
+    if(in_array($origin, $allowedDomains)){
         //Intercepts OPTIONS requests
         if($request->isMethod('OPTIONS')) {
             $response = response('', 200);
@@ -23,7 +23,7 @@ public function handle($request, Closure $next)
         $response->header('Access-Control-Allow-Headers', $request->header('Access-Control-Request-Headers'));
     }
 
-    // in_array($origin, $allowedDomains)
+ 
 
     // Sends it
     return $response;

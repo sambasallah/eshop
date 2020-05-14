@@ -44,8 +44,8 @@ const Home = (props) => {
 				slidesPerGroup: 1
 			},
 			500 : {
-				slidesPerView: 1,
-				slidesPerGroup: 1
+				slidesPerView: 2,
+				slidesPerGroup: 2
 			},
 			640: {
 			  slidesPerView: 2,

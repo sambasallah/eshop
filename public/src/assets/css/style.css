@@ -680,6 +680,10 @@ ul {
   padding: 5px;
 }
 
+.product {
+  text-align: center;
+}
+
 .product .product-description {
   padding-top: 4px;
 }
