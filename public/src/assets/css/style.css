@@ -649,6 +649,7 @@ ul {
 
 .single-product-description {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .single-product-description h3 {
@@ -662,6 +663,25 @@ ul {
 
 .single-product-description p {
   padding-top: 10px;
+}
+
+.similar-items {
+  width: 95%;
+  margin: auto;
+}
+
+.similar-items h4 {
+  padding-bottom: 8px;
+}
+
+.similar-items .similar-product {
+  width: 100%;
+  color: #000;
+  padding: 5px;
+}
+
+.product .product-description {
+  padding-top: 4px;
 }
 
 /** About Page **/

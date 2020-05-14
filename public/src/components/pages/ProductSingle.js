@@ -1,26 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import Slider  from 'react-slick';
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 import { connect } from 'react-redux';
-import { addToCart } from '../../actions/productActions';
+import { addToCart, getProductByID } from '../../actions/productActions';
 import { inCart, isJson } from '../utils/utils';
 import Swiper from 'react-id-swiper';
 
 const ProductSingle = (props) => {
 
     const [qty, setQty] = useState({qty: 1});
+    const [upsell, setUpsell] = useState([]);
 
     const product = props.product[0];
     const addedToCart = inCart(product, props.cartItems);
-
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        fade: true,
-        cssEase: 'linear'
-    };
 
     const params = {
         pagination: {
@@ -28,7 +20,67 @@ const ProductSingle = (props) => {
           clickable: true,
           dynamicBullets: true
         }
-      }
+    }
+
+    const paramsSimilarItems = {
+		slidesPerView: 5,
+		spaceBetween: 30,
+		pagination: {
+		  el: '.swiper-pagination',
+		  clickable: true,
+		},
+		breakpoints: {
+			320: {
+				slidesPerView: 1,
+				slidesPerGroup: 1
+			},
+			340: {
+				slidesPerView: 1,
+				slidesPerGroup: 1
+			},
+			500 : {
+				slidesPerView: 1,
+				slidesPerGroup: 1
+			},
+			640: {
+			  slidesPerView: 2,
+			  slidesPerGroup: 2
+			},
+			768: {
+			  slidesPerView: 4,
+			  spaceBetween: 40,
+			},
+			1024: {
+			  slidesPerView: 5,
+			  spaceBetween: 50,
+			}
+		}
+	  }
+
+    const getUpsell = async () => {
+        let url = '';
+        let categoryID = product.category_id;
+        let productID = product.id;
+        if(process.env.NODE_ENV === 'development') {
+             url = process.env.REACT_APP_DEVELOPMENT_API_URL 
+            + '/api/v1/upsell/' + categoryID + '/' + productID;
+        } else {
+             url = process.env.REACT_APP_PRODUCTION_API_URL 
+            + '/api/v1/upsell/' + categoryID + '/' + productID;
+        }
+        let response = await fetch(url);
+        let data = await response.json();
+        if(data) {
+             let upsellData = [];
+            //  data.map((value) => {
+            //      upsellData.push(value);
+            //  });
+            setUpsell([...upsell, ...data]);
+
+            console.log(data);
+        }
+        // console.log();
+    }
 
     const increment = () => {
         let currentQty = qty.qty;
@@ -39,10 +91,14 @@ const ProductSingle = (props) => {
         let currentQty = qty.qty;
         if(currentQty <= 1) {
             setQty({...qty, qty: 1 });
-            return;
+            return
         }
         setQty({...qty, qty: currentQty - 1 });
     }
+
+    useEffect(() => {
+        getUpsell();
+    }, [])
     
     return (
        
@@ -120,7 +176,7 @@ const ProductSingle = (props) => {
                     <div className="row">
                         <div className="col-md-12" style={{ padding: '0px 30px'}}>
                             <h3>Description</h3>
-                            { ReactHtmlParser(product.description) }
+                            {/* { ReactHtmlParser(product.description) } */}
                             <h3>Return Policy</h3>
                             <p><i className="fa fa-repeat"></i> 7 Days Return Guarantee</p>
                             <h3>Delivery</h3>
@@ -128,6 +184,45 @@ const ProductSingle = (props) => {
                         </div>
                     </div>
                 </div>
+
+                <div className="similar-items">
+                    <h4>Similar Items You Might Like</h4>
+                    <div className="similar-products">
+                    { upsell.length > 1? (
+                                <>
+                                <Swiper {...paramsSimilarItems} key={upsell.length}>
+                                { upsell.map((value, index) => {
+                                    return (
+                                    <div className="swiper-slide" key={index}>
+                                        <div className="product">
+                                            <div className="product-img">
+                                             <img src={JSON.parse(value.url)[0]} style={{maxWidth: '100%', maxHeight: '100%'}} />
+                                            </div>
+                                            <div className="product-description">
+                                                <h6><a href={ value.slug }
+                                                onClick={ () => { props.getProductByID(upsell, value.id) } }>{ value.name }</a></h6>
+                                                <p><span className="price">D{ new Intl.NumberFormat().format(value.sale_price)}</span> <span className="original-price">D{ new Intl.NumberFormat().format(value.regular_price) }</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    )	 
+                                })}
+                                </Swiper>
+                                </>
+                            ) : (
+                                // <>
+                                // <Swiper {...paramsSimilarItems}>
+                                //         <div className="loading-item"></div>
+                                //         <div className="loading-item"></div>
+                                //         <div className="loading-item"></div>
+                                //         <div className="loading-item"></div>
+                                //         <div className="loading-item"></div>
+                                // </Swiper>
+                                // </>
+                                'Loading'
+                            )}
+                    </div>
+                 </div>
 
             </div>
          
@@ -140,4 +235,4 @@ const mapStateToProps = state => (
      cartItems : state.products.cart? state.products.cart : [] }
 );
 
-export default connect(mapStateToProps, { addToCart  })(ProductSingle);
+export default connect(mapStateToProps, { addToCart, getProductByID  })(ProductSingle);

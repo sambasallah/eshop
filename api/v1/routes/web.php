@@ -27,6 +27,7 @@ $router->delete('/product/{id}', 'ProductController@deleteProduct');
 $router->get('/mobile-phones', 'ProductController@getAllPhones');
 $router->get('/trending-products', 'ProductController@getTrendingProducts');
 $router->get('/recommended-products', 'ProductController@getRecommendedProducts');
+$router->get('/upsell/{category_id}/{product_id}', 'ProductController@getUpsell');
 
 // Categories Route
 $router->get('/categories/product-categories', 'CategoryController@getAllCategories');
