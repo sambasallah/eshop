@@ -714,50 +714,42 @@ ul {
 }
 
 /** contact us **/
-.contact .contact-container .h2, .h5 {
-  text-align: center;
+.contact .contact-container {
+  max-height: 400px;
+  box-sizing: border-box;
+  padding: 40px;
 }
 
-.contact .form-container {
-  width: 60%;
-  margin: 20px auto;
+.contact-container h4 {
+  font-size: 30px;
+  padding-bottom: 8px;
 }
-
-.contact input[type=text].form-input {
-  width: 100%;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ed017f;
-  padding: 0px 5px;
-  font-family: sans-serif;
-  height: 50px;
-  line-height: 50px;
+.contact-container h5 {
+  font-size: 24px;
+  padding-bottom: 8px;
 }
-
-.contact textarea.form-message {
-  width: 100%;
-  height: 200px;
-  padding: 10px 10px;
-  border-radius: 5px;
-  border: 1px solid #ed017f;
+.contact-container h6 {
+  font-size: 18px;
 }
-
-.contact input[type=text].form-nput:focus {
-  border: 1px solid #33b27b;
+.contact-container h6 span {
+  color: #33b27b;
 }
-
-.contact textarea.form-message:focus {
-  border: 1px solid #fff;
+.contact-container ul {
+  list-style: none;
 }
-
-.contact a.submit {
-  padding: 10px 20px;
-  color: #fff;
-  background-color: #33b27b;
+.contact-container ul li {
+  display: inline-block;
+  padding: 10px 9px 0px 0px;
+  font-size: 18px;
 }
-
-.contact a.submit:hover {
-  box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
+.contact-container ul li i.fa.fa-facebook {
+  color: #3b5998;
+}
+.contact-container ul li i.fa.fa-instagram {
+  color: #C13584;
+}
+.contact-container ul li i.fa.fa-twitter {
+  color: #1DA1F2;
 }
 
 /** Cart Page **/

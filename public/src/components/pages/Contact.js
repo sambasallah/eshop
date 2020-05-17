@@ -13,38 +13,24 @@ const Contact = () => {
                 </div>
             </div>
             <div class="contact">
-    <div class="contact-container">
-        <div class="col-md-12">
-            <h2 class="h2">Get In Touch!</h2>
-            <h5 class="h5">Contact Us For Help with your order, delivery, refund etc</h5>
-            <form action="#" method="post">
-           <div class="form-container">
-                <div class="row">
-                   <div class="col-md-12">
-                   <input type="text" name="name" placeholder="Your Name*" class="form-input" required />
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-md-12">
-                   <input type="text" name="email" placeholder="Your Email*" class="form-input" required />
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-md-12">
-                   <input type="text" name="subject" placeholder="Subject*" class="form-input" required />
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-md-12">
-                   <textarea name="message" id="" placeholder="Message" class="form-message"></textarea>
-                   </div>
-               </div>
-               <a href="#" type="submit" class="submit">Send Message</a>
-               </div>
-            </form>
-           </div>
-        </div>
-    </div>
+                <div class="contact-container">
+                        <div className="row">
+                            <div className="col-md-6">
+                                <h4>Get In Touch!</h4>
+                                <h5>We'd love to hear from you</h5>
+                                <h6><span>info@ebaaba.xyz</span></h6>
+                                <ul>
+                                    <li><i className="fa fa-facebook"></i></li>
+                                    <li><i className="fa fa-twitter"></i></li>
+                                    <li><i className="fa fa-instagram"></i></li>
+                                </ul>
+                            </div>
+                            <div className="col-md-6" style={{textAlign: "right"}}>
+                                <img src={require('../../media/svg/contact.svg')} style={{maxWidth: '40%', maxHeight: '40%'}}/>
+                            </div>
+                        </div>
+                </div>
+            </div>
 </div>
     )
 }
