@@ -30,11 +30,13 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-slick": "^0.25.2",
+    "react-toast-notifications": "^2.4.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "serve": "^11.3.0",
     "slick-carousel": "^1.8.1",
-    "swiper": "^5.3.8"
+    "swiper": "^5.3.8",
+    "toasted-notes": "^3.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
