@@ -60,6 +60,7 @@ $router->get('/pending-orders', 'OrdersController@getTotalPendingOrders');
 $router->get('/completed-orders', 'OrdersController@getCompletedOrders');
 $router->put('/complete-order', 'OrdersController@completeOrder');
 $router->get('/order/{order_number}', 'OrdersController@getOrder');
+$router->delete('/delete-order', 'OrdersController@deleteOrder');
 
 // Dashboard Route
 $router->get('/total-sales', 'DashboardController@getTotalSales');

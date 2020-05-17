@@ -36,9 +36,11 @@ const SingleOrder = (props) => {
         setLoading({...loading,loading: true});
         let url = '';
         if(process.env.NODE_ENV === 'development') {
-            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/order/' + orderID + '?token=' + props.token;
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL 
+            + '/api/v1/order/' + orderID + '?token=' + props.token;
         } else {
-            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/order/' + orderID + '?token=' + props.token;
+            url = process.env.REACT_APP_PRODUCTION_API_URL 
+            + '/api/v1/order/' + orderID + '?token=' + props.token;
         }
         let response = await fetch(url);
         let data = await response.json();
@@ -69,12 +71,22 @@ const SingleOrder = (props) => {
         position: toast.POSITION.TOP_LEFT
     });
 
+    const orderDeleted = () =>  toast.success("Order Deleted", {
+        position: toast.POSITION.TOP_LEFT
+    });
+
+    const errorDeletingOrder = () =>  toast.error("An Error Occured!", {
+        position: toast.POSITION.TOP_LEFT
+    });
+
     const completeOrder = async () => {
         let url = '';
         if(process.env.NODE_ENV === 'development') {
-            url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/complete-order?token=' + props.token;
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL 
+            + '/api/v1/complete-order?token=' + props.token;
         } else {
-            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/complete-order?token=' + props.token;
+            url = process.env.REACT_APP_PRODUCTION_API_URL 
+            + '/api/v1/complete-order?token=' + props.token;
         }
         let response = await fetch(url, {method: 'PUT', headers : {'Content-Type': 'application/json'},
          body: JSON.stringify({'order_number': order.orderNumber})});
@@ -88,6 +100,30 @@ const SingleOrder = (props) => {
         }
     }
 
+    const deleteOrder = async () => {
+        let url = '';
+        if(process.env.NODE_ENV === 'development') {
+            url = process.env.REACT_APP_DEVELOPMENT_API_URL 
+            + '/api/v1/delete-order?token=' + props.token;
+        } else {
+            url = process.env.REACT_APP_PRODUCTION_API_URL 
+            + '/api/v1/delete-order?token=' + props.token;
+        }
+
+        let response = await fetch(url, {method: 'DELETE',
+                                headers: {'Content-Type': 'application/json'},
+                                body: JSON.stringify({orderID: orderID})
+                                });
+        let data = await response.json();
+
+        if(data.OrderDeleted === true) {
+            orderDeleted();
+            props.history.push('/orders');
+        } else {
+            errorDeletingOrder();
+            props.history.push('/orders');
+        }
+    }
    
 
     useEffect(() => {
@@ -120,6 +156,11 @@ const SingleOrder = (props) => {
                                   <li><h4>{ order.fullName }</h4></li>
                                   <li><span className="order-amount-summary">{ new Intl.NumberFormat('en-GM', { style: 'currency', currency: 'GMD' }).format(order.total) }</span></li>
                                   <li><span className="order-id">{ order.id }</span></li>
+                                  <li><i className="fa fa-trash" 
+                                  style={{fontSize: '20px', 
+                                  color: 'red',
+                                  paddingLeft: '5px',
+                                  cursor: 'pointer'}} onClick={ deleteOrder }></i></li>
                               </ul>
                               <h6>{ '#' + order.orderNumber } <span><FaClock /> Updated on { order.updatedAt } </span></h6>
                               <h3>Overview</h3>

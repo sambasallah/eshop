@@ -58,7 +58,7 @@ const AddProduct = (props) => {
             url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/product?token=' + props.token;
         }
         let response = await fetch(url, {method : 'POST',
-         headers : {'Content-Type': 'application/json', 'Accept': 'application/json'}, body : JSON.stringify(product) });
+         headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
         let data = await response.json();
         if(data.Created === true) {
             setProduct({...product, id: data.ID});
@@ -73,7 +73,7 @@ const AddProduct = (props) => {
         } else {
             url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/product/' + product.id + '?token=' + props.token;
         }
-        let response = await fetch(url, {method : 'PUT', 
+        let response = await fetch(url, {method : 'PUT',
         headers : {'Content-Type': 'application/json'}, body : JSON.stringify(product) });
         let data = await response.json();
         if(data.Updated === true) {

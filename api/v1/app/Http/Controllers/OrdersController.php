@@ -125,4 +125,16 @@ class OrdersController extends Controller
 
         return response()->json($order);
     }
+
+    public function deleteOrder(Request $request) {
+        $deleted_order = DB::table('orders')
+        ->where('order_number', $request->input('orderID'))
+        ->delete();
+
+        if($deleted_order === 1) {
+            return response()->json(['OrderDeleted' => true]);
+        }
+
+        return response()->json(['OrderDeleted' => false]);
+    }
 }

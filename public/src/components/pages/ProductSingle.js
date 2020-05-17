@@ -187,7 +187,7 @@ const ProductSingle = (props) => {
                                 { upsell.map((value, index) => {
                                     return (
                                     <div className="swiper-slide" key={index}>
-                                        <div className="product">
+                                        <div className="product similar-item">
                                             <div className="product-img">
                                              <img src={JSON.parse(value.url)[0]} style={{maxWidth: '100%', maxHeight: '100%'}} />
                                             </div>

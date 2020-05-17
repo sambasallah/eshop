@@ -37,7 +37,7 @@ const Categories = (props) => {
         if(process.env.NODE_ENV === 'development') {
             url = process.env.REACT_APP_DEVELOPMENT_API_URL + '/api/v1/categories/product-categories?token=' + props.token;
         } else {
-            url = process.env.REACT_APP_PRODUCTION_API_URL + '/aapi/v1/categories/product-categories?token=' + props.token;
+            url = process.env.REACT_APP_PRODUCTION_API_URL + '/api/v1/categories/product-categories?token=' + props.token;
         }  
         
         let response = await fetch(url);

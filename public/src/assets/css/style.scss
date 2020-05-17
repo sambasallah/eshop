@@ -613,7 +613,9 @@
 }
 
 .product-details .add-to-cart {
-	padding: 9px 75px;
+	max-width: 100%;
+	height: 40px;
+	padding: 0px 30px;
 	font-size: 16px;
 	font-weight: 500;
 	border: transparent;
@@ -706,6 +708,9 @@
 	padding: 5px;
 }
 
+.similar-items .similar-item {
+	text-align: center;
+}
 
 .product .product-description {
 	padding-top: 4px;
