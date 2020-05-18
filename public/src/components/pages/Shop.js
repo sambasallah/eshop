@@ -20,11 +20,11 @@ const Product = ({ product, index, products, getProductByID, addToCart, cartItem
             </div>
             <div>
                     <div className="product-description">
-                        <a href={ page ?'../' + product.slug : product.slug } onClick={ () => { getProductByID(products, product.id) } }>
+                        <Link to={ page ?'../' + product.slug : product.slug } onClick={ () => { getProductByID(products, product.id) } }>
                             <h3 className="title">{ limitTitle(product.name) }</h3>
                             <hr className="below-title"></hr>
                             <span className="price"><span style={{ fontSize: '15px', fontWeight: 'lighter' }}>D</span> { new Intl.NumberFormat().format(product.sale_price) } </span> <sup className="orignal-price"><del> { new Intl.NumberFormat().format(product.regular_price) } </del></sup>
-                        </a>
+                        </Link>
                         <hr className="below-price"></hr>
                         <button className="add-to-cart" onClick={() => {
                           let updatedProduct = {...product, qty: 1};
@@ -209,20 +209,19 @@ const Shop = (props) => {
                                  product={product} products={props.products}
                                  getProductByID={ props.getProductByID }
                                  addToCart={props.addToCart} cartItems={ props.cartItems }
-                                 page={page.page}
+                                 page={page_no}
                                  /> ))) : (
                                      <h1>No Product Found</h1>
                                  ) }
                             </div>
-
                             { Number(props.last_page) >= 2  && Number(props.last_page) < 3? (
                                 <>
                                     <nav aria-label="Products Navigation">
                                   <ul class="pagination justify-content-center">
-                                  <li class= { "page-item " +  (Number(page.page) === 1? "disabled" : "")}>
+                                  <li class= { "page-item " +  (Number(page_no) === 1? "disabled" : "")}>
                                     <a class="page-link" href={ "/shop/" + Number(page.page) } onClick={ prev }>Previous</a>
                                 </li>
-                                    <li class="page-item"><a class="page-link" href="/shop/1">1</a></li>
+                                    <li class="page-item"><Link class="page-link" to="/shop/1">1</Link></li>
                                     <li class="page-item"><Link class="page-link" to="/shop/2">2</Link></li>
                                     <li class= { "page-item " +  (Number(page.page) === Number(props.last_page)? "disabled" : "")}>
                                         <a class="page-link" href={ "/shop/" + Number(page.page) } onClick={ next }>Next</a>
@@ -241,7 +240,7 @@ const Shop = (props) => {
                                 </li>
                                     <li class="page-item"><a class="page-link" href="/shop/1">1</a></li>
                                     <li class="page-item"><a class="page-link" href="/shop/2">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="/shop/2">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="/shop/3">3</a></li>
                                     <li class= { "page-item " +  (Number(page.page) === Number(props.last_page)? "disabled" : "")}>
                                     <a class="page-link" href={ "/shop/" + Number(page.page) } onClick={ next }>Next</a>
                                 </li>

@@ -17,24 +17,24 @@ const Navbar = (props) => {
                     </span>
                 </button>
 
-                <div className="collapse navbar-collapse justify-content-end" id="collapsibleNavbar.in">
+                <div className="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
                     <ul className="navbar-nav">
-                    <li className="nav-item" data-toggle="collapse" data-target="#collapsibleNavbar.in">
+                    <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="/">home</Link>
                     </li>
-                    <li className="nav-item" data-toggle="collapse" data-target="#collapsibleNavbar.in">
+                    <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="shop">shop</Link>
                     </li>
-                    <li className="nav-item" data-toggle="collapse" data-target="#collapsibleNavbar.in">
+                    <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="/about">about</Link>
                     </li>
-                    <li className="nav-item" data-toggle="collapse" data-target="#collapsibleNavbar.in">
+                    <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="#">blog</Link>
                     </li>
-                    <li className="nav-item" data-toggle="collapse" data-target="#collapsibleNavbar.in">
+                    <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="/contact">contact</Link>
                     </li> 
-                    <li className="nav-item" data-toggle="collapse" data-target="#collapsibleNavbar.in">
+                    <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link to="/cart" className="nav-link">
                             <FaShoppingCart style={{ color: '#33b27b', fontSize: '20px'}}/>
                             { props.itemInCart? (<span className='badge badge-warning' id='lblCartCount'> { props.itemInCart } </span>) : '' } 

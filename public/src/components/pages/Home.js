@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Swiper from 'react-id-swiper';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getProductByID } from '../../actions/productActions';
 
 const MobilePhone = ({ value, getProductByID, products }) => {
@@ -12,9 +13,9 @@ const MobilePhone = ({ value, getProductByID, products }) => {
 				<img  src={JSON.parse(value.url)[0]} style={{maxWidth: '100%', maxHeight: '100%'}} />
 			</div>
 			<div className="product-description">
-				<h6><a href={value.slug } 
+				<h6><Link to={value.slug } 
 				onClick={ () => { getProductByID(products, value.id) } }>
-					{ value.name } - { 'D' + new Intl.NumberFormat().format(value.sale_price)}</a></h6>
+					{ value.name } - { 'D' + new Intl.NumberFormat().format(value.sale_price)}</Link></h6>
 			</div>
 	 </div>
 	 </>
@@ -248,8 +249,8 @@ const Home = (props) => {
 											<img src={JSON.parse(value.url)[0]} style={{ maxWidth : '100%', maxHeight: '100%'}}/>
 										</div>
 										<div className="col-md-9">
-											<p><a href={value.slug } 
-												onClick={ () => { props.getProductByID(recommended, value.id) } }>{ value.name }</a></p>
+											<p><Link to={value.slug } 
+												onClick={ () => { props.getProductByID(recommended, value.id) } }>{ value.name }</Link></p>
 											<h6>{ 'D' + Intl.NumberFormat().format(value.sale_price)} <span className="sale-price" style={{paddingLeft: '5px'}}>{ 'D' + Intl.NumberFormat().format(value.regular_price)}</span></h6>
 											<span className="amount-saved">You saved 
 											{ 'D' + Intl.NumberFormat().format(Number(value.regular_price) - Number(value.sale_price))}</span>
