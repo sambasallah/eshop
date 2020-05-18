@@ -19,6 +19,8 @@ import Success from './components/pages/Success';
 import Auth from './components/pages/Auth';
 import Account from './components/pages/Account';
 
+/** Scroll To Top */
+import ScrollToTop from './components/pages/ScrollToTop';
 
 
 /** Components */
@@ -38,20 +40,21 @@ const App = () => {
     <>
     <Provider store={store}>
     <Navbar></Navbar>
-   <Switch>
-    <Route exact path="/" component={Home}></Route>
-    <Route exact path="/shop" component={Shop}></Route>
-    <Route exact path="/shop/:page" render={(props) => <Shop {...props } />}></Route>
-    <Route exact path="/about/" component={About}></Route>
-    <Route exact path="/contact/" component={Contact}></Route>
-    <Route exact path="/checkout/" component={Checkout}></Route>
-    <Route exact path="/cart/" component={Cart}></Route>
-    <Route exact path="/completed/" component={Success}></Route>
-    <Route exact path="/auth/" component={Auth}></Route>
-    <Route exact path="/account/" component={Account}></Route>
-    <Route exact path="/:slug" component={Product}></Route>
-    <Route component={Error}></Route>
-   </Switch>
+    <ScrollToTop />
+    <Switch>
+      <Route exact path="/" component={Home}></Route>
+      <Route exact path="/shop" component={Shop}></Route>
+      <Route exact path="/shop/:page" render={(props) => <Shop {...props }/>}></Route>
+      <Route exact path="/about/" component={About}></Route>
+      <Route exact path="/contact/" component={Contact}></Route>
+      <Route exact path="/checkout/" component={Checkout}></Route>
+      <Route exact path="/cart/" component={Cart}></Route>
+      <Route exact path="/completed/" component={Success}></Route>
+      <Route exact path="/auth/" component={Auth}></Route>
+      <Route exact path="/account/" component={Account}></Route>
+      <Route exact path="/:slug" component={Product}></Route>
+      <Route component={Error}></Route>
+    </Switch>
    </Provider>
    <Footer></Footer>
    

@@ -26,7 +26,7 @@ const Contact = () => {
                                 </ul>
                             </div>
                             <div className="col-md-6" style={{textAlign: "right"}}>
-                                <img src={require('../../media/svg/contact.svg')} style={{maxWidth: '40%', maxHeight: '40%'}}/>
+                                <img src={require('../../media/svg/contact.svg')} style={{maxWidth: '30%', maxHeight: '30%'}}/>
                             </div>
                         </div>
                 </div>
