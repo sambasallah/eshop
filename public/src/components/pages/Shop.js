@@ -71,6 +71,7 @@ const Shop = (props) => {
     const next = () => {
         let currentPage = Number(page.page) + 1;
         setPage({page: currentPage});
+        props.history.push('/shop/' + currentPage);
      }
  
      
@@ -78,9 +79,12 @@ const Shop = (props) => {
          let currentPage = Number(page.page) - 1;
          if(currentPage === 0 ) {
              setPage({page: 1});
+             props.history.push('/shop/' + currentPage);
          } else {
              setPage({page: currentPage});
+             props.history.push('/shop/' + currentPage);
          }
+         
      }
 
      const changeToMinusPlusPrice = () => {
@@ -109,21 +113,42 @@ const Shop = (props) => {
     useEffect(() => {
             if(priceFilter.length > 0) {
                 if(priceFilter.length > 0 && categoryFilter.length > 0) {
-                    props.filterByPriceCategory(page.page, priceFilter, categoryFilter);
+                    if(page_no !== page.page) {
+                        props.filterByPriceCategory(page_no, priceFilter, categoryFilter);
+                    } else {
+                        props.filterByPriceCategory(page.page, priceFilter, categoryFilter);
+                    }
                 } else {
-                    props.filterByPrice(page.page, priceFilter);
+                    if(page_no !== page.page) {
+                        props.filterByPrice(page_no, priceFilter);
+                    } else {
+                        props.filterByPrice(page.page, priceFilter);
+                    }
                 }
             } else if(categoryFilter.length > 0) {
                 if(priceFilter.length > 0 && categoryFilter.length > 0) {
-                    props.filterByPriceCategory(page.page, priceFilter, categoryFilter);
+                    if(page_no !== page.page) {
+                        props.filterByPriceCategory(page_no, priceFilter, categoryFilter);
+                    } else {
+                        props.filterByPriceCategory(page.page, priceFilter, categoryFilter);
+                    }
                 } else {
-                    props.filterByCategory(page.page, categoryFilter);
+                    if(page_no !== page.page) {
+                        props.filterByCategory(page_no, categoryFilter);
+                    } else {
+                        props.filterByCategory(page.page, categoryFilter);
+                    }
              }
             } else {
-                props.getProducts(page.page);
+                if(page_no !== page.page) {
+                    props.getProducts(page_no);
+                } else {
+                    props.getProducts(page.page);
+                }
+                
             }
             getCategories();
-    },[priceFilter, categoryFilter]);
+    },[priceFilter, categoryFilter, page, page_no]);
 
     return (
        <>   
@@ -218,13 +243,13 @@ const Shop = (props) => {
                                 <>
                                     <nav aria-label="Products Navigation">
                                   <ul class="pagination justify-content-center">
-                                  <li class= { "page-item " +  (Number(page_no) === 1? "disabled" : "")}>
-                                    <a class="page-link" href={ "/shop/" + Number(page.page) } onClick={ prev }>Previous</a>
+                                  <li class= { "page-item " +  (Number(page.page) === 1? "disabled" : "")}>
+                                    <button class="page-link" onClick={ prev }>Previous</button>
                                 </li>
                                     <li class="page-item"><Link class="page-link" to="/shop/1">1</Link></li>
                                     <li class="page-item"><Link class="page-link" to="/shop/2">2</Link></li>
                                     <li class= { "page-item " +  (Number(page.page) === Number(props.last_page)? "disabled" : "")}>
-                                        <a class="page-link" href={ "/shop/" + Number(page.page) } onClick={ next }>Next</a>
+                                        <button class="page-link"  onClick={ next }>Next</button>
                                     </li>
                                  </ul>
                                  </nav>
@@ -236,25 +261,16 @@ const Shop = (props) => {
                                 <nav aria-label="Products Navigation">
                                   <ul class="pagination justify-content-center">
                                   <li class= { "page-item " +  (Number(page.page) === 1? "disabled" : "")}>
-                                    <a class="page-link" href={ "/shop/" + Number(page.page) } onClick={ prev }>Previous</a>
+                                    <button class="page-link"  onClick={ prev }>Previous</button>
                                 </li>
-                                    <li class="page-item"><a class="page-link" href="/shop/1">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="/shop/2">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="/shop/3">3</a></li>
+                                    <li class="page-item"><Link class="page-link" to="/shop/1">1</Link></li>
+                                    <li class="page-item"><Link class="page-link" to="/shop/2">2</Link></li>
+                                    <li class="page-item"><Link class="page-link" to="/shop/3">3</Link></li>
                                     <li class= { "page-item " +  (Number(page.page) === Number(props.last_page)? "disabled" : "")}>
-                                    <a class="page-link" href={ "/shop/" + Number(page.page) } onClick={ next }>Next</a>
-                                </li>
+                                        <button class="page-link" onClick={ next }>Next</button>
+                                     </li>
                                 </ul>
                                 </nav>
-                                </>
-                            ) : ("")}
-
-                            { Number(props.last_page) > 3 && Number(props.last_page) <= 4 ? (
-                                <>
-                                    <li class="page-item"><a class="page-link" href="/shop/1">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="/shop/2">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="/shop/2">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="/shop/2">4</a></li>
                                 </>
                             ) : ("")}
 
