@@ -72,7 +72,7 @@ const Checkout = (props) => {
                         <div className="col-md-8">
                             <div className="personal-information">
                             <h2>Personal Information</h2>
-                    <input type="text" name="name" placeholder="Full Name" id="fullName" onChange={ handleChange } required/>
+                    <input type="text" name="name" placeholder="Full Name" id="fullName" pattern="([a-zA-Z]+\s){1,}([a-zA-Z]+)" onChange={ handleChange } required/>
                     <input type="text" name="address" placeholder="Your address" id="address" onChange={ handleChange } required/>
                     <select required id="country" onChange={ handleChange }>
                         <option value="Choose country" selected>Choose Country</option>
