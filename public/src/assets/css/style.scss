@@ -104,6 +104,12 @@
 	}
 }
 
+@media (max-width: 767px) {
+	.container .hide-main-cart {
+		display: none;
+	}
+}
+
 /** Carousel **/
 .carousel-container {
 	padding-top: 20px;

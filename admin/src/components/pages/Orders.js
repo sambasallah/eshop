@@ -78,11 +78,13 @@ const Orders = (props) => {
 
         if(data) {
            let orderItems = [];
-           data.data.map((value) => {
+           if(data.data) {
+            data.data.map((value) => {
                 orders.push(value);
            });
            setPagination({current_page: data.current_page, last_page: data.last_page, from: data.from});
            setOrders([...orders,orderItems]);
+           }
         } else {
             console.log(data);
         }
@@ -150,7 +152,7 @@ const Orders = (props) => {
     }
 
 
-    const next = (event) => {
+    const next = () => {
         let currentPage = Number(page.page) + 1;
         setPage({page: currentPage});
      }

@@ -47,23 +47,25 @@ const SingleOrder = (props) => {
 
         if(data) {
           let oInfo = data[0];
-          let orderData = JSON.parse(oInfo.products);
-          setOrder({...order, id: oInfo.id, 
-            orderNumber: oInfo.order_number,
-            fullName: oInfo.full_name,
-            products: orderData,
-            total: oInfo.total,
-            updatedAt: oInfo.updated_at,
-            createdAt: oInfo.created_at,
-            country: oInfo.country,
-            address: oInfo.address,
-            email: oInfo.email,
-            orderNote: oInfo.order_note,
-            shippingAddress: oInfo.shipping_address,
-            orderStatus: oInfo.order_status,
-            phoneNumber: oInfo.phone_number,
-            townCity: oInfo.town_city });
-          setLoading({...loading, loading: false});
+          if(oInfo) {
+            let orderData = JSON.parse(oInfo.products);
+            setOrder({...order, id: oInfo.id, 
+              orderNumber: oInfo.order_number,
+              fullName: oInfo.full_name,
+              products: orderData,
+              total: oInfo.total,
+              updatedAt: oInfo.updated_at,
+              createdAt: oInfo.created_at,
+              country: oInfo.country,
+              address: oInfo.address,
+              email: oInfo.email,
+              orderNote: oInfo.order_note,
+              shippingAddress: oInfo.shipping_address,
+              orderStatus: oInfo.order_status,
+              phoneNumber: oInfo.phone_number,
+              townCity: oInfo.town_city });
+            setLoading({...loading, loading: false});
+          }
         }
     }
 

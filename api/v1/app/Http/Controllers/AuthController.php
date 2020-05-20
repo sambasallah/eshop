@@ -75,23 +75,10 @@ class AuthController extends Controller
                 'full_name' => $user->full_name
             ], 200);
         }
-
-        // return response()->json([
-        //     'token' => $this->jwt($user),
-        //     'img' => $user->img
-        // ], 200);
-
-        // return response()->json([
-        //             'token' => $this->jwt($user)
-        //  ], 200);
-
+        
         // Bad Request response
         return response()->json([
             'error' => 'Email or password is wrong.'
         ], 400);
-    }
-
-    public function checkTokenExpired() {
-        return response()->json(['Expired' => true]);
     }
 }

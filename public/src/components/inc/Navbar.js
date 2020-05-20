@@ -39,7 +39,7 @@ const Navbar = (props) => {
                                 <Link className="nav-link" to="/contact">contact</Link>
                             </li> 
                             <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                                <Link to="/cart" className="nav-link">
+                                <Link to="/cart" className="nav-link hide-main-cart">
                                     <FaShoppingCart style={{ color: '#33b27b', fontSize: '20px'}}/>
                                     { props.itemInCart? (<span className='badge badge-warning' id='lblCartCount'> { props.itemInCart } </span>) : '' } 
                                 </Link>

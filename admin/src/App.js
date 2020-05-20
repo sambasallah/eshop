@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
 
 // Redux Provider
@@ -21,6 +21,24 @@ import Users from './components/pages/Users';
 import AddUser from './components/pages/AddUser';
 
 
+const isAuthenticated = () => {
+  let token = localStorage.getItem('token');
+
+  if(token) {
+    return true;
+  }
+  return false;
+}
+
+const AuthRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={ props => (
+    isAuthenticated()? (
+      <Component {...props} />
+    ) : (
+      <Redirect to={{pathname: '/login'}} />
+    )
+  )} />
+)
 
 const App = () => {
   return (
@@ -28,38 +46,19 @@ const App = () => {
         <Provider store={store}>
           <Switch>
                 <Route exact path="/login" component={AdminLogin}></Route>
-                <Route exact path="/orders" render={(props) => <Orders {...props} />}></Route>
-                <Route exact path="/orders/:page" render={(props) => <Orders {...props} />}></Route>
-                <Route exact path="/store" component={Store}></Route>
-                <Route exact path="/store/:page" render={(props) => <Store {...props } />}></Route>
-                <Route exact path='/categories' component={Categories}></Route>
-                <Route exact path="/settings" component={Settings}></Route>
-                <Route exact path="/order/:order_id" render={(props) => <SingleOrder {...props} />}></Route>
-                <Route exact path="/add-product" component={AddProduct}></Route>
-                <Route exact path="/edit/:slug" component={EditProduct}></Route>
-                <Route exact path="/users" component={Users}></Route>
-                <Route exact path="/add-user" component={AddUser}></Route>
-                <Route exact path="/" component={Dashboard}></Route>
-             {/* { store.getState().auth.isLoggedIn? (
-               <>
-                <Route exact path="/orders" render={(props) => <Orders {...props} />}></Route>
-                <Route exact path="/orders/:page" render={(props) => <Orders {...props} />}></Route>
-                <Route exact path="/store" component={Store}></Route>
-                <Route exact path="/store/:page" render={(props) => <Store {...props } />}></Route>
-                <Route exact path='/categories' component={Categories}></Route>
-                <Route exact path="/settings" component={Settings}></Route>
-                <Route exact path="/order/:order_id" render={(props) => <SingleOrder {...props} />}></Route>
-                <Route exact path="/add-product" component={AddProduct}></Route>
-                <Route exact path="/edit/:slug" component={EditProduct}></Route>
-                <Route exact path="/users" component={Users}></Route>
-                <Route exact path="/add-user" component={AddUser}></Route>
-                <Route exact path="/" component={Dashboard}></Route>
-               </>
-             ) : (
-             <>
-             <Route exact path="/login" component={AdminLogin}></Route>
-             <Redirect to="/login"></Redirect>
-             </>)}  */}
+                <AuthRoute exact path="/" component={Dashboard} />
+                <Route exact path="/orders" render={(props) => <Orders {...props} />} />
+                <Route exact path="/orders/:page" render={(props) => <Orders {...props} />} />
+                <AuthRoute exact path="/store" component={Store} />
+                <AuthRoute exact path="/store/:page" render={(props) => <Store {...props } />} />
+                <AuthRoute exact path='/categories' component={Categories} />
+                <AuthRoute exact path="/settings" component={Settings} />
+                <Route exact path="/order/:order_id" render={(props) => <SingleOrder {...props} />} />
+                <AuthRoute exact path="/add-product" component={AddProduct} />
+                <AuthRoute exact path="/edit/:slug" component={EditProduct} />
+                <AuthRoute exact path="/users" component={Users} />
+                <AuthRoute exact path="/add-user" component={AddUser} />
+                <AuthRoute component={AdminLogin} />
           </Switch>
         </Provider>
     </div>
