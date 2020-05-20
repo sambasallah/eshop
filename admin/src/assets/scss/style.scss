@@ -655,7 +655,7 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	min-width: 30%;
+	min-width: 40%;
 	min-height: 40%;
 	background-color: #fff;
 	padding: 20px;
@@ -665,6 +665,12 @@ background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, F
 .admin-login h2 {
 	padding-bottom: 10px;
 	font-weight: 600;
+}
+
+@media screen and (max-width: 580px) {
+	.admin-login .admin-inner {
+		min-width: 90%;
+	}
 }
 
 .admin-inner form .username, .password {

@@ -128,6 +128,11 @@ ul {
   vertical-align: top;
 }
 
+@media (min-width: 767px) {
+  .container .hide-cart {
+    display: none;
+  }
+}
 /** Carousel **/
 .carousel-container {
   padding-top: 20px;
