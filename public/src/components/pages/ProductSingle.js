@@ -6,6 +6,7 @@ import { addToCart, getProductByID } from '../../actions/productActions';
 import { inCart, isJson } from '../utils/utils';
 import { Link } from 'react-router-dom';
 import Swiper from 'react-id-swiper';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const ProductSingle = (props) => {
 
@@ -146,7 +147,7 @@ const ProductSingle = (props) => {
                                         props.addToCart(updateProduct, props.cartItems)  
                                     } 
                                     } 
-                                    disabled={addedToCart}>{ addedToCart? 'Added' : 'Add To Cart' }</button> 
+                                    disabled={addedToCart}>{ addedToCart? 'Added' : <FaShoppingCart /> }</button> 
                                  </h3>
                                 <h3>
                                     <div className="icon-circle">

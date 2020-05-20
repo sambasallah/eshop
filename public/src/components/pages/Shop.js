@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getProducts, getProductByID, addToCart, filterByPrice, 
     filterByCategory,filterByPriceCategory } from '../../actions/productActions';
-import { FaPlus, FaMinus } from 'react-icons/fa';
+import { FaPlus, FaMinus, FaShoppingCart } from 'react-icons/fa';
 import { inCart } from '../utils/utils';
 
 const Product = ({ product, index, products, getProductByID, addToCart, cartItems, page }) => {
@@ -31,7 +31,7 @@ const Product = ({ product, index, products, getProductByID, addToCart, cartItem
                           addToCart(updatedProduct,cartItems)
                         }
                         } disabled={addedToCart}>
-                                { addedToCart ? 'Added' : 'Add To Cart' }</button>
+                                { addedToCart ? 'Added' : <FaShoppingCart /> }</button>
                     </div>
                 
             </div>

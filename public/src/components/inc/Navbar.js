@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { FaShoppingCart, FaSignInAlt } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const Navbar = (props) => {
     return (
