@@ -230,7 +230,7 @@ useEffect(() => {
     getProductData(pathArray[1]);
 },[]);
 
-    if(!props.token) return <Redirect to='/login'></Redirect>
+    // if(!props.token) return <Redirect to='/login'></Redirect>
 
     return (
         <div>

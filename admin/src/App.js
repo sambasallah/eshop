@@ -23,7 +23,6 @@ import AddUser from './components/pages/AddUser';
 
 const isAuthenticated = () => {
   let token = localStorage.getItem('token');
-
   if(token) {
     return true;
   }

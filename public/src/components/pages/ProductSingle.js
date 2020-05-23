@@ -191,11 +191,13 @@ const ProductSingle = (props) => {
                                     <div className="swiper-slide" key={index}>
                                         <div className="product similar-item">
                                             <div className="product-img">
-                                             <img src={JSON.parse(value.url)[0]} style={{maxWidth: '100%', maxHeight: '100%'}} />
+                                             <a href={ value.slug } onClick={ () => props.getProductByID(upsell, value.id) } >
+                                                 <img src={JSON.parse(value.url)[0]} style={{maxWidth: '100%', maxHeight: '100%'}} /> 
+                                            </a>
                                             </div>
                                             <div className="product-description">
-                                                <h6><Link to={ value.slug }
-                                                onClick={ () => { props.getProductByID(upsell, value.id) } }>{ value.name }</Link></h6>
+                                                <h6><a href={ value.slug }
+                                                onClick={ () => { props.getProductByID(upsell, value.id) } }>{ value.name }</a></h6>
                                                 <p><span className="price">D{ new Intl.NumberFormat().format(value.sale_price)}</span> <span className="original-price">D{ new Intl.NumberFormat().format(value.regular_price) }</span></p>
                                             </div>
                                         </div>

@@ -56,7 +56,7 @@ const Users = (props) => {
         getAdminsAndCustomers();
     }, []);
 
-    if(!props.token) return <Redirect to='/login'></Redirect>
+    // if(!props.token) return <Redirect to='/login'></Redirect>
 
     return (
         <div>

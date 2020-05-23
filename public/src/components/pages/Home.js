@@ -10,7 +10,7 @@ const MobilePhone = ({ value, getProductByID, products }) => {
 		<>
 		<div className="item">
 			<div className="product-img">
-				<img  src={JSON.parse(value.url)[0]} style={{maxWidth: '100%', maxHeight: '100%'}} />
+				<Link to={value.slug} onClick={ () => getProductByID(products, value.id) }><img  src={JSON.parse(value.url)[0]} style={{maxWidth: '100%', maxHeight: '100%'}} /></Link>
 			</div>
 			<div className="product-description">
 				<h6><Link to={value.slug } 
@@ -35,6 +35,10 @@ const Home = (props) => {
 		  el: '.swiper-pagination',
 		  clickable: true,
 		},
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev'
+		  },
 		breakpoints: {
 			320: {
 				slidesPerView: 1,
@@ -125,8 +129,8 @@ const Home = (props) => {
 		 <div className="home">
 			 <div className="home-inner">
 		 <div className="carousel-container">
-			 <div className="row">
-				 <div className="col-md-12">
+			 <div className="row carousel-row">
+			 <div className="col-md-9">
 				 <div id="myCarousel" className="carousel slide" data-ride="carousel">
 				<ol className="carousel-indicators">
 					<li data-target="#myCarousel" data-slide-to="0" className="active"></li>
@@ -165,12 +169,23 @@ const Home = (props) => {
 				<span className="sr-only">Next</span>
 			</a>
 					</div>
+			</div>
+			<div className="col-md-3 sidebar-carousel">
+					{/* <div className="row"></div> */}
+					<div className="sidebar-img">
+						<img src={require('../../media/images/woman.jpg')} 
+						style={{maxWidth: '100%', maxHeight: '100%'}} />
+					</div>
+					<div className="sidebar-img">
+						<img src={require('../../media/images/shoe.jpg')} 
+						style={{maxWidth: '100%', maxHeight: '100%'}} />
 					</div>
 				</div>
-	     </div>
+		</div>
+	</div>
 
 		 <div className="category">
-		<div className="category-tile">
+		<div className="category-title">
 			<h4>Trending <img src={require('../../media/icons/trending.png')} /></h4>
 		</div>
 		 { trending.length > 1? (
@@ -202,7 +217,7 @@ const Home = (props) => {
 
 
 	 <div className="category">
-		<div className="category-tile">
+		<div className="category-title">
 			<h4>Mobile Phones <img src={require('../../media/icons/mobile.png')} /></h4>
 		</div>
 		
@@ -266,13 +281,6 @@ const Home = (props) => {
 			
 		 </div>
 		 </div>
-	 </div>
-			
-	 <div className="about-eBaaba">
-		 <h2>eBaaba Gambia's No. 1 Online Shopping Platform</h2>
-		 <p>
-		 eBaaba.xyz is Gambia’s number one online Shopping destination.We pride ourselves in having everything you could possibly need for life and living at the best prices than anywhere else. Our access to Original Equipment Manufacturers and premium sellers gives us a wide range of products at very low prices. Some of our popular categories include electronics, mobile phones, computers, fashion, beauty products, home and kitchen, Building and construction materials and a whole lot more from premium brands. Some of our other categories include Food and drinks, automotive and industrial, books, musical equipment, babies and kids items, sports and fitness, to mention a few. To make your shopping experience swift and memorable, there are also added services like gift vouchers, consumer promotion activities across different categories and bulk purchases with hassle-free delivery. Enjoy free shipping rates for certain products and with the bulk purchase option, you can enjoy low shipping rates, discounted prices and flexible payment. When you shop on our platform, you can pay with your debit card or via KongaPay, which is a convenient and secured payment solution. Get the best of lifestyle services online. Don't miss out on the biggest sales online which takes place on special dates yearly.
-		 </p>
 	 </div>
 
 	 <div className="end"></div>

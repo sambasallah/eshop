@@ -64,7 +64,7 @@ const AddUser = (props) => {
         position: toast.POSITION.TOP_LEFT
     });
 
-    if(!props.token) return <Redirect to='/login'></Redirect>
+    // if(!props.token) return <Redirect to='/login'></Redirect>
 
     return (
         <div>

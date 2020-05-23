@@ -16,7 +16,9 @@ const Product = ({ product, index, products, getProductByID, addToCart, cartItem
         <div className="col-md-3">
         <div className="product">
             <div className="product-img" style={{textAlign: 'center'}}>
-                 <img src={ JSON.parse(product.url)[0] } style={{ maxWidth : "100%", maxHeight : "100%"}} />
+            <Link to={ page ?'../' + product.slug : product.slug } onClick={ () => { getProductByID(products, product.id) } }>
+                <img src={ JSON.parse(product.url)[0] } style={{ maxWidth : "100%", maxHeight : "100%"}} />
+            </Link>
             </div>
             <div>
                     <div className="product-description">
