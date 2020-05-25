@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SendGrid\Mail\Mail;
 
 class OrdersController extends Controller
 {
@@ -13,7 +14,11 @@ class OrdersController extends Controller
         $data['orderID'], $data['total'],
     $data['orderNote'], $data['shippingAddress']);
         if($orderCreated) {
-            return response()->json(['Created' => $orderCreated]);
+            $response = $this->sendOrderEmail($data['customerInfo']['email'], 
+            'transaction@ebaaba.xyz',
+            $data['customerInfo']['fullName'],
+            $data['orderID']);
+            return response()->json(['Created' => $orderCreated, 'EmailSentStatus' => $response]);
         }
         return response()->json(['Created' => $orderCreated]);
     }
@@ -51,6 +56,26 @@ class OrdersController extends Controller
             'customer_id' => $customer_id
             ]);
         return $order_created;
+    }
+
+    private function sendOrderEmail(string $to_email, 
+    string $from_email, string $username,
+    string $order_id) {
+        $email = new Mail(); 
+        $email->setFrom($from_email, "eBaaba");
+        $email->setSubject("Order Confirmation");
+        $email->addTo($to_email, $username);
+        // $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
+        $email->addContent(
+            "text/html", "<strong>Order confirmation email, your order id is $order_id</strong>"
+        );
+        $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+        try {
+            $response = $sendgrid->send($email);
+            return response()->json(['StatusCode' => $response->statusCode()]);
+        } catch (Exception $e) {
+            return response()->json(['Error' => 'Caught exception: '. $e->getMessage()]);
+        }
     }
 
     public function getAllOrders() {

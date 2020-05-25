@@ -8,7 +8,8 @@
         "php": "^7.2",
         "firebase/php-jwt": "^5.2",
         "flipbox/lumen-generator": "^6.0",
-        "laravel/lumen-framework": "^6.0"
+        "laravel/lumen-framework": "^6.0",
+        "sendgrid/sendgrid": "~7"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

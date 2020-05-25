@@ -41,6 +41,7 @@ const Checkout = (props) => {
         body: JSON.stringify(updatedCustomer)});
         let data = await response.json();
         if(data.Created === true) {
+            console.log(data);
             setLoading({...loading, loading: false});
             props.orderCompleted({customerName: customer.fullName, orderID: orderID});
             localStorage.removeItem('cart');
