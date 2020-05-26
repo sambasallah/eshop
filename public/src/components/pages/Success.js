@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 const Success = (props) => {
     
     const removeOrderID = () => {
+        localStorage.removeItem('cart');
         localStorage.removeItem('orderID');
     }
     

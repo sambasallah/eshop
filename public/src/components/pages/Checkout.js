@@ -41,13 +41,16 @@ const Checkout = (props) => {
         body: JSON.stringify(updatedCustomer)});
         let data = await response.json();
         if(data.Created === true) {
-            console.log(data);
             setLoading({...loading, loading: false});
             props.orderCompleted({customerName: customer.fullName, orderID: orderID});
-            localStorage.removeItem('cart');
             props.history.push('/completed');
         }
 
+    }
+
+    const removeCartItems = () => {
+        localStorage.removeItem('cart');
+        localStorage.removeItem('orderID');
     }
 
     const handleChange = (event) => {
@@ -356,7 +359,7 @@ const Checkout = (props) => {
                                     <li><h6>{ 'D' + new Intl.NumberFormat().format(total) }</h6></li>
                                 </ul>
                                 <hr/>
-                                <button type="submit" className='place-order'>{ loading.loading === true? <i class="fa fa-spinner fa-spin"></i> : 'place order' }</button>
+                                <button type="submit" className='place-order' onClick={ removeCartItems }>{ loading.loading === true? <i class="fa fa-spinner fa-spin"></i> : 'place order' }</button>
                                 <hr />
                                 <sub>We Accept : <i className="fa fa-cc-visa"></i> <i className="fa fa-cc-mastercard"></i> <i className="fa fa-cc-paypal"></i></sub>
                             </div>
