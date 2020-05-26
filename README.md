@@ -14,6 +14,8 @@
   - PHP (Laravel/Lumen)
 ### Database
   - MySQL
+### Email Service
+  - SendGrid
 ### CDN (Images & Videos)
   - [Cloudinary](https://cloudinary.com)
 ### Live Website (Under Development)
