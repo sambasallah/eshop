@@ -8,7 +8,6 @@ import { slug, chunk } from '../utils/UtilityFunctions';
 import { toast } from 'react-toastify';
 import Navbar from '../inc/Navbar';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 toast.configure();
 
@@ -131,7 +130,7 @@ const AddProduct = (props) => {
 
   const beginUpload = (tag) => {
     const uploadOptions = {
-      cloudName: "ebaaba",
+      cloudName: process.env.REACT_APP_CLOUD_NAME,
       tags: [tag],
       uploadPreset: "products"
     };
