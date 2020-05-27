@@ -63,8 +63,8 @@ class OrdersController extends Controller
         $order_list = "";
         foreach($order_items as $item) {
            $order_list .= "
-                  <tr>
-                     <td> " . $item['productName'] . "</td>
+                  <tr height='50px'>
+                     <td><img src='". $item['img'] ."' width='20' height='20' /> ". $item['productName'] . "</td>
                      <td> " . $item['qty'] . "</td>
                      <td> " . number_format(intval($item['salePrice']) * intval($item['qty'])) . "</td>
                   </tr>
