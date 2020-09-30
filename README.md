@@ -1,4 +1,4 @@
-# Modern E-Commerce Website (Reactjs & Redux)
+#  A Modern E-Commerce Website (Reactjs & Redux)
 # Home
 ![Home](public/src/media/images/Home.png)
 # Categories
