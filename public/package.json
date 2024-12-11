@@ -35,7 +35,7 @@
     "redux-thunk": "^2.3.0",
     "serve": "^11.3.0",
     "slick-carousel": "^1.8.1",
-    "swiper": "^5.3.8",
+    "swiper": "^6.5.1",
     "toasted-notes": "^3.2.0"
   },
   "scripts": {
